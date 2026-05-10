@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G[AI]N Advisory | GTM Leadership That Builds</title>
+  <meta name="description" content="Senior GTM leadership that builds, not just advises. For founders who need someone in the trenches — not another strategy deck." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230B1D33'/><text x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' fill='%235D9BD4' text-anchor='middle'>AI</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0B1D33;
+      --blue:    #1E4FA1;
+      --light:   #5D9BD4;
+      --pale:    #DCEAF7;
+      --charcoal:#2B2F33;
+      --gray:    #6b7280;
+      --off:     #F2F4F7;
+      --white:   #F9FAFB;
+      --ai:      #1a7a5e;
+      --ai-pale: #e0f4ee;
+      --mint:    #6ee7c7;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; }
+
+    /* ── LOGO ── */
+    .logo-wrap { display: inline-flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; }
+    .logo-word { font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1; white-space: nowrap; }
+    .logo-word .br { font-weight: 300; }
+    .logo-word .ai { font-weight: 800; }
+    .logo-adv { font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.22em; margin-top: 3px; }
+    .logo-light .logo-word { color: var(--navy); }
+    .logo-light .logo-word .br { color: rgba(30,79,161,0.22); }
+    .logo-light .logo-word .ai { background: linear-gradient(180deg,#5D9BD4,#1E4FA1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .logo-light .logo-adv { color: var(--gray); }
+    .logo-dark .logo-word { color: #fff; }
+    .logo-dark .logo-word .br { color: rgba(255,255,255,0.2); }
+    .logo-dark .logo-word .ai { background: linear-gradient(180deg,#DCEAF7,#5D9BD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .logo-dark .logo-adv { color: rgba(255,255,255,0.32); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; transition: background .3s, box-shadow .3s;
+    }
+    nav.scrolled { background: rgba(249,250,251,.97); box-shadow: 0 1px 0 rgba(11,29,51,.09); backdrop-filter: blur(12px); }
+    .nav-logo .logo-word { font-size: 26px; }
+    .nav-logo-dark  { display: block; }
+    .nav-logo-light { display: none; }
+    nav.scrolled .nav-logo-dark  { display: none; }
+    nav.scrolled .nav-logo-light { display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+    .nav-links a { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,.78); transition: color .2s; }
+    nav.scrolled .nav-links a { color: var(--charcoal); }
+    .nav-links a:hover { color: var(--light); }
+    nav.scrolled .nav-links a:hover { color: var(--blue); }
+    .nav-btn { background: rgba(255,255,255,.15) !important; border: 1px solid rgba(255,255,255,.28); color: #fff !important; padding: 9px 22px; border-radius: 100px; transition: background .2s !important; }
+    .nav-btn:hover { background: rgba(255,255,255,.28) !important; }
+    nav.scrolled .nav-btn { background: var(--navy) !important; border-color: var(--navy); color: #fff !important; }
+    nav.scrolled .nav-btn:hover { background: var(--blue) !important; border-color: var(--blue); }
+    .nav-close { display: none; }
+    .nav-mobile-header { display: none; }
+    .hb { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hb span { display: block; width: 22px; height: 1.5px; background: #fff; transition: background .3s; }
+    nav.scrolled .hb span { background: var(--navy); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; background: var(--navy);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 40px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(93,155,212,.045) 1px,transparent 1px), linear-gradient(90deg,rgba(93,155,212,.045) 1px,transparent 1px);
+      background-size: 72px 72px;
+    }
+    .hero-glow {
+      position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle,rgba(30,79,161,.26) 0%,transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 1; max-width: 800px; width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(26,122,94,.2); border: 1px solid rgba(26,122,94,.4);
+      border-radius: 100px; padding: 6px 18px; margin-bottom: 44px;
+      font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--mint);
+      align-self: center;
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; background:var(--mint); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+    .hero-logo { margin-bottom: 44px; display: inline-flex; flex-direction: column; align-items: flex-start; }
+    .hero-logo .logo-word { font-family:'Syne',sans-serif; font-size:clamp(64px,10vw,100px); font-weight:700; letter-spacing:-2px; line-height:1; color:#fff; white-space:nowrap; }
+    .hero-logo .logo-word .br { font-weight:300; color:rgba(255,255,255,.2); }
+    .hero-logo .logo-word .ai { font-weight:800; background:linear-gradient(180deg,#DCEAF7,#5D9BD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-logo .logo-adv { font-family:'DM Sans',sans-serif; font-size:clamp(16px,2vw,22px); font-weight:400; letter-spacing:.22em; color:rgba(255,255,255,.32); margin-top:8px; }
+
+    .hero-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 3.8vw, 52px);
+      font-weight: 700; line-height: 1.15;
+      color: #fff; margin-bottom: 24px;
+    }
+    .hero-headline .hl-blue { color: var(--light); }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.5vw, 18px); font-weight: 300; line-height: 1.78;
+      color: rgba(255,255,255,.55); max-width: 580px; margin: 0 auto 44px;
+    }
+    .hero-sub strong { color: rgba(255,255,255,.85); font-weight: 400; }
+
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-p { background: var(--mint); color: var(--navy); padding: 15px 36px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: background .2s, transform .2s; }
+    .btn-p:hover { background: #a7f3d0; transform: translateY(-2px); }
+    .btn-s { border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.7); padding: 15px 36px; border-radius: 100px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: border-color .2s, color .2s, transform .2s; }
+    .btn-s:hover { border-color: rgba(255,255,255,.55); color: #fff; transform: translateY(-2px); }
+
+    /* ── PAIN SECTION ── */
+    #pain { background: var(--off); }
+    .pain-inner { max-width: 1000px; margin: 0 auto; }
+    .pain-intro { font-family: 'Syne', sans-serif; font-size: clamp(22px, 2.8vw, 36px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 48px; max-width: 680px; }
+    .pain-intro span { color: var(--blue); }
+    .pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .pain-grid .pain-item:last-child { grid-column: 1 / -1; }
+    .pain-item {
+      background: var(--white); padding: 28px 28px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: background .2s;
+    }
+    .pain-item:hover { background: var(--pale); }
+    .pain-check { width: 22px; height: 22px; border-radius: 50%; background: rgba(30,79,161,.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .pain-check svg { width: 11px; height: 11px; }
+    .pain-text { font-size: 15px; font-weight: 300; line-height: 1.6; color: var(--charcoal); }
+    .pain-text strong { font-weight: 500; color: var(--navy); }
+    .pain-cta { margin-top: 40px; text-align: center; }
+    .pain-cta p { font-size: 17px; font-weight: 300; color: var(--gray); margin-bottom: 24px; font-style: italic; }
+    .pain-cta p strong { color: var(--navy); font-weight: 500; font-style: normal; }
+
+    /* ── WHO ── */
+    #who { background: var(--navy); position: relative; overflow: hidden; }
+    #who .hero-grid { opacity: .4; }
+    .who-inner { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .who-left .eye { color: var(--mint); }
+    .who-left .sh { color: #fff; }
+    .who-left .sl { color: rgba(255,255,255,.45); margin-top: 16px; font-size: 15px; font-weight: 300; line-height: 1.75; max-width: 400px; }
+    .who-tags { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+    .who-tag-item {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+      padding: 18px 22px; display: flex; align-items: center; gap: 14px;
+      transition: background .25s;
+    }
+    .who-tag-item:hover { background: rgba(255,255,255,.08); }
+    .who-tag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--light); flex-shrink: 0; }
+    .who-tag-text { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.7); }
+    .who-tag-text strong { font-weight: 500; color: #fff; }
+
+    /* ── HOW I WORK ── */
+    #how { background: var(--white); }
+    .how-inner { max-width: 1000px; margin: 0 auto; }
+    .how-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .how-card { background: var(--off); padding: 36px 30px; position: relative; transition: background .25s; }
+    .how-card:hover { background: var(--white); box-shadow: 0 0 0 1px var(--pale); }
+    .how-card-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .2em; color: rgba(30,79,161,.25); margin-bottom: 20px; }
+    .how-card-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .how-card-duration { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--light); margin-bottom: 14px; }
+    .how-card-body { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--gray); margin-bottom: 20px; }
+    .how-card-includes { display: flex; flex-direction: column; gap: 6px; }
+    .how-card-includes span { font-size: 12px; font-weight: 400; color: var(--charcoal); display: flex; align-items: center; gap: 8px; }
+    .how-card-includes span::before { content: '→'; color: var(--light); font-size: 11px; flex-shrink: 0; }
+    .how-card.featured { background: var(--navy); }
+    .how-card.featured .how-card-num { color: rgba(93,155,212,.4); }
+    .how-card.featured .how-card-title { color: #fff; }
+    .how-card.featured .how-card-duration { color: var(--mint); }
+    .how-card.featured .how-card-body { color: rgba(255,255,255,.5); }
+    .how-card.featured .how-card-includes span { color: rgba(255,255,255,.75); }
+    .how-card.featured .how-card-includes span::before { color: var(--mint); }
+    .how-card.featured:hover { background: #122a50; box-shadow: none; }
+
+    /* ── AI SECTION ── */
+    #ai-gtm { background: var(--off); }
+    .ai-inner { max-width: 1000px; margin: 0 auto; }
+    .ai-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 52px; }
+    .ai-left p { font-size: 15px; font-weight: 300; line-height: 1.78; color: var(--gray); margin-bottom: 20px; }
+    .ai-left p strong { color: var(--navy); font-weight: 500; }
+    .ai-tags { display: flex; flex-direction: column; gap: 10px; }
+    .ai-tag-row { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--white); }
+    .ai-tag-ico { width: 32px; height: 32px; background: var(--ai-pale); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ai-tag-ico svg { width: 14px; height: 14px; }
+    .ai-tag-title { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+    .ai-tag-desc  { font-size: 11.5px; font-weight: 300; color: var(--gray); line-height: 1.5; }
+    .ai-manifesto { background: var(--navy); padding: 36px 40px; }
+    .ai-manifesto-q { font-family: 'Syne', sans-serif; font-size: clamp(16px, 1.8vw, 22px); font-weight: 600; line-height: 1.45; color: #fff; margin-bottom: 16px; }
+    .ai-manifesto-q em { font-style: normal; color: var(--mint); }
+    .ai-manifesto-p { font-size: 13px; font-weight: 300; line-height: 1.78; color: rgba(255,255,255,.42); }
+
+    /* ── DIAGNOSTIC CTA ── */
+    #diagnostic {
+      background: var(--navy); position: relative; overflow: hidden;
+      text-align: center;
+    }
+    #diagnostic .hero-grid { opacity: .4; }
+    .diag-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .diag-inner .eye { justify-content: center; }
+    .diag-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: #fff; line-height: 1.12; margin-bottom: 20px; }
+    .diag-title em { font-style: normal; color: var(--mint); }
+    .diag-sub { font-size: 16px; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,.5); margin-bottom: 40px; }
+    .diag-sub strong { color: rgba(255,255,255,.8); font-weight: 400; }
+    .diag-features { display: flex; gap: 32px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+    .diag-feat { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 400; color: rgba(255,255,255,.45); letter-spacing: .06em; }
+    .diag-feat::before { content: ''; width: 6px; height: 6px; background: var(--mint); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+    .contact-layout { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .c-info { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+    .c-row { display: flex; align-items: center; gap: 14px; }
+    .c-ico { width: 34px; height: 34px; flex-shrink: 0; border: 1px solid var(--gray); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: border-color .2s; }
+    .c-ico:hover { border-color: var(--blue); }
+    .c-ico svg { width: 14px; height: 14px; }
+    .form-box { background: var(--off); padding: 36px 32px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fg { display: flex; flex-direction: column; gap: 6px; margin-bottom: 13px; }
+    .fg label { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); }
+    .fg input, .fg select, .fg textarea { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 300; background: var(--white); border: 1px solid #e5e7eb; color: var(--charcoal); padding: 11px 14px; border-radius: 4px; outline: none; width: 100%; transition: border-color .2s; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--blue); }
+    .fg textarea { resize: vertical; min-height: 96px; }
+    .form-btn { width: 100%; padding: 14px; background: var(--navy); color: #fff; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; border: none; border-radius: 100px; cursor: pointer; transition: background .2s, transform .2s; margin-top: 4px; }
+    .form-btn:hover { background: var(--blue); transform: translateY(-2px); }
+    .form-ok { display: none; padding: 48px 0; text-align: center; }
+    .form-ok .tick { font-size: 28px; color: var(--ai); margin-bottom: 14px; }
+    .form-ok p { font-size: 14px; font-weight: 300; line-height: 1.72; color: var(--gray); }
+    .form-ok strong { color: var(--navy); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--charcoal); padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .ft-logo .logo-word { font-size: 22px; }
+    .ft-links { display: flex; gap: 22px; list-style: none; flex-wrap: wrap; }
+    .ft-links a { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.28); text-decoration: none; transition: color .2s; }
+    .ft-links a:hover { color: var(--light); }
+    .ft-copy { font-size: 10px; color: rgba(255,255,255,.16); }
+
+    /* ── SHARED ── */
+    .sec { padding: 96px 60px; }
+    .eye { display: inline-flex; align-items: center; gap: 12px; font-size: 9.5px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; margin-bottom: 18px; }
+    .eye::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+    .eye.bl { color: var(--blue); }
+    .eye.gr { color: var(--ai); }
+    .eye.wh { color: rgba(255,255,255,.35); }
+    .sh { font-family: 'Syne', sans-serif; font-size: clamp(28px, 3.2vw, 44px); font-weight: 700; letter-spacing: -.01em; color: var(--navy); line-height: 1.12; margin-bottom: 16px; }
+    .sl { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--gray); max-width: 460px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 880px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 0;
+        position: fixed; inset: 0;
+        background: var(--navy);
+        padding: 0; z-index: 999;
+        align-items: stretch;
+        overflow-y: auto;
+      }
+      .nav-links.open li { border-bottom: 1px solid rgba(255,255,255,.06); }
+      .nav-links.open a {
+        color: rgba(255,255,255,.8); font-size: 16px;
+        font-weight: 500; letter-spacing: .08em;
+        display: block; padding: 20px 32px;
+        transition: background .2s;
+      }
+      .nav-links.open a:hover { background: rgba(255,255,255,.06); color: #fff; }
+      .nav-links.open .nav-btn {
+        margin: 24px 32px; padding: 14px 24px;
+        border-radius: 100px; text-align: center;
+        background: var(--mint) !important; color: var(--navy) !important;
+        border: none; font-weight: 700;
+      }
+      /* Close button inside open menu */
+      .nav-close {
+        display: none; position: absolute; top: 20px; right: 24px;
+        background: none; border: none; cursor: pointer; padding: 8px;
+        color: rgba(255,255,255,.6); font-size: 24px; line-height: 1;
+        z-index: 1000;
+      }
+      .nav-links.open ~ .nav-close,
+      .nav-close.visible { display: block; position: fixed; top: 20px; right: 24px; z-index: 1000; background: none; border: none; cursor: pointer; padding: 8px; color: rgba(255,255,255,.6); font-size: 24px; line-height: 1; }
+      /* Mobile menu header */
+      .nav-mobile-header {
+        display: none; padding: 24px 32px 20px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .nav-links.open .nav-mobile-header { display: block; }
+      .nav-mobile-logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -1px; color: #fff; }
+      .nav-mobile-logo .br { font-weight: 300; color: rgba(255,255,255,.2); }
+      .nav-mobile-logo .ai { font-weight: 800; background: linear-gradient(180deg,#DCEAF7,#5D9BD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+      .hb { display: flex; }
+      #hero { padding: 110px 24px 64px; }
+      .sec { padding: 64px 24px; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .who-inner { grid-template-columns: 1fr; gap: 40px; }
+      .how-cards { grid-template-columns: 1fr; }
+      .ai-split { grid-template-columns: 1fr; gap: 40px; }
+      .contact-layout { grid-template-columns: 1fr; gap: 44px; }
+      .frow { grid-template-columns: 1fr; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="logo-wrap logo-dark nav-logo nav-logo-dark">
+    <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
+  </a>
+  <a href="#hero" class="logo-wrap logo-light nav-logo nav-logo-light">
+    <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
+  </a>
+  <ul class="nav-links" id="nl">
+    <li class="nav-mobile-header">
+      <div class="nav-mobile-logo">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</div>
+    </li>
+    <li><a href="#pain">The Problem</a></li>
+    <li><a href="#credibility">Why It Works</a></li>
+    <li><a href="#how">How I Work</a></li>
+    <li><a href="#who">Who I Serve</a></li>
+    <li><a href="platform.html">GTM Platform</a></li>
+    <li><a href="#diagnostic" class="nav-btn">Free Diagnostic</a></li>
+  </ul>
+  <button class="hb" id="hb" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-close" id="navClose" aria-label="Close menu" onclick="closeMenu()">✕</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Fractional GTM Leadership</div>
+    <div class="hero-logo" id="heroLogo">
+      <div class="logo-word">G<span class="br">[</span><span class="ai" id="heroAi">AI</span><span class="br">]</span>N</div>
+      <div class="logo-adv" id="heroAdv">Advisory</div>
+    </div>
+    <h1 class="hero-headline">
+      Fix your GTM.<br>
+      Build a predictable revenue engine.<br>
+      <span class="hl-blue">Without hiring a full-time CRO.</span>
+    </h1>
+    <p class="hero-sub">
+      Senior GTM leadership that <strong>builds, not just advises</strong> — for founders who need someone in the trenches, not another strategy deck.
+    </p>
+    <div class="hero-btns">
+      <a href="diagnostic.html" class="btn-p">Get Your Free GTM Diagnostic</a>
+      <a href="#how" class="btn-s">How I Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<div class="sec" id="pain">
+  <div class="pain-inner">
+    <div class="pain-intro reveal">
+      If any of this sounds familiar, <span>you're in the right place.</span>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-item reveal">
+        <div class="pain-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#1E4FA1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pain-text"><strong>Pipeline is unpredictable month to month</strong> — you never quite know where next quarter is coming from.</div>
+      </div>
+      <div class="pain-item reveal">
+        <div class="pain-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#1E4FA1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pain-text"><strong>You're still closing everything yourself</strong> — founder-led sales got you here but it can't scale.</div>
+      </div>
+      <div class="pain-item reveal">
+        <div class="pain-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#1E4FA1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pain-text"><strong>You've hired sales reps but performance is inconsistent</strong> — and you're not sure if it's the people or the process.</div>
+      </div>
+      <div class="pain-item reveal">
+        <div class="pain-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#1E4FA1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pain-text"><strong>There's no repeatable sales process</strong> — every deal gets handled differently and nothing compounds.</div>
+      </div>
+      <div class="pain-item reveal">
+        <div class="pain-check"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#1E4FA1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pain-text"><strong>Marketing and sales aren't aligned</strong> — leads come in but the pipeline doesn't convert the way it should.</div>
+      </div>
+    </div>
+    <div class="pain-cta reveal">
+      <p><strong>You don't need a consultant who tells you what to do.</strong> You need someone who's been here before and will build it with you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHO I SERVE -->
+<div class="sec" id="who">
+  <div class="hero-grid" style="position:absolute;opacity:.35;pointer-events:none;top:0;left:0;right:0;bottom:0;"></div>
+  <div class="who-inner">
+    <div class="who-left reveal">
+      <div class="eye wh">Who I Serve</div>
+      <h2 class="sh">Built for early-stage B2B founders.</h2>
+      <p class="sl">I do my best work at the stage where things are messy, the stakes are high, and you need someone who can figure it out — not just advise on it.</p>
+    </div>
+    <div class="who-tags reveal">
+      <div class="who-tag-item">
+        <div class="who-tag-dot"></div>
+        <div class="who-tag-text"><strong>B2B SaaS &amp; recurring revenue</strong> companies between $0–10M ARR</div>
+      </div>
+      <div class="who-tag-item">
+        <div class="who-tag-dot"></div>
+        <div class="who-tag-text"><strong>5–50 person teams</strong> where the founder is still too involved in sales</div>
+      </div>
+      <div class="who-tag-item">
+        <div class="who-tag-dot"></div>
+        <div class="who-tag-text"><strong>Seed to Series B</strong> — the stage where GTM foundations determine everything</div>
+      </div>
+      <div class="who-tag-item">
+        <div class="who-tag-dot"></div>
+        <div class="who-tag-text"><strong>Companies that have tried hiring</strong> but the sales motion still isn't working</div>
+      </div>
+      <div class="who-tag-item">
+        <div class="who-tag-dot"></div>
+        <div class="who-tag-text"><strong>Founders who want a builder</strong> — someone in the trenches, not on the whiteboard</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDIBILITY -->
+<div class="sec" id="credibility" style="background:var(--off);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="eye bl reveal">Why It Works</div>
+    <h2 class="sh reveal">25+ years. Every stage.<br>$0 to $350M+.</h2>
+    <p style="font-size:17px;font-weight:400;color:var(--blue);margin-bottom:8px;max-width:600px;" class="reveal">So I know exactly where your GTM is breaking — and what actually fixes it.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:52px;" class="cred-grid">
+      <div style="background:var(--white);padding:36px 32px;" class="reveal">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--light);margin-bottom:12px;">The Track Record</div>
+        <p style="font-size:15px;font-weight:300;line-height:1.78;color:var(--gray);">
+          I've built revenue organizations from scratch at pre-revenue startups and scaled them to hundreds of millions. Grown teams from 3 reps to 75+. Taken companies from $1M to $40M, $6M to $60M, $5M to $150M. Every stage. Every motion. I've done it — not advised on it.
+        </p>
+      </div>
+      <div style="background:var(--white);padding:36px 32px;" class="reveal">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--light);margin-bottom:12px;">The Difference</div>
+        <p style="font-size:15px;font-weight:300;line-height:1.78;color:var(--gray);">
+          I'm still selling. Still building pipeline. Still closing deals. When I work with you, you're not getting someone who used to do this — you're getting someone actively in the market, who knows what buyers respond to right now, and who uses AI the same way I'll teach your team to.
+        </p>
+      </div>
+      <div style="background:var(--navy);padding:36px 32px;grid-column:1/-1;" class="reveal">
+        <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between;">
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--light);">$0→$350M+</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;">Revenue Built</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--light);">25+</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;">Years Operating</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--light);">75+</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;">Person Teams Built</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--light);">Pre-Rev→IPO</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;">Every Stage Covered</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--light);">B2B SaaS</div>
+            <div style="font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;">Fintech · Data · AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sec" id="how">
+  <div class="how-inner">
+    <div class="eye bl reveal">How I Work</div>
+    <h2 class="sh reveal">Three steps. Clear journey.<br>No retainers for the sake of retainers.</h2>
+    <p class="sl reveal">Every engagement starts with fast clarity on what's broken. You decide what comes next.</p>
+    <div class="how-cards">
+      <div class="how-card reveal">
+        <div class="how-card-num">Step 1</div>
+        <div class="how-card-title">Diagnose</div>
+        <div class="how-card-duration">GTM Audit · 2–3 Weeks</div>
+        <p class="how-card-body">Fast clarity, low risk. A deep diagnostic of your entire commercial motion — ICP, pipeline, process, team, and technology. You get a clear picture of what's working, what's broken, and exactly what to fix first.</p>
+        <div class="how-card-includes">
+          <span>ICP &amp; market clarity assessment</span>
+          <span>Pipeline &amp; revenue health review</span>
+          <span>Sales process evaluation</span>
+          <span>Prioritized action plan</span>
+        </div>
+      </div>
+      <div class="how-card featured reveal">
+        <div class="how-card-num">Step 2</div>
+        <div class="how-card-title">Fix</div>
+        <div class="how-card-duration">Revenue System Build · 30–90 Days</div>
+        <p class="how-card-body">Hands-on rebuild. We don't just identify the problems — we build the solutions together. A repeatable, AI-augmented GTM motion designed for your stage, your market, and your team.</p>
+        <div class="how-card-includes">
+          <span>Repeatable sales process built</span>
+          <span>AI-native workflows implemented</span>
+          <span>Team enablement &amp; playbooks</span>
+          <span>Pipeline &amp; forecast infrastructure</span>
+        </div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-card-num">Step 3</div>
+        <div class="how-card-title">Lead</div>
+        <div class="how-card-duration">Fractional CRO · Ongoing</div>
+        <p class="how-card-body">Full execution ownership. Senior revenue leadership embedded in your team — leading from the front, building and iterating, without the full-time executive cost.</p>
+        <div class="how-card-includes">
+          <span>Weekly leadership &amp; execution</span>
+          <span>Hiring &amp; team development</span>
+          <span>Board &amp; investor reporting</span>
+          <span>Continuous GTM iteration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI GTM -->
+<div class="sec" id="ai-gtm">
+  <div class="ai-inner">
+    <div class="eye gr reveal">AI &amp; GTM</div>
+    <h2 class="sh reveal">The AI advantage<br>your competitors don't have yet.</h2>
+    <div class="ai-split">
+      <div class="ai-left reveal">
+        <p>Every engagement I run is <strong>AI-augmented</strong> — which means faster diagnosis, sharper strategy, and execution at a pace that wasn't possible even two years ago.</p>
+        <p>This isn't about selling you AI tools. It's about using AI to give you the speed and intelligence of a full GTM team, at a fraction of the cost.</p>
+        <div class="ai-manifesto">
+          <div class="ai-manifesto-q">"You get faster pipeline diagnosis, clearer forecasting, and fewer missed deals — because decisions are based on <em>live signals, not guesswork</em>. AI is the mechanism. Results are the point."</div>
+          <p class="ai-manifesto-p">I'm a practitioner first. Every AI capability I deploy has been tested in live commercial environments. I don't recommend tools I haven't run myself — and I don't hand you a stack without the expertise to operate it.</p>
+        </div>
+      </div>
+      <div class="ai-tags reveal">
+        <div class="ai-tag-row">
+          <div class="ai-tag-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1a7a5e" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg></div>
+          <div><div class="ai-tag-title">Market Intelligence</div><div class="ai-tag-desc">Real-time competitive signals and buyer intent — strategy decisions grounded in current reality.</div></div>
+        </div>
+        <div class="ai-tag-row">
+          <div class="ai-tag-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1a7a5e" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M7 8l3 3 2-2 3 3"/></svg></div>
+          <div><div class="ai-tag-title">Sales Workflow Automation</div><div class="ai-tag-desc">AI-native workflows that eliminate manual work and let your team focus on selling.</div></div>
+        </div>
+        <div class="ai-tag-row">
+          <div class="ai-tag-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1a7a5e" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div><div class="ai-tag-title">Pipeline &amp; Forecasting</div><div class="ai-tag-desc">AI-assisted pipeline scoring and scenario modeling so you always know where you stand.</div></div>
+        </div>
+        <div class="ai-tag-row">
+          <div class="ai-tag-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1a7a5e" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="ai-tag-title">GTM Diagnostic Tool</div><div class="ai-tag-desc">Proprietary AI diagnostic that surfaces your biggest revenue bottlenecks in minutes.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIAGNOSTIC CTA -->
+<div class="sec" id="diagnostic">
+  <div class="hero-grid" style="position:absolute;opacity:.35;pointer-events:none;top:0;left:0;right:0;bottom:0;"></div>
+  <div class="diag-inner">
+    <div class="eye gr">Free GTM Diagnostic</div>
+    <h2 class="diag-title">Get clarity on what's <em>breaking your GTM</em> in 4 minutes.</h2>
+    <p class="diag-sub">Answer 14 questions. Get a <strong>personalized GTM scorecard</strong> that identifies your biggest bottlenecks — and what to fix first. Free. No sales pitch.</p>
+    <div class="diag-features">
+      <div class="diag-feat">Takes 4 minutes</div>
+      <div class="diag-feat">AI-powered analysis</div>
+      <div class="diag-feat">Instant results</div>
+      <div class="diag-feat">100% free</div>
+    </div>
+    <div class="hero-btns">
+      <a href="diagnostic.html" class="btn-p">Get My Free Diagnostic</a>
+      <a href="#contact" class="btn-s">Or book a call</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sec" id="contact">
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="eye bl">Let's Talk</div>
+      <h2 class="sh">Ready to build something that actually works?</h2>
+      <p class="sl">Tell me where you are and what's not working. I'll tell you honestly whether I can help — and what that would look like.</p>
+      <div class="c-info">
+        <div class="c-row">
+          <a href="https://www.linkedin.com/company/gain-advisory" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <div class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(30,79,161,.7)" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="form-box reveal">
+      <form id="contactForm" action="https://formspree.io/f/xpqbjpqg" method="POST" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="fg"><label>First Name</label><input type="text" name="first_name" placeholder="John" required /></div>
+          <div class="fg"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith" required /></div>
+        </div>
+        <div class="fg"><label>Work Email</label><input type="email" name="email" placeholder="you@company.com" required /></div>
+        <div class="fg"><label>Company</label><input type="text" name="company" placeholder="Alpha AI" /></div>
+        <div class="fg">
+          <label>What's your biggest challenge right now?</label>
+          <select name="challenge">
+            <option value="" disabled selected>Select...</option>
+            <option>Pipeline is unpredictable</option>
+            <option>Founder-led sales not scaling</option>
+            <option>Sales team underperforming</option>
+            <option>No repeatable sales process</option>
+            <option>Sales &amp; marketing misaligned</option>
+            <option>Need GTM strategy from scratch</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell me more</label><textarea name="message" placeholder="What's going on and what have you already tried?"></textarea></div>
+        <button type="submit" class="form-btn">Send Message</button>
+      </form>
+      <div class="form-ok" id="formOk">
+        <div class="tick">✦</div>
+        <p>Got it.<br><strong>I'll be back to you within one business day.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="logo-wrap logo-dark ft-logo" id="ftLogo">
+    <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
+    <span class="logo-adv" id="ftAdv">Advisory</span>
+  </a>
+  <ul class="ft-links">
+    <li><a href="#pain">The Problem</a></li>
+    <li><a href="#credibility">Why It Works</a></li>
+    <li><a href="#how">How I Work</a></li>
+    <li><a href="#who">Who I Serve</a></li>
+    <li><a href="#ai-gtm">AI &amp; GTM</a></li>
+    <li><a href="#diagnostic">Free Diagnostic</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="ft-copy">© 2026 Gain Advisory LLC</span>
+</footer>
+
+<script>
+  /* Nav */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  /* Hamburger */
+  const hb = document.getElementById('hb');
+  const nl = document.getElementById('nl');
+  const navClose = document.getElementById('navClose');
+
+  function openMenu()  { nl.classList.add('open'); navClose.classList.add('visible'); document.body.style.overflow='hidden'; }
+  function closeMenu() { nl.classList.remove('open'); navClose.classList.remove('visible'); document.body.style.overflow=''; }
+
+  hb.addEventListener('click', openMenu);
+  nl.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  /* Reveal */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* Center Advisory under [AI] */
+  function centerAdvisory() {
+    [
+      { logo: document.getElementById('heroLogo'), ai: document.getElementById('heroAi'), adv: document.getElementById('heroAdv') },
+      { logo: document.getElementById('ftLogo'),   ai: document.getElementById('ftLogo') ? document.getElementById('ftLogo').querySelector('.ai') : null, adv: document.getElementById('ftAdv') }
+    ].forEach(({ logo, ai, adv }) => {
+      if (!logo || !ai || !adv) return;
+      const lr = logo.getBoundingClientRect();
+      const ar = ai.getBoundingClientRect();
+      const dr = adv.getBoundingClientRect();
+      if (!lr.width) return;
+      adv.style.marginLeft = ((ar.left + ar.right) / 2 - lr.left - dr.width / 2) + 'px';
+    });
+  }
+  window.addEventListener('load', centerAdvisory);
+  window.addEventListener('resize', centerAdvisory);
+
+  /* Hero entrance */
+  ['.hero-badge', '.hero-logo', '.hero-headline', '.hero-sub', '.hero-btns'].forEach((sel, i) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = `opacity .7s ease ${i*.12}s, transform .7s ease ${i*.12}s`;
+    setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 80 + i * 120);
+  });
+
+  /* Form */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(r => {
+        if (r.ok) { form.style.display = 'none'; document.getElementById('formOk').style.display = 'block'; }
+        else { alert('Something went wrong. Please reach out on LinkedIn.'); }
+      })
+      .catch(() => alert('Something went wrong. Please reach out on LinkedIn.'));
+  }
+</script>
+</body>
+</html>

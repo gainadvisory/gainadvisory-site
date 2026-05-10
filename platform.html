@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GTM Intelligence Platform | G[AI]N Advisory</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230B1D33'/><text x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' fill='%235D9BD4' text-anchor='middle'>AI</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#0B1D33;--blue:#1E4FA1;--light:#5D9BD4;--pale:#DCEAF7;
+      --gray:#6b7280;--off:#F2F4F7;--white:#F9FAFB;
+      --ai:#1a7a5e;--mint:#6ee7c7;
+      --red:#ef4444;--amber:#f59e0b;--green:#10b981;
+      --charcoal:#2B2F33;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--off);color:var(--charcoal);min-height:100vh}
+
+    /* ── SCREENS ── */
+    .screen{display:none;min-height:100vh}
+    .screen.active{display:block}
+
+    /* ── AUTH ── */
+    #screen-auth{ display:flex; background:var(--navy); align-items:center; justify-content:center; min-height:100vh; position:relative; overflow:hidden; }
+    #screen-auth.hidden{ display:none; }
+    #screen-app{ display:none; }
+    #screen-app.active{ display:flex; min-height:100vh; }
+    .auth-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(93,155,212,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(93,155,212,.04) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+    .auth-glow{position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(30,79,161,.2) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+    .auth-box{position:relative;z-index:1;width:100%;max-width:420px;padding:24px}
+    .auth-logo{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;letter-spacing:-1px;color:#fff;margin-bottom:8px;text-align:center}
+    .auth-logo .br{font-weight:300;color:rgba(255,255,255,.2)}
+    .auth-logo .ai{font-weight:800;background:linear-gradient(180deg,#DCEAF7,#5D9BD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .auth-tagline{font-size:12px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);text-align:center;margin-bottom:40px}
+    .auth-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:36px 32px}
+    .auth-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+    .auth-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);margin-bottom:28px;line-height:1.6}
+    .auth-tabs{display:flex;gap:2px;margin-bottom:28px}
+    .auth-tab{flex:1;padding:9px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);transition:all .2s;background:transparent}
+    .auth-tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .af{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    .af label{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+    .af input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Inter',sans-serif;font-size:13px;padding:11px 14px;outline:none;width:100%;transition:border-color .2s}
+    .af input:focus{border-color:rgba(93,155,212,.5)}
+    .af input::placeholder{color:rgba(255,255,255,.2)}
+    .auth-btn{width:100%;padding:13px;background:var(--mint);color:var(--navy);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;border:none;cursor:pointer;margin-top:8px;transition:background .2s}
+    .auth-btn:hover{background:#a7f3d0}
+    .auth-err{font-size:12px;color:var(--red);margin-top:8px;display:none}
+    .auth-switch{font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin-top:16px;cursor:pointer}
+    .auth-switch span{color:var(--light);text-decoration:underline}
+    .auth-back{display:block;text-align:center;margin-top:20px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s}
+    .auth-back:hover{color:rgba(255,255,255,.5)}
+
+    /* ── APP SHELL ── */
+    #screen-app{display:none}
+    #screen-app.active{display:flex;min-height:100vh}
+
+    /* SIDEBAR */
+    .sidebar{width:240px;background:var(--navy);flex-shrink:0;display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:50}
+    .sidebar-logo{padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .sidebar-logo-mark{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;letter-spacing:-1px;color:#fff}
+    .sidebar-logo-mark .br{font-weight:300;color:rgba(255,255,255,.2)}
+    .sidebar-logo-mark .ai{font-weight:800;background:linear-gradient(180deg,#DCEAF7,#5D9BD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sidebar-logo-sub{font-size:8px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:3px}
+    .sidebar-nav{flex:1;padding:20px 12px;display:flex;flex-direction:column;gap:2px}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:12px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.45);cursor:pointer;transition:all .2s;border-radius:4px}
+    .nav-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)}
+    .nav-item.active{background:rgba(30,79,161,.3);color:#fff}
+    .nav-item svg{width:15px;height:15px;flex-shrink:0}
+    .nav-section{font-size:8.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:16px 12px 6px;margin-top:8px}
+    .sidebar-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,.06)}
+    .user-info{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px}
+    .user-avatar{width:30px;height:30px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+    .user-name{font-size:12px;font-weight:500;color:rgba(255,255,255,.7);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .user-plan{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}
+    .btn-logout{width:100%;padding:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.35);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .btn-logout:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+
+    /* MAIN CONTENT */
+    .main{margin-left:240px;flex:1;padding:32px 40px;min-height:100vh}
+    .page{display:none}
+    .page.active{display:block}
+
+    /* PAGE HEADER */
+    .page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px}
+    .page-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .page-sub{font-size:14px;font-weight:300;color:var(--gray)}
+    .page-actions{display:flex;gap:10px;align-items:center;flex-shrink:0}
+
+    /* BUTTONS */
+    .btn-primary{background:var(--navy);color:#fff;padding:10px 22px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;border-radius:100px}
+    .btn-primary:hover{background:var(--blue)}
+    .btn-secondary{background:transparent;color:var(--navy);padding:10px 22px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--navy);cursor:pointer;transition:all .2s;border-radius:100px}
+    .btn-secondary:hover{background:var(--navy);color:#fff}
+    .btn-mint{background:var(--mint);color:var(--navy);padding:10px 22px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;border-radius:100px}
+    .btn-mint:hover{background:#a7f3d0}
+
+    /* CARDS */
+    .card{background:#fff;padding:24px;margin-bottom:16px}
+    .card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .card-sub{font-size:12px;font-weight:300;color:var(--gray);margin-bottom:20px}
+
+    /* GRID */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+
+    /* STAT CARDS */
+    .stat-card{background:#fff;padding:22px 24px}
+    .stat-label{font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+    .stat-value{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--navy);line-height:1;margin-bottom:6px}
+    .stat-delta{font-size:11px;font-weight:500;display:flex;align-items:center;gap:4px}
+    .stat-delta.up{color:var(--green)}
+    .stat-delta.down{color:var(--red)}
+    .stat-delta.neutral{color:var(--gray)}
+
+    /* SCORE CIRCLE */
+    .score-wrap{display:flex;align-items:center;gap:24px}
+    .score-circ{position:relative;width:90px;height:90px;flex-shrink:0}
+    .score-circ svg{position:absolute;inset:0;transform:rotate(-90deg)}
+    .score-circ-bg{fill:none;stroke:var(--off);stroke-width:6}
+    .score-circ-fill{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
+    .score-circ-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .score-circ-num span:first-child{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;line-height:1}
+    .score-circ-num span:last-child{font-size:9px;font-weight:500;color:var(--gray);letter-spacing:.1em}
+
+    /* CATEGORY BAR */
+    .cat-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--off)}
+    .cat-row:last-child{border-bottom:none}
+    .cat-row-name{font-size:12px;font-weight:500;color:var(--charcoal);width:160px;flex-shrink:0}
+    .cat-row-bar{flex:1;height:6px;background:var(--off);border-radius:3px;overflow:hidden}
+    .cat-row-fill{height:100%;border-radius:3px;transition:width 1s ease}
+    .cat-row-score{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;width:36px;text-align:right;flex-shrink:0}
+    .cat-row-label{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;width:80px;text-align:right;flex-shrink:0}
+
+    /* HISTORY CHART */
+    .history-chart{width:100%;height:160px;position:relative;margin-top:8px}
+    .chart-svg{width:100%;height:100%}
+
+    /* BENCHMARK */
+    .benchmark-row{display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--off)}
+    .benchmark-row:last-child{border-bottom:none}
+    .bench-cat{font-size:12px;font-weight:500;color:var(--charcoal);flex:1}
+    .bench-you{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+    .bench-avg{font-size:12px;font-weight:300;color:var(--gray)}
+    .bench-diff{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px}
+    .bench-diff.up{background:#dcfce7;color:#15803d}
+    .bench-diff.down{background:#fee2e2;color:#dc2626}
+    .bench-diff.same{background:var(--off);color:var(--gray)}
+
+    /* RECOMMENDATIONS */
+    .rec-item{background:var(--off);padding:18px 20px;margin-bottom:8px;border-left:3px solid var(--blue)}
+    .rec-item.critical{border-color:var(--red)}
+    .rec-item.good{border-color:var(--green)}
+    .rec-priority{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+    .rec-priority.critical{color:var(--red)}
+    .rec-priority.medium{color:var(--amber)}
+    .rec-priority.good{color:var(--green)}
+    .rec-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .rec-text{font-size:13px;font-weight:300;line-height:1.65;color:var(--gray)}
+
+    /* AI ANALYSIS BOX */
+    .ai-box{background:var(--navy);padding:28px 32px;margin-bottom:16px}
+    .ai-box-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+    .ai-box-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .ai-box-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff}
+    .ai-box-sub{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:16px}
+    .ai-box-text{font-size:13.5px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.65);white-space:pre-wrap}
+
+    /* PAYWALL */
+    .paywall{background:linear-gradient(135deg,var(--navy),#122a50);border:1px solid rgba(93,155,212,.2);padding:40px;text-align:center;position:relative;overflow:hidden;margin-bottom:16px}
+    .paywall::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M0 30h60M30 0v60' stroke='rgba(93,155,212,0.04)' stroke-width='1'/%3E%3C/svg%3E");pointer-events:none}
+    .paywall-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(110,231,199,.15);border:1px solid rgba(110,231,199,.3);border-radius:100px;padding:4px 12px;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:20px}
+    .paywall-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:10px;position:relative}
+    .paywall-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto;position:relative;line-height:1.7}
+    .paywall-features{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;position:relative}
+    .paywall-feat{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.6);justify-content:center}
+    .paywall-feat::before{content:'✓';color:var(--mint);font-weight:700;font-size:12px}
+    .paywall-price{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#fff;position:relative;margin-bottom:4px}
+    .paywall-price span{font-size:16px;font-weight:400;color:rgba(255,255,255,.4)}
+    .paywall-note{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:24px;position:relative}
+
+    /* DIAGNOSTIC IN APP */
+    .diag-progress{margin-bottom:36px}
+    .diag-q-cat{font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--light);margin-bottom:10px}
+    .diag-q-text{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:28px}
+    .diag-options{display:flex;flex-direction:column;gap:8px}
+    .diag-option{background:#fff;border:2px solid var(--off);padding:16px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px}
+    .diag-option:hover{border-color:var(--light);background:var(--pale)}
+    .diag-option.selected{border-color:var(--blue);background:rgba(30,79,161,.05)}
+    .diag-opt-letter{width:26px;height:26px;border-radius:50%;border:2px solid var(--off);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--gray);flex-shrink:0;transition:all .2s}
+    .diag-option.selected .diag-opt-letter{border-color:var(--blue);background:var(--blue);color:#fff}
+    .diag-opt-text{font-size:13.5px;font-weight:300;line-height:1.5;color:var(--charcoal)}
+    .diag-option.selected .diag-opt-text{color:var(--navy);font-weight:400}
+    .diag-nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px}
+
+    /* PROGRESS BAR */
+    .prog-wrap{margin-bottom:32px}
+    .prog-meta{display:flex;justify-content:space-between;margin-bottom:8px}
+    .prog-label{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+    .prog-count{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--gray)}
+    .prog-track{height:3px;background:var(--off);border-radius:2px;overflow:hidden}
+    .prog-fill{height:100%;background:linear-gradient(90deg,var(--light),var(--mint));border-radius:2px;transition:width .4s}
+
+    /* COLORS */
+    .c-red{color:var(--red)} .c-amber{color:var(--amber)} .c-green{color:var(--green)} .c-light{color:var(--light)} .c-navy{color:var(--navy)}
+    .fill-red{background:var(--red)} .fill-amber{background:var(--amber)} .fill-green{background:var(--green)} .fill-light{background:var(--light)}
+    .stroke-red{stroke:var(--red)} .stroke-amber{stroke:var(--amber)} .stroke-green{stroke:var(--green)} .stroke-light{stroke:var(--light)}
+
+    /* EMPTY STATE */
+    .empty{text-align:center;padding:60px 24px}
+    .empty-icon{font-size:36px;margin-bottom:16px}
+    .empty-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px}
+    .empty-sub{font-size:14px;font-weight:300;color:var(--gray);margin-bottom:24px;max-width:360px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+    /* LOADING */
+    .ai-loading{display:flex;flex-direction:column;align-items:center;padding:40px;text-align:center}
+    .ai-loading-dots{display:flex;gap:6px;margin-bottom:16px}
+    .ai-loading-dot{width:8px;height:8px;border-radius:50%;background:var(--light);animation:dot-bounce .8s ease-in-out infinite}
+    .ai-loading-dot:nth-child(2){animation-delay:.15s}
+    .ai-loading-dot:nth-child(3){animation-delay:.3s}
+    @keyframes dot-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .ai-loading p{font-size:13px;font-weight:300;color:var(--gray)}
+
+    /* BADGE */
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    .badge-red{background:#fee2e2;color:#dc2626}
+    .badge-amber{background:#fef3c7;color:#d97706}
+    .badge-green{background:#dcfce7;color:#15803d}
+    .badge-blue{background:var(--pale);color:var(--blue)}
+
+    @media(max-width:768px){
+      .sidebar{display:none}
+      .main{margin-left:0;padding:24px 16px}
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ AUTH SCREEN ═══ -->
+<div class="screen" id="screen-auth">
+  <div class="auth-grid"></div>
+  <div class="auth-glow"></div>
+  <div class="auth-box">
+    <div class="auth-logo">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</div>
+    <div class="auth-tagline">GTM Intelligence Platform</div>
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Sign In</div>
+        <div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Create Account</div>
+      </div>
+      <!-- LOGIN -->
+      <div id="form-login">
+        <div class="af"><label>Email</label><input type="email" id="login-email" placeholder="you@company.com"/></div>
+        <div class="af"><label>Password</label><input type="password" id="login-pw" placeholder="••••••••"/></div>
+        <div class="auth-err" id="login-err">Invalid email or password.</div>
+        <button class="auth-btn" onclick="doLogin()">Sign In →</button>
+      </div>
+      <!-- SIGNUP -->
+      <div id="form-signup" style="display:none">
+        <div class="af"><label>Your Name</label><input type="text" id="signup-name" placeholder="John Smith"/></div>
+        <div class="af"><label>Company</label><input type="text" id="signup-company" placeholder="Alpha AI"/></div>
+        <div class="af"><label>Email</label><input type="email" id="signup-email" placeholder="you@company.com"/></div>
+        <div class="af"><label>Password</label><input type="password" id="signup-pw" placeholder="Create a password"/></div>
+        <div class="auth-err" id="signup-err"></div>
+        <button class="auth-btn" onclick="doSignup()">Create Account →</button>
+      </div>
+    </div>
+    <a href="index.html" class="auth-back">← Back to gainadvisory.com</a>
+  </div>
+</div>
+
+<!-- ═══ APP SCREEN ═══ -->
+<div class="screen" id="screen-app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</div>
+      <div class="sidebar-logo-sub">GTM Intelligence</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('diagnostic')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        GTM Diagnostic
+      </div>
+      <div class="nav-item" onclick="showPage('recommendations')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Recommendations
+      </div>
+      <div class="nav-section">Analytics</div>
+      <div class="nav-item" onclick="showPage('history')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Score History
+      </div>
+      <div class="nav-item" onclick="showPage('benchmark')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Benchmarking
+      </div>
+      <div class="nav-section">Account</div>
+      <div class="nav-item" onclick="showPage('upgrade')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Upgrade to Pro
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">J</div>
+        <div>
+          <div class="user-name" id="userName">Loading...</div>
+          <div class="user-plan">Free Plan</div>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div>
+          <div class="page-title" id="dashGreeting">Good morning</div>
+          <div class="page-sub">Here's your GTM health snapshot</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn-primary" onclick="showPage('diagnostic')">Retake Diagnostic</button>
+        </div>
+      </div>
+
+      <!-- No data state -->
+      <div id="dash-empty" style="display:none">
+        <div class="empty">
+          <div class="empty-icon">📊</div>
+          <div class="empty-title">Take your first GTM diagnostic</div>
+          <div class="empty-sub">Complete the 14-question diagnostic to get your GTM health score and personalized recommendations.</div>
+          <button class="btn-mint" onclick="showPage('diagnostic')">Start My Diagnostic</button>
+        </div>
+      </div>
+
+      <!-- Data state -->
+      <div id="dash-data">
+        <div class="grid-4">
+          <div class="stat-card">
+            <div class="stat-label">GTM Health Score</div>
+            <div class="stat-value" id="dash-score">—</div>
+            <div class="stat-delta neutral" id="dash-score-delta">No previous score</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Diagnostics Taken</div>
+            <div class="stat-value" id="dash-count">0</div>
+            <div class="stat-delta neutral">Since joining</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Biggest Gap</div>
+            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-gap">—</div>
+            <div class="stat-delta neutral" id="dash-gap-score"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Next Diagnostic</div>
+            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-next">—</div>
+            <div class="stat-delta neutral">Recommended quarterly</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">GTM Score Breakdown</div>
+            <div class="card-sub">Your latest diagnostic results by category</div>
+            <div id="dash-cats"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">AI Analysis</div>
+            <div class="card-sub">Your personalized GTM assessment</div>
+            <div id="dash-analysis-preview" style="font-size:13px;font-weight:300;line-height:1.75;color:var(--gray)"></div>
+            <button class="btn-secondary" style="margin-top:16px;font-size:10px" onclick="showPage('recommendations')">See Full Recommendations →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAGNOSTIC -->
+    <div class="page" id="page-diagnostic">
+      <div class="page-header">
+        <div>
+          <div class="page-title">GTM Diagnostic</div>
+          <div class="page-sub">Answer all 10 questions to get your updated score</div>
+        </div>
+      </div>
+      <div id="diag-intro-card" class="card">
+        <div class="card-title">Ready to assess your GTM motion?</div>
+        <div class="card-sub">This takes about 4 minutes. Be honest — the more accurate your answers, the more useful your results.</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><span style="color:var(--mint);font-weight:700">✓</span>10 questions</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><span style="color:var(--mint);font-weight:700">✓</span>AI-powered analysis</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><span style="color:var(--mint);font-weight:700">✓</span>Score saved to your history</div>
+        </div>
+        <button class="btn-mint" onclick="startAppDiag()">Start Diagnostic →</button>
+      </div>
+      <div id="diag-quiz-card" class="card" style="display:none">
+        <div class="prog-wrap">
+          <div class="prog-meta">
+            <span class="prog-label">GTM Diagnostic</span>
+            <span class="prog-count" id="app-prog-count">1 / 10</span>
+          </div>
+          <div class="prog-track"><div class="prog-fill" id="app-prog-fill" style="width:10%"></div></div>
+        </div>
+        <div class="diag-q-cat" id="app-q-cat"></div>
+        <div class="diag-q-text" id="app-q-text"></div>
+        <div class="diag-options" id="app-q-opts"></div>
+        <div class="diag-nav">
+          <button class="btn-secondary" id="app-btn-prev" onclick="appPrevQ()" style="font-size:10px">← Back</button>
+          <button class="btn-primary" id="app-btn-next" onclick="appNextQ()" disabled style="font-size:10px">Next →</button>
+        </div>
+      </div>
+      <div id="diag-loading-card" class="card" style="display:none">
+        <div class="ai-loading">
+          <div class="ai-loading-dots"><div class="ai-loading-dot"></div><div class="ai-loading-dot"></div><div class="ai-loading-dot"></div></div>
+          <p>Analyzing your GTM motion and generating recommendations...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="page" id="page-recommendations">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Recommendations</div>
+          <div class="page-sub">AI-generated action plan based on your latest diagnostic</div>
+        </div>
+      </div>
+      <div id="rec-empty" style="display:none">
+        <div class="empty">
+          <div class="empty-icon">💡</div>
+          <div class="empty-title">No recommendations yet</div>
+          <div class="empty-sub">Complete your first diagnostic to get personalized recommendations.</div>
+          <button class="btn-mint" onclick="showPage('diagnostic')">Take Diagnostic</button>
+        </div>
+      </div>
+      <div id="rec-data">
+        <div class="ai-box">
+          <div class="ai-box-header"><div class="ai-box-dot"></div><div class="ai-box-title">AI Analysis</div></div>
+          <div class="ai-box-sub">Powered by G[AI]N Advisory</div>
+          <div class="ai-box-text" id="rec-analysis">Loading...</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Priority Action Items</div>
+          <div class="card-sub">Ranked by impact — fix these first</div>
+          <div id="rec-items"></div>
+        </div>
+        <div class="card" style="text-align:center;padding:32px">
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px">Want help executing on these?</div>
+          <p style="font-size:13px;font-weight:300;color:var(--gray);margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7">I work with founders directly to implement these fixes. Let's spend 30 minutes on your specific situation.</p>
+          <a href="index.html#contact" class="btn-mint" style="text-decoration:none;display:inline-block">Book a Free 30-Min Call</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="page" id="page-history">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Score History</div>
+          <div class="page-sub">Track your GTM health over time</div>
+        </div>
+        <button class="btn-primary" onclick="showPage('diagnostic')">Retake Diagnostic</button>
+      </div>
+      <div id="hist-empty" style="display:none">
+        <div class="empty">
+          <div class="empty-icon">📈</div>
+          <div class="empty-title">No history yet</div>
+          <div class="empty-sub">Take at least two diagnostics to see your progress over time.</div>
+          <button class="btn-mint" onclick="showPage('diagnostic')">Take Diagnostic</button>
+        </div>
+      </div>
+      <div id="hist-data">
+        <div class="card">
+          <div class="card-title">Overall GTM Score Over Time</div>
+          <div class="card-sub">Each point represents a completed diagnostic</div>
+          <div class="history-chart"><svg class="chart-svg" id="historyChart"></svg></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Diagnostic History</div>
+          <div class="card-sub">All your past assessments</div>
+          <div id="hist-table"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENCHMARK -->
+    <div class="page" id="page-benchmark">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Benchmarking</div>
+          <div class="page-sub">See how you compare to other early-stage B2B companies</div>
+        </div>
+      </div>
+      <div id="bench-empty" style="display:none">
+        <div class="empty">
+          <div class="empty-icon">📊</div>
+          <div class="empty-title">Complete a diagnostic first</div>
+          <div class="empty-sub">Take your first diagnostic to see how you compare to industry benchmarks.</div>
+          <button class="btn-mint" onclick="showPage('diagnostic')">Take Diagnostic</button>
+        </div>
+      </div>
+      <div id="bench-data">
+        <div class="card">
+          <div class="card-title">You vs. Early-Stage B2B Average</div>
+          <div class="card-sub">Based on anonymized G[AI]N Advisory diagnostic data</div>
+          <div id="bench-rows"></div>
+        </div>
+        <div class="paywall" id="bench-paywall">
+          <div class="paywall-badge">Pro Feature</div>
+          <div class="paywall-title">Unlock Full Benchmarking</div>
+          <p class="paywall-sub">See how you compare by industry, revenue stage, and team size — not just overall averages.</p>
+          <div class="paywall-features">
+            <div class="paywall-feat">Filter by revenue stage ($0–1M, $1–5M, $5–10M)</div>
+            <div class="paywall-feat">Filter by business model (SaaS, Services, B2B2C)</div>
+            <div class="paywall-feat">Monthly benchmark updates as more data comes in</div>
+          </div>
+          <div class="paywall-price">$99<span>/month</span></div>
+          <div class="paywall-note">Cancel anytime. No contracts.</div>
+          <button class="btn-mint" onclick="showPage('upgrade')">Upgrade to Pro</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPGRADE -->
+    <div class="page" id="page-upgrade">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Upgrade to Pro</div>
+          <div class="page-sub">Unlock the full GTM Intelligence Platform</div>
+        </div>
+      </div>
+      <div style="max-width:560px">
+        <div class="paywall">
+          <div class="paywall-badge">G[AI]N Advisory Pro</div>
+          <div class="paywall-title">Everything you need to build a predictable revenue engine</div>
+          <p class="paywall-sub">The free diagnostic shows you what's broken. Pro gives you the ongoing system to fix it and track progress.</p>
+          <div class="paywall-features">
+            <div class="paywall-feat">Unlimited quarterly diagnostics</div>
+            <div class="paywall-feat">Score history &amp; trend tracking</div>
+            <div class="paywall-feat">Full AI recommendations (updated each diagnostic)</div>
+            <div class="paywall-feat">Benchmarking by stage, model &amp; industry</div>
+            <div class="paywall-feat">Priority email support from Jason</div>
+            <div class="paywall-feat">Monthly GTM insight reports</div>
+          </div>
+          <div class="paywall-price">$99<span>/month</span></div>
+          <div class="paywall-note">Cancel anytime. Billed monthly.</div>
+          <button class="btn-mint" onclick="handleUpgrade()">Get Started with Pro →</button>
+        </div>
+        <div class="card" style="text-align:center">
+          <p style="font-size:13px;font-weight:300;color:var(--gray);line-height:1.7">Questions? Want to talk through whether Pro is right for you? <a href="index.html#contact" style="color:var(--blue);text-decoration:none;font-weight:500">Book a call with Jason →</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .main -->
+</div><!-- end #screen-app -->
+
+<script>
+// ── QUESTIONS (same as diagnostic.html) ──
+const QUESTIONS = [
+  {category:"ICP & Market Clarity",text:"How clearly defined is your Ideal Customer Profile (ICP)?",key:"icp",options:[{text:"Detailed ICP — specific industry, company size, role, pain points, and buying triggers",score:4},{text:"General sense of who we sell to but not formally documented",score:2},{text:"We sell to anyone who seems like a good fit — haven't really narrowed it down",score:1},{text:"Still figuring out who our best customers are",score:0}]},
+  {category:"ICP & Market Clarity",text:"How well does your messaging resonate with your target buyers?",key:"messaging",options:[{text:"Prospects immediately understand our value — rarely have to explain what we do",score:4},{text:"Most prospects get it after a conversation, but written messaging needs work",score:2},{text:"We often find ourselves explaining and educating — message isn't landing on its own",score:1},{text:"Still workshopping our positioning and value proposition",score:0}]},
+  {category:"Pipeline & Revenue Health",text:"How predictable is your pipeline month to month?",key:"pipeline",options:[{text:"Strong pipeline visibility — can forecast revenue with reasonable accuracy",score:4},{text:"Somewhat predictable but have good months and bad months without knowing why",score:2},{text:"Inconsistent — hard to know where next quarter is coming from",score:1},{text:"No real pipeline — deals appear somewhat randomly",score:0}]},
+  {category:"Pipeline & Revenue Health",text:"Who is primarily responsible for closing deals?",key:"closing",options:[{text:"Dedicated sales reps closing deals independently and consistently",score:4},{text:"Sales reps handle most deals but founder still needs to get involved to close",score:2},{text:"Founder closes most deals — sales team supports but doesn't own the close",score:1},{text:"Founder closes everything — no real sales function yet",score:0}]},
+  {category:"Sales Process & Execution",text:"How mature is your sales process?",key:"process",options:[{text:"Documented, repeatable process that reps follow consistently",score:4},{text:"Loose process but not consistently followed or documented",score:2},{text:"Every rep does it differently — no standard approach",score:1},{text:"No real sales process — reactive and ad hoc",score:0}]},
+  {category:"Sales Process & Execution",text:"How would you rate your sales team's current performance?",key:"teamPerf",options:[{text:"Most reps hitting or exceeding quota consistently",score:4},{text:"Mixed — some strong performers, some struggling",score:2},{text:"Most reps underperforming — not sure if it's the people or the process",score:1},{text:"No sales team yet — just the founder",score:2}]},
+  {category:"GTM Alignment",text:"How well are your sales and marketing teams aligned?",key:"alignment",options:[{text:"Sales and marketing share the same ICP, messaging, and pipeline goals",score:4},{text:"Some alignment but marketing leads often aren't what sales actually wants",score:2},{text:"Sales and marketing operate independently — minimal coordination",score:1},{text:"No marketing function yet — very early stage",score:2}]},
+  {category:"GTM Alignment",text:"How effectively does your marketing generate qualified pipeline?",key:"marketing",options:[{text:"Marketing is a meaningful source of qualified pipeline that sales actively values",score:4},{text:"Marketing generates leads but quality is inconsistent — lots of noise",score:2},{text:"Most pipeline comes from outbound and referrals — marketing contribution is minimal",score:1},{text:"No marketing function driving pipeline yet",score:1}]},
+  {category:"Team & Leadership",text:"Does your commercial team have the right leadership for your stage?",key:"leadership",options:[{text:"Yes — experienced revenue leadership that's right for where we are",score:4},{text:"We have someone but they're probably better suited for an earlier or later stage",score:2},{text:"Founder is acting as CRO — no dedicated revenue leadership",score:1},{text:"We know we need revenue leadership but haven't figured out the right solution",score:0}]},
+  {category:"AI & Technology",text:"How would you describe your team's use of AI and modern sales technology?",key:"aiTech",options:[{text:"Actively use AI tools across sales, marketing, and operations — it's part of how we work",score:4},{text:"Use some AI tools but it's not systematic — more experimental",score:2},{text:"Mostly using traditional tools — CRM, email, basic outbound. AI isn't part of the motion",score:1},{text:"Tech stack is minimal — figuring out the basics before adding more tools",score:0}]}
+];
+
+const CATEGORIES = {
+  "ICP & Market Clarity":      {keys:["icp","messaging"],       label:"ICP & Messaging"},
+  "Pipeline & Revenue Health": {keys:["pipeline","closing"],    label:"Pipeline & Revenue"},
+  "Sales Process & Execution": {keys:["process","teamPerf"],    label:"Sales Process"},
+  "GTM Alignment":             {keys:["alignment","marketing"], label:"GTM Alignment"},
+  "Team & Leadership":         {keys:["leadership"],            label:"Team & Leadership"},
+  "AI & Technology":           {keys:["aiTech"],                label:"AI & Technology"}
+};
+
+// Benchmark averages (based on typical early-stage B2B companies)
+const BENCHMARKS = {
+  "ICP & Market Clarity":      42,
+  "Pipeline & Revenue Health": 38,
+  "Sales Process & Execution": 35,
+  "GTM Alignment":             40,
+  "Team & Leadership":         44,
+  "AI & Technology":           31
+};
+
+const PRIORITY_DESCS = {
+  "ICP & Market Clarity":      "Sharpen your ICP and tighten your messaging. When buyers immediately recognize themselves in your story, conversion improves across every channel.",
+  "Pipeline & Revenue Health": "Build predictable pipeline generation — inbound and outbound. Consistent top-of-funnel is the foundation everything else depends on.",
+  "Sales Process & Execution": "Document and systematize your sales process. A repeatable motion means performance stops depending on who's selling.",
+  "GTM Alignment":             "Get sales and marketing operating from the same playbook. Misalignment is one of the most expensive sources of pipeline leakage.",
+  "Team & Leadership":         "Assess whether you have the right commercial leadership for your stage. Wrong profile at wrong time is why most GTM motions stall.",
+  "AI & Technology":           "Modernize your GTM tech stack. AI-native workflows can dramatically accelerate outreach, qualification, and pipeline management."
+};
+
+// ── STATE ──
+let currentUser = null;
+let appAnswers = {};
+let appCurrent = 0;
+
+// ── STORAGE HELPERS ──
+function getUsers()   { try { return JSON.parse(localStorage.getItem('gtm_users') || '{}'); } catch(e) { return {}; } }
+function saveUsers(u) { localStorage.setItem('gtm_users', JSON.stringify(u)); }
+function getUserData(email)     { try { return JSON.parse(localStorage.getItem(`gtm_data_${email}`) || '{"diagnostics":[]}'); } catch(e) { return {diagnostics:[]}; } }
+function saveUserData(email, d) { localStorage.setItem(`gtm_data_${email}`, JSON.stringify(d)); }
+function getSession()  { try { return JSON.parse(localStorage.getItem('gtm_session') || 'null'); } catch(e) { return null; } }
+function saveSession(u){ localStorage.setItem('gtm_session', JSON.stringify(u)); }
+function clearSession(){ localStorage.removeItem('gtm_session'); }
+
+// ── AUTH ──
+function switchTab(tab) {
+  document.getElementById('tab-login').classList.toggle('active', tab==='login');
+  document.getElementById('tab-signup').classList.toggle('active', tab==='signup');
+  document.getElementById('form-login').style.display  = tab==='login'  ? 'block' : 'none';
+  document.getElementById('form-signup').style.display = tab==='signup' ? 'block' : 'none';
+}
+
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pw    = document.getElementById('login-pw').value;
+  const err   = document.getElementById('login-err');
+  const users = getUsers();
+  if (!users[email] || users[email].password !== btoa(pw)) {
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+  currentUser = { email, name: users[email].name, company: users[email].company };
+  saveSession(currentUser);
+  loadApp();
+}
+
+function doSignup() {
+  const name    = document.getElementById('signup-name').value.trim();
+  const company = document.getElementById('signup-company').value.trim();
+  const email   = document.getElementById('signup-email').value.trim().toLowerCase();
+  const pw      = document.getElementById('signup-pw').value;
+  const err     = document.getElementById('signup-err');
+  if (!name || !email || !pw) { err.textContent = 'Please fill in all fields.'; err.style.display='block'; return; }
+  if (pw.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.style.display='block'; return; }
+  const users = getUsers();
+  if (users[email]) { err.textContent = 'An account with this email already exists.'; err.style.display='block'; return; }
+  users[email] = { name, company, password: btoa(pw) };
+  saveUsers(users);
+  currentUser = { email, name, company };
+  saveSession(currentUser);
+  loadApp();
+}
+
+function doLogout() {
+  currentUser = null;
+  clearSession();
+  document.getElementById('screen-auth').classList.remove('hidden');
+  document.getElementById('screen-app').classList.remove('active');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-pw').value = '';
+}
+
+// ── APP LOAD ──
+function loadApp() {
+  document.getElementById('screen-auth').classList.add('hidden');
+  document.getElementById('screen-app').classList.add('active');
+
+  // Set user info
+  document.getElementById('userName').textContent = currentUser.name;
+  document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+
+  // Greeting
+  const hr = new Date().getHours();
+  const greeting = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('dashGreeting').textContent = `${greeting}, ${currentUser.name.split(' ')[0]}`;
+
+  showPage('dashboard');
+  renderDashboard();
+}
+
+// ── NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`page-${id}`).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes(id)) n.classList.add('active');
+  });
+  if (id === 'recommendations') renderRecommendations();
+  if (id === 'history')         renderHistory();
+  if (id === 'benchmark')       renderBenchmark();
+}
+
+// ── SCORE HELPERS ──
+function colorForScore(s) { return s>=75?'green':s>=45?'amber':'red'; }
+function labelForScore(s) { return s>=75?'Strong':s>=45?'Needs Work':'Critical Gap'; }
+
+function calcScores(answers) {
+  const raw = {};
+  QUESTIONS.forEach(q => { raw[q.key] = q.options[answers[q.key] ?? 0].score; });
+  const catScores = {};
+  Object.entries(CATEGORIES).forEach(([cat,cfg]) => {
+    const vals = cfg.keys.map(k => raw[k] ?? 0);
+    catScores[cat] = Math.round((vals.reduce((a,b)=>a+b,0)/(vals.length*4))*100);
+  });
+  const overall = Math.round(Object.values(catScores).reduce((a,b)=>a+b,0)/Object.keys(catScores).length);
+  return {catScores, overall};
+}
+
+// ── DASHBOARD ──
+function renderDashboard() {
+  const data = getUserData(currentUser.email);
+  if (!data.diagnostics.length) {
+    document.getElementById('dash-empty').style.display = 'block';
+    document.getElementById('dash-data').style.display  = 'none';
+    return;
+  }
+  document.getElementById('dash-empty').style.display = 'none';
+  document.getElementById('dash-data').style.display  = 'block';
+
+  const latest = data.diagnostics[data.diagnostics.length - 1];
+  const prev   = data.diagnostics.length > 1 ? data.diagnostics[data.diagnostics.length - 2] : null;
+
+  // Overall score
+  document.getElementById('dash-score').textContent = latest.overall;
+  document.getElementById('dash-score').className = `stat-value c-${colorForScore(latest.overall)}`;
+  if (prev) {
+    const diff = latest.overall - prev.overall;
+    const delta = document.getElementById('dash-score-delta');
+    delta.textContent = diff > 0 ? `▲ ${diff} from last diagnostic` : diff < 0 ? `▼ ${Math.abs(diff)} from last diagnostic` : 'No change from last diagnostic';
+    delta.className = `stat-delta ${diff>0?'up':diff<0?'down':'neutral'}`;
+  }
+
+  // Count
+  document.getElementById('dash-count').textContent = data.diagnostics.length;
+
+  // Biggest gap
+  const sorted = Object.entries(latest.catScores).sort((a,b)=>a[1]-b[1]);
+  document.getElementById('dash-gap').textContent = CATEGORIES[sorted[0][0]].label;
+  document.getElementById('dash-gap-score').textContent = `Score: ${sorted[0][1]}/100`;
+
+  // Next diagnostic
+  const lastDate = new Date(latest.date);
+  const nextDate = new Date(lastDate);
+  nextDate.setMonth(nextDate.getMonth() + 3);
+  const today = new Date();
+  const daysUntil = Math.ceil((nextDate - today) / (1000*60*60*24));
+  document.getElementById('dash-next').textContent = daysUntil <= 0 ? 'Now' : `${daysUntil}d`;
+
+  // Category breakdown
+  const cats = document.getElementById('dash-cats');
+  cats.innerHTML = '';
+  Object.entries(latest.catScores).forEach(([cat, score]) => {
+    const c = colorForScore(score);
+    cats.innerHTML += `
+      <div class="cat-row">
+        <div class="cat-row-name">${CATEGORIES[cat].label}</div>
+        <div class="cat-row-bar"><div class="cat-row-fill fill-${c}" style="width:0%" data-w="${score}%"></div></div>
+        <div class="cat-row-score c-${c}">${score}</div>
+        <div class="cat-row-label c-${c}">${labelForScore(score)}</div>
+      </div>`;
+  });
+  setTimeout(() => document.querySelectorAll('.cat-row-fill').forEach(el => el.style.width = el.dataset.w), 100);
+
+  // Analysis preview
+  const preview = latest.analysis ? latest.analysis.substring(0, 300) + '...' : 'Complete a diagnostic to get your AI analysis.';
+  document.getElementById('dash-analysis-preview').textContent = preview;
+}
+
+// ── IN-APP DIAGNOSTIC ──
+function startAppDiag() {
+  appAnswers = {};
+  appCurrent = 0;
+  document.getElementById('diag-intro-card').style.display  = 'none';
+  document.getElementById('diag-quiz-card').style.display   = 'block';
+  document.getElementById('diag-loading-card').style.display= 'none';
+  renderAppQ();
+}
+
+function renderAppQ() {
+  const q = QUESTIONS[appCurrent];
+  document.getElementById('app-q-cat').textContent   = q.category;
+  document.getElementById('app-q-text').textContent  = q.text;
+  document.getElementById('app-prog-count').textContent = `${appCurrent+1} / ${QUESTIONS.length}`;
+  document.getElementById('app-prog-fill').style.width = `${((appCurrent+1)/QUESTIONS.length)*100}%`;
+  const letters = ['A','B','C','D'];
+  const opts = document.getElementById('app-q-opts');
+  opts.innerHTML = '';
+  q.options.forEach((opt,i) => {
+    const d = document.createElement('div');
+    d.className = 'diag-option' + (appAnswers[q.key]===i?' selected':'');
+    d.innerHTML = `<div class="diag-opt-letter">${letters[i]}</div><div class="diag-opt-text">${opt.text}</div>`;
+    d.onclick = () => { appAnswers[q.key]=i; renderAppQ(); };
+    opts.appendChild(d);
+  });
+  document.getElementById('app-btn-prev').disabled = appCurrent===0;
+  document.getElementById('app-btn-next').disabled = appAnswers[q.key]===undefined;
+  document.getElementById('app-btn-next').textContent = appCurrent===QUESTIONS.length-1 ? 'See Results →' : 'Next →';
+}
+
+function appPrevQ() { if(appCurrent>0){appCurrent--;renderAppQ();} }
+function appNextQ() {
+  if(appAnswers[QUESTIONS[appCurrent].key]===undefined) return;
+  if(appCurrent<QUESTIONS.length-1){appCurrent++;renderAppQ();}
+  else { finishAppDiag(); }
+}
+
+async function finishAppDiag() {
+  document.getElementById('diag-quiz-card').style.display    = 'none';
+  document.getElementById('diag-loading-card').style.display = 'block';
+
+  const {catScores, overall} = calcScores(appAnswers);
+
+  // Get AI analysis
+  let analysis = '';
+  const answerSummary = QUESTIONS.map(q=>`${q.category} — ${q.text}: "${q.options[appAnswers[q.key]??0].text}"`).join('\n');
+  const catSummary = Object.entries(catScores).map(([c,s])=>`${c}: ${s}/100`).join(', ');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        system:`You are Jason Brausewetter, founder of GAIN Advisory — a senior fractional GTM advisor. You build revenue engines for early-stage B2B founders. Direct, experienced, practical. Write in first person as Jason.`,
+        messages:[{role:'user',content:`GTM Diagnostic results:\n\nAnswers:\n${answerSummary}\n\nScores: ${catSummary}\nOverall: ${overall}/100\n\nWrite a 2-3 paragraph honest analysis. Be specific. End with one action for the next 30 days. No bullets.`}]
+      })
+    });
+    const d = await res.json();
+    analysis = d.content?.[0]?.text || '';
+  } catch(e) {
+    analysis = `Based on these results, there's a clear pattern emerging. The challenges you're facing aren't isolated — they're connected, and they're fixable.\n\nFocus on your lowest-scoring category first. Don't try to fix everything at once. Build the foundation before layering on the next piece.`;
+  }
+
+  // Save to user data
+  const userData = getUserData(currentUser.email);
+  userData.diagnostics.push({
+    date: new Date().toISOString(),
+    overall,
+    catScores,
+    answers: {...appAnswers},
+    analysis
+  });
+  saveUserData(currentUser.email, userData);
+
+  // Reset quiz UI and show dashboard
+  document.getElementById('diag-loading-card').style.display = 'none';
+  document.getElementById('diag-intro-card').style.display   = 'block';
+  renderDashboard();
+  showPage('dashboard');
+}
+
+// ── RECOMMENDATIONS ──
+function renderRecommendations() {
+  const data = getUserData(currentUser.email);
+  if (!data.diagnostics.length) {
+    document.getElementById('rec-empty').style.display = 'block';
+    document.getElementById('rec-data').style.display  = 'none';
+    return;
+  }
+  document.getElementById('rec-empty').style.display = 'none';
+  document.getElementById('rec-data').style.display  = 'block';
+
+  const latest = data.diagnostics[data.diagnostics.length-1];
+  document.getElementById('rec-analysis').textContent = latest.analysis || 'No analysis available.';
+
+  const sorted = Object.entries(latest.catScores).sort((a,b)=>a[1]-b[1]);
+  const items = document.getElementById('rec-items');
+  items.innerHTML = '';
+  sorted.forEach(([cat, score], i) => {
+    const priority = score < 45 ? 'critical' : score < 75 ? 'medium' : 'good';
+    const priorityLabel = score < 45 ? 'Critical — Fix First' : score < 75 ? 'Medium Priority' : 'Looking Good';
+    items.innerHTML += `
+      <div class="rec-item ${priority}">
+        <div class="rec-priority ${priority}">${priorityLabel}</div>
+        <div class="rec-title">${CATEGORIES[cat].label} — ${score}/100</div>
+        <div class="rec-text">${PRIORITY_DESCS[cat]}</div>
+      </div>`;
+  });
+}
+
+// ── HISTORY ──
+function renderHistory() {
+  const data = getUserData(currentUser.email);
+  if (data.diagnostics.length < 1) {
+    document.getElementById('hist-empty').style.display = 'block';
+    document.getElementById('hist-data').style.display  = 'none';
+    return;
+  }
+  document.getElementById('hist-empty').style.display = 'none';
+  document.getElementById('hist-data').style.display  = 'block';
+
+  // Chart
+  const diags = data.diagnostics;
+  const svg = document.getElementById('historyChart');
+  const W = svg.parentElement.offsetWidth || 600;
+  const H = 140;
+  const pad = {t:20,r:20,b:30,l:36};
+  const iW = W - pad.l - pad.r;
+  const iH = H - pad.t - pad.b;
+  const scores = diags.map(d=>d.overall);
+  const minS = Math.max(0, Math.min(...scores)-10);
+  const maxS = Math.min(100, Math.max(...scores)+10);
+  const xStep = diags.length>1 ? iW/(diags.length-1) : iW;
+  const pts = scores.map((s,i)=>{
+    const x = pad.l + (diags.length>1 ? i*xStep : iW/2);
+    const y = pad.t + iH - ((s-minS)/(maxS-minS))*iH;
+    return {x,y,s};
+  });
+  const pathD = pts.map((p,i)=>(i===0?`M ${p.x} ${p.y}`:`L ${p.x} ${p.y}`)).join(' ');
+  const areaD = pts.length ? `${pathD} L ${pts[pts.length-1].x} ${pad.t+iH} L ${pts[0].x} ${pad.t+iH} Z` : '';
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  svg.innerHTML = `
+    <defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5D9BD4" stop-opacity="0.2"/><stop offset="100%" stop-color="#5D9BD4" stop-opacity="0"/></linearGradient></defs>
+    ${[0,25,50,75,100].map(v=>{
+      const y = pad.t + iH - ((v-minS)/(maxS-minS))*iH;
+      if(y<pad.t||y>pad.t+iH) return '';
+      return `<line x1="${pad.l}" y1="${y}" x2="${pad.l+iW}" y2="${y}" stroke="#f0f0f0" stroke-width="1"/><text x="${pad.l-6}" y="${y+4}" font-size="9" fill="#9ca3af" text-anchor="end">${v}</text>`;
+    }).join('')}
+    ${pts.length>1?`<path d="${areaD}" fill="url(#chartGrad)"/>`:''}
+    ${pts.length>1?`<path d="${pathD}" fill="none" stroke="#5D9BD4" stroke-width="2" stroke-linejoin="round"/>`:''}
+    ${pts.map((p,i)=>`
+      <circle cx="${p.x}" cy="${p.y}" r="5" fill="#5D9BD4" stroke="white" stroke-width="2"/>
+      <text x="${p.x}" y="${p.y-10}" font-size="10" font-weight="700" fill="#1E4FA1" text-anchor="middle">${p.s}</text>
+    `).join('')}
+    ${diags.map((d,i)=>{
+      const x = pad.l + (diags.length>1?i*xStep:iW/2);
+      const date = new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      return `<text x="${x}" y="${pad.t+iH+18}" font-size="9" fill="#9ca3af" text-anchor="middle">${date}</text>`;
+    }).join('')}
+  `;
+
+  // Table
+  const table = document.getElementById('hist-table');
+  table.innerHTML = diags.slice().reverse().map((d,i)=>{
+    const date = new Date(d.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    const c = colorForScore(d.overall);
+    return `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--off)">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--navy)">${date}</div>
+          <div style="font-size:11px;font-weight:300;color:var(--gray)">Diagnostic #${diags.length-i}</div>
+        </div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800" class="c-${c}">${d.overall}</div>
+        <span class="badge badge-${c==='green'?'green':c==='amber'?'amber':'red'}">${labelForScore(d.overall)}</span>
+      </div>`;
+  }).join('');
+}
+
+// ── BENCHMARK ──
+function renderBenchmark() {
+  const data = getUserData(currentUser.email);
+  if (!data.diagnostics.length) {
+    document.getElementById('bench-empty').style.display = 'block';
+    document.getElementById('bench-data').style.display  = 'none';
+    return;
+  }
+  document.getElementById('bench-empty').style.display = 'none';
+  document.getElementById('bench-data').style.display  = 'block';
+
+  const latest = data.diagnostics[data.diagnostics.length-1];
+  const rows = document.getElementById('bench-rows');
+  rows.innerHTML = '';
+  Object.entries(latest.catScores).forEach(([cat, score]) => {
+    const avg  = BENCHMARKS[cat];
+    const diff = score - avg;
+    rows.innerHTML += `
+      <div class="benchmark-row">
+        <div class="bench-cat">${CATEGORIES[cat].label}</div>
+        <div class="bench-you c-${colorForScore(score)}">${score}</div>
+        <div class="bench-avg">Avg: ${avg}</div>
+        <span class="bench-diff ${diff>0?'up':diff<0?'down':'same'}">${diff>0?'+':''}${diff}</span>
+      </div>`;
+  });
+}
+
+// ── UPGRADE ──
+function handleUpgrade() {
+  window.location.href = 'index.html#contact';
+}
+
+// ── INIT ──
+window.addEventListener('load', () => {
+  const session = getSession();
+  if (session) {
+    currentUser = session;
+    loadApp();
+  }
+});
+
+// Allow Enter key on auth forms
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const loginVisible = document.getElementById('form-login').style.display !== 'none';
+    if (document.getElementById('screen-auth').classList.contains('active')) {
+      if (loginVisible) doLogin(); else doSignup();
+    }
+  }
+});
+</script>
+</body>
+</html>
