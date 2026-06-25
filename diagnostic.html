@@ -228,7 +228,7 @@
   <div class="screen active" id="screen-intro">
     <div class="intro-badge">Free GTM Diagnostic</div>
     <h1 class="intro-title">Find out what's really <em>holding your revenue back</em>.</h1>
-    <p class="intro-sub">Answer 14 questions. Get an AI-powered GTM scorecard that identifies your biggest bottlenecks — and tells you exactly what to fix first.</p>
+    <p class="intro-sub">Answer 14 questions. Get an AI-powered GTM scorecard that identifies your biggest bottlenecks, and tells you exactly what to fix first.</p>
     <div class="intro-features">
       <div class="intro-feat">Takes 4 minutes</div>
       <div class="intro-feat">AI-powered analysis</div>
@@ -242,7 +242,7 @@
   <div class="screen" id="screen-profile">
     <div class="profile-wrap">
       <h2 class="profile-title">First, tell us about your company.</h2>
-      <p class="profile-sub">This helps us give you a more accurate, stage-specific analysis — not a generic one.</p>
+      <p class="profile-sub">This helps us give you a more accurate, stage-specific analysis, not a generic one.</p>
 
       <div class="profile-name-row">
         <div class="profile-field">
@@ -261,10 +261,10 @@
           <select class="profile-select" id="profileRevenue">
             <option value="" disabled selected>Select...</option>
             <option value="Pre-revenue">Pre-revenue</option>
-            <option value="$0–$500K ARR">$0–$500K ARR</option>
-            <option value="$500K–$2M ARR">$500K–$2M ARR</option>
-            <option value="$2M–$5M ARR">$2M–$5M ARR</option>
-            <option value="$5M–$10M ARR">$5M–$10M ARR</option>
+            <option value="$0-$500K ARR">$0-$500K ARR</option>
+            <option value="$500K-$2M ARR">$500K-$2M ARR</option>
+            <option value="$2M-$5M ARR">$2M-$5M ARR</option>
+            <option value="$5M-$10M ARR">$5M-$10M ARR</option>
             <option value="$10M+ ARR">$10M+ ARR</option>
           </select>
         </div>
@@ -273,10 +273,10 @@
           <select class="profile-select" id="profileTeam">
             <option value="" disabled selected>Select...</option>
             <option value="Just me">Just me (solo founder)</option>
-            <option value="2–5">2–5 people</option>
-            <option value="6–15">6–15 people</option>
-            <option value="16–30">16–30 people</option>
-            <option value="31–50">31–50 people</option>
+            <option value="2-5">2-5 people</option>
+            <option value="6-15">6-15 people</option>
+            <option value="16-30">16-30 people</option>
+            <option value="31-50">31-50 people</option>
             <option value="50+">50+ people</option>
           </select>
         </div>
@@ -305,7 +305,7 @@
         </div>
       </div>
 
-      <p class="profile-note">* Email is optional — results are shown on screen regardless.</p>
+      <p class="profile-note">* Email is optional, results are shown on screen regardless.</p>
 
       <button class="btn-start" onclick="startQuiz()">Start the Diagnostic →</button>
     </div>
@@ -349,7 +349,7 @@
   <div class="screen" id="screen-results">
     <div class="results-wrap">
       <div class="gain-print-header">
-        <h1>G[AI]N Advisory — GTM Diagnostic Report</h1>
+        <h1>G[AI]N Advisory, GTM Diagnostic Report</h1>
         <p>gainadvisory.com &nbsp;·&nbsp; Generated <span id="printDate"></span></p>
       </div>
       <div class="results-header">
@@ -388,7 +388,7 @@
         </button>
       </div>
       <div class="results-cta">
-        <div class="cta-title">Ready to fix this — fast?</div>
+        <div class="cta-title">Ready to fix this, fast?</div>
         <p class="cta-sub">I work with early-stage B2B founders to build the revenue engine their business needs. Let's spend 30 minutes on your specific situation.</p>
         <a href="index.html#contact" class="btn-cta">Book a Free 30-Min Call</a>
         <div style="margin-top:20px;">
@@ -409,73 +409,73 @@ const SHEETS_URL     = 'https://script.google.com/macros/s/AKfycbz043qu7v48t7gx_
 const QUESTIONS = [
   { category:"ICP & Market Clarity", text:"How clearly defined is your Ideal Customer Profile (ICP)?", key:"icp",
     options:[
-      {text:"Detailed ICP — specific industry, company size, role, pain points, and buying triggers",score:4},
+      {text:"Detailed ICP, specific industry, company size, role, pain points, and buying triggers",score:4},
       {text:"General sense of who we sell to but not formally documented",score:2},
-      {text:"We sell to anyone who seems like a good fit — haven't really narrowed it down",score:1},
+      {text:"We sell to anyone who seems like a good fit, haven't really narrowed it down",score:1},
       {text:"Still figuring out who our best customers are",score:0}
     ]},
   { category:"ICP & Market Clarity", text:"How well does your messaging resonate with your target buyers?", key:"messaging",
     options:[
-      {text:"Prospects immediately understand our value — rarely have to explain what we do",score:4},
+      {text:"Prospects immediately understand our value, rarely have to explain what we do",score:4},
       {text:"Most prospects get it after a conversation, but written messaging needs work",score:2},
-      {text:"We often find ourselves explaining and educating — message isn't landing on its own",score:1},
+      {text:"We often find ourselves explaining and educating, message isn't landing on its own",score:1},
       {text:"Still workshopping our positioning and value proposition",score:0}
     ]},
   { category:"Pipeline & Revenue Health", text:"How predictable is your pipeline month to month?", key:"pipeline",
     options:[
-      {text:"Strong pipeline visibility — can forecast revenue with reasonable accuracy",score:4},
+      {text:"Strong pipeline visibility, can forecast revenue with reasonable accuracy",score:4},
       {text:"Somewhat predictable but have good months and bad months without knowing why",score:2},
-      {text:"Inconsistent — hard to know where next quarter is coming from",score:1},
-      {text:"No real pipeline — deals appear somewhat randomly",score:0}
+      {text:"Inconsistent, hard to know where next quarter is coming from",score:1},
+      {text:"No real pipeline, deals appear somewhat randomly",score:0}
     ]},
   { category:"Pipeline & Revenue Health", text:"Who is primarily responsible for closing deals?", key:"closing",
     options:[
       {text:"Dedicated sales reps closing deals independently and consistently",score:4},
       {text:"Sales reps handle most deals but founder still needs to get involved to close",score:2},
-      {text:"Founder closes most deals — sales team supports but doesn't own the close",score:1},
-      {text:"Founder closes everything — no real sales function yet",score:0}
+      {text:"Founder closes most deals, sales team supports but doesn't own the close",score:1},
+      {text:"Founder closes everything, no real sales function yet",score:0}
     ]},
   { category:"Sales Process & Execution", text:"How mature is your sales process?", key:"process",
     options:[
       {text:"Documented, repeatable process that reps follow consistently",score:4},
       {text:"Loose process but not consistently followed or documented",score:2},
-      {text:"Every rep does it differently — no standard approach",score:1},
-      {text:"No real sales process — reactive and ad hoc",score:0}
+      {text:"Every rep does it differently, no standard approach",score:1},
+      {text:"No real sales process, reactive and ad hoc",score:0}
     ]},
   { category:"Sales Process & Execution", text:"How would you rate your sales team's current performance?", key:"teamPerf",
     options:[
       {text:"Most reps hitting or exceeding quota consistently",score:4},
-      {text:"Mixed — some strong performers, some struggling",score:2},
-      {text:"Most reps underperforming — not sure if it's the people or the process",score:1},
-      {text:"No sales team yet — just the founder",score:2}
+      {text:"Mixed, some strong performers, some struggling",score:2},
+      {text:"Most reps underperforming, not sure if it's the people or the process",score:1},
+      {text:"No sales team yet, just the founder",score:2}
     ]},
   { category:"GTM Alignment", text:"How well are your sales and marketing teams aligned?", key:"alignment",
     options:[
       {text:"Sales and marketing share the same ICP, messaging, and pipeline goals",score:4},
       {text:"Some alignment but marketing leads often aren't what sales actually wants",score:2},
-      {text:"Sales and marketing operate independently — minimal coordination",score:1},
-      {text:"No marketing function yet — very early stage",score:2}
+      {text:"Sales and marketing operate independently, minimal coordination",score:1},
+      {text:"No marketing function yet, very early stage",score:2}
     ]},
   { category:"GTM Alignment", text:"How effectively does your marketing generate qualified pipeline?", key:"marketing",
     options:[
       {text:"Marketing is a meaningful source of qualified pipeline that sales actively values",score:4},
-      {text:"Marketing generates leads but quality is inconsistent — lots of noise",score:2},
-      {text:"Most pipeline comes from outbound and referrals — marketing contribution is minimal",score:1},
+      {text:"Marketing generates leads but quality is inconsistent, lots of noise",score:2},
+      {text:"Most pipeline comes from outbound and referrals, marketing contribution is minimal",score:1},
       {text:"No marketing function driving pipeline yet",score:1}
     ]},
   { category:"Team & Leadership", text:"Does your commercial team have the right leadership for your stage?", key:"leadership",
     options:[
-      {text:"Yes — experienced revenue leadership that's right for where we are",score:4},
+      {text:"Yes, experienced revenue leadership that's right for where we are",score:4},
       {text:"We have someone but they're probably better suited for an earlier or later stage",score:2},
-      {text:"Founder is acting as CRO — no dedicated revenue leadership",score:1},
+      {text:"Founder is acting as CRO, no dedicated revenue leadership",score:1},
       {text:"We know we need revenue leadership but haven't figured out the right solution",score:0}
     ]},
   { category:"AI & Technology", text:"How would you describe your team's use of AI and modern sales technology?", key:"aiTech",
     options:[
-      {text:"Actively use AI tools across sales, marketing, and operations — it's part of how we work",score:4},
-      {text:"Use some AI tools but it's not systematic — more experimental",score:2},
-      {text:"Mostly using traditional tools — CRM, email, basic outbound. AI isn't part of the motion",score:1},
-      {text:"Tech stack is minimal — figuring out the basics before adding more tools",score:0}
+      {text:"Actively use AI tools across sales, marketing, and operations, it's part of how we work",score:4},
+      {text:"Use some AI tools but it's not systematic, more experimental",score:2},
+      {text:"Mostly using traditional tools, CRM, email, basic outbound. AI isn't part of the motion",score:1},
+      {text:"Tech stack is minimal, figuring out the basics before adding more tools",score:0}
     ]}
 ];
 
@@ -490,7 +490,7 @@ const CATEGORIES = {
 
 const PRIORITY_DESCS = {
   "ICP & Market Clarity":      "Sharpen your ICP definition and tighten your messaging. When buyers immediately recognize themselves in your story, conversion improves across every channel.",
-  "Pipeline & Revenue Health": "Build predictable pipeline generation — both inbound and outbound. Consistent top-of-funnel is the foundation everything else depends on.",
+  "Pipeline & Revenue Health": "Build predictable pipeline generation, both inbound and outbound. Consistent top-of-funnel is the foundation everything else depends on.",
   "Sales Process & Execution": "Document and systematize your sales process. A repeatable motion means performance stops depending on who's selling and starts depending on the system.",
   "GTM Alignment":             "Get sales and marketing operating from the same playbook. Misalignment is one of the most common and expensive sources of pipeline leakage.",
   "Team & Leadership":         "Assess whether you have the right commercial leadership for your stage. The wrong profile at the wrong time is a common reason GTM motions stall.",
@@ -612,8 +612,8 @@ async function generateResults() {
 
   // Grade
   const grades = {
-    green:{grade:'GTM Foundation Is Solid',        desc:'Your go-to-market motion has real strength. Focus now on optimizing and scaling what\'s working — and closing the remaining gaps before they become ceilings.'},
-    amber:{grade:'GTM Motion Needs Strengthening', desc:'You have solid foundations but meaningful gaps that are likely costing you deals and predictability. These are fixable — but they need attention now before you scale.'},
+    green:{grade:'GTM Foundation Is Solid',        desc:'Your go-to-market motion has real strength. Focus now on optimizing and scaling what\'s working, and closing the remaining gaps before they become ceilings.'},
+    amber:{grade:'GTM Motion Needs Strengthening', desc:'You have solid foundations but meaningful gaps that are likely costing you deals and predictability. These are fixable, but they need attention now before you scale.'},
     red:  {grade:'Critical GTM Gaps Identified',   desc:'Your go-to-market motion has significant gaps limiting your revenue potential. The good news: these are all fixable. But the longer you wait, the more expensive it gets.'}
   };
   document.getElementById('scoreGrade').textContent = grades[color].grade;
@@ -644,7 +644,7 @@ async function generateResults() {
     </div>`).join('');
 
   // AI Analysis
-  const answerSummary = QUESTIONS.map(q=>`${q.category} — ${q.text}: "${q.options[answers[q.key]??0].text}" (${q.options[answers[q.key]??0].score}/4)`).join('\n');
+  const answerSummary = QUESTIONS.map(q=>`${q.category}, ${q.text}: "${q.options[answers[q.key]??0].text}" (${q.options[answers[q.key]??0].score}/4)`).join('\n');
   const catSummary = Object.entries(catScores).map(([cat,s])=>`${cat}: ${s}/100`).join(', ');
   const profileSummary = `Company profile: ${revenue} revenue, ${team} team size, ${model} business model, respondent is ${role}.`;
 
@@ -656,7 +656,7 @@ async function generateResults() {
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
-        system:`You are Jason Brausewetter, founder of GAIN Advisory — a senior fractional GTM advisor who helps early-stage B2B founders build predictable revenue engines. You are direct, experienced, and practical. You build, not just advise. Your tone is honest, warm, and confident. Write in first person as Jason.`,
+        system:`You are Jason Brausewetter, founder of GAIN Advisory, a senior fractional GTM advisor who helps early-stage B2B founders build predictable revenue engines. You are direct, experienced, and practical. You build, not just advise. Your tone is honest, warm, and confident. Write in first person as Jason.`,
         messages:[{role:'user',content:`A founder just completed my GTM diagnostic.\n\n${profileSummary}\n\nAnswers:\n${answerSummary}\n\nCategory scores: ${catSummary}\nOverall: ${overall}/100\n\nWrite a 3-4 paragraph personalized analysis. Be specific about what you see. Identify the core pattern behind their challenges. Be direct. End with one specific actionable thing they should do in the next 30 days. No bullet points. Do not start with "I".`}]
       })
     });
@@ -664,7 +664,7 @@ async function generateResults() {
     analysisText = data.content?.[0]?.text || '';
     document.getElementById('analysisText').textContent = analysisText;
   } catch(e) {
-    analysisText = `Based on these responses, there's a clear pattern. The gaps aren't isolated — they're connected. Most early-stage B2B companies face the same core challenge: they've built something valuable but haven't yet built the systematic commercial motion to match it.\n\nThe good news is every gap here is fixable. None of this requires a $300k CRO or a 6-month consulting engagement. What it requires is someone who's been here before and knows exactly what to build — and in what order.\n\nIn the next 30 days, focus on the single highest-impact item in your priority list above. Don't try to fix everything at once. Pick one, go deep, and build the foundation before layering on the next piece.`;
+    analysisText = `Based on these responses, there's a clear pattern. The gaps aren't isolated, they're connected. Most early-stage B2B companies face the same core challenge: they've built something valuable but haven't yet built the systematic commercial motion to match it.\n\nThe good news is every gap here is fixable. None of this requires a $300k CRO or a 6-month consulting engagement. What it requires is someone who's been here before and knows exactly what to build, and in what order.\n\nIn the next 30 days, focus on the single highest-impact item in your priority list above. Don't try to fix everything at once. Pick one, go deep, and build the foundation before layering on the next piece.`;
     document.getElementById('analysisText').textContent = analysisText;
   }
 
@@ -693,14 +693,14 @@ async function silentCapture({name, email, revenue, team, model, role, catScores
     ai_analysis:    analysisText?.substring(0,500) || ''
   };
 
-  // 1. Formspree — emails you every submission
+  // 1. Formspree, emails you every submission
   try {
     await fetch(FORMSPREE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         ...payload,
-        _subject: `GTM Diagnostic — Score: ${overall}/100 — ${name||'Anonymous'} — ${revenue||'Unknown stage'}`
+        _subject: `GTM Diagnostic, Score: ${overall}/100, ${name||'Anonymous'}, ${revenue||'Unknown stage'}`
       })
     });
   } catch(e) { /* silent */ }

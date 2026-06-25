@@ -354,7 +354,7 @@
         <div class="grid-4">
           <div class="stat-card">
             <div class="stat-label">GTM Health Score</div>
-            <div class="stat-value" id="dash-score">—</div>
+            <div class="stat-value" id="dash-score">, </div>
             <div class="stat-delta neutral" id="dash-score-delta">No previous score</div>
           </div>
           <div class="stat-card">
@@ -364,12 +364,12 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">Biggest Gap</div>
-            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-gap">—</div>
+            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-gap">, </div>
             <div class="stat-delta neutral" id="dash-gap-score"></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">Next Diagnostic</div>
-            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-next">—</div>
+            <div class="stat-value" style="font-size:18px;padding-top:4px" id="dash-next">, </div>
             <div class="stat-delta neutral">Recommended quarterly</div>
           </div>
         </div>
@@ -400,7 +400,7 @@
       </div>
       <div id="diag-intro-card" class="card">
         <div class="card-title">Ready to assess your GTM motion?</div>
-        <div class="card-sub">This takes about 4 minutes. Be honest — the more accurate your answers, the more useful your results.</div>
+        <div class="card-sub">This takes about 4 minutes. Be honest, the more accurate your answers, the more useful your results.</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><span style="color:var(--mint);font-weight:700">✓</span>10 questions</div>
           <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><span style="color:var(--mint);font-weight:700">✓</span>AI-powered analysis</div>
@@ -456,7 +456,7 @@
         </div>
         <div class="card">
           <div class="card-title">Priority Action Items</div>
-          <div class="card-sub">Ranked by impact — fix these first</div>
+          <div class="card-sub">Ranked by impact, fix these first</div>
           <div id="rec-items"></div>
         </div>
         <div class="card" style="text-align:center;padding:32px">
@@ -523,9 +523,9 @@
         <div class="paywall" id="bench-paywall">
           <div class="paywall-badge">Pro Feature</div>
           <div class="paywall-title">Unlock Full Benchmarking</div>
-          <p class="paywall-sub">See how you compare by industry, revenue stage, and team size — not just overall averages.</p>
+          <p class="paywall-sub">See how you compare by industry, revenue stage, and team size, not just overall averages.</p>
           <div class="paywall-features">
-            <div class="paywall-feat">Filter by revenue stage ($0–1M, $1–5M, $5–10M)</div>
+            <div class="paywall-feat">Filter by revenue stage ($0-1M, $1-5M, $5-10M)</div>
             <div class="paywall-feat">Filter by business model (SaaS, Services, B2B2C)</div>
             <div class="paywall-feat">Monthly benchmark updates as more data comes in</div>
           </div>
@@ -573,16 +573,16 @@
 <script>
 // ── QUESTIONS (same as diagnostic.html) ──
 const QUESTIONS = [
-  {category:"ICP & Market Clarity",text:"How clearly defined is your Ideal Customer Profile (ICP)?",key:"icp",options:[{text:"Detailed ICP — specific industry, company size, role, pain points, and buying triggers",score:4},{text:"General sense of who we sell to but not formally documented",score:2},{text:"We sell to anyone who seems like a good fit — haven't really narrowed it down",score:1},{text:"Still figuring out who our best customers are",score:0}]},
-  {category:"ICP & Market Clarity",text:"How well does your messaging resonate with your target buyers?",key:"messaging",options:[{text:"Prospects immediately understand our value — rarely have to explain what we do",score:4},{text:"Most prospects get it after a conversation, but written messaging needs work",score:2},{text:"We often find ourselves explaining and educating — message isn't landing on its own",score:1},{text:"Still workshopping our positioning and value proposition",score:0}]},
-  {category:"Pipeline & Revenue Health",text:"How predictable is your pipeline month to month?",key:"pipeline",options:[{text:"Strong pipeline visibility — can forecast revenue with reasonable accuracy",score:4},{text:"Somewhat predictable but have good months and bad months without knowing why",score:2},{text:"Inconsistent — hard to know where next quarter is coming from",score:1},{text:"No real pipeline — deals appear somewhat randomly",score:0}]},
-  {category:"Pipeline & Revenue Health",text:"Who is primarily responsible for closing deals?",key:"closing",options:[{text:"Dedicated sales reps closing deals independently and consistently",score:4},{text:"Sales reps handle most deals but founder still needs to get involved to close",score:2},{text:"Founder closes most deals — sales team supports but doesn't own the close",score:1},{text:"Founder closes everything — no real sales function yet",score:0}]},
-  {category:"Sales Process & Execution",text:"How mature is your sales process?",key:"process",options:[{text:"Documented, repeatable process that reps follow consistently",score:4},{text:"Loose process but not consistently followed or documented",score:2},{text:"Every rep does it differently — no standard approach",score:1},{text:"No real sales process — reactive and ad hoc",score:0}]},
-  {category:"Sales Process & Execution",text:"How would you rate your sales team's current performance?",key:"teamPerf",options:[{text:"Most reps hitting or exceeding quota consistently",score:4},{text:"Mixed — some strong performers, some struggling",score:2},{text:"Most reps underperforming — not sure if it's the people or the process",score:1},{text:"No sales team yet — just the founder",score:2}]},
-  {category:"GTM Alignment",text:"How well are your sales and marketing teams aligned?",key:"alignment",options:[{text:"Sales and marketing share the same ICP, messaging, and pipeline goals",score:4},{text:"Some alignment but marketing leads often aren't what sales actually wants",score:2},{text:"Sales and marketing operate independently — minimal coordination",score:1},{text:"No marketing function yet — very early stage",score:2}]},
-  {category:"GTM Alignment",text:"How effectively does your marketing generate qualified pipeline?",key:"marketing",options:[{text:"Marketing is a meaningful source of qualified pipeline that sales actively values",score:4},{text:"Marketing generates leads but quality is inconsistent — lots of noise",score:2},{text:"Most pipeline comes from outbound and referrals — marketing contribution is minimal",score:1},{text:"No marketing function driving pipeline yet",score:1}]},
-  {category:"Team & Leadership",text:"Does your commercial team have the right leadership for your stage?",key:"leadership",options:[{text:"Yes — experienced revenue leadership that's right for where we are",score:4},{text:"We have someone but they're probably better suited for an earlier or later stage",score:2},{text:"Founder is acting as CRO — no dedicated revenue leadership",score:1},{text:"We know we need revenue leadership but haven't figured out the right solution",score:0}]},
-  {category:"AI & Technology",text:"How would you describe your team's use of AI and modern sales technology?",key:"aiTech",options:[{text:"Actively use AI tools across sales, marketing, and operations — it's part of how we work",score:4},{text:"Use some AI tools but it's not systematic — more experimental",score:2},{text:"Mostly using traditional tools — CRM, email, basic outbound. AI isn't part of the motion",score:1},{text:"Tech stack is minimal — figuring out the basics before adding more tools",score:0}]}
+  {category:"ICP & Market Clarity",text:"How clearly defined is your Ideal Customer Profile (ICP)?",key:"icp",options:[{text:"Detailed ICP, specific industry, company size, role, pain points, and buying triggers",score:4},{text:"General sense of who we sell to but not formally documented",score:2},{text:"We sell to anyone who seems like a good fit, haven't really narrowed it down",score:1},{text:"Still figuring out who our best customers are",score:0}]},
+  {category:"ICP & Market Clarity",text:"How well does your messaging resonate with your target buyers?",key:"messaging",options:[{text:"Prospects immediately understand our value, rarely have to explain what we do",score:4},{text:"Most prospects get it after a conversation, but written messaging needs work",score:2},{text:"We often find ourselves explaining and educating, message isn't landing on its own",score:1},{text:"Still workshopping our positioning and value proposition",score:0}]},
+  {category:"Pipeline & Revenue Health",text:"How predictable is your pipeline month to month?",key:"pipeline",options:[{text:"Strong pipeline visibility, can forecast revenue with reasonable accuracy",score:4},{text:"Somewhat predictable but have good months and bad months without knowing why",score:2},{text:"Inconsistent, hard to know where next quarter is coming from",score:1},{text:"No real pipeline, deals appear somewhat randomly",score:0}]},
+  {category:"Pipeline & Revenue Health",text:"Who is primarily responsible for closing deals?",key:"closing",options:[{text:"Dedicated sales reps closing deals independently and consistently",score:4},{text:"Sales reps handle most deals but founder still needs to get involved to close",score:2},{text:"Founder closes most deals, sales team supports but doesn't own the close",score:1},{text:"Founder closes everything, no real sales function yet",score:0}]},
+  {category:"Sales Process & Execution",text:"How mature is your sales process?",key:"process",options:[{text:"Documented, repeatable process that reps follow consistently",score:4},{text:"Loose process but not consistently followed or documented",score:2},{text:"Every rep does it differently, no standard approach",score:1},{text:"No real sales process, reactive and ad hoc",score:0}]},
+  {category:"Sales Process & Execution",text:"How would you rate your sales team's current performance?",key:"teamPerf",options:[{text:"Most reps hitting or exceeding quota consistently",score:4},{text:"Mixed, some strong performers, some struggling",score:2},{text:"Most reps underperforming, not sure if it's the people or the process",score:1},{text:"No sales team yet, just the founder",score:2}]},
+  {category:"GTM Alignment",text:"How well are your sales and marketing teams aligned?",key:"alignment",options:[{text:"Sales and marketing share the same ICP, messaging, and pipeline goals",score:4},{text:"Some alignment but marketing leads often aren't what sales actually wants",score:2},{text:"Sales and marketing operate independently, minimal coordination",score:1},{text:"No marketing function yet, very early stage",score:2}]},
+  {category:"GTM Alignment",text:"How effectively does your marketing generate qualified pipeline?",key:"marketing",options:[{text:"Marketing is a meaningful source of qualified pipeline that sales actively values",score:4},{text:"Marketing generates leads but quality is inconsistent, lots of noise",score:2},{text:"Most pipeline comes from outbound and referrals, marketing contribution is minimal",score:1},{text:"No marketing function driving pipeline yet",score:1}]},
+  {category:"Team & Leadership",text:"Does your commercial team have the right leadership for your stage?",key:"leadership",options:[{text:"Yes, experienced revenue leadership that's right for where we are",score:4},{text:"We have someone but they're probably better suited for an earlier or later stage",score:2},{text:"Founder is acting as CRO, no dedicated revenue leadership",score:1},{text:"We know we need revenue leadership but haven't figured out the right solution",score:0}]},
+  {category:"AI & Technology",text:"How would you describe your team's use of AI and modern sales technology?",key:"aiTech",options:[{text:"Actively use AI tools across sales, marketing, and operations, it's part of how we work",score:4},{text:"Use some AI tools but it's not systematic, more experimental",score:2},{text:"Mostly using traditional tools, CRM, email, basic outbound. AI isn't part of the motion",score:1},{text:"Tech stack is minimal, figuring out the basics before adding more tools",score:0}]}
 ];
 
 const CATEGORIES = {
@@ -606,7 +606,7 @@ const BENCHMARKS = {
 
 const PRIORITY_DESCS = {
   "ICP & Market Clarity":      "Sharpen your ICP and tighten your messaging. When buyers immediately recognize themselves in your story, conversion improves across every channel.",
-  "Pipeline & Revenue Health": "Build predictable pipeline generation — inbound and outbound. Consistent top-of-funnel is the foundation everything else depends on.",
+  "Pipeline & Revenue Health": "Build predictable pipeline generation, inbound and outbound. Consistent top-of-funnel is the foundation everything else depends on.",
   "Sales Process & Execution": "Document and systematize your sales process. A repeatable motion means performance stops depending on who's selling.",
   "GTM Alignment":             "Get sales and marketing operating from the same playbook. Misalignment is one of the most expensive sources of pipeline leakage.",
   "Team & Leadership":         "Assess whether you have the right commercial leadership for your stage. Wrong profile at wrong time is why most GTM motions stall.",
@@ -828,7 +828,7 @@ async function finishAppDiag() {
 
   // Get AI analysis
   let analysis = '';
-  const answerSummary = QUESTIONS.map(q=>`${q.category} — ${q.text}: "${q.options[appAnswers[q.key]??0].text}"`).join('\n');
+  const answerSummary = QUESTIONS.map(q=>`${q.category}, ${q.text}: "${q.options[appAnswers[q.key]??0].text}"`).join('\n');
   const catSummary = Object.entries(catScores).map(([c,s])=>`${c}: ${s}/100`).join(', ');
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages',{
@@ -837,14 +837,14 @@ async function finishAppDiag() {
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:800,
-        system:`You are Jason Brausewetter, founder of GAIN Advisory — a senior fractional GTM advisor. You build revenue engines for early-stage B2B founders. Direct, experienced, practical. Write in first person as Jason.`,
+        system:`You are Jason Brausewetter, founder of GAIN Advisory, a senior fractional GTM advisor. You build revenue engines for early-stage B2B founders. Direct, experienced, practical. Write in first person as Jason.`,
         messages:[{role:'user',content:`GTM Diagnostic results:\n\nAnswers:\n${answerSummary}\n\nScores: ${catSummary}\nOverall: ${overall}/100\n\nWrite a 2-3 paragraph honest analysis. Be specific. End with one action for the next 30 days. No bullets.`}]
       })
     });
     const d = await res.json();
     analysis = d.content?.[0]?.text || '';
   } catch(e) {
-    analysis = `Based on these results, there's a clear pattern emerging. The challenges you're facing aren't isolated — they're connected, and they're fixable.\n\nFocus on your lowest-scoring category first. Don't try to fix everything at once. Build the foundation before layering on the next piece.`;
+    analysis = `Based on these results, there's a clear pattern emerging. The challenges you're facing aren't isolated, they're connected, and they're fixable.\n\nFocus on your lowest-scoring category first. Don't try to fix everything at once. Build the foundation before layering on the next piece.`;
   }
 
   // Save to user data
@@ -884,11 +884,11 @@ function renderRecommendations() {
   items.innerHTML = '';
   sorted.forEach(([cat, score], i) => {
     const priority = score < 45 ? 'critical' : score < 75 ? 'medium' : 'good';
-    const priorityLabel = score < 45 ? 'Critical — Fix First' : score < 75 ? 'Medium Priority' : 'Looking Good';
+    const priorityLabel = score < 45 ? 'Critical, Fix First' : score < 75 ? 'Medium Priority' : 'Looking Good';
     items.innerHTML += `
       <div class="rec-item ${priority}">
         <div class="rec-priority ${priority}">${priorityLabel}</div>
-        <div class="rec-title">${CATEGORIES[cat].label} — ${score}/100</div>
+        <div class="rec-title">${CATEGORIES[cat].label}, ${score}/100</div>
         <div class="rec-text">${PRIORITY_DESCS[cat]}</div>
       </div>`;
   });
