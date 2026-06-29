@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg-light-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 180" width="480" height="180">
+    <defs>
+      <linearGradient id="aiGradLight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5D9BD4"></stop>
+        <stop offset="100%" stop-color="#1E4FA1"></stop>
+      </linearGradient>
+      <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&amp;family=Syne:wght@300;700;800&amp;display=swap');</style>
+    </defs>
+    <rect width="480" height="180" fill="#F9FAFB"></rect>
+    <text x="240" y="118" font-family="Syne, sans-serif" font-size="96" letter-spacing="-2" text-anchor="middle" fill="#0B1D33">
+      <tspan font-weight="700">G</tspan><tspan font-weight="300" fill="rgba(30,79,161,0.35)">[</tspan><tspan font-weight="800" fill="url(#aiGradLight)">AI</tspan><tspan font-weight="300" fill="rgba(30,79,161,0.35)">]</tspan><tspan font-weight="700">N</tspan>
+    </text>
+    <text x="240" y="148" font-family="DM Sans, sans-serif" font-size="14" font-weight="400" letter-spacing="3.1" text-anchor="middle" fill="#6b7280">Advisory</text>
+  </svg>

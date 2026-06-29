@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg-mono-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 180" width="480" height="180">
+    <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&amp;family=Syne:wght@300;700;800&amp;display=swap');</style>
+    </defs>
+    <rect width="480" height="180" fill="#0B1D33"></rect>
+    <text x="240" y="118" font-family="Syne, sans-serif" font-size="96" letter-spacing="-2" text-anchor="middle" fill="#ffffff">
+      <tspan font-weight="700">G</tspan><tspan font-weight="300">[</tspan><tspan font-weight="800">AI</tspan><tspan font-weight="300">]</tspan><tspan font-weight="700">N</tspan>
+    </text>
+    <text x="240" y="148" font-family="DM Sans, sans-serif" font-size="14" font-weight="400" letter-spacing="3.1" text-anchor="middle" fill="rgba(255,255,255,0.65)">Advisory</text>
+  </svg>

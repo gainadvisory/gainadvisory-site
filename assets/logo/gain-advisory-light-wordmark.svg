@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg-light-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 130" width="480" height="130">
+    <defs>
+      <linearGradient id="aiGradLightW" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#5D9BD4"></stop>
+        <stop offset="100%" stop-color="#1E4FA1"></stop>
+      </linearGradient>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@300;700;800&amp;display=swap');</style>
+    </defs>
+    <rect width="480" height="130" fill="#F9FAFB"></rect>
+    <text x="240" y="98" font-family="Syne, sans-serif" font-size="96" letter-spacing="-2" text-anchor="middle" fill="#0B1D33">
+      <tspan font-weight="700">G</tspan><tspan font-weight="300" fill="rgba(30,79,161,0.35)">[</tspan><tspan font-weight="800" fill="url(#aiGradLightW)">AI</tspan><tspan font-weight="300" fill="rgba(30,79,161,0.35)">]</tspan><tspan font-weight="700">N</tspan>
+    </text>
+  </svg>
