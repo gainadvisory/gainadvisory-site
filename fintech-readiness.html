@@ -9,6 +9,8 @@
 body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
 .page{max-width:1080px;margin:0 auto;padding:0 0 80px}
 .sec{background:#fff;margin:0 22px 22px;border:1px solid var(--line);border-radius:16px;padding:42px 48px}
+.sec.alt{background:#e9eef5}
+.sec.pop{background:#e9f1fb;border-color:#cbdcf0}
 .logo{font-family:Syne;font-weight:700;font-size:26px;letter-spacing:-.02em;color:#fff;display:inline-flex;align-items:baseline;gap:10px;line-height:1}
 .logo .br{font-weight:300;color:rgba(255,255,255,.2)}
 .logo .ai{font-weight:800;background:linear-gradient(180deg,#DCEAF7,#5D9BD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -50,6 +52,7 @@ p{font-size:15.5px;color:#28384c;margin:0 0 14px} .mut{color:var(--mut)}
 .dgt{font-size:15px;color:var(--ink);padding-top:1px}
 .themes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
 .theme{border-left:3px solid var(--ai);background:var(--aipale);border-radius:0 12px 12px 0;padding:18px 22px}
+.theme.wide{grid-column:1 / -1}
 .theme h4{color:var(--navy);font-size:16px;margin-bottom:10px}
 .tq{font-size:14px;font-style:italic;color:#28384c;margin:0 0 8px;line-height:1.45}
 .ta{font-size:12px;color:var(--ai);font-weight:600;margin:0}
@@ -111,7 +114,7 @@ ul.ceo li{display:flex;align-items:flex-start;gap:16px;font-size:17px;color:var(
   <p class="mut">This is counted, not claimed, from 122 observable hiring signals. What follows is where the gap is worst, what the founders themselves say about it, and the specific places where a company's stated strategy and its observable reality have quietly come apart.</p>
 </div>
 
-<div class="sec">
+<div class="sec alt">
   <h2>The asymmetry, by category</h2>
   <h3>Everyone is hiring engineers. Almost no one is hiring sellers.</h3>
   <div class="legend"><span class="e">Engineering / product roles</span><span class="g">Commercial / GTM roles</span></div>
@@ -136,7 +139,7 @@ ul.ceo li{display:flex;align-items:flex-start;gap:16px;font-size:17px;color:var(
   <p class="mut" style="margin-top:12px">We do not publish soft percentages we cannot defend. Where a finding is inference (including the founder-situation patterns below), it is labeled as such.</p>
 </div>
 
-<div class="sec">
+<div class="sec alt">
   <div class="kicker">What founders are actually wrestling with</div>
   <h3>In our 219 company-by-company diagnoses, the same conclusions recur.</h3>
   <p class="mut" style="margin-bottom:16px">Read each figure as the <b>share of our analyses</b> that reached that conclusion, an <b>inference</b> we draw, not a measured property of the companies. We label it that way on purpose. Every per-company hypothesis later in this report carries a confidence level and a line on what would prove it wrong.</p>
@@ -148,17 +151,17 @@ ul.ceo li{display:flex;align-items:flex-start;gap:16px;font-size:17px;color:var(
   <h2>What founders are telling us</h2>
   <h3>We did not only count the data. We listened to 53 founders.</h3>
   <p class="mut" style="margin-bottom:20px">Founder interviews are the closest thing a private company has to an earnings call, the moment a founder stops marketing and starts reasoning. A handful of themes recur across the universe. If you run one of these companies, the point is simple: you are not the only one.</p>
-  <div class="themes"><div class="theme"><h4>The buying trigger is economics, not mission</h4><p class="tq">Described the purchase decision turning on hard economics, not vision or mission, even in a category where you would expect the opposite.</p><p class="ta">An embedded-finance founder, on a podcast</p></div><div class="theme"><h4>Creating a category with no budget line yet</h4><p class="tq">Selling a future process into a category buyers do not yet budget for, which is the hardest kind of sale there is.</p><p class="ta">A capital-markets AI founder, on a podcast</p></div><div class="theme"><h4>The buyer we sell to is not the buyer who funds it</h4><p class="tq">The user who loves the product is not the person who controls the budget, and finance or risk quietly blocks the deal.</p><p class="ta">A payments-automation founder, on a podcast</p></div><div class="theme"><h4>Product works, the repeatable engine does not exist yet</h4><p class="tq">Real product traction and paying customers, but no repeatable commercial motion behind it yet.</p><p class="ta">A wealth-management founder, on a podcast</p></div><div class="theme"><h4>Founder-led selling is a load you cannot put down</h4><p class="tq">Still the only one who can reliably create and close pipeline, and it has become a constraint they cannot delegate.</p><p class="ta">An insurance and benefits founder, on a podcast</p></div></div>
+  <div class="themes"><div class="theme"><h4>The buying trigger is economics, not mission</h4><p class="tq">Described the purchase decision turning on hard economics, not vision or mission, even in a category where you would expect the opposite.</p><p class="ta">An embedded-finance founder, on a podcast</p></div><div class="theme"><h4>Creating a category with no budget line yet</h4><p class="tq">Selling a future process into a category buyers do not yet budget for, which is the hardest kind of sale there is.</p><p class="ta">A capital-markets AI founder, on a podcast</p></div><div class="theme"><h4>The buyer we sell to is not the buyer who funds it</h4><p class="tq">The user who loves the product is not the person who controls the budget, and finance or risk quietly blocks the deal.</p><p class="ta">A payments-automation founder, on a podcast</p></div><div class="theme"><h4>Product works, the repeatable engine does not exist yet</h4><p class="tq">Real product traction and paying customers, but no repeatable commercial motion behind it yet.</p><p class="ta">A wealth-management founder, on a podcast</p></div><div class="theme wide"><h4>Founder-led selling is a load you cannot put down</h4><p class="tq">Still the only one who can reliably create and close pipeline, and it has become a constraint they cannot delegate.</p><p class="ta">An insurance and benefits founder, on a podcast</p></div></div>
 </div>
 
-<div class="sec">
+<div class="sec pop">
   <h2>Where strategy and reality diverge</h2>
   <h3>The most useful finding is not what companies are doing. It is where what they say and what they do have come apart.</h3>
   <p class="mut" style="margin-bottom:20px">Reading the founder's narrative against the hiring, the website, the pricing, and the public peer surfaces contradictions the company often cannot see from the inside. Four patterns dominate across the universe. The specific, evidence-based version for any one company is something we share with that company directly.</p>
   <div class="dvpat"><h4>Serving every buyer, focused on none</h4><p class="dvd">The most common contradiction in the universe. A single product and one motion pointed at three or four structurally different buyers, each with a different decision-maker, deal size, and sales cycle. Focus is the cheapest growth lever at this stage, and almost no one is using it.</p></div><div class="dvpat"><h4>Selling the practitioner&#x27;s outcome to the budget-holder</h4><p class="dvd">Companies win the user with a &#x27;do more, faster&#x27; story, then stall because the person who signs the contract is funding something else entirely, risk reduction, compliance, board-grade economics.</p></div><div class="dvpat"><h4>Enterprise validation without an enterprise motion</h4><p class="dvd">The hardest gap to see from the inside. Marquee logos and a raise sized for upmarket, with no commercial engine, security and procurement motion, or named GTM hire to convert the halo into repeatable revenue.</p></div><div class="dvpat"><h4>The distribution traps</h4><p class="dvd">Where the channel quietly works against the company: selling to your channel and around it at once, asking buyers to rip out entrenched systems with no &#x27;why now&#x27;, or a vision that attracts the wrong buyer.</p></div>
 </div>
 
-<div class="sec">
+<div class="sec alt">
   <h2>Where you are on the curve</h2>
   <h3>Almost every company in this study sits in the same narrow band.</h3>
   <p class="mut" style="margin-bottom:14px">Commercial readiness is a stage, not a score. Here is the lifecycle. The red band is where commercial complexity outruns commercial capability, and it is where our 219 diagnoses cluster.</p>
@@ -177,7 +180,7 @@ ul.ceo li{display:flex;align-items:flex-start;gap:16px;font-size:17px;color:var(
   <p class="mut" style="margin-top:18px">None of these on its own means much. Three or four together is a pattern, and it almost always surfaces first as a forecast surprise in the board meeting, not as a number on a dashboard.</p>
 </div>
 
-<div class="sec">
+<div class="sec alt">
   <div class="kicker">The signature output</div>
   <h3>For every company, one commercial hypothesis, not ten observations.</h3>
   <p class="mut" style="margin-bottom:18px">The deliverable is not a dashboard of signals. It is a single, falsifiable claim about the next commercial constraint a company is likely to hit, supported by evidence across all three layers. You do not have to be right every time. You have to be interesting enough that a founder needs to understand why you think it.</p>
