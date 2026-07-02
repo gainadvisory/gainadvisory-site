@@ -317,6 +317,30 @@
       .story-h { position: static; opacity:1; transform:none; padding: 22px 0; border-top:1px solid rgba(255,255,255,.08); }
     }
 
+    /* SCROLL STORY, alternating light beats */
+    .story-sticky { background: var(--navy); transition: background .6s ease; }
+    .story.is-light .story-sticky { background: #e9eff7; }
+    .story.is-light .story-bg { background-image: linear-gradient(rgba(30,79,161,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(30,79,161,.055) 1px,transparent 1px); }
+    .story.is-light .story-bg2 { background: radial-gradient(circle,rgba(30,79,161,.10) 0%,transparent 65%); }
+    .story.is-light .story-eyebrow { color: var(--ai); }
+    .story.is-light .story-eyebrow::before { background: var(--ai); }
+    .story.is-light .story-progress span { background: rgba(11,29,51,.14); }
+    .story.is-light .story-progress span.on { background: var(--ai); }
+    .story.is-light .story-h .step-k { color: rgba(30,79,161,.55); }
+    .story.is-light .story-h h3 { color: var(--navy); }
+    .story.is-light .story-h h3 em { color: var(--ai); }
+    .story.is-light .story-h p { color: var(--gray); }
+    .story.is-light .scard { background: #fff; border-color: rgba(11,29,51,.10); box-shadow: 0 22px 44px -24px rgba(11,29,51,.28); }
+    .story.is-light .scard .lab { color: var(--gray); }
+    .story.is-light .scard .dot { background: var(--blue); }
+    .story.is-light .scard .dot.m { background: var(--ai); }
+    .story.is-light .scard .val { color: var(--navy); }
+    .story.is-light .scard .val.blue { color: var(--blue); }
+    .story.is-light .scard .val.mint { color: var(--ai); }
+    .story.is-light .scard .sub { color: var(--gray); }
+    .story.is-light .story-bar i { background: var(--blue); }
+    .story.is-light .story-bar i.m { background: var(--ai); }
+
     /* ── MOBILE ── */
     @media (max-width: 880px) {
       nav { padding: 0 24px; }
@@ -863,7 +887,7 @@
 <footer>
   <a href="#hero" class="logo-wrap logo-dark ft-logo" id="ftLogo">
     <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
-    <span class="logo-adv" id="ftAdv">Advisory</span>
+    
   </a>
   <ul class="ft-links">
     <li><a href="#pain">The Problem</a></li>
@@ -907,12 +931,14 @@
     const panels = story.querySelectorAll('.story-panel');
     const pips   = story.querySelectorAll('.story-progress span');
     const N = steps.length;
+    const THEMES = ['light','dark','light','dark'];
     let cur = -1;
     function setA(i){
       if(i===cur) return; cur=i;
       steps.forEach((s,k)=>s.classList.toggle('on',k===i));
       panels.forEach((p,k)=>p.classList.toggle('on',k===i));
       pips.forEach((p,k)=>p.classList.toggle('on',k<=i));
+      story.classList.toggle('is-light', THEMES[i]==='light');
     }
     function onScroll(){
       const total = story.offsetHeight - window.innerHeight;
