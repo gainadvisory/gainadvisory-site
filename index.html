@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>G[AI]N Advisory | Commercial engines for founder-led fintech &amp; capital-markets companies</title>
-  <meta name="description" content="Gain Advisory helps founder-led fintech, capital-markets, wealthtech, and financial-data companies turn early traction into a repeatable commercial engine, by uncovering why customers buy, refining positioning, and building scalable revenue systems." />
+  <title>G[AI]N Advisory | Commercial engines for founder-led, growth-stage SaaS companies</title>
+  <meta name="description" content="Gain Advisory helps founder-led, early- and growth-stage SaaS and recurring-revenue companies turn early traction into a repeatable commercial engine, with deep expertise in fintech, wealthtech, and capital-markets technology. We uncover why customers buy, refine positioning, and build scalable revenue systems." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230B1D33'/><text x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' fill='%235D9BD4' text-anchor='middle'>AI</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -170,6 +170,11 @@
     #how { background: var(--white); }
     .how-inner { max-width: 1000px; margin: 0 auto; }
     .how-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .pk-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 44px; }
+    .how-card-out { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(11,29,51,.08); }
+    .how-card-out span { display: block; font-size: 11px; font-weight: 300; font-style: italic; line-height: 1.55; color: var(--gray); }
+    .how-card.featured .how-card-out { border-top-color: rgba(255,255,255,.12); }
+    .how-card.featured .how-card-out span { color: rgba(255,255,255,.5); }
     .how-card { background: var(--off); padding: 36px 30px; position: relative; transition: background .25s; }
     .how-card:hover { background: var(--white); box-shadow: 0 0 0 1px var(--pale); }
     .how-card-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .2em; color: rgba(30,79,161,.25); margin-bottom: 20px; }
@@ -268,7 +273,7 @@
 
     /* -- SCROLL STORY -- */
     .story { position: relative; background: var(--navy); }
-    .story-track { height: 400vh; }
+    .story-track { height: 300vh; }
     .story-sticky { position: sticky; top: 0; height: 100vh; min-height: 640px; overflow: hidden; display: flex; align-items: center; }
     .story-bg { position:absolute; inset:0; background-image: linear-gradient(rgba(93,155,212,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(93,155,212,.05) 1px,transparent 1px); background-size:72px 72px; pointer-events:none; }
     .story-bg2 { position:absolute; top:-20%; left:58%; width:820px; height:820px; background:radial-gradient(circle,rgba(30,79,161,.22) 0%,transparent 65%); pointer-events:none; }
@@ -390,7 +395,7 @@
       .sec { padding: 64px 24px; }
       .pain-grid { grid-template-columns: 1fr; }
       .who-inner { grid-template-columns: 1fr; gap: 40px; }
-      .how-cards { grid-template-columns: 1fr; }
+      .how-cards, .pk-cards { grid-template-columns: 1fr; }
       .ai-split { grid-template-columns: 1fr; gap: 40px; }
       .contact-layout { grid-template-columns: 1fr; gap: 44px; }
       .frow { grid-template-columns: 1fr; }
@@ -438,7 +443,7 @@
       <span class="hl-blue">that scales beyond the founder.</span>
     </h1>
     <p class="hero-sub">
-      Gain Advisory works with <strong>founder-led fintech, capital-markets, wealthtech, and financial-data companies</strong> that have customer traction but still rely on executive relationships, intuition, and leader-led selling to grow.
+      Gain Advisory works with <strong>founder-led, early- and growth-stage SaaS and recurring-revenue companies</strong> that have customer traction but still rely on executive relationships, intuition, and leader-led selling to grow. Deepest expertise: fintech, wealthtech, capital-markets tech, and financial data.
     </p>
     <p class="hero-sub" style="margin-top:18px;">
       I help uncover <strong>why your customers buy</strong>, refine positioning, align pricing and packaging, and build the go-to-market systems that make revenue repeatable.
@@ -459,7 +464,7 @@
       <div class="story-stage">
         <div class="story-copy">
           <div class="story-eyebrow">From founder-led to a real engine</div>
-          <div class="story-progress"><span class="on"></span><span></span><span></span><span></span></div>
+          <div class="story-progress"><span class="on"></span><span></span><span></span></div>
           <div class="story-headline">
             <div class="story-h on">
               <div class="step-k">STEP 01</div>
@@ -468,16 +473,11 @@
             </div>
             <div class="story-h">
               <div class="step-k">STEP 02</div>
-              <h3>The <em>commercial readiness gap.</em></h3>
-              <p>Across 318 funded fintechs, engineering roles outnumber commercial roles almost four to one. Staffed to build, starved to sell. The product is ready. The engine that sells it was never built.</p>
-            </div>
-            <div class="story-h">
-              <div class="step-k">STEP 03</div>
               <h3>Build the <em>commercial engine.</em></h3>
               <p>Customer truth, then commercial architecture, then a system the team can run without you. Not a rescue hire, not more volume. A repeatable motion the company owns.</p>
             </div>
             <div class="story-h">
-              <div class="step-k">STEP 04</div>
+              <div class="step-k">STEP 03</div>
               <h3>Know exactly <em>where you stand.</em></h3>
               <p>Readiness is not a feeling. Measure it across five dimensions in three minutes, and get a map of what to build first, before you spend on a hire or a campaign.</p>
             </div>
@@ -491,12 +491,6 @@
             <div class="scard" style="top:312px;left:44px;width:210px;"><div class="lab"><span class="dot m"></span>At scale</div><div class="val mint">It stalls</div></div>
           </div>
           <!-- PANEL 1 -->
-          <div class="story-panel">
-            <div class="scard" style="top:24px;left:8px;width:196px;"><div class="lab"><span class="dot"></span>Engineering roles</div><div class="val blue">4</div><div class="story-bar"><i style="height:58px"></i><i style="height:50px"></i><i style="height:56px"></i><i style="height:44px"></i></div></div>
-            <div class="scard" style="top:78px;left:250px;width:184px;"><div class="lab"><span class="dot m"></span>Commercial roles</div><div class="val mint">1</div><div class="story-bar"><i class="m" style="height:20px"></i></div></div>
-            <div class="scard wide" style="top:312px;left:24px;width:372px;"><div class="lab"><span class="dot"></span>The pattern</div><div class="sub">Staffed to build, starved to sell. Almost 4 to 1 across 318 funded fintechs.</div></div>
-          </div>
-          <!-- PANEL 2 -->
           <div class="story-panel">
             <div class="scard" style="top:14px;left:16px;width:308px;"><div class="lab"><span class="dot"></span>01</div><div class="val" style="font-size:18px;">Customer Truth</div><div class="sub">Who really buys, and the pressure that makes them.</div></div>
             <div class="scard" style="top:152px;left:96px;width:308px;"><div class="lab"><span class="dot m"></span>02</div><div class="val mint" style="font-size:18px;">Commercial Architecture</div><div class="sub">Positioning, segmentation, motion, and pricing that fit.</div></div>
@@ -564,13 +558,13 @@
   <div class="who-inner">
     <div class="who-left reveal">
       <div class="eye wh">Who I Serve</div>
-      <h2 class="sh">Built for founder-led fintech and capital-markets companies.</h2>
-      <p class="sl">I do my best work when a company has a product, customers, and revenue, but the commercial engine has not yet been fully established.</p>
+      <h2 class="sh">Built for founder-led, growth-stage SaaS.</h2>
+      <p class="sl">Broad enough for any founder-led, recurring-revenue business turning traction into a repeatable engine. Deepest where it counts: fintech, wealthtech, capital markets, and financial data. I do my best work when a company has a product, customers, and revenue, but the commercial engine has not yet been fully established.</p>
     </div>
     <div class="who-tags reveal">
       <div class="who-tag-item">
         <div class="who-tag-dot"></div>
-        <div class="who-tag-text"><strong>Companies in financial software, fintech, financial data, treasury, CFO-tech, capital markets, investor relations,</strong> or financial infrastructure</div>
+        <div class="who-tag-text"><strong>Founder-led SaaS and recurring-revenue companies,</strong> with deep expertise in fintech, wealthtech, capital markets, financial data, and CFO-tech</div>
       </div>
       <div class="who-tag-item">
         <div class="who-tag-dot"></div>
@@ -587,6 +581,41 @@
       <div class="who-tag-item">
         <div class="who-tag-dot"></div>
         <div class="who-tag-text"><strong>First commercial hires arriving,</strong> but the repeatable motion is not fully built</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE TWO MOMENTS -->
+<div class="sec">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="eye bl reveal">The two moments that matter</div>
+    <h2 class="sh reveal">Built for the two moments that matter.</h2>
+    <p class="sl reveal" style="max-width:620px;">Founder-led companies tend to need commercial help at one of two inflection points: proving traction before a raise, or turning founder-led wins into a repeatable engine after one.</p>
+    <div class="pk-cards">
+      <div class="how-card reveal">
+        <div class="how-card-num">A</div>
+        <div class="how-card-title">Pre-Raise<br>Traction Boost</div>
+        <div class="how-card-body">For founders proving the commercial thesis before they raise, with real customers and real evidence, not a story.</div>
+        <div class="how-card-includes">
+          <span>Define your ideal customer profile</span>
+          <span>Build a pipeline of ICP accounts</span>
+          <span>Land your first closed business</span>
+          <span>Proof points to inject into your pitch deck</span>
+        </div>
+        <div class="how-card-out"><span>Walk into the raise with commercial evidence a buyer and an investor both believe.</span></div>
+      </div>
+      <div class="how-card featured reveal">
+        <div class="how-card-num">B</div>
+        <div class="how-card-title">Post-Raise<br>GTM Scale-Up</div>
+        <div class="how-card-body">For funded founders turning early, founder-led wins into a machine that runs without them.</div>
+        <div class="how-card-includes">
+          <span>Build a repeatable, scalable, predictable GTM engine</span>
+          <span>Founder-to-sales hand-off playbook</span>
+          <span>A repeatable, consistent demo and close process</span>
+          <span>Pipeline review dashboard</span>
+        </div>
+        <div class="how-card-out"><span>A commercial engine that produces predictable growth without depending on the founder.</span></div>
       </div>
     </div>
   </div>
@@ -931,7 +960,7 @@
     const panels = story.querySelectorAll('.story-panel');
     const pips   = story.querySelectorAll('.story-progress span');
     const N = steps.length;
-    const THEMES = ['light','dark','light','dark'];
+    const THEMES = ['light','light','dark'];
     let cur = -1;
     function setA(i){
       if(i===cur) return; cur=i;
