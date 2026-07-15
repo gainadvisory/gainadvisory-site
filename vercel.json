@@ -1,4 +1,12 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/platform", "destination": "/#intelligence", "permanent": true },
+    { "source": "/assessment", "destination": "/capital-readiness", "permanent": true },
+    { "source": "/paires", "destination": "/engagements", "permanent": true },
+    { "source": "/diagnostic", "destination": "/engagements", "permanent": true },
+    { "source": "/chat-preview", "destination": "/", "permanent": true },
+    { "source": "/home-v3", "destination": "/", "permanent": true }
+  ]
 }

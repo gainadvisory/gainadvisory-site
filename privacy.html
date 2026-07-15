@@ -1,140 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy | G[AI]N Advisory</title>
-  <meta name="description" content="Gain Advisory privacy policy: what we collect through gainadvisory.com, how we use it, and your choices." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230B1D33'/><text x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' fill='%235D9BD4' text-anchor='middle'>AI</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:#0B1D33; --blue:#1E4FA1; --light:#5D9BD4; --pale:#DCEAF7;
-      --charcoal:#2B2F33; --gray:#6b7280; --white:#F9FAFB;
-    }
-    body { font-family:'Inter',sans-serif; background:var(--white); color:var(--charcoal); line-height:1.7; }
-    .logo-wrap { display:inline-flex; flex-direction:column; align-items:flex-start; text-decoration:none; line-height:1; }
-    .logo-word { font-family:'Syne',sans-serif; font-weight:700; letter-spacing:-0.02em; line-height:1; white-space:nowrap; font-size:24px; }
-    .logo-word .br { font-weight:300; }
-    .logo-word .ai { font-weight:800; }
-    .logo-adv { font-family:'DM Sans',sans-serif; font-weight:400; letter-spacing:0.22em; margin-top:3px; font-size:11px; }
-    .logo-light .logo-word { color:var(--navy); }
-    .logo-light .logo-word .br { color:rgba(30,79,161,0.22); }
-    .logo-light .logo-word .ai { background:linear-gradient(180deg,#5D9BD4,#1E4FA1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .logo-light .logo-adv { color:var(--gray); }
-    .logo-dark .logo-word { color:#fff; }
-    .logo-dark .logo-word .br { color:rgba(255,255,255,0.2); }
-    .logo-dark .logo-word .ai { background:linear-gradient(180deg,#DCEAF7,#5D9BD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .logo-dark .logo-adv { color:rgba(255,255,255,0.32); }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy | Gain Advisory</title>
+<meta name="description" content="Gain Advisory privacy policy: what we collect through gainadvisory.com, how we use it, and your choices.">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  a{color:#1E4FA1;text-decoration:none}
+  a:hover{color:#123163}
+  ::selection{background:#1E4FA1;color:#fff}
+  .lh2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:-0.01em;color:#0B1D33;margin:clamp(36px,5vw,52px) 0 0}
+  .lp{font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;color:#3A4654;margin:14px 0 0}
+  .lli{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:#3A4654;margin:8px 0 0;padding-left:20px;position:relative}
+  .lli:before{content:"›";position:absolute;left:0;color:#1E4FA1}
+  .lstrong{color:#0B1D33;font-weight:600}
+</style>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 
-    header.bar { padding:24px 60px; border-bottom:1px solid rgba(11,29,51,.08); }
-    main { max-width:780px; margin:0 auto; padding:56px 28px 80px; }
-    .eyebrow { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--light); font-weight:600; margin-bottom:14px; }
-    h1 { font-family:'Syne',sans-serif; font-weight:700; font-size:40px; color:var(--navy); letter-spacing:-0.02em; line-height:1.1; }
-    .eff { color:var(--gray); font-size:14px; margin-top:10px; }
-    h2 { font-family:'Syne',sans-serif; font-weight:600; font-size:21px; color:var(--navy); margin:38px 0 12px; }
-    p { margin:0 0 14px; }
-    ul { margin:0 0 14px; padding-left:22px; }
-    li { margin:0 0 8px; }
-    strong { color:var(--navy); font-weight:600; }
-    a { color:var(--blue); }
-    .lead { font-size:17px; }
-    footer { background:var(--charcoal); padding:26px 60px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:18px; margin-top:40px; }
-    .ft-links { display:flex; gap:24px; list-style:none; flex-wrap:wrap; }
-    .ft-links a { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.6); }
-    .ft-links a:hover { color:#fff; }
-    .ft-copy { font-size:12px; color:rgba(255,255,255,.4); }
-    @media (max-width:640px){ header.bar{padding:20px 24px;} footer{flex-direction:column; align-items:flex-start; padding:24px;} h1{font-size:32px;} }
-  </style>
+<link rel="canonical" href="https://gainadvisory.com/privacy">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gain Advisory">
+<meta property="og:url" content="https://gainadvisory.com/privacy">
+<meta property="og:title" content="Privacy Policy | Gain Advisory">
+<meta property="og:description" content="Gain Advisory privacy policy: what we collect through gainadvisory.com, how we use it, and your choices.">
+<meta property="og:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gain Advisory — Builder of Commercial Engines.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | Gain Advisory">
+<meta name="twitter:description" content="Gain Advisory privacy policy: what we collect through gainadvisory.com, how we use it, and your choices.">
+<meta name="twitter:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+
 </head>
 <body>
-  <header class="bar">
-    <a href="/" class="logo-wrap logo-light">
-      <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
-      
-    </a>
+<div>
+  <header style="position:sticky;top:0;z-index:50;background:rgba(251,251,249,.9);backdrop-filter:blur(10px);border-bottom:1px solid #E2E6EA">
+    <nav style="max-width:820px;margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between">
+      <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:22px;color:#0B1D33;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(30,79,161,.32)">[</span><span style="color:#1E4FA1">AI</span><span style="font-weight:400;color:rgba(30,79,161,.32)">]</span>N</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em">Advisory</span>
+      </a>
+      <a href="/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
+    </nav>
   </header>
 
-  <main>
-    <div class="eyebrow">Legal</div>
-    <h1>Privacy Policy</h1>
-    <p class="eff">Effective date: June 25, 2026</p>
+  <article style="max-width:820px;margin:0 auto;padding:clamp(56px,8vw,96px) 24px clamp(64px,9vw,110px)">
+    <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Legal</div>
+    <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,54px);line-height:1.02;letter-spacing:-0.02em;color:#0B1D33;margin:14px 0 0">Privacy Policy</h1>
+    <p style="font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.04em;color:#8FA0B4;margin:16px 0 0">Effective date: June 25, 2026</p>
+    <p class="lp" style="margin-top:24px"><span class="lstrong">Gain Advisory LLC</span> ("Gain Advisory," "we," "us") respects your privacy. This policy explains what information we collect through our website at gainadvisory.com and related communications, how we use it, and your choices.</p>
 
-    <p class="lead" style="margin-top:28px;"><strong>Gain Advisory LLC</strong> ("Gain Advisory," "we," "us") respects your privacy. This policy explains what information we collect through our website at gainadvisory.com and related communications, how we use it, and your choices.</p>
+    <h2 class="lh2">Information we collect</h2>
+    <p class="lp"><span class="lstrong">Information you provide.</span></p>
+    <div class="lli">Contact details you submit through forms or email (name, company, email, phone, and anything you choose to include in your message).</div>
+    <div class="lli">Scheduling information when you book a call through our scheduling tool (Calendly), such as your name, email, and meeting details.</div>
+    <div class="lli">Correspondence and information you share with us during the course of a discussion or engagement.</div>
+    <p class="lp" style="margin-top:18px"><span class="lstrong">Information collected automatically.</span></p>
+    <div class="lli">Usage and device data through standard web analytics, such as pages viewed, referring site, browser type, approximate location, and timestamps.</div>
+    <div class="lli">Cookies and similar technologies used to operate the site and understand how it is used.</div>
+    <p class="lp">We do not knowingly collect sensitive personal information through the website, and we ask that you not send it to us through web forms.</p>
 
-    <h2>Information we collect</h2>
-    <p><strong>Information you provide.</strong></p>
-    <ul>
-      <li>Contact details you submit through forms or email (name, company, email, phone, and anything you choose to include in your message).</li>
-      <li>Scheduling information when you book a call through our scheduling tool (Calendly), such as your name, email, and meeting details.</li>
-      <li>Correspondence and information you share with us during the course of a discussion or engagement.</li>
-    </ul>
-    <p><strong>Information collected automatically.</strong></p>
-    <ul>
-      <li>Usage and device data through standard web analytics, such as pages viewed, referring site, browser type, approximate location, and timestamps.</li>
-      <li>Cookies and similar technologies used to operate the site and understand how it is used.</li>
-    </ul>
-    <p>We do not knowingly collect sensitive personal information through the website, and we ask that you not send it to us through web forms.</p>
+    <h2 class="lh2">How we use information</h2>
+    <p class="lp">We use the information to:</p>
+    <div class="lli">Respond to your inquiries and schedule and conduct meetings.</div>
+    <div class="lli">Provide, and where relevant discuss, our advisory services.</div>
+    <div class="lli">Operate, maintain, and improve the website.</div>
+    <div class="lli">Send relevant communications you have requested or that relate to an engagement.</div>
+    <div class="lli">Comply with legal obligations and protect our rights.</div>
+    <p class="lp"><span class="lstrong">We do not sell your personal information.</span></p>
 
-    <h2>How we use information</h2>
-    <p>We use the information to:</p>
-    <ul>
-      <li>Respond to your inquiries and schedule and conduct meetings.</li>
-      <li>Provide, and where relevant discuss, our advisory services.</li>
-      <li>Operate, maintain, and improve the website.</li>
-      <li>Send relevant communications you have requested or that relate to an engagement.</li>
-      <li>Comply with legal obligations and protect our rights.</li>
-    </ul>
-    <p>We do not sell your personal information.</p>
+    <h2 class="lh2">How information is shared</h2>
+    <p class="lp">We share information only as needed to run our business:</p>
+    <div class="lli"><span class="lstrong">Service providers</span> who operate tools on our behalf, such as website hosting, web analytics, scheduling (Calendly), email, and our customer relationship management system. They may process information only to provide services to us.</div>
+    <div class="lli"><span class="lstrong">Legal and safety</span> purposes, when required by law or to protect rights, safety, or property.</div>
+    <div class="lli"><span class="lstrong">Business transfers</span>, in connection with a merger, acquisition, or sale of assets, subject to this policy.</div>
 
-    <h2>How information is shared</h2>
-    <p>We share information only as needed to run our business:</p>
-    <ul>
-      <li><strong>Service providers</strong> who operate tools on our behalf, such as website hosting, web analytics, scheduling (Calendly), email, and our customer relationship management system. They may process information only to provide services to us.</li>
-      <li><strong>Legal and safety</strong> purposes, when required by law or to protect rights, safety, or property.</li>
-      <li><strong>Business transfers</strong>, in connection with a merger, acquisition, or sale of assets, subject to this policy.</li>
-    </ul>
+    <h2 class="lh2">Cookies</h2>
+    <p class="lp">The site uses cookies and similar technologies to function and to measure usage. You can control cookies through your browser settings. Disabling some cookies may affect how the site works.</p>
 
-    <h2>Cookies</h2>
-    <p>The site uses cookies and similar technologies to function and to measure usage. You can control cookies through your browser settings. Disabling some cookies may affect how the site works.</p>
+    <h2 class="lh2">Data retention</h2>
+    <p class="lp">We keep personal information only as long as needed for the purposes above, to maintain our business records, and to meet legal obligations, after which we delete or de-identify it.</p>
 
-    <h2>Data retention</h2>
-    <p>We keep personal information only as long as needed for the purposes above, to maintain our business records, and to meet legal obligations, after which we delete or de-identify it.</p>
+    <h2 class="lh2">Your choices and rights</h2>
+    <p class="lp">Depending on where you live, you may have rights to access, correct, delete, or restrict the use of your personal information, and to opt out of certain processing. To make a request, contact us at privacy@gainadvisory.com. We will respond consistent with applicable law. You can unsubscribe from non-essential emails at any time using the link in the email or by contacting us.</p>
 
-    <h2>Your choices and rights</h2>
-    <p>Depending on where you live, you may have rights to access, correct, delete, or restrict the use of your personal information, and to opt out of certain processing. To make a request, contact us at <a href="mailto:privacy@gainadvisory.com">privacy@gainadvisory.com</a>. We will respond consistent with applicable law. You can unsubscribe from non-essential emails at any time using the link in the email or by contacting us.</p>
+    <h2 class="lh2">Security</h2>
+    <p class="lp">We use reasonable administrative and technical measures to protect personal information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
 
-    <h2>Security</h2>
-    <p>We use reasonable administrative and technical measures to protect personal information. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
+    <h2 class="lh2">Third-party links</h2>
+    <p class="lp">The site may link to third-party sites we do not control. Their privacy practices are governed by their own policies.</p>
 
-    <h2>Third-party links</h2>
-    <p>The site may link to third-party sites we do not control. Their privacy practices are governed by their own policies.</p>
+    <h2 class="lh2">Children</h2>
+    <p class="lp">The website is intended for business professionals and is not directed to children under 16, and we do not knowingly collect their information.</p>
 
-    <h2>Children</h2>
-    <p>The website is intended for business professionals and is not directed to children under 16, and we do not knowingly collect their information.</p>
+    <h2 class="lh2">Changes to this policy</h2>
+    <p class="lp">We may update this policy from time to time. We will post the updated version here with a new effective date.</p>
 
-    <h2>Changes to this policy</h2>
-    <p>We may update this policy from time to time. We will post the updated version here with a new effective date.</p>
+    <h2 class="lh2">Contact</h2>
+    <p class="lp"><span class="lstrong">Gain Advisory LLC</span><br>Email: privacy@gainadvisory.com<br>Web: gainadvisory.com</p>
 
-    <h2>Contact</h2>
-    <p><strong>Gain Advisory LLC</strong><br />
-    Email: <a href="mailto:privacy@gainadvisory.com">privacy@gainadvisory.com</a><br />
-    Web: gainadvisory.com</p>
-  </main>
+    <div style="margin-top:clamp(44px,6vw,64px);padding-top:22px;border-top:1px solid #E2E6EA;display:flex;gap:20px;font-family:'Inter',sans-serif;font-size:14px">
+      <a href="/">Back to home</a>
+      <a href="/terms">Master Services Agreement</a>
+    </div>
+  </article>
 
-  <footer>
-    <a href="/" class="logo-wrap logo-dark">
-      <span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span>
-      
-    </a>
-    <ul class="ft-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/privacy">Privacy</a></li>
-    </ul>
-    <span class="ft-copy">© 2026 Gain Advisory LLC</span>
+  <footer style="color:#fff;background:#0B1D33">
+    <div style="max-width:820px;margin:0 auto;padding:clamp(40px,6vw,60px) 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
+      <span>© 2026 Gain Advisory LLC · Commercial by Design</span>
+      <a href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" style="color:rgba(255,255,255,.7)">LinkedIn</a>
+    </div>
   </footer>
+</div>
+
 </body>
 </html>
