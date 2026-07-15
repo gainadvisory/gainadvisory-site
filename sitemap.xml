@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://gainadvisory.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gainadvisory.com/engagements</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://gainadvisory.com/capital-readiness</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gainadvisory.com/cco-vs-cro</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gainadvisory.com/cco-vs-cmo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gainadvisory.com/what-gain-advisory-is</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gainadvisory.com/fintech-readiness</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gainadvisory.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://gainadvisory.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

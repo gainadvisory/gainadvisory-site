@@ -1,318 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>G[AI]N Advisory | Engagements</title>
-  <meta name="description" content="How Gain Advisory engages with founder-led, growth-stage SaaS companies, with deep expertise in fintech and capital markets. Three ways to work together, each powered by GTMology." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230B1D33'/><text x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='900' fill='%235D9BD4' text-anchor='middle'>AI</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --navy:#0B1D33; --blue:#1E4FA1; --light:#5D9BD4; --pale:#DCEAF7; --charcoal:#2B2F33; --gray:#6b7280; --off:#F2F4F7; --white:#F9FAFB; --ai:#1a7a5e; --ai-pale:#e0f4ee; --mint:#6ee7c7; }
-    html { scroll-behavior: smooth; }
-    body { font-family:'Inter',sans-serif; background:var(--white); color:var(--charcoal); overflow-x:hidden; }
-    /* logo */
-    .logo-wrap { display:inline-flex; flex-direction:column; align-items:flex-start; text-decoration:none; line-height:1; }
-    .logo-word { font-family:'Syne',sans-serif; font-weight:700; letter-spacing:-0.02em; line-height:1; white-space:nowrap; }
-    .logo-word .br { font-weight:300; } .logo-word .ai { font-weight:800; }
-    .logo-adv { font-family:'DM Sans',sans-serif; font-weight:400; letter-spacing:0.22em; margin-top:3px; }
-    .logo-light .logo-word { color:var(--navy); } .logo-light .logo-word .br { color:rgba(30,79,161,.22); }
-    .logo-light .logo-word .ai { background:linear-gradient(180deg,#5D9BD4,#1E4FA1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .logo-light .logo-adv { color:var(--gray); }
-    .logo-dark .logo-word { color:#fff; } .logo-dark .logo-word .br { color:rgba(255,255,255,.2); }
-    .logo-dark .logo-word .ai { background:linear-gradient(180deg,#DCEAF7,#5D9BD4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .logo-dark .logo-adv { color:rgba(255,255,255,.32); }
-    /* nav */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; height:68px; display:flex; align-items:center; justify-content:space-between; padding:0 60px; transition:background .3s, box-shadow .3s; }
-    nav.scrolled { background:rgba(249,250,251,.97); box-shadow:0 1px 0 rgba(11,29,51,.09); backdrop-filter:blur(12px); }
-    .nav-logo .logo-word { font-size:26px; }
-    .nav-logo-dark { display:block; } .nav-logo-light { display:none; }
-    nav.scrolled .nav-logo-dark { display:none; } nav.scrolled .nav-logo-light { display:block; }
-    .nav-links { display:flex; gap:32px; list-style:none; align-items:center; }
-    .nav-links a { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.78); transition:color .2s; }
-    nav.scrolled .nav-links a { color:var(--charcoal); }
-    .nav-links a:hover { color:var(--light); } nav.scrolled .nav-links a:hover { color:var(--blue); }
-    .nav-btn { background:rgba(255,255,255,.15)!important; border:1px solid rgba(255,255,255,.28); color:#fff!important; padding:9px 22px; border-radius:100px; }
-    .nav-btn:hover { background:rgba(255,255,255,.28)!important; }
-    nav.scrolled .nav-btn { background:var(--navy)!important; border-color:var(--navy); color:#fff!important; }
-    nav.scrolled .nav-btn:hover { background:var(--blue)!important; border-color:var(--blue); }
-    .hb { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
-    .hb span { display:block; width:22px; height:1.5px; background:#fff; } nav.scrolled .hb span { background:var(--navy); }
-    /* shared */
-    .sec { padding:96px 60px; } .sec-narrow { max-width:1040px; margin:0 auto; }
-    .eye { display:inline-flex; align-items:center; gap:12px; font-size:9.5px; font-weight:600; letter-spacing:.32em; text-transform:uppercase; margin-bottom:18px; }
-    .eye::before { content:''; width:24px; height:1px; background:currentColor; }
-    .eye.bl { color:var(--blue); } .eye.gr { color:var(--ai); } .eye.wh { color:rgba(255,255,255,.4); }
-    .sh { font-family:'Syne',sans-serif; font-size:clamp(28px,3.2vw,44px); font-weight:700; letter-spacing:-.01em; color:var(--navy); line-height:1.12; margin-bottom:16px; }
-    .sl { font-size:15px; font-weight:300; line-height:1.75; color:var(--gray); max-width:620px; }
-    .hero-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(93,155,212,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(93,155,212,.05) 1px,transparent 1px); background-size:72px 72px; }
-    /* header */
-    .eng-hero { background:var(--navy); position:relative; overflow:hidden; text-align:center; padding:150px 40px 90px; }
-    .eng-hero .inner { position:relative; z-index:1; max-width:760px; margin:0 auto; }
-    .eng-hero .eye { justify-content:center; }
-    .eng-h1 { font-family:'Syne',sans-serif; font-size:clamp(32px,4.4vw,56px); font-weight:700; line-height:1.1; color:#fff; margin-bottom:22px; }
-    .eng-wedge { font-size:clamp(15px,1.6vw,19px); font-weight:300; line-height:1.72; color:rgba(255,255,255,.58); max-width:680px; margin:0 auto 28px; }
-    .eng-wedge strong { color:rgba(255,255,255,.92); font-weight:400; }
-    .eng-gtm-line { display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.04em; color:var(--mint); font-weight:400; }
-    .eng-gtm-line::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--mint); }
-    /* packages */
-    .pk-intro { max-width:760px; margin-bottom:50px; }
-    .how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; align-items:stretch; }
-    .pk-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; align-items:stretch; }
-    .how-card { background:var(--off); padding:34px 30px; display:flex; flex-direction:column; }
-    .how-card-num { font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:.2em; color:rgba(30,79,161,.25); margin-bottom:18px; }
-    .how-card-title { font-family:'Syne',sans-serif; font-size:19px; font-weight:700; color:var(--navy); margin-bottom:10px; line-height:1.2; }
-    .how-card-price { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); margin-bottom:16px; }
-    .how-card-body { font-size:13px; font-weight:300; line-height:1.7; color:var(--gray); margin-bottom:20px; }
-    .how-card-includes { display:flex; flex-direction:column; gap:7px; }
-    .how-card-includes span { font-size:12px; font-weight:400; color:var(--charcoal); display:flex; align-items:flex-start; gap:9px; line-height:1.4; }
-    .how-card-includes span::before { content:'→'; color:var(--light); font-size:11px; flex-shrink:0; margin-top:1px; }
-    .how-card-out { margin-top:auto; padding-top:18px; }
-    .how-card-out span { display:block; font-size:11px; font-weight:300; font-style:italic; line-height:1.55; color:var(--gray); border-top:1px solid rgba(11,29,51,.08); padding-top:14px; }
-    .how-card.featured { background:var(--navy); }
-    .how-card.featured .how-card-num { color:rgba(93,155,212,.45); }
-    .how-card.featured .how-card-title { color:#fff; }
-    .how-card.featured .how-card-price { color:var(--mint); }
-    .how-card.featured .how-card-body { color:rgba(255,255,255,.5); }
-    .how-card.featured .how-card-includes span { color:rgba(255,255,255,.78); }
-    .how-card.featured .how-card-includes span::before { color:var(--mint); }
-    .how-card.featured .how-card-out span { color:rgba(255,255,255,.5); border-top-color:rgba(255,255,255,.12); }
-    .pk-note { margin-top:26px; font-size:12px; font-style:italic; color:var(--gray); }
-    /* gtmology band */
-    .gtm-band { background:var(--navy); position:relative; overflow:hidden; }
-    .gtm-band .hero-grid { opacity:.4; }
-    .gtm-inner { position:relative; z-index:1; max-width:1040px; margin:0 auto; }
-    .gtm-inner .sh { color:#fff; } .gtm-inner .sl { color:rgba(255,255,255,.5); }
-    .gtm-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:44px; }
-    .gtm-item { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); padding:22px 22px; }
-    .gtm-item h4 { font-size:13px; font-weight:600; color:#fff; margin-bottom:5px; }
-    .gtm-item p { font-size:12px; font-weight:300; line-height:1.55; color:rgba(255,255,255,.46); }
-    /* industries */
-    .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:36px; }
-    .chip { background:var(--off); border:1px solid var(--pale); color:var(--navy); font-size:12.5px; font-weight:400; padding:9px 18px; border-radius:100px; }
-    /* philosophy / cta */
-    .phil { background:var(--charcoal); text-align:center; }
-    .phil .big { font-family:'Syne',sans-serif; font-size:clamp(24px,3vw,40px); font-weight:700; color:#fff; line-height:1.18; max-width:760px; margin:0 auto 18px; }
-    .phil .big em { font-style:normal; color:var(--mint); }
-    .phil p { font-size:15px; font-weight:300; line-height:1.7; color:rgba(255,255,255,.5); max-width:600px; margin:0 auto 36px; }
-    .btn-p { background:var(--mint); color:var(--navy); padding:15px 36px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; transition:background .2s,transform .2s; display:inline-block; }
-    .btn-p:hover { background:#a7f3d0; transform:translateY(-2px); }
-    /* footer */
-    footer { background:var(--charcoal); padding:26px 60px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; border-top:1px solid rgba(255,255,255,.06); }
-    .ft-logo .logo-word { font-size:22px; }
-    .ft-links { display:flex; gap:22px; list-style:none; flex-wrap:wrap; }
-    .ft-links a { font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.28); text-decoration:none; transition:color .2s; }
-    .ft-links a:hover { color:var(--light); }
-    .ft-copy { font-size:10px; color:rgba(255,255,255,.16); }
-    @media (max-width:880px) {
-      nav { padding:0 24px; } .nav-links { display:none; } .hb { display:flex; }
-      .sec { padding:64px 24px; } .eng-hero { padding:120px 24px 64px; }
-      .how-cards, .pk-cards { grid-template-columns:1fr; } .gtm-grid { grid-template-columns:1fr; }
-      footer { flex-direction:column; align-items:flex-start; padding:24px; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Engagements | Gain Advisory</title>
+<meta name="description" content="Three ways to work with Gain Advisory, each powered by GTMology. Install the commercial engine first, so you hire into a working system instead of gambling on it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  a{color:#1E4FA1;text-decoration:none}
+  a:hover{color:#123163}
+  ::selection{background:#1E4FA1;color:#fff}
+</style>
+
+<link rel="canonical" href="https://gainadvisory.com/engagements">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gain Advisory">
+<meta property="og:url" content="https://gainadvisory.com/engagements">
+<meta property="og:title" content="Engagements | Gain Advisory">
+<meta property="og:description" content="Three ways to work with Gain Advisory, each powered by GTMology. Install the commercial engine first, so you hire into a working system instead of gambling on it.">
+<meta property="og:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gain Advisory — Builder of Commercial Engines.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Engagements | Gain Advisory">
+<meta name="twitter:description" content="Three ways to work with Gain Advisory, each powered by GTMology. Install the commercial engine first, so you hire into a working system instead of gambling on it.">
+<meta name="twitter:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+
 </head>
 <body>
+<div>
+  <header style="position:sticky;top:0;z-index:50;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E2E6EA">
+    <nav style="max-width:1120px;margin:0 auto;padding:0 24px;height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:22px;color:#0B1D33;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(30,79,161,.32)">[</span><span style="color:#1E4FA1">AI</span><span style="font-weight:400;color:rgba(30,79,161,.32)">]</span>N</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em">Advisory</span>
+      </a>
+      <a href="/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
+    </nav>
+  </header>
 
-<nav id="nav">
-  <a href="/" class="logo-wrap logo-dark nav-logo nav-logo-dark"><span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span></a>
-  <a href="/" class="logo-wrap logo-light nav-logo nav-logo-light"><span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span></a>
-  <ul class="nav-links" id="nl">
-    <li><a href="/#pain">The Problem</a></li>
-    <li><a href="/#how">How I Work</a></li>
-    <li><a href="/#who">Who I Serve</a></li>
-    <li><a href="https://app.gtmology.io/" target="_blank" rel="noopener">GTMology</a></li>
-    <li><a href="/#contact" class="nav-btn">Start the conversation</a></li>
-  </ul>
-  <button class="hb" id="hb" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-
-<!-- HEADER -->
-<section class="eng-hero">
-  <div class="hero-grid"></div>
-  <div class="inner">
-    <span class="eye wh">Engagements</span>
-    <h1 class="eng-h1">How we work.</h1>
-    <p class="eng-wedge">A full-time CRO is a <strong>$300,000 bet</strong> you make before you know what good looks like, and most early fintechs hire the wrong one. Gain Advisory installs the commercial engine first, so you hire into a working system instead of gambling on it. You get a President and CRO-level operator you could not afford full-time.</p>
-    <span class="eng-gtm-line">Every engagement runs on GTMology, our private AI market-intelligence platform.</span>
-  </div>
-</section>
-
-<!-- THE TWO MOMENTS -->
-<section class="sec">
-  <div class="sec-narrow">
-    <div class="pk-intro">
-      <span class="eye bl">The two moments that matter</span>
-      <h2 class="sh">Built for the two moments that matter.</h2>
-      <p class="sl">Founder-led companies tend to need commercial help at one of two inflection points: proving traction before a raise, or turning founder-led wins into a repeatable engine after one.</p>
+  <section style="background:#0B1D33;color:#fff">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(64px,10vw,120px) 24px clamp(56px,8vw,96px)">
+      <a href="/" style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4">← Gain Advisory</a>
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#5D9BD4;margin-top:26px">Engagements</div>
+      <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,6vw,72px);line-height:1;letter-spacing:-0.02em;margin:16px 0 0">How we work.</h1>
+      <p style="font-family:'Inter',sans-serif;font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#AEBED0;margin:26px 0 0;max-width:60ch">A full-time CRO is a <strong style="color:#fff">$300,000 bet</strong> you make before you know what good looks like. Gain Advisory installs the commercial engine first, so you hire into a working system instead of gambling on it. You get a President and CRO-level operator you could not afford full-time.</p>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;color:#5D9BD4;margin:20px 0 0">Every engagement runs on GTMology, the private commercial intelligence engine behind the work.</p>
     </div>
-    <div class="pk-cards">
-      <div class="how-card">
-        <div class="how-card-num">A</div>
-        <div class="how-card-title">Pre-Raise<br>Traction Boost</div>
-        <div class="how-card-body">For founders proving the commercial thesis before they raise, with real customers and real evidence, not a story.</div>
-        <div class="how-card-includes">
-          <span>Define your ideal customer profile</span>
-          <span>Build a pipeline of ICP accounts</span>
-          <span>Land your first closed business</span>
-          <span>Proof points to inject into your pitch deck</span>
-        </div>
-        <div class="how-card-out"><span>Walk into the raise with commercial evidence a buyer and an investor both believe.</span></div>
+  </section>
+
+  <!-- two moments -->
+  <section style="max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px 0">
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">The two moments that matter</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,42px);line-height:1.06;letter-spacing:-0.015em;color:#0B1D33;margin:14px 0 0;max-width:20ch">Commercial readiness before the raise. Commercial momentum after it.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;color:#5B6B7C;margin:18px 0 0;max-width:60ch">Founder- or CEO-led companies tend to need commercial help at one of two inflection points: proving traction before a raise, or turning early wins into a repeatable engine after one.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:32px">
+      <div style="border:1px solid #E2E6EA;background:#fff;border-radius:14px;padding:28px">
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:32px;height:32px;border-radius:7px;background:#0B1D33;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700">A</span><span style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:#0B1D33">Pre-Raise Traction Boost</span></div>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;color:#5B6B7C;margin:16px 0 0">For founders proving the commercial thesis before they raise, with real customers and real evidence, not a story.</p>
+        <ul style="list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px">
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Define your ideal customer profile</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Build a pipeline of ICP accounts</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Land your first closed business</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Proof points to inject into your pitch deck</li>
+        </ul>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#1E4FA1;margin:18px 0 0;font-weight:500">Walk into the raise with commercial evidence a buyer and an investor both believe.</p>
       </div>
-      <div class="how-card featured">
-        <div class="how-card-num">B</div>
-        <div class="how-card-title">Post-Raise<br>GTM Scale-Up</div>
-        <div class="how-card-body">For funded founders turning early, founder-led wins into a machine that runs without them.</div>
-        <div class="how-card-includes">
-          <span>Build a repeatable, scalable, predictable GTM engine</span>
-          <span>Founder-to-sales hand-off playbook</span>
-          <span>A repeatable, consistent demo and close process</span>
-          <span>Pipeline review dashboard</span>
-        </div>
-        <div class="how-card-out"><span>A commercial engine that produces predictable growth without depending on the founder.</span></div>
+      <div style="border:1px solid #E2E6EA;background:#fff;border-radius:14px;padding:28px">
+        <div style="display:flex;align-items:center;gap:12px"><span style="width:32px;height:32px;border-radius:7px;background:#0B1D33;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700">B</span><span style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:#0B1D33">Post-Raise GTM Scale-Up</span></div>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;color:#5B6B7C;margin:16px 0 0">For funded founders or CEOs turning early, leader-led wins into a machine that runs without them.</p>
+        <ul style="list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px">
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Build a repeatable, scalable, predictable GTM engine</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Founder-to-sales hand-off playbook</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>A repeatable, consistent demo and close process</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">›</span>Pipeline review dashboard</li>
+        </ul>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#1E4FA1;margin:18px 0 0;font-weight:500">A commercial engine that produces predictable growth without depending on any single person.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PACKAGES -->
-<section class="sec">
-  <div class="sec-narrow">
-    <div class="pk-intro">
-      <span class="eye bl">Three ways to engage</span>
-      <h2 class="sh">Commercial growth for founder-led SaaS.</h2>
-      <p class="sl">Gain Advisory partners with founder-led, early- and growth-stage SaaS and recurring-revenue companies that have proven products but need to build a repeatable commercial engine, with deep, specific expertise in fintech, wealthtech, and capital-markets technology. Led by an operator who built and scaled the commercial organizations behind a global stock exchange, a capital markets software company, a cap-table and shareholder-services business, a financial data company, and a macro data platform.</p>
-    </div>
+  <!-- three ways -->
+  <section style="max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px 0">
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Three ways to engage</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,42px);line-height:1.06;letter-spacing:-0.015em;color:#0B1D33;margin:14px 0 0;max-width:22ch">Commercial growth for founder- and CEO-led SaaS.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;color:#5B6B7C;margin:18px 0 0;max-width:66ch">Led by an operator who built and scaled the commercial organizations behind a global stock exchange, a capital markets software company, a cap-table and shareholder-services business, a financial data company, and a macro data platform. Deepest in fintech, wealthtech, and capital-markets technology.</p>
 
-    <div class="how-cards">
-      <!-- 1 -->
-      <div class="how-card">
-        <div class="how-card-num">01</div>
-        <div class="how-card-title">GTM Diagnostic</div>
-        <div class="how-card-price">$5,000 fixed fee · about 2 weeks</div>
-        <div class="how-card-body">For founders who want an experienced executive to evaluate the commercial organization before a major hire or growth decision.</div>
-        <div class="how-card-includes">
-          <span>Commercial maturity assessment</span>
-          <span>Ideal customer profile evaluation</span>
-          <span>Positioning and messaging review</span>
-          <span>Pipeline and sales-process review</span>
-          <span>Go-to-market gap analysis</span>
-          <span>Sales-hiring recommendations</span>
-          <span>12-month commercial roadmap</span>
-        </div>
-        <div class="how-card-out"><span>A clear read on what is working, what is limiting growth, and a prioritized plan. Credited toward month one if you continue.</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:32px">
+      <div style="border:1px solid #E2E6EA;background:#fff;border-radius:14px;padding:28px;display:flex;flex-direction:column">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8FA0B4">01</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:#0B1D33;margin-top:8px">GTM Diagnostic</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.03em;color:#1E4FA1;margin-top:8px;font-weight:500">$5,000 fixed fee · about 2 weeks</div>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#5B6B7C;margin:14px 0 0">For founders or CEOs who want an experienced executive to evaluate the commercial organization before a major hire or growth decision.</p>
+        <ul style="list-style:none;padding:0;margin:16px 0 20px;display:grid;gap:7px">
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Commercial maturity assessment</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Ideal customer profile evaluation</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Positioning and messaging review</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Pipeline and sales-process review</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Go-to-market gap analysis</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Sales-hiring recommendations</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>12-month commercial roadmap</li>
+        </ul>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#8FA0B4;margin:auto 0 0">A clear read on what is working, what is limiting growth, and a prioritized plan. Credited toward month one if you continue.</p>
       </div>
-      <!-- 2 featured -->
-      <div class="how-card featured">
-        <div class="how-card-num">02</div>
-        <div class="how-card-title">Fractional<br>Chief Revenue Officer</div>
-        <div class="how-card-price">Starting at $10,000 / month · 3 to 6 months</div>
-        <div class="how-card-body">For founder-led companies with product-market fit that need experienced commercial leadership without hiring a full-time CRO.</div>
-        <div class="how-card-includes">
-          <span>Executive go-to-market strategy</span>
-          <span>Weekly leadership meetings</span>
-          <span>Sales process and forecasting</span>
-          <span>Pipeline reviews</span>
-          <span>Messaging and positioning</span>
-          <span>Hiring and interviewing sales talent</span>
-          <span>Compensation planning</span>
-          <span>Board and investor support</span>
-          <span>GTMology market intelligence</span>
-        </div>
-        <div class="how-card-out"><span>A repeatable commercial operating system built to support predictable growth.</span></div>
+      <div style="border:1px solid #1E4FA1;background:#0B1D33;color:#fff;border-radius:14px;padding:28px;display:flex;flex-direction:column">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5D9BD4">02</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-top:8px">Fractional GTM &amp; Commercial Leadership</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.03em;color:#5D9BD4;margin-top:8px;font-weight:500">Starting at $10,000 / month · 3 to 6 months</div>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#AEBED0;margin:14px 0 0">For companies with product-market fit that need experienced commercial leadership without hiring a full-time CRO.</p>
+        <ul style="list-style:none;padding:0;margin:16px 0 20px;display:grid;gap:7px">
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Executive go-to-market strategy</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Weekly leadership meetings</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Sales process and forecasting</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Pipeline reviews</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Messaging and positioning</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Hiring and interviewing sales talent</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Compensation planning</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>Board and investor support</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#DCE5EF;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#5D9BD4">·</span>GTMology market intelligence</li>
+        </ul>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#AEBED0;margin:auto 0 0">A repeatable commercial operating system built to support predictable growth.</p>
       </div>
-      <!-- 3 -->
-      <div class="how-card">
-        <div class="how-card-num">03</div>
-        <div class="how-card-title">Commercial Transformation</div>
-        <div class="how-card-price">Starting at $25,000 / month</div>
-        <div class="how-card-body">For growth-stage companies preparing for significant expansion, enterprise sales, or organizational change.</div>
-        <div class="how-card-includes">
-          <span>Executive commercial leadership</span>
-          <span>Revenue-organization redesign</span>
-          <span>Sales-organization structure</span>
-          <span>Territory and account strategy</span>
-          <span>Compensation architecture</span>
-          <span>Forecasting and KPI framework</span>
-          <span>Customer-success strategy</span>
-          <span>GTMology integrated into planning</span>
-        </div>
-        <div class="how-card-out"><span>A modern commercial organization designed for sustainable, scalable growth.</span></div>
+      <div style="border:1px solid #E2E6EA;background:#fff;border-radius:14px;padding:28px;display:flex;flex-direction:column">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8FA0B4">03</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:#0B1D33;margin-top:8px">Commercial Transformation</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.03em;color:#1E4FA1;margin-top:8px;font-weight:500">Starting at $25,000 / month</div>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#5B6B7C;margin:14px 0 0">For growth-stage companies preparing for significant expansion, enterprise sales, or organizational change.</p>
+        <ul style="list-style:none;padding:0;margin:16px 0 20px;display:grid;gap:7px">
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Executive commercial leadership</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Revenue-organization redesign</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Sales-organization structure</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Territory and account strategy</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Compensation architecture</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Forecasting and KPI framework</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>Customer-success strategy</li>
+          <li style="font-family:'Inter',sans-serif;font-size:14px;color:#14202F;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1">·</span>GTMology integrated into planning</li>
+        </ul>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#8FA0B4;margin:auto 0 0">A modern commercial organization designed for sustainable, scalable growth.</p>
       </div>
     </div>
-    <p class="pk-note">Engagements are scoped to fit. Pricing reflects scope and time commitment, quoted after a short conversation.</p>
-  </div>
-</section>
+    <p style="font-family:'Inter',sans-serif;font-size:14px;color:#8FA0B4;margin:22px 0 0">Engagements are scoped to fit. Pricing reflects scope and time commitment, quoted after a short conversation.</p>
+  </section>
 
-<!-- GTMOLOGY BAND -->
-<section class="sec gtm-band">
-  <div class="hero-grid"></div>
-  <div class="gtm-inner">
-    <span class="eye gr">The unfair advantage</span>
-    <h2 class="sh">Every engagement runs on GTMology.</h2>
-    <p class="sl">Unlike traditional advisory firms, Gain Advisory pairs decades of executive operating experience with a private AI intelligence platform that reads the market and turns it into a go-to-market plan: which accounts, why now, who to call, and what to say.</p>
-    <div class="gtm-grid">
-      <div class="gtm-item"><h4>Executive and company intelligence</h4><p>Who is moving, why now, and what they are trying to solve.</p></div>
-      <div class="gtm-item"><h4>Market and buyer signals</h4><p>Funding, hiring, leadership change, and product moves, weighted and judged.</p></div>
-      <div class="gtm-item"><h4>Competitive insight</h4><p>How the field is positioning and where the opening is.</p></div>
-      <div class="gtm-item"><h4>Earnings and industry monitoring</h4><p>Filings and transcripts read for what they actually mean commercially.</p></div>
-      <div class="gtm-item"><h4>Strategic account intelligence</h4><p>Target lists scored to your ideal customer, refreshed as the market moves.</p></div>
-      <div class="gtm-item"><h4>Commercial research</h4><p>The evidence behind every recommendation, not opinion.</p></div>
+  <!-- GTMology -->
+  <section style="max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px 0">
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">The unfair advantage</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,42px);line-height:1.06;letter-spacing:-0.015em;color:#0B1D33;margin:14px 0 0;max-width:22ch">Every engagement runs on GTMology.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;color:#5B6B7C;margin:18px 0 0;max-width:64ch">Decades of executive operating experience paired with a private commercial intelligence engine that reads the market and turns it into a plan: which accounts, why now, who to call, and what to say.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px">
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Executive and company intelligence</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">Who is moving, why now, and what they are trying to solve.</div></div>
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Market and buyer signals</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">Funding, hiring, leadership change, and product moves, weighted and judged.</div></div>
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Competitive insight</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">How the field is positioning, and where the opening is.</div></div>
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Earnings and industry monitoring</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">Filings and transcripts read for what they actually mean commercially.</div></div>
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Strategic account intelligence</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">Target lists scored to your ideal customer, refreshed as the market moves.</div></div>
+      <div style="border-top:2px solid #1E4FA1;padding-top:16px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Commercial research</div><div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:#5B6B7C;margin-top:6px">The evidence behind every recommendation, not opinion.</div></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- INDUSTRIES -->
-<section class="sec">
-  <div class="sec-narrow">
-    <span class="eye bl">Where we work</span>
-    <h2 class="sh">Deepest in financial markets.</h2>
-    <p class="sl">We build commercial engines for founder-led SaaS broadly. This is where we go deepest: decades of operating experience that let us understand a founder's business and their buyers better than a generalist could.</p>
-    <div class="chips">
-      <span class="chip">Financial Technology</span>
-      <span class="chip">Capital Markets Technology</span>
-      <span class="chip">WealthTech</span>
-      <span class="chip">RegTech</span>
-      <span class="chip">Market Infrastructure</span>
-      <span class="chip">Financial Data and Analytics</span>
-      <span class="chip">Governance and Compliance Technology</span>
-      <span class="chip">Institutional Investment Technology</span>
+  <!-- sectors + close -->
+  <section style="max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px clamp(64px,9vw,110px)">
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Where we work</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,42px);line-height:1.06;letter-spacing:-0.015em;color:#0B1D33;margin:14px 0 0">Deepest in financial markets.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;color:#5B6B7C;margin:18px 0 0;max-width:60ch">We build commercial engines for founder- and CEO-led SaaS broadly. This is where we go deepest, with decades of operating experience behind the products.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Financial Technology</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Capital Markets Technology</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">WealthTech</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">RegTech</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Market Infrastructure</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Financial Data and Analytics</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Governance and Compliance Technology</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:13px;color:#14202F;background:#fff;border:1px solid #E2E6EA;border-radius:6px;padding:8px 14px">Institutional Investment Technology</span>
     </div>
-  </div>
-</section>
 
-<!-- PHILOSOPHY / CTA -->
-<section class="sec phil">
-  <div class="big">We do not sell consulting hours. <em>We build commercial engines.</em></div>
-  <p>The objective is simple: help founder-led, early- and growth-stage SaaS companies establish the strategy, structure, and execution to create predictable, repeatable revenue.</p>
-  <a href="/#contact" class="btn-p">Start the conversation</a>
-  <div style="margin-top:18px;"><a href="" onclick="Calendly.initPopupWidget({url:'https://calendly.com/jason-gainadvisory/30min'});return false;" style="color:rgba(255,255,255,.62);font-size:13px;text-decoration:underline;text-underline-offset:4px;">or book a 30-minute call</a></div>
-</section>
+    <div style="margin-top:clamp(48px,7vw,80px);border-radius:16px;background:#0B1D33;color:#fff;padding:clamp(32px,5vw,56px);text-align:center">
+      <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,34px);line-height:1.1;letter-spacing:-0.015em;color:#fff;margin:0;max-width:24ch;margin-left:auto;margin-right:auto">We do not sell consulting hours. We build commercial engines.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px">
+        <a href="/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#fff;padding:14px 24px;border-radius:6px">Start the conversation</a>
+        <a href="https://calendly.com/jason-gainadvisory/30min" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;border:1px solid rgba(255,255,255,.34);padding:13px 23px;border-radius:6px">Book a 30-minute call</a>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <a href="/" class="logo-wrap logo-dark ft-logo"><span class="logo-word">G<span class="br">[</span><span class="ai">AI</span><span class="br">]</span>N</span></a>
-  <ul class="ft-links">
-    <li><a href="/#pain">The Problem</a></li>
-    <li><a href="/#how">How I Work</a></li>
-    <li><a href="/#who">Who I Serve</a></li>
-    <li><a href="https://app.gtmology.io/" target="_blank" rel="noopener">GTMology</a></li>
-    <li><a href="/#contact">Contact</a></li>
-  </ul>
-  <span class="ft-copy">© 2026 Gain Advisory LLC</span>
-</footer>
+  <footer style="color:#fff;background:#0B1D33">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(48px,7vw,72px) 24px clamp(32px,4vw,44px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;align-items:flex-start">
+      <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.4)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.4)">]</span>N</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+      </a>
+      <div style="display:flex;flex-direction:column;gap:10px;font-family:'Inter',sans-serif;font-size:14px">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px">Briefings</div>
+        <a href="/cco-vs-cro" style="color:rgba(255,255,255,.85)">Fractional CCO vs CRO</a>
+        <a href="/cco-vs-cmo" style="color:rgba(255,255,255,.85)">Fractional CCO vs CMO</a>
+        <a href="/what-gain-advisory-is" style="color:rgba(255,255,255,.85)">What Gain Advisory is (and isn't)</a>
+        <a href="/" style="color:rgba(255,255,255,.85)">Back to home</a>
+      </div>
+    </div>
+    <div style="max-width:1120px;margin:0 auto;padding:0 24px 40px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">© 2026 Gain Advisory LLC · Commercial by Design</div>
+  </footer>
+</div>
 
-<script>
-  const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
-  window.addEventListener('scroll', onScroll); onScroll();
-  const nl = document.getElementById('nl'), hb = document.getElementById('hb');
-  hb.addEventListener('click', () => nl.classList.toggle('open'));
-</script>
 </body>
 </html>
