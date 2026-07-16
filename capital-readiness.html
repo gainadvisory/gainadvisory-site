@@ -14,12 +14,33 @@
   a{color:#1E4FA1;text-decoration:none}
   a:hover{color:#123163}
   ::selection{background:#1E4FA1;color:#fff}
+
   @media(max-width:860px){ .ga-navlinks{display:none !important} }
+  .ga-burger{display:none;position:fixed;right:20px;top:12px;z-index:60;
+    width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    background:transparent;border:0;cursor:pointer;padding:0}
+  .ga-burger-bar{display:block;width:22px;height:2px;background:#0B1D33;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar{background:#fff}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(2){opacity:0}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .ga-mobile-nav{display:none;position:fixed;inset:0;background:#0B1D33;z-index:55;padding:96px 24px 32px;overflow-y:auto}
+  .ga-mobile-nav nav{display:flex;flex-direction:column;gap:4px;max-width:520px;margin:0 auto}
+  .ga-mobile-nav a{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.01em;color:#fff;
+    text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .ga-mobile-nav a:active{color:#5D9BD4}
+  .ga-mobile-cta{margin-top:24px;border-bottom:0 !important;font-size:16px !important;font-family:'Inter',sans-serif !important;
+    font-weight:600 !important;background:#fff;color:#0B1D33 !important;border-radius:6px;padding:15px 22px !important;text-align:center}
+  html.ga-js .ga-burger{display:none}
+  @media(max-width:860px){ html.ga-js .ga-burger{display:flex} .ga-mobile-nav[data-open]{display:block} html.ga-js .ga-header-cta{display:none} }
+  html.ga-nav-open,html.ga-nav-open body{overflow:hidden}
+  @media (prefers-reduced-motion: reduce){ .ga-burger-bar{transition:none} }
 </style>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script>document.documentElement.className+=' ga-js'</script>
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png">
@@ -76,9 +97,11 @@
         <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:22px;color:#0B1D33;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:#5B6B7C">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:#5B6B7C">]</span>N</span>
         <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em">Advisory</span>
       </a>
-      <div class="ga-navlinks" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-family:'Inter',sans-serif;font-size:14px;font-weight:500"><a href="/#method" style="color:#14202F">Method</a><a href="/readiness" style="color:#14202F">Readiness</a><a href="/research" style="color:#14202F">Research</a><a href="/about" style="color:#14202F">About</a><a href="/#close" style="color:#14202F">Contact</a></div><a href="/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
+      <div class="ga-navlinks" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-family:'Inter',sans-serif;font-size:14px;font-weight:500"><a href="/#method" style="color:#14202F">Method</a><a href="/readiness" style="color:#14202F">Readiness</a><a href="/research" style="color:#14202F">Research</a><a href="/about" style="color:#14202F">About</a><a href="/#close" style="color:#14202F">Contact</a></div><a class="ga-header-cta" href="/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
     </nav>
-  </header>
+  </header><button type="button" class="ga-burger" aria-label="Menu" aria-expanded="false" aria-controls="ga-mobile-nav">
+    <span class="ga-burger-bar"></span><span class="ga-burger-bar"></span><span class="ga-burger-bar"></span>
+  </button><div class="ga-mobile-nav" id="ga-mobile-nav" hidden><nav aria-label="Mobile"><a href="/#method">Method</a><a href="/readiness">Readiness</a><a href="/research">Research</a><a href="/about">About</a><a href="/#close">Contact</a><a class="ga-mobile-cta" href="/#close">Start the conversation</a></nav></div>
 <section style="background:#0B1D33;color:#fff">
   <div style="max-width:1080px;margin:0 auto;padding:clamp(56px,8vw,96px) 24px clamp(48px,6vw,72px)">
     <a href="/" style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;text-decoration:none">&#8592; Gain Advisory</a>
@@ -195,5 +218,24 @@
   </footer>
 </div>
 
+<script>
+(function(){
+  var btn = document.querySelector('.ga-burger');
+  var panel = document.getElementById('ga-mobile-nav');
+  if (!btn || !panel) return;
+  panel.hidden = false;                 // JS is running, so the panel can exist
+  function set(open){
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.setAttribute('data-open',''); else panel.removeAttribute('data-open');
+    document.documentElement.classList.toggle('ga-nav-open', open);
+  }
+  set(false);
+  btn.addEventListener('click', function(){ set(btn.getAttribute('aria-expanded') !== 'true'); });
+  panel.addEventListener('click', function(e){ if (e.target.tagName === 'A') set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+  // A resize past the breakpoint must not leave a fixed panel covering desktop.
+  addEventListener('resize', function(){ if (innerWidth > 860) set(false); }, { passive: true });
+})();
+</script>
 </body>
 </html>
