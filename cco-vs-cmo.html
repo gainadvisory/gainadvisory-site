@@ -38,7 +38,31 @@
 <meta name="twitter:description" content="Marketing creates demand. Commercial leadership determines whether demand becomes durable growth. How a CCO aligns product, marketing, sales, and customer success around one commercial truth.">
 <meta name="twitter:image" content="https://gainadvisory.com/assets/og-card.jpg">
 <script defer src="/_vercel/insights/script.js"></script>
-
+<style>
+@media (max-width:599px){ .ga-brk-lg{display:none} }
+/* The evidence table's three fixed "fr" columns can't shrink below their
+   longest word (grid children default to min-width:auto), so on a phone the
+   right-hand column burst out of the card and clipped. Letting these cells
+   shrink makes the text wrap instead.
+   Deliberately scoped to this one table: applying min-width:0 to every grid
+   child regressed the CCO comparison pages, where a column then collapsed to
+   22px and its content overflowed, giving the page a 40px horizontal scroll. */
+[style*="grid-template-columns:1.4fr .7fr 2fr"] > *{min-width:0}
+.ga-x1:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+.ga-x2:hover{color:#fff}
+.ga-x3:hover{color:#fff}
+.ga-x4:hover{color:#fff}
+.ga-x5:hover{color:#fff}
+.ga-x6:hover{color:#fff}
+.ga-x7:hover{color:#fff}
+.ga-x8:hover{color:#fff}
+.ga-x9:hover{color:#fff}
+.ga-x10:hover{color:#fff}
+.ga-x11:hover{color:#fff}
+.ga-x12:hover{color:#fff}
+.ga-x13:hover{color:#fff}
+.ga-x14:hover{color:#fff}
+</style>
 </head>
 <body>
 <div>
@@ -123,19 +147,43 @@
   </article>
 
   <footer style="color:#fff;background:#0B1D33">
-    <div style="max-width:1080px;margin:0 auto;padding:clamp(48px,7vw,72px) 24px clamp(32px,4vw,44px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;align-items:flex-start">
-      <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.4)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.4)">]</span>N</span>
-        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
-      </a>
-      <div style="display:flex;flex-direction:column;gap:10px;font-family:'Inter',sans-serif;font-size:14px">
-        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px">More briefings</div>
-        <a href="/cco-vs-cro" style="color:rgba(255,255,255,.85)">Fractional CCO vs CRO</a>
-        <a href="/what-gain-advisory-is" style="color:rgba(255,255,255,.85)">What Gain Advisory is (and isn't)</a>
-        <a href="/" style="color:rgba(255,255,255,.85)">Back to home</a>
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px clamp(36px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:240px">
+          <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:28px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.4)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.4)">]</span>N</span>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+          </a>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:22px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:12px 0 0">Commercial by Design</p>
+          <a class="ga-x1" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Explore</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x2" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
+            <a class="ga-x3" href="/#journey" style="color:rgba(255,255,255,.85);transition:color .2s">The Journey</a>
+            <a class="ga-x4" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
+            <a class="ga-x5" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x6" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
+            <a class="ga-x7" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
+            <a class="ga-x8" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
+            <a class="ga-x9" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Briefings</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x10" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
+            <a class="ga-x11" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
+            <a class="ga-x12" href="/what-gain-advisory-is" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
+        <span>© 2026 Gain Advisory LLC</span>
+        <span style="display:flex;gap:18px"><a class="ga-x13" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x14" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
       </div>
     </div>
-    <div style="max-width:1080px;margin:0 auto;padding:0 24px 40px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">© 2026 Gain Advisory LLC · Commercial by Design</div>
   </footer>
 </div>
 

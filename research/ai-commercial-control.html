@@ -1,159 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Capability Has Outrun Commercial Control | Gain Advisory Research</title>
-<meta name="description" content="The three questions every GTM leader should be able to answer about AI. Gain Advisory Research Series, Issue #2.">
-<style>
-  :root{
-    --navy:#0B1D33;
-    --navy-2:#12233A;
-    --ink:#12233A;
-    --paper:#FBFBF9;
-    --paper-2:#F1F3F1;
-    --blue:#1E4FA1;
-    --blue-lt:#5D9BD4;
-    --accent:#1E4FA1;
-    --accent-lt:#5D9BD4;
-    --muted:#5B6B7C;
-    --muted-dk:#8FA1B4;
-    --hair:#E3E6E4;
-    --hair-dk:#25415E;
-    --serif:'Syne', system-ui, sans-serif;
-    --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-    --measure:40rem;
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;
-    font-family:var(--sans);
-    color:var(--ink);
-    background:var(--paper);
-    font-size:17px;
-    line-height:1.72;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-
-  /* ---------- Layout ---------- */
-  .spread{padding:clamp(3.5rem,9vw,7rem) 1.5rem}
-  .wrap{max-width:46rem;margin:0 auto}
-  .wrap-wide{max-width:56rem;margin:0 auto}
-  p,.body{max-width:var(--measure)}
-  .spread.dark{background:var(--navy);color:var(--paper)}
-  .spread.dark p{color:#DDE6EF}
-  .rule{height:1px;background:var(--hair);border:0;margin:2.5rem 0}
-  .dark .rule{background:var(--hair-dk)}
-
-  /* ---------- Type ---------- */
-  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.12;letter-spacing:-0.01em;margin:0}
-  .eyebrow{font-family:var(--serif);font-weight:700;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
-  .dark .eyebrow{color:var(--blue-lt)}
-  h2{font-size:clamp(1.7rem,3.6vw,2.35rem);margin:.4rem 0 .3rem}
-  .gap-q{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,2.1vw,1.28rem);color:var(--blue);line-height:1.3;margin:.2rem 0 1.8rem;max-width:38rem}
-  .lead{font-family:var(--serif);font-weight:600;font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.4;letter-spacing:-0.01em;max-width:38rem;margin:0 0 1.5rem}
-  .dark .lead{color:#EAF1F8}
-  p{margin:0 0 1.15rem}
-  strong{font-weight:700}
-  em{font-style:italic}
-
-  /* ---------- Cover ---------- */
-  .cover{min-height:88vh;display:flex;flex-direction:column;justify-content:space-between;background:var(--navy);color:var(--paper);padding:clamp(2.5rem,6vw,4.5rem) 1.5rem}
-  .cover-inner{max-width:56rem;margin:0 auto;width:100%}
-  .cover h1{font-size:clamp(2.5rem,6.4vw,4.4rem);font-weight:800;letter-spacing:-0.02em;line-height:1.04;margin:1.2rem 0 0;max-width:16ch}
-  .cover .subtitle{font-family:var(--sans);font-weight:400;font-size:clamp(1.05rem,2.3vw,1.4rem);color:var(--muted-dk);margin:1.6rem 0 0;max-width:30rem;line-height:1.45}
-  .cover-top,.cover-bottom{max-width:56rem;margin:0 auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-  .series{font-family:var(--serif);font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--blue-lt)}
-  .wordmark{font-family:var(--serif);font-weight:800;letter-spacing:.02em;font-size:1.05rem;color:var(--paper)}
-  .wordmark .ai{color:var(--accent-lt)}
-  .cover-motif{margin:2.6rem 0 0}
-
-  /* ---------- Pull stats ---------- */
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0 0;max-width:52rem}
-  .stat{border-top:2px solid var(--accent);padding-top:.9rem}
-  .stat .num{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,4.4vw,2.9rem);line-height:1;color:var(--navy);letter-spacing:-0.02em}
-  .stat .lab{font-size:.92rem;color:var(--muted);margin-top:.55rem;line-height:1.4}
-  .stat .src{font-size:.78rem;color:var(--muted);opacity:.8;margin-top:.35rem}
-
-  /* ---------- Verdict / inset ---------- */
-  .verdict{border-left:3px solid var(--accent);padding:.2rem 0 .2rem 1.15rem;margin:2rem 0;max-width:38rem}
-  .verdict .k{display:block;font-family:var(--serif);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
-  .verdict p{font-style:italic;font-weight:500;font-size:1.08rem;margin:0;color:var(--ink)}
-  .dark .verdict p{color:#EAF1F8}
-  .dark .verdict{border-left-color:var(--accent-lt)}
-  .dark .verdict .k{color:var(--accent-lt)}
-
-  .inset{background:var(--paper-2);border:1px solid var(--hair);border-radius:10px;padding:1.4rem 1.5rem;margin:2rem 0;max-width:40rem}
-  .inset .tag{font-family:var(--mono);font-weight:500;font-size:.74rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
-  .inset p{margin:.55rem 0 0;font-size:1rem;line-height:1.6}
-  .inset .date{font-family:var(--mono);color:var(--blue)}
-
-  /* ---------- Exhibits ---------- */
-  figure.exhibit{margin:2.6rem auto;max-width:52rem}
-  figure.exhibit svg{width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 1px 3px rgba(11,29,51,.08),0 8px 30px rgba(11,29,51,.06)}
-  .dark figure.exhibit svg{box-shadow:0 1px 3px rgba(0,0,0,.4),0 12px 40px rgba(0,0,0,.35)}
-  figcaption{font-size:.85rem;color:var(--muted);margin-top:.7rem;text-align:center;max-width:40rem;margin-left:auto;margin-right:auto}
-
-  /* ---------- Three questions ---------- */
-  .questions{counter-reset:q;max-width:44rem;margin:2rem auto 0}
-  .q{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;padding:1.7rem 0;border-top:1px solid var(--hair-dk)}
-  .q:first-child{border-top:0}
-  .q .n{font-family:var(--serif);font-weight:800;font-size:clamp(1.6rem,3.4vw,2.3rem);color:var(--accent-lt);line-height:1}
-  .q .k{font-family:var(--serif);font-weight:700;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-lt);display:block;margin-bottom:.35rem}
-  .q .t{font-family:var(--serif);font-weight:600;font-size:clamp(1.1rem,2.1vw,1.35rem);line-height:1.4;color:var(--paper);margin:0}
-
-  /* ---------- Big principle ---------- */
-  .principle{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:1.25;letter-spacing:-0.01em;color:var(--paper);max-width:24ch;margin:1.2rem 0;border-left:4px solid var(--accent-lt);padding-left:1.3rem}
-
-  /* ---------- Methodology ---------- */
-  .method h3{font-family:var(--serif);font-size:1.05rem;color:var(--navy);margin:1.6rem 0 .3rem}
-  .method p{font-size:1rem;color:var(--ink)}
-
-  /* ---------- Close ---------- */
-  .close-line{font-family:var(--mono);font-size:.85rem;letter-spacing:.04em;color:var(--muted-dk);margin-top:2.5rem}
-  a{color:inherit}
-
-  /* ---------- Responsive ---------- */
-  @media (max-width:640px){
-    body{font-size:16px}
-    .stats{grid-template-columns:1fr;gap:1.6rem}
-    .q{grid-template-columns:1fr;gap:.4rem}
-  }
-
-  /* ---------- Print ---------- */
-  @media print{
-    @page{size:A4;margin:18mm 16mm}
-    html,body{background:#fff}
-    body{font-size:10.5pt;line-height:1.5;color:#12233A}
-    a{text-decoration:none}
-    .spread{padding:0;margin:0 0 10mm}
-    .cover{min-height:auto;padding:0 0 12mm;background:#fff;color:#0B1D33}
-    .cover h1{color:#0B1D33}
-    .cover .subtitle{color:#5B6B7C}
-    .series,.q .k{color:#1E4FA1}
-    .wordmark{color:#0B1D33}
-    .spread.dark{background:#fff;color:#12233A;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    .spread.dark p{color:#12233A}
-    .lead,.dark .lead{color:#0B1D33}
-    .principle{color:#0B1D33;border-left-color:#1E4FA1}
-    .q{border-top-color:#E3E6E4;break-inside:avoid}
-    .q .n{color:#1E4FA1}
-    .q .t{color:#12233A}
-    .verdict p,.dark .verdict p{color:#12233A}
-    .cover,.spread{break-inside:avoid}
-    section{break-inside:avoid-page}
-    figure.exhibit{break-inside:avoid;box-shadow:none;max-width:100%}
-    figure.exhibit svg{box-shadow:none;border:1px solid #E3E6E4}
-    h2,h3{break-after:avoid}
-    .lead,.gap-q{break-after:avoid}
-    .stats{break-inside:avoid}
-    .cover-motif{display:none}
-  }
-</style>
-
+<meta name="description" content="The three questions every GTM leader should be able to answer about AI. Issue #2 of the Gain Advisory Research Series: an evidence-led read on the gap between AI capability and commercial control.">
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
@@ -167,106 +18,251 @@
 <meta property="og:site_name" content="Gain Advisory">
 <meta property="og:url" content="https://gainadvisory.com/research/ai-commercial-control">
 <meta property="og:title" content="AI Capability Has Outrun Commercial Control | Gain Advisory Research">
-<meta property="og:description" content="The three questions every GTM leader should be able to answer about AI. Issue #2 of the Gain Advisory Research Series, built on a senior-practitioner corpus and the verified public record.">
+<meta property="og:description" content="The three questions every GTM leader should be able to answer about AI. Gain Advisory Research, Issue #2.">
 <meta property="og:image" content="https://gainadvisory.com/assets/og-research-issue2.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gain Advisory Research, Issue #2: AI Capability Has Outrun Commercial Control.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Capability Has Outrun Commercial Control | Gain Advisory Research">
-<meta name="twitter:description" content="The three questions every GTM leader should be able to answer about AI. Gain Advisory Research, Issue #2.">
+<meta name="twitter:description" content="The three questions every GTM leader should be able to answer about AI.">
 <meta name="twitter:image" content="https://gainadvisory.com/assets/og-research-issue2.jpg">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Report",
-  "headline": "AI Capability Has Outrun Commercial Control",
-  "alternativeHeadline": "The three questions every GTM leader should be able to answer about AI.",
-  "datePublished": "2026-07-13",
-  "author": { "@type": "Person", "name": "Jason Brausewetter" },
-  "publisher": { "@type": "Organization", "name": "Gain Advisory",
-    "logo": { "@type": "ImageObject", "url": "https://gainadvisory.com/assets/apple-touch-icon.png" } },
-  "isPartOf": { "@type": "PublicationIssue", "issueNumber": 2, "name": "Gain Advisory Research Series" },
-  "url": "https://gainadvisory.com/research/ai-commercial-control",
-  "image": "https://gainadvisory.com/assets/og-research-issue2.jpg",
-  "inLanguage": "en"
-}
+{"@context":"https://schema.org","@type":"Report","headline":"AI Capability Has Outrun Commercial Control",
+"alternativeHeadline":"The three questions every GTM leader should be able to answer about AI.",
+"datePublished":"2026-07-13","author":{"@type":"Person","name":"Jason Brausewetter"},
+"publisher":{"@type":"Organization","name":"Gain Advisory","logo":{"@type":"ImageObject","url":"https://gainadvisory.com/assets/apple-touch-icon.png"}},
+"isPartOf":{"@type":"PublicationIssue","issueNumber":2,"name":"Gain Advisory Research Series"},
+"url":"https://gainadvisory.com/research/ai-commercial-control","image":"https://gainadvisory.com/assets/og-research-issue2.jpg","inLanguage":"en"}
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
-
 <style>
-  /* Site chrome — values copied from the live gainadvisory-site homepage. */
-  .skip{position:absolute;left:-9999px;top:0;z-index:100;background:#0B1D33;color:#fff;padding:12px 18px;border-radius:0 0 4px 0}
+  /* ==== tokens: identical to the live Gain Advisory site ==== */
+  :root{
+    --navy:#0B1D33; --navy2:#12233A; --ink:#14202F; --body:#3A4654;
+    --muted:#5B6B7C; --faint:#8FA0B4; --steel2:#93A0AD;
+    --blue:#1E4FA1; --blue-dk:#123163; --blue-lt:#5D9BD4;
+    --paper:#FBFBF9; --white:#FFFFFF; --hair:#E2E6EA; --hair2:#EEF0F3;
+    --disp:'Syne',system-ui,sans-serif; --ui:'Inter',system-ui,sans-serif; --dm:'DM Sans',system-ui,sans-serif;
+    --measure:66ch;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:clip;max-width:100%}
+  body{background:var(--paper);color:var(--body);font-family:var(--ui);-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.75}
+  a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-dk)}
+  ::selection{background:var(--blue);color:#fff}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .skip{position:absolute;left:-9999px;top:0;z-index:120;background:var(--navy);color:#fff;padding:12px 18px}
   .skip:focus{left:0}
-  :focus-visible{outline:2px solid #1E4FA1;outline-offset:3px}
 
-  .ga-nav{position:sticky;top:0;z-index:50;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E2E6EA}
+  /* ==== site nav (copied from the live homepage) ==== */
+  .ga-nav{position:sticky;top:0;z-index:60;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--hair)}
   .ga-nav-inner{max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
   .ga-logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none}
-  .ga-wm{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#0B1D33;line-height:1;white-space:nowrap}
-  .ga-br{font-weight:400;color:rgba(30,79,161,.32)}
-  .ga-ai{color:#1E4FA1}
-  .ga-adv{font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em}
-  .ga-logo-light .ga-wm{color:#fff}
-  .ga-logo-light .ga-br{color:rgba(255,255,255,.4)}
-  .ga-logo-light .ga-ai{color:#5D9BD4}
-  .ga-logo-light .ga-adv{color:rgba(255,255,255,.72)}
-  .ga-navlinks{display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-family:'Inter',sans-serif;font-size:14px;font-weight:500}
-  .ga-navlinks a{color:#14202F;text-decoration:none}
-  .ga-navlinks a:hover{color:#1E4FA1}
-  .ga-cta{font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap}
-  .ga-cta:hover{background:#1E4FA1}
-  @media(max-width:860px){ .ga-navlinks{display:none} }
+  .ga-wm{font-family:var(--disp);font-weight:800;letter-spacing:-0.02em;font-size:24px;color:var(--navy);line-height:1;white-space:nowrap}
+  .ga-br{font-weight:400;color:rgba(30,79,161,.32)} .ga-ai{color:var(--blue)}
+  .ga-adv{font-family:var(--dm);font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:.5em;margin-left:.34em}
+  .ga-logo-light .ga-wm{color:#fff}.ga-logo-light .ga-br{color:rgba(255,255,255,.4)}
+  .ga-logo-light .ga-ai{color:var(--blue-lt)}.ga-logo-light .ga-adv{color:rgba(255,255,255,.72)}
+  .ga-navlinks{display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-size:14px;font-weight:500}
+  .ga-navlinks a{color:var(--ink)}
+  .ga-cta{font-weight:600;font-size:14px;color:#fff;background:var(--navy);padding:10px 18px;border-radius:6px;white-space:nowrap}
+  .ga-cta:hover{background:var(--blue);color:#fff}
+  @media(max-width:900px){.ga-navlinks{display:none}}
 
-  .ga-foot{position:relative;color:#fff;background-color:#5a4028;overflow:hidden;margin-top:0}
-  .ga-foot-wood{position:absolute;inset:0;background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),url('/assets/wood-wall.jpg');background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),image-set(url('/assets/wood-wall.webp') type('image/webp'),url('/assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center}
-  .ga-foot-inner,.ga-foot-bar{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
-  .ga-foot-inner{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-top:60px;padding-bottom:40px}
-  .ga-foot-tag{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;line-height:1.15;margin:18px 0 6px;color:#fff}
-  .ga-foot-sub{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72);margin:0}
-  .ga-foot-cols{display:flex;gap:56px;flex-wrap:wrap}
-  .ga-foot-h{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72);margin:0 0 12px}
-  .ga-foot-cols a{display:block;font-family:'Inter',sans-serif;font-size:14px;color:#fff;text-decoration:none;margin-bottom:8px;opacity:.92}
-  .ga-foot-cols a:hover{color:#5D9BD4}
-  .ga-foot-bar{border-top:1px solid rgba(255,255,255,.18);padding-top:20px;padding-bottom:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.75)}
-  .ga-foot-bar a{color:rgba(255,255,255,.75)}
-  .ga-foot-bar a:hover{color:#fff}
+  /* ==== reading progress ==== */
+  .prog{position:fixed;top:68px;left:0;height:2px;width:100%;z-index:59;background:transparent;pointer-events:none}
+  .prog i{display:block;height:100%;width:0;background:var(--blue);transition:width .1s linear}
 
-  /* Exhibits stay legible on small screens: the SVG keeps a readable minimum
-     width and the wrapper pans, rather than shrinking labels to mush. The
-     wrapper must be width-constrained (max-width:100%) or the wide SVG pushes
-     the whole document into horizontal scroll. */
-  /* The pannable exhibit is correctly constrained, but a wide SVG inside an
-     overflow:auto descendant still grows body.scrollWidth. The live site
-     solves the same problem with overflow-x:clip on the page wrapper (clip,
-     not hidden, so position:sticky still works). */
-  html,body{overflow-x:clip;max-width:100%}
+  /* ==== cover ==== */
+  .cover{background:var(--navy);color:#fff;padding:clamp(56px,8vw,96px) 24px clamp(64px,9vw,110px);position:relative;overflow:hidden}
+  .cover-in{max-width:1180px;margin:0 auto}
+  .crumb{font-family:var(--dm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel2);display:flex;gap:10px;align-items:center}
+  .crumb a{color:var(--steel2)} .crumb a:hover{color:#fff}
+  .cover-grid{display:grid;grid-template-columns:1.32fr .68fr;gap:clamp(32px,4vw,56px);align-items:center;margin-top:clamp(40px,5vw,64px)}
+  /* grid children default to min-width:auto and refuse to shrink, so a wide
+     child (the meta row) stretched the column past the viewport and the
+     title clipped under overflow-x:clip. */
+  .cover-grid>*{min-width:0}
+  .kicker{font-family:var(--dm);font-size:12px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--blue-lt)}
+  /* The break is art-directed, not left to the box: two decisive lines on
+     desktop. Auto-wrapping orphaned "Outrun" on its own line. Below 900px the
+     forced break is dropped and the title wraps naturally.
+     The markup keeps a real space BEFORE .brk: display:none removes the break
+     but not a word boundary, so without it the phone renders "OutrunCommercial"
+     as one unbreakable 20-character word that overflows the column. */
+  .cover h1{font-family:var(--disp);font-weight:800;font-size:clamp(1.5rem,3.45vw,2.95rem);line-height:1.06;letter-spacing:-0.028em;color:#fff;margin:20px 0 0;max-width:none}
+  @media(max-width:900px){.cover h1 .brk{display:none}}
+  .cover .sub{font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.5;color:#AEBED0;margin-top:26px;max-width:44ch;font-weight:300}
+  .meta{display:flex;gap:0;margin-top:clamp(36px,5vw,54px);border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
+  .meta div{padding:18px 28px 0 0;margin-right:28px}
+  .meta .k{font-family:var(--dm);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel2);display:block}
+  .meta .v{font-family:var(--disp);font-weight:700;font-size:16px;color:#fff;margin-top:6px;display:block}
+  .motif-wrap svg{width:100%;max-width:560px;height:auto;display:block;margin-left:auto}
+  .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s ease forwards}
+  .draw:nth-of-type(2){animation-delay:.25s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .scroll-cue{margin-top:clamp(40px,6vw,64px);font-family:var(--dm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel2);display:flex;align-items:center;gap:10px}
+  .scroll-cue::after{content:"";width:34px;height:1px;background:var(--steel2)}
+  @media(max-width:900px){.cover-grid{grid-template-columns:1fr;gap:40px;align-items:start}.motif-wrap{order:2}}
 
-  /* Cover H1 clipped on every phone: the report's clamp floors at 2.5rem
-     (40px), so "Commercial" rendered 391px wide inside a ~342px column and
-     the clip hid it. Same defect class the designer fixed on the homepage
-     H1 (floor wins, never scales down). Lower the floor and let it scale;
-     desktop is unchanged (4.4rem cap). Typography only, no copy touched. */
-  .cover h1{font-size:clamp(1.85rem,7.4vw,4.4rem)}
-  .figure-scroll{max-width:100%;min-width:0}
-  figure{min-width:0;max-width:100%}
-  @media(max-width:640px){
-    .figure-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;
-      /* hint that it pans, and keep the scrollbar unobtrusive */
-      scrollbar-width:thin;padding-bottom:4px}
-    .figure-scroll > svg{min-width:520px;width:520px;max-width:none}
+  /* ==== utility bar ==== */
+  .util{border-bottom:1px solid var(--hair);background:var(--paper);position:sticky;top:68px;z-index:40}
+  .util-in{max-width:1180px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .util a,.util button{font-family:var(--dm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;font-weight:500}
+  .util a:hover,.util button:hover{color:var(--blue)}
+  .util-r{display:flex;gap:24px;align-items:center}
+  @media print{.util,.prog,.ga-nav,.toc,.scroll-cue{display:none!important}}
+
+  /* ==== layout: sticky TOC + article ==== */
+  .shell{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:210px 1fr;gap:clamp(32px,5vw,80px);align-items:start}
+  /* Without this the article column sizes to min-content, and the exhibit SVGs
+     (min-width:560px, meant to pan inside .ex-scroll) drag the whole column to
+     560px. Every scene then inherits 560px at a 375px viewport and the body
+     copy is silently clipped by the overflow-x:clip on body. */
+  .shell>*{min-width:0}
+  .toc{position:sticky;top:150px;padding:clamp(64px,8vw,110px) 0 0}
+  .toc-h{font-family:var(--dm);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+  .toc a{display:block;font-size:13.5px;line-height:1.4;color:var(--muted);padding:7px 0 7px 14px;border-left:2px solid var(--hair);transition:color .2s,border-color .2s}
+  .toc a:hover{color:var(--ink)}
+  .toc a.on{color:var(--blue);border-left-color:var(--blue);font-weight:600}
+  @media(max-width:1040px){.shell{grid-template-columns:1fr}.toc{display:none}}
+
+  /* ==== scenes ==== */
+  .scene{padding:clamp(72px,10vw,150px) 0;border-top:1px solid transparent}
+  .scene:first-of-type{padding-top:clamp(56px,7vw,96px)}
+  .eyebrow{font-family:var(--dm);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--blue)}
+  h2{font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,3.4vw,2.9rem);line-height:1.08;letter-spacing:-0.02em;color:var(--ink);margin:20px 0 0;max-width:20ch}
+  h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.1rem,1.9vw,1.35rem);color:var(--ink);margin:2.8rem 0 .5rem}
+  .q-line{font-family:var(--disp);font-weight:600;font-size:clamp(1.05rem,1.9vw,1.3rem);line-height:1.4;color:var(--blue);margin-top:18px;max-width:34ch}
+  .lead{font-size:clamp(1.1rem,1.7vw,1.3rem);line-height:1.62;color:var(--body);margin-top:26px;max-width:48ch;font-weight:300}
+  .scene p{max-width:var(--measure);margin-top:1.5rem}
+  .scene p strong{color:var(--ink);font-weight:600}
+  .note{font-size:.95rem;color:var(--muted);max-width:56ch}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,44px);margin-top:clamp(40px,5vw,64px)}
+  .stat{border-top:2px solid var(--blue);padding-top:20px}
+  .stat .n{font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.6rem);color:var(--navy);line-height:1;letter-spacing:-0.02em}
+  .stat .l{font-size:14.5px;line-height:1.5;color:var(--body);margin-top:12px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:8px}
+  @media(max-width:720px){.stats{grid-template-columns:1fr;gap:28px}}
+
+  /* dark scene */
+  .dark-scene{background:var(--navy);color:#AEBED0;padding:clamp(72px,10vw,150px) 24px;margin-top:clamp(72px,10vw,150px)}
+  .dark-in{max-width:1180px;margin:0 auto}
+  .dark-scene h2{color:#fff}
+  .dark-scene .eyebrow{color:var(--blue-lt)}
+  .dark-scene p{color:#AEBED0;max-width:var(--measure);margin-top:1.5rem}
+  .dark-scene p strong{color:#fff}
+  .dark-scene .lead{color:#C9D6E4}
+  .dark-scene .note{color:var(--steel2)}
+
+  /* inset + verdict */
+  .inset{background:var(--hair2);border-radius:12px;padding:clamp(24px,3vw,34px);margin:2.6rem 0 0;max-width:var(--measure)}
+  .inset .tag{font-family:var(--dm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .inset .tag .date{color:var(--blue)}
+  .inset p{margin-top:14px;font-size:15.5px;color:var(--body)}
+  .verdict{border-left:2px solid var(--blue);padding:4px 0 4px 22px;margin:2.8rem 0 0;max-width:var(--measure)}
+  .verdict .k{font-family:var(--dm);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:500}
+  .verdict p{margin-top:10px;font-style:italic;color:var(--ink);font-size:16.5px}
+  .dark-scene .verdict p{color:#fff}
+
+  /* exhibits */
+  figure.ex{margin:clamp(44px,6vw,80px) 0 0}
+  .ex-scroll{max-width:100%;min-width:0}
+  figure.ex svg{width:100%;height:auto;display:block;border-radius:10px}
+  figcaption{font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:16px;max-width:60ch}
+  .dark-scene figcaption{color:var(--steel2)}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:680px){
+    .ex-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:6px}
+    .ex-scroll>svg{min-width:560px;width:560px;max-width:none}
+    .ex-hint{font-family:var(--dm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:8px}
   }
-  @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important;scroll-behavior:auto!important} }
+  @media(min-width:681px){.ex-hint{display:none}}
 
+  /* THE signature quote */
+  .principle{background:var(--navy);padding:clamp(90px,14vw,200px) 24px;text-align:center;position:relative}
+  .principle-in{max-width:1180px;margin:0 auto}
+  .principle .mark{width:56px;height:1px;background:var(--blue-lt);margin:0 auto clamp(36px,5vw,56px)}
+  .principle blockquote{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,5vw,4rem);line-height:1.12;letter-spacing:-0.03em;color:#fff;max-width:17ch;margin:0 auto}
+  .principle blockquote .b{color:var(--blue-lt);display:block}
+  .principle .attr{font-family:var(--dm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel2);margin-top:clamp(36px,5vw,56px)}
+
+  /* three questions */
+  .qs{margin-top:clamp(44px,6vw,72px);border-top:1px solid rgba(255,255,255,.16)}
+  .qrow{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,40px);padding:clamp(28px,4vw,44px) 0;border-bottom:1px solid rgba(255,255,255,.16);align-items:start}
+  .qn{font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--blue-lt);line-height:1;opacity:.55}
+  .qk{font-family:var(--dm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-lt)}
+  .qt{font-family:var(--disp);font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);line-height:1.32;color:#fff;margin-top:10px;max-width:44ch}
+
+  /* method */
+  .method{background:var(--white);border-top:1px solid var(--hair);padding:clamp(72px,10vw,140px) 24px}
+  .method-in{max-width:1180px;margin:0 auto}
+  .method h3{margin-top:2.4rem}
+  .method p{max-width:var(--measure);margin-top:.9rem}
+
+  /* close */
+  .close{background:var(--navy);color:#AEBED0;padding:clamp(72px,10vw,150px) 24px}
+  .close-in{max-width:1180px;margin:0 auto}
+  .close h2{color:#fff}
+  .close .eyebrow{color:var(--blue-lt)}
+  .close p{color:#AEBED0;max-width:var(--measure);margin-top:1.5rem}
+  .close .reprise{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.25;color:#fff;margin-top:3rem;max-width:24ch;letter-spacing:-0.015em}
+  .close-cta{margin-top:3rem;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .btn{font-family:var(--ui);font-weight:600;font-size:15px;padding:14px 24px;border-radius:6px;display:inline-flex;align-items:center;gap:9px}
+  .btn-p{background:#fff;color:var(--navy)} .btn-p:hover{background:var(--blue-lt);color:var(--navy)}
+  .btn-g{border:1px solid rgba(255,255,255,.3);color:#fff} .btn-g:hover{border-color:#fff;color:#fff}
+  .colophon{margin-top:clamp(48px,6vw,72px);padding-top:22px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--dm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel2)}
+
+  /* related */
+  .related{background:var(--paper);padding:clamp(64px,8vw,110px) 24px;border-top:1px solid var(--hair)}
+  .rel-in{max-width:1180px;margin:0 auto}
+  .rel-h{font-family:var(--dm);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--hair)}
+  .rel-row{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,4vw,48px);padding:30px 0;border-bottom:1px solid var(--hair);align-items:center}
+  .rel-no{font-family:var(--disp);font-weight:800;font-size:1.6rem;color:var(--hair)}
+  .rel-row h4{font-family:var(--disp);font-weight:700;font-size:clamp(1.05rem,1.8vw,1.35rem);color:var(--navy);margin:0}
+  .rel-row p{font-size:14.5px;color:var(--body);margin:6px 0 0;max-width:60ch}
+  .rel-go{font-family:var(--dm);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+  @media(max-width:720px){.rel-row{grid-template-columns:1fr;gap:8px}}
+
+  /* footer: shared, lifted verbatim from the built donor page */
+  .ga-x1:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+  .ga-x2:hover{color:#fff}
+  .ga-x3:hover{color:#fff}
+  .ga-x4:hover{color:#fff}
+  .ga-x5:hover{color:#fff}
+  .ga-x6:hover{color:#fff}
+  .ga-x7:hover{color:#fff}
+  .ga-x8:hover{color:#fff}
+  .ga-x9:hover{color:#fff}
+  .ga-x10:hover{color:#fff}
+  .ga-x11:hover{color:#fff}
+  .ga-x12:hover{color:#fff}
+  .ga-x13:hover{color:#fff}
+  .ga-x14:hover{color:#fff}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    .draw{stroke-dashoffset:0!important;animation:none!important}
+  }
   @media print{
-    .ga-nav,.ga-foot,.skip,.ga-cta{display:none!important}
-    a[href^="/"]:after{content:""}
+    body{font-size:11pt;background:#fff}
+    .cover,.dark-scene,.principle,.close{background:#fff!important;color:#000!important}
+    .cover h1,.dark-scene h2,.principle blockquote,.close h2{color:#000!important}
+    .dark-scene p,.close p{color:#222!important}
+    .ga-foot,.related,.close-cta{display:none!important}
+    .scene,.dark-scene{padding:18pt 0!important;break-inside:avoid}
+    figure.ex{break-inside:avoid}
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#report">Skip to the report</a>
 
-<a class="skip" href="#report">Skip to report</a>
 <header class="ga-nav">
   <nav class="ga-nav-inner" aria-label="Primary">
     <a href="/" class="ga-logo" aria-label="Gain Advisory home">
@@ -274,129 +270,156 @@
       <span class="ga-adv">Advisory</span>
     </a>
     <div class="ga-navlinks">
-      <a href="/research">Research</a>
-      <a href="/#method">The Method</a>
-      <a href="/#journey">The Journey</a>
-      <a href="/#proof">Track Record</a>
-      <a href="/engagements">Engagements</a>
+      <a href="/research">Research</a><a href="/#method">The Method</a><a href="/#journey">The Journey</a>
+      <a href="/#proof">Track Record</a><a href="/engagements">Engagements</a>
     </div>
-    <a href="/#close" class="ga-cta">Start the conversation</a>
+    <!-- No header CTA on research pages (Jason, 2026-07-16). The reader came to
+         read; the offer belongs at the end of the piece, not in the furniture. -->
   </nav>
 </header>
+<div class="prog" aria-hidden="true"><i id="progbar"></i></div>
 
-<!-- ================= COVER ================= -->
+<!-- ============ COVER ============ -->
 <header class="cover">
-  <div class="cover-top">
-    <span class="series">Gain Advisory Research Series &nbsp;&middot;&nbsp; Issue #2</span>
-    
-  </div>
+  <div class="cover-in">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/research">Research</a><span aria-hidden="true">/</span><span>Issue #2</span>
+    </nav>
 
-  <div class="cover-inner">
-    <p class="eyebrow" style="color:var(--blue-lt)">Commercial Intelligence</p>
-    <h1>AI Capability Has Outrun Commercial Control</h1>
-    <p class="subtitle">The three questions every GTM leader should be able to answer about AI.</p>
-
-    <div class="cover-motif" aria-hidden="true">
-      <svg viewBox="0 -10 560 145" width="100%" style="max-width:560px;height:auto;display:block" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 112 C160 112 300 40 560 8" fill="none" stroke="#5D9BD4" stroke-width="2.5"/>
-        <path d="M0 112 C200 108 380 96 560 78" fill="none" stroke="#1E4FA1" stroke-width="2.5"/>
+    <div class="cover-grid">
+      <div>
+        <p class="kicker">Commercial Intelligence</p>
+        <h1>AI Capability Has Outrun <br class="brk">Commercial Control</h1>
+        <p class="sub">The three questions every GTM leader should be able to answer about AI.</p>
+        <div class="meta">
+          <div><span class="k">Issue</span><span class="v">No. 02</span></div>
+          <div><span class="k">Published</span><span class="v">July 2026</span></div>
+          <div><span class="k">Reading time</span><span class="v">12 minutes</span></div>
+          <div><span class="k">Series</span><span class="v">Gain Advisory Research</span></div>
+        </div>
+        <p class="scroll-cue">Begin reading</p>
+      </div>
+      <div class="motif-wrap"><svg viewBox="0 -12 560 150" width="100%" style="max-width:560px;height:auto;display:block" xmlns="http://www.w3.org/2000/svg">
+        <path pathLength="1" class="draw" d="M0 112 C160 112 300 40 560 8" fill="none" stroke="#5D9BD4" stroke-width="2.5"/>
+        <path pathLength="1" class="draw" d="M0 112 C200 108 380 96 560 78" fill="none" stroke="#93A0AD" stroke-width="2.5"/>
         <text x="452" y="4" fill="#5D9BD4" font-family="Inter,sans-serif" font-size="12" font-weight="600">Capability</text>
-        <text x="470" y="98" fill="#5D9BD4" font-family="Inter,sans-serif" font-size="12" font-weight="600">Control</text>
-      </svg>
+        <text x="470" y="98" fill="#93A0AD" font-family="Inter,sans-serif" font-size="12" font-weight="600">Control</text>
+      </svg></div>
     </div>
-  </div>
-
-  <div class="cover-bottom">
-    <span class="series" style="color:var(--muted-dk)">A commercial intelligence publication</span>
-    <span class="series" style="color:var(--muted-dk)">2026</span>
   </div>
 </header>
 
-<!-- ================= EXECUTIVE SUMMARY ================= -->
-<section class="spread" aria-labelledby="sum-h">
-  <div class="wrap">
-    <p class="eyebrow">Executive Summary</p>
-    <h2 id="sum-h">The gap between what AI can do and what we can control.</h2>
-
-    <div class="stats" role="list">
-      <div class="stat" role="listitem">
-        <div class="num">None of 3</div>
-        <div class="lab">leading AI cost tools we tested connect spend to a revenue outcome.</div>
-      </div>
-      <div class="stat" role="listitem">
-        <div class="num">78%</div>
-        <div class="lab">of finance executives cannot fully tie AI spend to outcomes.</div>
-        <div class="src">Vendor-commissioned survey; directional.</div>
-      </div>
-      <div class="stat" role="listitem">
-        <div class="num">~1 in 5</div>
-        <div class="lab">vendors in a 90-company AI-GTM universe absorbed by a larger platform in 18 months.</div>
-      </div>
+<!-- ============ UTILITY ============ -->
+<div class="util">
+  <div class="util-in">
+    <a href="/research">&larr; Back to Research</a>
+    <div class="util-r">
+      <button type="button" id="share">Share</button>
+      <button type="button" onclick="window.print()">Print</button>
     </div>
-
-    <hr class="rule">
-
-    <p>Go-to-market organizations have deployed AI faster than they have built the ability to control it. This is not a report about whether AI works. It is a report about the distance between two speeds: how quickly an organization can switch on a new AI capability, and how slowly it can answer three much older management questions about that capability.</p>
-    <p>We define commercial control as an organization's ability to govern what AI can access, verify what it produces, and connect what it costs to the outcomes it delivers. Across every organization studied for this report, capability had raced ahead of all three.</p>
-    <p>The finding rests on three independent bodies of evidence, cross-checked against one another: an anonymized corpus of senior go-to-market practitioners, a bounded refresh of the public record, and direct product testing of the leading AI governance and cost tools. None was designed to agree with the others. All three surfaced the same three gaps.</p>
-    <p>The sharpest evidence is not an opinion and not a survey. When we tested the three leading AI cost-management platforms directly, none connected AI spend to a specific account, opportunity, or revenue outcome as a shipped capability. And the most resourced AI companies in the world describe the same three gaps in their own operations, on the record. If Microsoft, Salesforce, and Google have not closed these gaps with their resources, no go-to-market organization should assume the market will close them on its own.</p>
-    <p>The three gaps compound. An organization cannot trust the cost data it has not governed, and cannot govern access it has not verified. This report names the gaps, shows the evidence, and closes with three questions any leader should be able to answer today. Those who can have commercial control over their AI. The rest are not behind on adoption. They are behind on the second, quieter half of the same work.</p>
   </div>
-</section>
+</div>
 
-<!-- ================= OPENING ================= -->
-<section class="spread dark" aria-labelledby="open-h">
-  <div class="wrap">
+<div class="shell" id="report">
+  <!-- ============ TOC ============ -->
+  <aside class="toc" aria-label="Table of contents">
+    <p class="toc-h">Contents</p>
+    <nav id="toclist">
+      <a href="#summary">Executive summary</a>
+      <a href="#mismatch">The Maturity Mismatch</a>
+      <a href="#access">1 &nbsp;Access and Governance</a>
+      <a href="#reliability">2 &nbsp;Reliability and Verification</a>
+      <a href="#economics">3 &nbsp;Economics and Accountability</a>
+      <a href="#compound">The Gaps Compound</a>
+      <a href="#questions">Three questions</a>
+      <a href="#method">Methodology</a>
+    </nav>
+  </aside>
+
+  <article>
+    <!-- ============ EXECUTIVE SUMMARY ============ -->
+    <section class="scene" id="summary" aria-labelledby="sum-h">
+      <p class="eyebrow">Executive Summary</p>
+      <h2 id="sum-h">The gap between what AI can do and what we can control.</h2>
+
+      <div class="stats reveal" role="list">
+        <div class="stat" role="listitem">
+          <div class="n">None of 3</div>
+          <div class="l">leading AI cost tools we tested connect spend to a revenue outcome.</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="n">78%</div>
+          <div class="l">of finance executives cannot fully tie AI spend to outcomes.</div>
+          <div class="s">Vendor-commissioned survey; directional.</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="n">~1 in 5</div>
+          <div class="l">vendors in a 90-company AI-GTM universe absorbed by a larger platform in 18 months.</div>
+        </div>
+      </div>
+
+      <p>Go-to-market organizations have deployed AI faster than they have built the ability to control it. This is not a report about whether AI works. It is a report about the distance between two speeds: how quickly an organization can switch on a new AI capability, and how slowly it can answer three much older management questions about that capability.</p>
+      <p>We define commercial control as an organization's ability to govern what AI can access, verify what it produces, and connect what it costs to the outcomes it delivers. Across every organization studied for this report, capability had raced ahead of all three.</p>
+      <p>The finding rests on three independent bodies of evidence, cross-checked against one another: an anonymized corpus of senior go-to-market practitioners, a bounded refresh of the public record, and direct product testing of the leading AI governance and cost tools. None was designed to agree with the others. All three surfaced the same three gaps.</p>
+      <p>The sharpest evidence is not an opinion and not a survey. When we tested the three leading AI cost-management platforms directly, none connected AI spend to a specific account, opportunity, or revenue outcome as a shipped capability. And the most resourced AI companies in the world describe the same three gaps in their own operations, on the record. If Microsoft, Salesforce, and Google have not closed these gaps with their resources, no go-to-market organization should assume the market will close them on its own.</p>
+      <p>The three gaps compound. An organization cannot trust the cost data it has not governed, and cannot govern access it has not verified. This report names the gaps, shows the evidence, and closes with three questions any leader should be able to answer today. Those who can have commercial control over their AI. The rest are not behind on adoption. They are behind on the second, quieter half of the same work.</p>
+    </section>
+  </article>
+</div>
+
+<!-- ============ OPENING (dark) ============ -->
+<section class="dark-scene" id="mismatch" aria-labelledby="open-h">
+  <div class="dark-in">
     <p class="eyebrow">Opening</p>
     <h2 id="open-h">The Maturity Mismatch</h2>
     <p class="lead">An organization can turn on a new AI capability in an afternoon. Building the ability to control it takes much longer, and most have not done it yet.</p>
     <p>Over the past year, go-to-market teams have adopted AI at a pace that would have been hard to imagine two years ago. Adoption is up, tooling is everywhere, and the prevailing story is one of progress. That story is true. This report does not dispute it. It adds a second story that has moved more slowly and drawn far less attention.</p>
     <p><strong>Commercial control is an organization's ability to govern what AI can access, verify what it produces, and connect what it costs to measurable business outcomes.</strong></p>
     <p>Those three abilities lag capability everywhere we looked. Organizations are confident about what their AI can do. They are far less confident about who can reach it, whether they can trust what it produces, and what it is actually costing them against what it returns. We call these the three control gaps, and the rest of this report takes them one at a time before showing why they are one problem rather than three.</p>
-    <p style="color:var(--muted-dk);font-size:.95rem;max-width:38rem">A note on evidence. Where a claim is a verified public fact, it is presented as one. Where it is our reading of the evidence, we say so. That distinction is kept throughout.</p>
+    <p class="note">A note on evidence. Where a claim is a verified public fact, it is presented as one. Where it is our reading of the evidence, we say so. That distinction is kept throughout.</p>
   </div>
 </section>
 
-<!-- ================= GAP ONE ================= -->
-<section class="spread" aria-labelledby="g1-h">
-  <div class="wrap">
-    <p class="eyebrow">Gap One</p>
-    <h2 id="g1-h">Access and Governance</h2>
-    <p class="gap-q">Who and what can the AI reach, once it is connected to the systems that run the business?</p>
+<div class="shell">
+  <div></div>
+  <article>
+    <!-- ============ GAP ONE ============ -->
+    <section class="scene" id="access" aria-labelledby="g1-h">
+      <p class="eyebrow">Gap One</p>
+      <h2 id="g1-h">Access and Governance</h2>
+      <p class="q-line">Who and what can the AI reach, once it is connected to the systems that run the business?</p>
 
-    <p>The most consistently raised issue among senior practitioners was not what AI could do. It was what AI could reach. Operators described being blocked, restricted, or made uneasy by how little control they had over what a tool could see once it was connected to a real business system.</p>
-    <p>One example stood in for many. A consultant could not use an AI file-drive connector on a client engagement, because the connector exposed the entire drive with no way to limit it to a single folder, in direct conflict with the client's data-handling agreement. The problem was not the model. The problem was that access was all-or-nothing.</p>
-    <p>Direct product testing confirmed this as a real and current limitation, not an anecdote. A leading AI assistant's file-drive connector offered only a binary choice: grant access to everything, or grant access to nothing. There was no native way to scope the tool to one folder.</p>
-    <p>Set against that, the picture inside a single well-configured system was more encouraging. At least one major CRM platform already enforces field-level and object-level rules on AI connections, applying the same permissions that govern human users. The gap, in other words, is not primarily inside any one well-run system. It is in the seams between systems. An organization's AI footprint rarely lives in one place. It spans the CRM, a file store, a messaging platform, and a lengthening list of point tools, each governed separately, if at all.</p>
+      <p>The most consistently raised issue among senior practitioners was not what AI could do. It was what AI could reach. Operators described being blocked, restricted, or made uneasy by how little control they had over what a tool could see once it was connected to a real business system.</p>
+      <p>One example stood in for many. A consultant could not use an AI file-drive connector on a client engagement, because the connector exposed the entire drive with no way to limit it to a single folder, in direct conflict with the client's data-handling agreement. The problem was not the model. The problem was that access was all-or-nothing.</p>
+      <p>Direct product testing confirmed this as a real and current limitation, not an anecdote. A leading AI assistant's file-drive connector offered only a binary choice: grant access to everything, or grant access to nothing. There was no native way to scope the tool to one folder.</p>
+      <p>Set against that, the picture inside a single well-configured system was more encouraging. At least one major CRM platform already enforces field-level and object-level rules on AI connections, applying the same permissions that govern human users. The gap, in other words, is not primarily inside any one well-run system. It is in the seams between systems. An organization's AI footprint rarely lives in one place. It spans the CRM, a file store, a messaging platform, and a lengthening list of point tools, each governed separately, if at all.</p>
 
-    <div class="inset">
-      <span class="tag">Verified incident &middot; <span class="date">August 2025</span></span>
-      <p>The Drift product from sales-engagement vendor Salesloft became the entry point for a supply-chain breach in which OAuth tokens tied to its CRM integration were stolen. Cloudflare, a named affected customer, confirmed roughly 104 of its own API tokens were exposed. The cause was a conventional token supply-chain attack, not anything AI-specific, but it is a precise illustration of this gap: a third-party integration with broad, loosely scoped access to a CRM becomes the single point of failure.</p>
-    </div>
+      <div class="inset reveal">
+        <span class="tag">Verified incident &middot; <span class="date">August 2025</span></span>
+        <p>The Drift product from sales-engagement vendor Salesloft became the entry point for a supply-chain breach in which OAuth tokens tied to its CRM integration were stolen. Cloudflare, a named affected customer, confirmed roughly 104 of its own API tokens were exposed. The cause was a conventional token supply-chain attack, not anything AI-specific, but it is a precise illustration of this gap: a third-party integration with broad, loosely scoped access to a CRM becomes the single point of failure.</p>
+      </div>
 
-    <p>There is a pattern worth naming in how organizations respond. Faced with uncertainty about how to govern access precisely, many reach for the blunt instrument, banning a tool outright or mandating a single approved one, rather than configuring the finer controls that, in at least one major platform, already exist. Why reach for the ban? One explanation, which this research raises as an open question rather than a settled finding, is that no single function clearly owns the decision. Security owns the tools that enforce access. RevOps owns the CRM. Individual operators adopt point tools directly, sometimes without telling either. When ownership is unclear, the blunt instrument is the path of least resistance.</p>
+      <p>There is a pattern worth naming in how organizations respond. Faced with uncertainty about how to govern access precisely, many reach for the blunt instrument, banning a tool outright or mandating a single approved one, rather than configuring the finer controls that, in at least one major platform, already exist. Why reach for the ban? One explanation, which this research raises as an open question rather than a settled finding, is that no single function clearly owns the decision. Security owns the tools that enforce access. RevOps owns the CRM. Individual operators adopt point tools directly, sometimes without telling either. When ownership is unclear, the blunt instrument is the path of least resistance.</p>
 
-    <div class="verdict">
-      <span class="k">Where this leaves an executive</span>
-      <p>"We banned the risky tools" and "we have a CRM with permissions" are not the same as "our AI access is under control." Neither addresses the seam between systems where the real exposure sits, and neither answers who is accountable for closing it.</p>
-    </div>
-  </div>
-</section>
+      <div class="verdict">
+        <span class="k">Where this leaves an executive</span>
+        <p>"We banned the risky tools" and "we have a CRM with permissions" are not the same as "our AI access is under control." Neither addresses the seam between systems where the real exposure sits, and neither answers who is accountable for closing it.</p>
+      </div>
+    </section>
 
-<!-- ================= GAP TWO ================= -->
-<section class="spread" aria-labelledby="g2-h">
-  <div class="wrap">
-    <p class="eyebrow">Gap Two</p>
-    <h2 id="g2-h">Reliability and Verification</h2>
-    <p class="gap-q">Can the organization trust the output without a hidden manual tax?</p>
+    <!-- ============ GAP TWO ============ -->
+    <section class="scene" id="reliability" aria-labelledby="g2-h">
+      <p class="eyebrow">Gap Two</p>
+      <h2 id="g2-h">Reliability and Verification</h2>
+      <p class="q-line">Can the organization trust the output without a hidden manual tax?</p>
 
-    <p>The practitioners most enthusiastic about deploying AI were also, consistently, the ones describing the most manual safeguards around it. This is the pattern that defines the second gap: the people closest to the technology trust it the least at face value.</p>
-    <p>One incident captured it. An automated weekly report silently pulled the wrong reporting period's data, and when the discrepancy was noticed and the tool was asked to explain itself, it produced a fabricated explanation rather than acknowledging the error. This was not raised as a rare malfunction. It was raised as the kind of thing that keeps otherwise enthusiastic operators from treating these tools as a dependable core layer without independent checking. The same operators reported reliability degrading as agents were asked to run several workstreams at once, which drove more manual review, not less.</p>
-    <p>The public record corroborates the pattern. Coverage through 2026 frames the moment as a rebuilding period for enterprise AI agents, driven specifically by reliability problems surfacing after early pilots. A survey of roughly 1,300 AI and engineering professionals found quality and accuracy cited as the single largest blocker to moving agents into production.</p>
-    <p>The organizations furthest ahead in adopting AI are, by their own account, also investing the most in checking it. That verification work is an unglamorous operating cost, and it tends to fall informally on whoever is already using the tool rather than being planned or budgeted for. It also sits underneath every optimistic productivity claim made about the same tools.</p>
+      <p>The practitioners most enthusiastic about deploying AI were also, consistently, the ones describing the most manual safeguards around it. This is the pattern that defines the second gap: the people closest to the technology trust it the least at face value.</p>
+      <p>One incident captured it. An automated weekly report silently pulled the wrong reporting period's data, and when the discrepancy was noticed and the tool was asked to explain itself, it produced a fabricated explanation rather than acknowledging the error. This was not raised as a rare malfunction. It was raised as the kind of thing that keeps otherwise enthusiastic operators from treating these tools as a dependable core layer without independent checking. The same operators reported reliability degrading as agents were asked to run several workstreams at once, which drove more manual review, not less.</p>
+      <p>The public record corroborates the pattern. Coverage through 2026 frames the moment as a rebuilding period for enterprise AI agents, driven specifically by reliability problems surfacing after early pilots. A survey of roughly 1,300 AI and engineering professionals found quality and accuracy cited as the single largest blocker to moving agents into production.</p>
+      <p>The organizations furthest ahead in adopting AI are, by their own account, also investing the most in checking it. That verification work is an unglamorous operating cost, and it tends to fall informally on whoever is already using the tool rather than being planned or budgeted for. It also sits underneath every optimistic productivity claim made about the same tools.</p>
 
-    <figure class="exhibit" aria-label="Exhibit B. Consolidation is already here. Roughly one in five vendors in a 90-company AI go-to-market universe was absorbed by a larger platform within about eighteen months, with reliability and observability tools consolidating fastest, three of eight already acquired. A caveat notes the count is directional, not exact.">
-      <div class="figure-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 624" role="img" aria-labelledby="exB-title exB-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+      <figure class="ex reveal" aria-label="Exhibit B. Consolidation is already here. Roughly one in five vendors in a 90-company AI go-to-market universe was absorbed by a larger platform within about eighteen months, with reliability and observability tools consolidating fastest, three of eight already acquired. A caveat notes the count is directional, not exact.">
+        <div class="ex-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 624" role="img" aria-labelledby="exB-title exB-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
   <title id="exB-title">Exhibit B. Consolidation Is Already Here</title>
   <desc id="exB-desc">A grid of 90 dots represents a 90-vendor AI go-to-market universe. Roughly 21 dots are filled to show the vendors already absorbed by a larger platform within about eighteen months, approximately one in five. Reliability and observability tools are consolidating fastest, with 3 of 8 already acquired. A caveat notes that acquired companies leave a searchable footprint while independent ones do not, so the true rate is directional, not exact.</desc>
 
@@ -447,36 +470,35 @@
   <!-- Source -->
   <text x="56" y="608" fill="#5B6B7C" font-size="11.5">Source: Gain Advisory analysis of a 90-vendor AI go-to-market universe, cross-checked against public records, 2026.</text>
 </svg></div>
-      <figcaption>Exhibit B. The tooling meant to supply verification is itself the fastest-consolidating category, a reason not to assume a stable, permanent verification layer yet exists to lean on.</figcaption>
-    </figure>
+        <p class="ex-hint">Scroll the exhibit &rarr;</p>
+        <figcaption>Exhibit B. The tooling meant to supply verification is itself the fastest-consolidating category, a reason not to assume a stable, permanent verification layer yet exists to lean on.</figcaption>
+      </figure>
 
-    <div class="verdict">
-      <span class="k">Where this leaves an executive</span>
-      <p>A tool evaluated on capability alone is priced on only part of its real cost. The unpriced part is the verification required to trust its output.</p>
-    </div>
+      <div class="verdict">
+        <span class="k">Where this leaves an executive</span>
+        <p>A tool evaluated on capability alone is priced on only part of its real cost. The unpriced part is the verification required to trust its output.</p>
+      </div>
 
-    <p style="color:var(--muted);font-size:.95rem;max-width:38rem">One boundary, stated carefully: the rapid consolidation above should not be read as proof of reliability failure. Most of those were premium acquisitions. It is a reason not to assume a settled category of verification tools already exists.</p>
-  </div>
-</section>
+      <p class="note">One boundary, stated carefully: the rapid consolidation above should not be read as proof of reliability failure. Most of those were premium acquisitions. It is a reason not to assume a settled category of verification tools already exists.</p>
+    </section>
 
-<!-- ================= GAP THREE ================= -->
-<section class="spread" aria-labelledby="g3-h">
-  <div class="wrap">
-    <p class="eyebrow">Gap Three &middot; The analytical payoff</p>
-    <h2 id="g3-h">Economics and Accountability</h2>
-    <p class="gap-q">Can AI spend be connected to accounts, pipeline, and revenue outcomes?</p>
+    <!-- ============ GAP THREE ============ -->
+    <section class="scene" id="economics" aria-labelledby="g3-h">
+      <p class="eyebrow">Gap Three &middot; The analytical payoff</p>
+      <h2 id="g3-h">Economics and Accountability</h2>
+      <p class="q-line">Can AI spend be connected to accounts, pipeline, and revenue outcomes?</p>
 
-    <p>This is the analytical center of the report, and the gap where the evidence is strongest.</p>
-    <p>Senior practitioners described AI spend growing large enough to require the CFO's direct involvement, with cost models built alongside finance because usage was accelerating faster than per-unit prices were falling. Some described being caught off guard when a vendor shifted from seat-based to usage-based billing. In the absence of anything better, a few had built their own token-tracking tools by hand.</p>
-    <p>Then we tested the tools directly. Of the three leading AI and cloud cost-management platforms we examined, <strong>none natively attributes AI spend to a specific CRM account, sales opportunity, or revenue outcome as a shipped, ready-to-use capability.</strong> All three are built for engineering and finance-operations buyers, require technical setup, and, with one partial exception offering finance-facing reporting, are not designed for a revenue leader to use directly. This is the most rigorously established finding in the report, because it is a direct product observation rather than an inference from silence.</p>
-    <p>The public record points the same way. A 2026 survey of more than 2,100 senior leaders across twenty countries found AI's shift to usage-based billing actively confusing finance leadership. Separate pricing research shows per-seat software pricing losing meaningful share to usage-based models over roughly the past year.</p>
-    <p>One vendor put a number on it. CloudZero, which sells directly into this problem, published research finding that 78% of finance executives cannot fully tie AI spending to business outcomes. The figure should be read for what it is: vendor-commissioned research, from a company with a direct interest in the gap appearing large, based on a survey that does not disclose an independent pollster, field dates, or margin of error. With that stated plainly, it is a directional data point from the supply side echoing what the practitioner testimony and the product testing had already established independently.</p>
+      <p>This is the analytical center of the report, and the gap where the evidence is strongest.</p>
+      <p>Senior practitioners described AI spend growing large enough to require the CFO's direct involvement, with cost models built alongside finance because usage was accelerating faster than per-unit prices were falling. Some described being caught off guard when a vendor shifted from seat-based to usage-based billing. In the absence of anything better, a few had built their own token-tracking tools by hand.</p>
+      <p>Then we tested the tools directly. Of the three leading AI and cloud cost-management platforms we examined, <strong>none natively attributes AI spend to a specific CRM account, sales opportunity, or revenue outcome as a shipped, ready-to-use capability.</strong> All three are built for engineering and finance-operations buyers, require technical setup, and, with one partial exception offering finance-facing reporting, are not designed for a revenue leader to use directly. This is the most rigorously established finding in the report, because it is a direct product observation rather than an inference from silence.</p>
+      <p>The public record points the same way. A 2026 survey of more than 2,100 senior leaders across twenty countries found AI's shift to usage-based billing actively confusing finance leadership. Separate pricing research shows per-seat software pricing losing meaningful share to usage-based models over roughly the past year.</p>
+      <p>One vendor put a number on it. CloudZero, which sells directly into this problem, published research finding that 78% of finance executives cannot fully tie AI spending to business outcomes. The figure should be read for what it is: vendor-commissioned research, from a company with a direct interest in the gap appearing large, based on a survey that does not disclose an independent pollster, field dates, or margin of error. With that stated plainly, it is a directional data point from the supply side echoing what the practitioner testimony and the product testing had already established independently.</p>
 
-    <h3 style="font-family:var(--serif);font-size:clamp(1.15rem,2.2vw,1.4rem);margin:2.4rem 0 .4rem;color:var(--navy)">What the best-resourced companies admit</h3>
-    <p>The most striking corroboration comes from the companies with the most reason and the most resources to have solved this already. In their own words, on the record, the largest AI operators describe the same three gaps inside their own businesses.</p>
+      <h3>What the best-resourced companies admit</h3>
+      <p>The most striking corroboration comes from the companies with the most reason and the most resources to have solved this already. In their own words, on the record, the largest AI operators describe the same three gaps inside their own businesses.</p>
 
-    <figure class="exhibit" aria-label="Exhibit C. The frontier admits the same three gaps. Microsoft's CEO on access and governance: agents will increasingly need tools for identity, governance, security and more. Salesforce's President and CMO on reliability: ask the same question twice and get two different answers, a probabilistic nondeterministic system. Google's CFO on economics: a strategic commitment to balancing near-term returns with investments in future innovation. Each statement verbatim from an earnings call or investor presentation.">
-      <div class="figure-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 668" role="img" aria-labelledby="exC-title exC-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+      <figure class="ex reveal" aria-label="Exhibit C. The frontier admits the same three gaps. Microsoft's CEO on access and governance: agents will increasingly need tools for identity, governance, security and more. Salesforce's President and CMO on reliability: ask the same question twice and get two different answers, a probabilistic nondeterministic system. Google's CFO on economics: a strategic commitment to balancing near-term returns with investments in future innovation. Each statement verbatim from an earnings call or investor presentation.">
+        <div class="ex-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 668" role="img" aria-labelledby="exC-title exC-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
   <title id="exC-title">Exhibit C. What the Best-Resourced Companies Admit</title>
   <desc id="exC-desc">Three cards, one per gap. Microsoft's CEO on access and governance: agents will increasingly need tools for identity, governance, security and more. Salesforce's President and CMO on reliability: ask the same question twice and get two different answers, a probabilistic nondeterministic system. Google's CFO on economics: a strategic commitment to balancing near-term returns with investments in future innovation. Each statement is verbatim from an earnings call or investor presentation.</desc>
 
@@ -517,31 +539,32 @@
   <!-- Source -->
   <text x="56" y="652" fill="#5B6B7C" font-size="11.5">Source: company earnings calls and investor presentations, 2026, verified word-for-word against the transcript record.</text>
 </svg></div>
-      <figcaption>Exhibit C. Three companies, three gaps, three on-the-record admissions. This is the frontier describing its own operations, not Gain Advisory's opinion and not a vendor's marketing.</figcaption>
-    </figure>
+        <p class="ex-hint">Scroll the exhibit &rarr;</p>
+        <figcaption>Exhibit C. Three companies, three gaps, three on-the-record admissions. This is the frontier describing its own operations, not Gain Advisory's opinion and not a vendor's marketing.</figcaption>
+      </figure>
 
-    <p>On access and governance, Microsoft built an entire control layer to retrofit governance onto agent sprawl, describing agents that "will increasingly need tools for identity, governance, security and more." A control plane for non-human actors is being built now, after the agents arrived, not before. On reliability, Salesforce's President and CMO described the core problem without euphemism: "you ask it the same question, you get 2 different answers. So it's a probabilistic nondeterministic system." On economics, Google's own CFO framed the company's AI investment not as proven return but as forward conviction: "a strategic commitment to balancing near-term returns with investments in future innovation."</p>
+      <p>On access and governance, Microsoft built an entire control layer to retrofit governance onto agent sprawl, describing agents that "will increasingly need tools for identity, governance, security and more." A control plane for non-human actors is being built now, after the agents arrived, not before. On reliability, Salesforce's President and CMO described the core problem without euphemism: "you ask it the same question, you get 2 different answers. So it's a probabilistic nondeterministic system." On economics, Google's own CFO framed the company's AI investment not as proven return but as forward conviction: "a strategic commitment to balancing near-term returns with investments in future innovation."</p>
 
-    <div class="verdict">
-      <span class="k">Where this leaves an executive</span>
-      <p>If the frontier has not closed the gap between AI cost and business outcome with the resources these companies command, waiting quietly for the market to close it for you is not a plan.</p>
-    </div>
+      <div class="verdict">
+        <span class="k">Where this leaves an executive</span>
+        <p>If the frontier has not closed the gap between AI cost and business outcome with the resources these companies command, waiting quietly for the market to close it for you is not a plan.</p>
+      </div>
 
-    <p style="color:var(--muted);font-size:.95rem;max-width:38rem">One boundary, stated deliberately. A confirmed product gap is not the same as confirmed market demand. This report can say the tool connecting AI spend to revenue outcome does not yet exist as a shipped capability in the platforms we tested. It does not claim to know how large or urgent the market for building it would be. That would require direct validation with the leaders who own the budget, which is a next step, not a finding.</p>
-  </div>
-</section>
+      <p class="note">One boundary, stated deliberately. A confirmed product gap is not the same as confirmed market demand. This report can say the tool connecting AI spend to revenue outcome does not yet exist as a shipped capability in the platforms we tested. It does not claim to know how large or urgent the market for building it would be. That would require direct validation with the leaders who own the budget, which is a next step, not a finding.</p>
+    </section>
+  </article>
+</div>
 
-<!-- ================= SYNTHESIS ================= -->
-<section class="spread dark" aria-labelledby="syn-h">
-  <div class="wrap">
+<!-- ============ SYNTHESIS (dark) ============ -->
+<section class="dark-scene" id="compound" aria-labelledby="syn-h">
+  <div class="dark-in">
     <p class="eyebrow">Synthesis</p>
     <h2 id="syn-h">The Gaps Compound</h2>
     <p class="lead">Three gaps, not three purchases. They stack, and each one undermines the layer above it.</p>
     <p>An organization cannot reliably connect AI cost to revenue outcome if it lacks governance visibility into what is being used, by whom, against which accounts. It cannot trust the cost and usage data it does have if the agent behavior producing that data has not itself been verified. Solve economics without governance, and you have built an accountability system on top of ungoverned inputs. Solve governance without reliability, and you are auditing access to a system whose outputs you still cannot fully trust.</p>
-  </div>
 
-  <figure class="exhibit" aria-label="Exhibit A. The three gaps are one system, not a menu. Access and Governance is the foundation. Reliability and Verification rests on it. Economics and Accountability sits at the top. Each layer can only be closed once the layer beneath it is.">
-    <div class="figure-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 580" role="img" aria-labelledby="exA-title exA-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+    <figure class="ex reveal" aria-label="Exhibit A. The three gaps are one system, not a menu. Access and Governance is the foundation. Reliability and Verification rests on it. Economics and Accountability sits at the top. Each layer can only be closed once the layer beneath it is.">
+      <div class="ex-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 580" role="img" aria-labelledby="exA-title exA-desc" font-family="'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
   <title id="exA-title">Exhibit A. The Compounding Gaps</title>
   <desc id="exA-desc">A vertical dependency stack. Access and Governance forms the base. Reliability and Verification rests on it. Economics and Accountability sits at the top. Upward arrows show that each layer depends on the one below, and a caption at each seam shows how the upper layer fails if the lower one is skipped.</desc>
 
@@ -583,58 +606,54 @@
   <!-- Source -->
   <text x="56" y="566" fill="#6E8199" font-size="11.5">Source: Gain Advisory analysis, Issue #2. The dependency runs upward: each gap closes only after the gap beneath it does.</text>
 </svg></div>
-    <figcaption style="color:var(--muted-dk)">Exhibit A. Commercial control is one discipline, read from the foundation up.</figcaption>
-  </figure>
+      <p class="ex-hint">Scroll the exhibit &rarr;</p>
+      <figcaption>Exhibit A. Commercial control is one discipline, read from the foundation up.</figcaption>
+    </figure>
 
-  <div class="wrap">
     <p>This is why commercial control is one discipline in this report, not three line items. And it is why the durable lesson outlasts any single tool, vendor, or model generation.</p>
-    <p class="principle">Capability is bought in a day. Control is earned over quarters.</p>
-    <p>The organizations that internalize that will treat their commercial operations with the same design discipline, verification, and accountability that good teams already apply to product and to code. The gap this report describes is, in the end, the gap between those two levels of rigor.</p>
   </div>
 </section>
 
-<!-- ================= THREE QUESTIONS ================= -->
-<section class="spread dark" aria-labelledby="q-h">
-  <div class="wrap">
+<!-- ============ THE SIGNATURE QUOTE ============ -->
+<section class="principle" aria-label="The principle of this report">
+  <div class="principle-in">
+    <div class="mark" aria-hidden="true"></div>
+    <blockquote>Capability is bought in a day. <span class="b">Control is earned over quarters.</span></blockquote>
+    <p class="attr">The principle of Issue #2</p>
+  </div>
+</section>
+
+<section class="dark-scene" style="margin-top:0;padding-top:clamp(56px,7vw,90px)" aria-label="What the principle implies">
+  <div class="dark-in">
+    <p style="margin-top:0">The organizations that internalize that will treat their commercial operations with the same design discipline, verification, and accountability that good teams already apply to product and to code. The gap this report describes is, in the end, the gap between those two levels of rigor.</p>
+  </div>
+</section>
+
+<!-- ============ THREE QUESTIONS ============ -->
+<section class="dark-scene" id="questions" style="margin-top:0" aria-labelledby="q-h">
+  <div class="dark-in">
     <p class="eyebrow">What This Means for GTM Leaders</p>
     <h2 id="q-h">Three questions. Answerable today.</h2>
-    <p style="max-width:40rem">This report stops short of a prescriptive roadmap. How to close these gaps will vary by size, industry, and existing tooling. So instead of a roadmap, three questions. Any go-to-market leader should be able to answer all three today. In most organizations studied for this report, they could not.</p>
-  </div>
+    <p>This report stops short of a prescriptive roadmap. How to close these gaps will vary by size, industry, and existing tooling. So instead of a roadmap, three questions. Any go-to-market leader should be able to answer all three today. In most organizations studied for this report, they could not.</p>
 
-  <div class="questions">
-    <div class="q">
-      <div class="n">1</div>
-      <div>
-        <span class="k">Access</span>
-        <p class="t">If an AI tool is connected to your CRM, your file storage, or your messaging platform right now, do you know exactly what it can see, and who decided that?</p>
-      </div>
+    <div class="qs">
+      <div class="qrow reveal"><div class="qn">1</div><div><span class="qk">Access</span>
+        <p class="qt">If an AI tool is connected to your CRM, your file storage, or your messaging platform right now, do you know exactly what it can see, and who decided that?</p></div></div>
+      <div class="qrow reveal"><div class="qn">2</div><div><span class="qk">Reliability</span>
+        <p class="qt">When an AI agent produces an account summary, a forecast input, or an outbound message, what is your process for catching it when it is wrong?</p></div></div>
+      <div class="qrow reveal"><div class="qn">3</div><div><span class="qk">Economics</span>
+        <p class="qt">If asked what your organization spent on AI last quarter, could you say which accounts, campaigns, or deals that spend was in service of?</p></div></div>
     </div>
-    <div class="q">
-      <div class="n">2</div>
-      <div>
-        <span class="k">Reliability</span>
-        <p class="t">When an AI agent produces an account summary, a forecast input, or an outbound message, what is your process for catching it when it is wrong?</p>
-      </div>
-    </div>
-    <div class="q">
-      <div class="n">3</div>
-      <div>
-        <span class="k">Economics</span>
-        <p class="t">If asked what your organization spent on AI last quarter, could you say which accounts, campaigns, or deals that spend was in service of?</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="wrap">
-    <p style="margin-top:2.4rem;max-width:40rem">An organization that can answer all three has commercial control over its AI deployment. An organization that cannot is not necessarily behind on adoption. The evidence suggests the opposite is often true: the most aggressive adopters are the most exposed on all three questions. They are behind on the second, less visible half of the same work. That half is the work worth doing next.</p>
+    <p>An organization that can answer all three has commercial control over its AI deployment. An organization that cannot is not necessarily behind on adoption. The evidence suggests the opposite is often true: the most aggressive adopters are the most exposed on all three questions. They are behind on the second, less visible half of the same work. That half is the work worth doing next.</p>
   </div>
 </section>
 
-<!-- ================= METHODOLOGY ================= -->
-<section class="spread method" aria-labelledby="m-h">
-  <div class="wrap">
+<!-- ============ METHODOLOGY ============ -->
+<section class="method" id="method" aria-labelledby="m-h">
+  <div class="method-in">
     <p class="eyebrow">Methodology and Evidence Standard</p>
-    <h2 id="m-h" style="color:var(--navy)">How this report was built.</h2>
+    <h2 id="m-h">How this report was built.</h2>
     <p>This report is built from three sources, cross-checked against one another.</p>
 
     <h3>An anonymized senior-practitioner corpus</h3>
@@ -648,61 +667,140 @@
 
     <h3>Verified, then frozen</h3>
     <p>Every statistic was checked against its original source before publication. Figures that could not be independently verified were corrected or removed. Some proposed findings were tested adversarially and dropped when they did not hold up, including one claim that AI vendors themselves share their customers' gaps, which was investigated and abandoned as unsupported. Public-company statements were verified word-for-word against the earnings-call and filing record before being placed in quotation marks. A full source ledger is available on request.</p>
-
     <p>The report distinguishes throughout between what was directly observed, what is a reasonable inference from it, and what is Gain Advisory's interpretation of what it means. That discipline is the standard for this series.</p>
+
+    <h3>GTMology</h3>
+    <p>The research runs on GTMology, the commercial intelligence engine behind Gain Advisory. It collects signals, normalizes company context, and synthesizes evidence across an account universe. It accelerates the research. The judgment, and the standard above, remain the work.</p>
   </div>
 </section>
 
-<!-- ================= ABOUT / CLOSE ================= -->
-<footer class="spread dark" aria-labelledby="a-h">
-  <div class="wrap">
+<!-- ============ CLOSE ============ -->
+<section class="close" aria-labelledby="a-h">
+  <div class="close-in">
     <p class="eyebrow">About This Series</p>
     <h2 id="a-h">Commercial intelligence for founder-led companies.</h2>
     <p>The Gain Advisory Research Series examines how great commercial organizations will be built and operated. AI is the first domain the series takes up, because it is where the distance between capability and control is currently widest. The method is the point: verify the evidence, freeze it, then build on it.</p>
     <p>Gain Advisory is a commercial intelligence and commercial strategy firm working with founder-led companies. If this report prompted a question about your own organization, a reply is the only call to action here.</p>
 
-    <p class="principle" style="font-size:clamp(1.2rem,2.6vw,1.6rem);margin-top:2.5rem">Capability is bought in a day. Control is earned over quarters.</p>
+    <p class="reprise">Capability is bought in a day. Control is earned over quarters.</p>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:2.5rem;flex-wrap:wrap">
-      
-      <span class="close-line">GTMology by Gain Advisory LLC</span>
+    <div class="close-cta">
+      <a class="btn btn-p" href="/#close">Explore how Gain Advisory builds commercial systems grounded in evidence</a>
+      <a class="btn btn-g" href="/research">All research</a>
+    </div>
+
+    <div class="colophon">
+      <span>Gain Advisory Research Series &middot; Issue #2</span>
+      <span>GTMology by Gain Advisory LLC</span>
     </div>
   </div>
-</footer>
+</section>
 
+<!-- ============ RELATED ============ -->
+<section class="related" aria-labelledby="rel-h">
+  <div class="rel-in">
+    <p class="rel-h" id="rel-h">Related research</p>
+    <a class="rel-row" href="/fintech-readiness">
+      <span class="rel-no">01</span>
+      <span><h4>Fintech Commercial Readiness</h4>
+        <p>The commercial readiness gap in early-stage fintech: where founder-led traction stalls before it becomes a system a team can run and an investor can underwrite.</p></span>
+      <span class="rel-go">Read &rarr;</span>
+    </a>
+  </div>
+</section>
 
-<footer class="ga-foot">
-  <div class="ga-foot-wood" aria-hidden="true"></div>
-  <div class="ga-foot-inner">
-    <div>
-      <a href="/" class="ga-logo ga-logo-light" aria-label="Gain Advisory home">
-        <span class="ga-wm">G<span class="ga-br">[</span><span class="ga-ai">AI</span><span class="ga-br">]</span>N</span>
-        <span class="ga-adv">Advisory</span>
-      </a>
-      <p class="ga-foot-tag">Builder of<br>Commercial Engines.</p>
-      <p class="ga-foot-sub">Commercial by Design</p>
-    </div>
-    <div class="ga-foot-cols">
-      <div>
-        <p class="ga-foot-h">Research</p>
-        <a href="/research">All research</a>
-        <a href="/research/ai-commercial-control">AI Commercial Control</a>
-        <a href="/fintech-readiness">Fintech Commercial Readiness</a>
+<footer style="color:#fff;background:#0B1D33">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px clamp(36px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:240px">
+          <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:28px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.4)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.4)">]</span>N</span>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+          </a>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:22px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:12px 0 0">Commercial by Design</p>
+          <a class="ga-x1" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Explore</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x2" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
+            <a class="ga-x3" href="/#journey" style="color:rgba(255,255,255,.85);transition:color .2s">The Journey</a>
+            <a class="ga-x4" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
+            <a class="ga-x5" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x6" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
+            <a class="ga-x7" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
+            <a class="ga-x8" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
+            <a class="ga-x9" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Briefings</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x10" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
+            <a class="ga-x11" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
+            <a class="ga-x12" href="/what-gain-advisory-is" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
+          </div>
+        </div>
       </div>
-      <div>
-        <p class="ga-foot-h">Explore</p>
-        <a href="/#method">The Method</a>
-        <a href="/#journey">The Journey</a>
-        <a href="/engagements">Engagements</a>
-        <a href="/capital-readiness">Capital Readiness</a>
-        <a href="/#close">Contact</a>
+      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
+        <span>© 2026 Gain Advisory LLC</span>
+        <span style="display:flex;gap:18px"><a class="ga-x13" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x14" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
       </div>
     </div>
-  </div>
-  <div class="ga-foot-bar">
-    <span>&copy; 2026 Gain Advisory LLC</span>
-    <span><a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></span>
-  </div>
-</footer>
+  </footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reading progress */
+  var bar = document.getElementById('progbar');
+  var raf = null;
+  function prog(){
+    raf = null;
+    var h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = (h > 0 ? Math.min(100, Math.max(0, scrollY / h * 100)) : 0) + '%';
+  }
+  addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(prog); }, {passive:true});
+  addEventListener('resize', prog); prog();
+
+  /* exhibits + blocks reveal once */
+  var nodes = [].slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+    nodes.forEach(function(n){ io.observe(n); });
+    addEventListener('load', function(){ setTimeout(function(){ nodes.forEach(function(n){ n.classList.add('in'); }); }, 3000); });
+  } else { nodes.forEach(function(n){ n.classList.add('in'); }); }
+
+  /* TOC active section */
+  var links = [].slice.call(document.querySelectorAll('#toclist a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if ('IntersectionObserver' in window && secs.length){
+    var seen = new Map();
+    var so = new IntersectionObserver(function(es){
+      es.forEach(function(e){ seen.set(e.target.id, e.intersectionRatio); });
+      var best = null, br = 0;
+      seen.forEach(function(r, id){ if(r > br){ br = r; best = id; } });
+      if (best) links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + best); });
+    }, {threshold:[0,.1,.35,.7], rootMargin:'-140px 0px -55% 0px'});
+    secs.forEach(function(s){ so.observe(s); });
+  }
+
+  /* share */
+  var share = document.getElementById('share');
+  share.addEventListener('click', function(){
+    var data = { title: document.title, text: 'Gain Advisory Research, Issue #2', url: location.href };
+    if (navigator.share) { navigator.share(data).catch(function(){}); return; }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(location.href).then(function(){
+        var t = share.textContent; share.textContent = 'Link copied';
+        setTimeout(function(){ share.textContent = t; }, 1800);
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>
