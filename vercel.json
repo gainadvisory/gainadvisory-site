@@ -9,7 +9,7 @@
     },
     {
       "source": "/assessment",
-      "destination": "/capital-readiness",
+      "destination": "/readiness",
       "permanent": true
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "source": "/diagnostic",
-      "destination": "/engagements",
+      "destination": "/readiness",
       "permanent": true
     },
     {
@@ -40,6 +40,11 @@
     {
       "source": "/research/issue-2",
       "destination": "/research/ai-commercial-control",
+      "permanent": true
+    },
+    {
+      "source": "/what-gain-advisory-is",
+      "destination": "/about",
       "permanent": true
     }
   ]

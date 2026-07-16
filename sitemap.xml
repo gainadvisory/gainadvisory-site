@@ -5,10 +5,11 @@
   <url><loc>https://gainadvisory.com/capital-readiness</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gainadvisory.com/cco-vs-cro</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gainadvisory.com/cco-vs-cmo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://gainadvisory.com/what-gain-advisory-is</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gainadvisory.com/fintech-readiness</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://gainadvisory.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://gainadvisory.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://gainadvisory.com/research</loc></url>
   <url><loc>https://gainadvisory.com/research/ai-commercial-control</loc></url>
+  <url><loc>https://gainadvisory.com/readiness</loc></url>
+  <url><loc>https://gainadvisory.com/about</loc></url>
 </urlset>
