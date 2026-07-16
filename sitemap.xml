@@ -9,4 +9,6 @@
   <url><loc>https://gainadvisory.com/fintech-readiness</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://gainadvisory.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://gainadvisory.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://gainadvisory.com/research</loc></url>
+  <url><loc>https://gainadvisory.com/research/ai-commercial-control</loc></url>
 </urlset>
