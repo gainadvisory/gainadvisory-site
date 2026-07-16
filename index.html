@@ -35,6 +35,26 @@
   @media(max-width:860px){ html.ga-js .ga-burger{display:flex} .ga-mobile-nav[data-open]{display:block} html.ga-js .ga-header-cta{display:none} }
   html.ga-nav-open,html.ga-nav-open body{overflow:hidden}
   @media (prefers-reduced-motion: reduce){ .ga-burger-bar{transition:none} }
+
+  /* Below 860px the pinned stepper cannot show the copy: a sticky 100vh stage
+     with overflow:hidden clips ~550px of every beat. Un-pin and stack, which is
+     the same treatment the noscript fallback already uses. */
+  /* Un-pin on width OR height. The pinned stage is a sticky 100vh box with
+     overflow:hidden, so a viewport shorter than the tallest beat silently eats
+     copy. Measured with the approved copy: the tallest beat is 786px, and
+     1366x768 clipped 18px, 1280x720 clipped 66px, 900x700 clipped 169px. Those
+     are ordinary laptops, not edge cases. 840px of height clears 786 with
+     headroom; below that the section stacks and stays readable. */
+  @media(max-width:860px),(max-height:840px){
+    .ga-method{height:auto !important}
+    .ga-method-stage{position:static !important;height:auto !important;overflow:visible !important}
+    .ga-method-stage > div:last-child{min-height:0 !important}
+    .ga-method-stage [data-beat]{position:static !important;opacity:1 !important;transform:none !important;
+      pointer-events:auto !important;padding:0 0 clamp(40px,7vw,64px);border-bottom:1px solid #EEF0F3;margin-bottom:clamp(32px,6vw,52px)}
+    .ga-method-stage [data-beat]:last-child{border-bottom:0;margin-bottom:0}
+    .ga-method-rail,#ga-rail-fill{display:none}
+    .ga-method-ticks{display:none}
+  }
 </style>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
@@ -347,22 +367,22 @@
               <div style="display:flex;align-items:center;gap:clamp(24px,4vw,60px);flex-wrap:wrap">
                 <div style="flex:0 0 auto">
                   <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(88px,13vw,168px);line-height:.8;letter-spacing:-0.03em;color:#0B1D33">D<span style="font-size:.62em;vertical-align:super;color:#1E4FA1">2</span></div>
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">Diagnose + Design</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">D² · Diagnose + Design</div>
                 </div>
                 <div style="flex:1 1 340px;min-width:280px">
                   <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Think</div>
-                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">Understand reality, then design the motion.</h3>
+                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">Understand before you build.</h3><p style="font-family:'Inter',sans-serif;font-size:14px;color:#5B6B7C;margin:6px 0 0;line-height:1.55;max-width:60ch">Most companies do not lack ideas about how to grow. They lack a shared, evidence-based understanding of what is actually working, what is not, and why.</p><p style="font-family:'Inter',sans-serif;font-size:14px;color:#5B6B7C;margin:6px 0 0;line-height:1.55;max-width:60ch">D² brings two disciplines together. Diagnose establishes the commercial truth. Design turns that truth into a commercial architecture the company can test.</p>
                   <div style="display:grid;gap:16px;margin-top:22px">
                     <div style="display:flex;gap:14px;align-items:flex-start">
                       <span style="flex:0 0 auto;width:34px;height:34px;border-radius:7px;background:#0B1D33;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px">D</span>
-                      <div><div style="font-family:'Inter',sans-serif;font-size:16px;color:#14202F"><strong>Diagnose</strong> <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;font-weight:500">→ Commercial Truth</span></div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:3px;line-height:1.5">Understand what is actually true. Who really buys, and why.</div></div>
+                      <div><div style="font-family:'Inter',sans-serif;font-size:16px;color:#14202F"><strong>Diagnose → Commercial Truth</strong></div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;margin-top:3px;line-height:1.5;font-weight:500">Replace commercial assumptions with commercial truth.</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">We examine the business as it operates today, not as the strategy deck describes it.</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">Who actually buys? What problem creates urgency? Why do customers choose you? Where do deals advance, stall, or disappear? Which parts of the motion are repeatable, and which still depend on the founder, individual relationships, or heroic effort?</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">The result is a single source of commercial truth: a clear view of the customer, market, motion, constraints, and opportunities that should govern what gets built next.</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;font-weight:500;margin-top:8px">→ Commercial Truth</div></div>
                     </div>
                     <div style="display:flex;gap:14px;align-items:flex-start">
                       <span style="flex:0 0 auto;width:34px;height:34px;border-radius:7px;background:#0B1D33;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px">D</span>
-                      <div><div style="font-family:'Inter',sans-serif;font-size:16px;color:#14202F"><strong>Design</strong> <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;font-weight:500">→ Commercial Architecture</span></div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:3px;line-height:1.5">Turn that evidence into the motion that fits.</div></div>
+                      <div><div style="font-family:'Inter',sans-serif;font-size:16px;color:#14202F"><strong>Design → Commercial Architecture</strong></div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#14202F;margin-top:3px;line-height:1.5;font-weight:500">Turn what is true into a motion worth testing.</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">Commercial truth becomes commercial architecture.</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">We design the customer strategy, positioning, narrative, routes to market, sales motion, roles, process, economics, and operating cadence as one connected system. Each decision is explicit. Each assumption is visible. Each element is designed to reinforce the others.</div><div style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin-top:6px;line-height:1.55">The result is not a finished playbook pretending to have all the answers. It is an evidence-based blueprint ready to meet the market.</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;font-weight:500;margin-top:8px">→ Commercial Architecture</div></div>
                     </div>
                   </div>
-                  <p style="font-family:'Inter',sans-serif;font-size:14.5px;color:#8FA0B4;margin:20px 0 0;line-height:1.55;max-width:52ch">Two disciplines, one mindset. That is the <strong style="color:#1E4FA1">D²</strong>.</p>
+                  <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#0B1D33;margin:22px 0 0;letter-spacing:-0.01em">Two disciplines. One standard.</p><p style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin:8px 0 0;line-height:1.55;max-width:60ch">Diagnose prevents the company from scaling the wrong assumptions. Design converts what the company has learned into a coherent commercial hypothesis.</p><p style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin:6px 0 0;line-height:1.55;max-width:60ch">That is the <strong style="color:#1E4FA1">D²</strong>: understand what is true, then design what should happen next.</p>
                 </div>
               </div>
             </div>
@@ -372,32 +392,32 @@
               <div style="display:flex;align-items:center;gap:clamp(24px,4vw,60px);flex-wrap:wrap">
                 <div style="flex:0 0 auto">
                   <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(88px,13vw,168px);line-height:.8;letter-spacing:-0.03em;color:#0B1D33">B<span style="font-size:.34em;vertical-align:super;color:#1E4FA1">↻</span></div>
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">Build in the market</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">Build in the Market</div>
                 </div>
                 <div style="flex:1 1 340px;min-width:280px">
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">In the market</div>
-                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">Prove it before you scale it.</h3>
-                  <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);color:#5B6B7C;margin:18px 0 0;line-height:1.6;max-width:50ch">Stand up the motion with real buyers and prove it actually sells. Evidence, not assumptions. The blueprint meets the market.</p>
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;margin-top:20px;font-weight:500">→ Repeatable Motion</div>
-                  <div style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 15px;border:1px solid #E2E6EA;border-radius:999px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B7C">Open the door <span style="color:#1E4FA1">↓</span></div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">In the Market</div>
+                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">Prove the motion before you scale it.</h3>
+                  <p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">A commercial architecture is still a hypothesis until buyers respond to it.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">Build puts the motion into the market. We work inside real opportunities, with real buyers, to test the positioning, narrative, channels, process, roles, and economics under actual selling conditions.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">The objective is not activity for its own sake. It is evidence. We learn what creates engagement, what moves a buyer forward, what breaks under pressure, and what the company can execute consistently.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">Each cycle replaces more assumption with proof. The blueprint becomes a working commercial motion that the company has earned the right to scale.</p>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;margin-top:20px;font-weight:500">→ Repeatable Commercial Motion</div>
+                  <div style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 15px;border:1px solid #E2E6EA;border-radius:999px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B7C">Open the loop <span style="color:#1E4FA1">↓</span></div>
                 </div>
               </div>
             </div>
 
             <!-- BEAT 3 · INSIDE BUILD (loop) -->
             <div class="ga-x30" data-beat="2" style="transition:opacity .55s ease,transform .55s ease">
-              <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Inside Build · the loop</div>
-              <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,34px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em;max-width:24ch">The rigor a product team gives the product, aimed at how you sell.</h3>
-              <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);color:#5B6B7C;margin:16px 0 0;line-height:1.6;max-width:60ch">Build is a loop, not a step. It repeats until the motion is repeatable.</p>
+              <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Inside Build · The Learning Loop</div>
+              <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,34px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em;max-width:24ch">Build is a loop, not a launch.</h3>
+              <p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:64ch">The rigor a product team applies to the product should also be applied to how the company sells.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:64ch">The first version is a Minimum Viable Motion: the smallest complete commercial motion capable of producing meaningful market evidence. It is deliberately built to learn.</p>
               <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px">
                 <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#F2F4F6;border:1px solid #E2E6EA;border-radius:8px;padding:11px 16px">Minimum Viable Motion</span>
                 <span style="color:#8FA0B4;font-size:18px">→</span>
-                <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#F2F4F6;border:1px solid #E2E6EA;border-radius:8px;padding:11px 16px">Commercial Sprint <span style="color:#5B6B7C;font-weight:400">· 2-6 wks</span></span>
+                <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#F2F4F6;border:1px solid #E2E6EA;border-radius:8px;padding:11px 16px">Commercial Sprint <span style="color:#5B6B7C;font-weight:400">· 2 to 6 weeks</span></span>
                 <span style="color:#8FA0B4;font-size:18px">→</span>
-                <span style="display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;border:1px dashed #C7CDD4;border-radius:8px;padding:11px 16px">Measure → Learn → Pivot / Persevere → Refine <span style="color:#1E4FA1;font-weight:700;font-size:17px">↻</span></span>
+                <span style="display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;border:1px dashed #C7CDD4;border-radius:8px;padding:11px 16px">Measure → Learn → Pivot or Persevere → Refine <span style="color:#1E4FA1;font-weight:700;font-size:17px">↻</span></span>
               </div>
-              <p style="font-family:'Inter',sans-serif;font-size:14px;color:#8FA0B4;margin:18px 0 0;line-height:1.55;max-width:66ch">Every Commercial Sprint answers four questions: What did we believe? What happened? What did we learn? What changes next?</p>
-              <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);color:#14202F;margin:20px 0 0;line-height:1.6;max-width:62ch">Prove the selling before you scale the selling. The playbook is always written <span style="color:#1E4FA1;font-weight:600">in pencil, never in pen</span>. A commercial system is designed to learn, not merely to execute.</p>
+              <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33;margin:22px 0 0;letter-spacing:-0.01em">Every sprint must answer four questions.</p><p style="font-family:'Inter',sans-serif;font-size:14.5px;color:#5B6B7C;margin:8px 0 0;line-height:1.6;max-width:64ch">What did we believe? What actually happened? What did we learn? What changes next?</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:64ch">The answers determine what the company keeps, changes, removes, or tests again. With each cycle, the motion becomes clearer, stronger, and more repeatable.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:64ch">This is how commercial knowledge compounds. Insights become decisions. Decisions become operating practices. Operating practices become a system.</p>
+              <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);color:#14202F;margin:20px 0 0;line-height:1.6;max-width:64ch">Commercial architecture is drawn <span style="color:#1E4FA1;font-weight:600">in pencil, never in pen</span>.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:64ch">Markets evolve. Buyers change. Competitors move. Great commercial systems are designed to learn, not merely to execute.</p>
             </div>
 
             <!-- BEAT 4 · TRANSFER -->
@@ -405,13 +425,13 @@
               <div style="display:flex;align-items:center;gap:clamp(24px,4vw,60px);flex-wrap:wrap">
                 <div style="flex:0 0 auto">
                   <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(88px,13vw,168px);line-height:.8;letter-spacing:-0.03em;color:#1E4FA1">T</div>
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">Transfer &amp; institutionalize</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:10px">Transfer + Institutionalize</div>
                 </div>
                 <div style="flex:1 1 340px;min-width:280px">
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">The hand-off</div>
-                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">The engine remains.</h3>
-                  <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);color:#5B6B7C;margin:18px 0 0;line-height:1.6;max-width:52ch">Institutionalize the motion so it no longer depends on any single person. Not a handoff of documents, but a system installed: playbooks, enablement, hiring, dashboards, and one shared commercial truth.</p>
-                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;margin-top:20px;font-weight:500">→ Runs without you</div>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Inside the Company</div>
+                  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.01em">The capability transfers. The system remains.</h3>
+                  <p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">A commercial engine is not complete while it still depends on the person who built it.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">Transfer embeds the proven motion into the company. Strategy, execution, people, data, and decision-making are synchronized around one shared commercial truth.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">The knowledge moves out of individual heads and into the operating system of the business. Playbooks document how the motion works. Enablement builds the team's ability to run it. Hiring profiles define who the system needs. Dashboards make performance visible. Operating cadences turn evidence into decisions.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">This is not a handoff of documents. It is the institutionalization of capability.</p><p style="font-family:'Inter',sans-serif;font-size:clamp(14px,1.4vw,16px);color:#5B6B7C;margin:12px 0 0;line-height:1.6;max-width:58ch">The company does not simply receive a commercial system. It learns how to operate, measure, challenge, and improve it without depending on any single person.</p>
+                  <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#1E4FA1;margin-top:20px;font-weight:500">→ A Commercial Engine the Company Can Run</div>
                 </div>
               </div>
             </div>
@@ -420,7 +440,12 @@
         </div>
       </div>
     </div>
-  </section>
+  <div style="max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) 24px clamp(56px,8vw,96px);border-top:1px solid #EEF0F3">
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3vw,34px);color:#0B1D33;margin:0;letter-spacing:-0.015em">Build the engine. Do not be it.</h3>
+  <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);color:#5B6B7C;margin:14px 0 0;line-height:1.6;max-width:70ch">D²BT moves the company from commercial assumption to commercial truth, from commercial truth to architecture, from architecture to a proven motion, and from a proven motion to an institutional capability.</p>
+  <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);color:#5B6B7C;margin:10px 0 0;line-height:1.6;max-width:70ch">The result is repeatable growth that no longer depends on founder instinct, individual heroics, or an outside advisor remaining in the room.</p>
+</div>
+</section>
 
   <!-- THE JOURNEY -->
   <section id="journey" style="background:#FBFBF9;position:relative;overflow:hidden">
