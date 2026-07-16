@@ -2,11 +2,45 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/platform", "destination": "/#intelligence", "permanent": true },
-    { "source": "/assessment", "destination": "/capital-readiness", "permanent": true },
-    { "source": "/paires", "destination": "/engagements", "permanent": true },
-    { "source": "/diagnostic", "destination": "/engagements", "permanent": true },
-    { "source": "/chat-preview", "destination": "/", "permanent": true },
-    { "source": "/home-v3", "destination": "/", "permanent": true }
+    {
+      "source": "/platform",
+      "destination": "/#intelligence",
+      "permanent": true
+    },
+    {
+      "source": "/assessment",
+      "destination": "/capital-readiness",
+      "permanent": true
+    },
+    {
+      "source": "/paires",
+      "destination": "/engagements",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostic",
+      "destination": "/engagements",
+      "permanent": true
+    },
+    {
+      "source": "/chat-preview",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home-v3",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/insights",
+      "destination": "/research",
+      "permanent": true
+    },
+    {
+      "source": "/research/issue-2",
+      "destination": "/research/ai-commercial-control",
+      "permanent": true
+    }
   ]
 }
