@@ -5,106 +5,84 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Research | Gain Advisory</title>
 <meta name="description" content="The Gain Advisory Research Series. Evidence-led commercial intelligence for founders, CEOs, and commercial leaders. Verified against the public record, then frozen before publication.">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  a{color:#1E4FA1;text-decoration:none}
+  a:hover{color:#123163}
+  ::selection{background:#1E4FA1;color:#fff}
+  h1,h2,h3{text-wrap:balance}
+  p{text-wrap:pretty}
+  @media(max-width:860px){ .ga-navlinks{display:none !important} }
+  @media(max-width:760px){ .ga-issue{grid-template-columns:1fr !important} .ga-build{grid-template-columns:1fr !important} }
+
+  @media(max-width:860px){ .ga-navlinks{display:none !important} }
+  .ga-burger{display:none;position:fixed;right:20px;top:12px;z-index:60;
+    width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    background:transparent;border:0;cursor:pointer;padding:0}
+  .ga-burger-bar{display:block;width:22px;height:2px;background:#0B1D33;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar{background:#fff}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(2){opacity:0}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .ga-mobile-nav{display:none;position:fixed;inset:0;background:#0B1D33;z-index:55;padding:96px 24px 32px;overflow-y:auto}
+  .ga-mobile-nav nav{display:flex;flex-direction:column;gap:4px;max-width:520px;margin:0 auto}
+  .ga-mobile-nav a{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.01em;color:#fff;
+    text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .ga-mobile-nav a:active{color:#5D9BD4}
+  .ga-mobile-cta{margin-top:24px;border-bottom:0 !important;font-size:16px !important;font-family:'Inter',sans-serif !important;
+    font-weight:600 !important;background:#fff;color:#0B1D33 !important;border-radius:6px;padding:15px 22px !important;text-align:center}
+  html.ga-js .ga-burger{display:none}
+  @media(max-width:860px){ html.ga-js .ga-burger{display:flex} .ga-mobile-nav[data-open]{display:block} html.ga-js .ga-header-cta{display:none} }
+  html.ga-nav-open,html.ga-nav-open body{overflow:hidden}
+  @media (prefers-reduced-motion: reduce){ .ga-burger-bar{transition:none} }
+</style>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script>document.documentElement.className+=' ga-js'</script>
+
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
 <link rel="canonical" href="https://gainadvisory.com/research">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gain Advisory">
 <meta property="og:url" content="https://gainadvisory.com/research">
 <meta property="og:title" content="Research | Gain Advisory">
-<meta property="og:description" content="The Gain Advisory Research Series. Evidence-led commercial intelligence, verified against the public record, then frozen before publication.">
+<meta property="og:description" content="The Gain Advisory Research Series. Evidence-led commercial intelligence for founders, CEOs, and commercial leaders. Verified against the public record, then frozen before publication.">
 <meta property="og:image" content="https://gainadvisory.com/assets/og-card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gain Advisory, Builder of Commercial Engines">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Research | Gain Advisory">
-<meta name="twitter:description" content="The Gain Advisory Research Series. Evidence-led commercial intelligence.">
+<meta name="twitter:description" content="The Gain Advisory Research Series. Evidence-led commercial intelligence for founders, CEOs, and commercial leaders. Verified against the public record, then frozen before publication.">
 <meta name="twitter:image" content="https://gainadvisory.com/assets/og-card.jpg">
 <script defer src="/_vercel/insights/script.js"></script>
+<script>document.documentElement.className+=' ga-js'</script>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#FBFBF9;color:#14202F;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:#1E4FA1;text-decoration:none}
-  a:hover{color:#123163}
-  :focus-visible{outline:2px solid #1E4FA1;outline-offset:3px}
-  .skip{position:absolute;left:-9999px;top:0;z-index:100;background:#0B1D33;color:#fff;padding:12px 18px}
-  .skip:focus{left:0}
-
-  /* nav: copied from the live homepage */
-  .ga-nav{position:sticky;top:0;z-index:50;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E2E6EA}
-  .ga-nav-inner{max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-  .ga-logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none}
-  .ga-wm{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#0B1D33;line-height:1;white-space:nowrap}
-  .ga-br{font-weight:400;color:#5B6B7C}
-  .ga-ai{color:#5D9BD4}
-  .ga-adv{font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em}
-  .ga-logo-light .ga-wm{color:#fff}.ga-logo-light .ga-br{color:rgba(255,255,255,.72)}
-  .ga-logo-light .ga-ai{color:#5D9BD4}.ga-logo-light .ga-adv{color:rgba(255,255,255,.72)}
-  .ga-navlinks{display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-size:14px;font-weight:500}
-  .ga-navlinks a{color:#14202F}
-  .ga-cta{font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px;white-space:nowrap}
-  .ga-cta:hover{background:#1E4FA1;color:#fff}
-  @media(max-width:860px){.ga-navlinks{display:none}}
-
-  /* masthead */
-  .mast{background:#0B1D33;color:#fff;padding:clamp(64px,9vw,110px) 24px clamp(56px,7vw,84px)}
-  .wrap{max-width:1180px;margin:0 auto}
-  .eyebrow{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#5D9BD4}
-  .mast h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,6vw,68px);line-height:1.02;letter-spacing:-0.025em;margin:18px 0 0;max-width:16ch}
-  .mast p{font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#AEBED0;margin:22px 0 0;max-width:60ch}
-
-  /* library */
-  .lib{padding:clamp(56px,7vw,96px) 24px}
-  .lib-h{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#5B6B7C;padding-bottom:16px;border-bottom:1px solid #E2E6EA}
-  .issue{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,4vw,56px);align-items:start;padding:clamp(30px,4vw,44px) 0;border-bottom:1px solid #E2E6EA}
-  .issue-no{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,3vw,40px);color:#E2E6EA;line-height:1;letter-spacing:-0.02em}
-  .issue-meta{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5B6B7C;margin-bottom:10px}
-  .issue h2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,30px);line-height:1.14;letter-spacing:-0.015em;margin:0 0 10px}
-  .issue h2 a{color:#0B1D33}
-  .issue h2 a:hover{color:#1E4FA1}
-  .issue p{font-size:15.5px;line-height:1.62;color:#3A4654;max-width:62ch;margin:0}
-  .issue-go{font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;white-space:nowrap;padding-top:4px}
-  .tag{display:inline-block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#1E4FA1;border:1px solid rgba(30,79,161,.28);border-radius:999px;padding:3px 10px;margin-top:14px}
-  @media(max-width:720px){
-    .issue{grid-template-columns:1fr;gap:6px}
-    .issue-no{font-size:22px}
-    .issue-go{padding-top:12px}
-  }
-
-  /* standard note */
-  .note{background:#F1F3F5;border-top:1px solid #E2E6EA;padding:clamp(48px,6vw,80px) 24px}
-  .note-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px)}
-  .note h3{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2vw,25px);letter-spacing:-0.01em;margin:0 0 12px;color:#0B1D33}
-  .note p{font-size:15px;line-height:1.68;color:#3A4654;max-width:56ch}
-  @media(max-width:720px){.note-grid{grid-template-columns:1fr}}
-
-  /* footer: copied from the live homepage */
-  .ga-foot{position:relative;color:#fff;background-color:#5a4028;overflow:hidden}
-  .ga-foot-wood{position:absolute;inset:0;background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),url('/assets/wood-wall.jpg');background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),image-set(url('/assets/wood-wall.webp') type('image/webp'),url('/assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center}
-  .ga-foot-inner,.ga-foot-bar{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
-  .ga-foot-inner{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-top:60px;padding-bottom:40px}
-  .ga-foot-tag{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;line-height:1.15;margin:18px 0 6px;color:#fff}
-  .ga-foot-sub{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72);margin:0}
-  .ga-foot-cols{display:flex;gap:56px;flex-wrap:wrap}
-  .ga-foot-h{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72);margin:0 0 12px}
-  .ga-foot-cols a{display:block;font-size:14px;color:#fff;margin-bottom:8px;opacity:.92}
-  .ga-foot-cols a:hover{color:#5D9BD4}
-  .ga-foot-bar{border-top:1px solid rgba(255,255,255,.18);padding-top:20px;padding-bottom:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.75)}
-  .ga-foot-bar a{color:rgba(255,255,255,.75)}
-  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
-
-  /* shared footer rules (synced) */
-  .ga-x1:hover{color:#fff;border-color:rgba(255,255,255,.5)}
-.ga-x2:hover{color:#fff}
-.ga-x3:hover{color:#fff}
-.ga-x4:hover{color:#fff}
+@media (max-width:599px){ .ga-brk-lg{display:none} }
+/* The evidence table's three fixed "fr" columns can't shrink below their
+   longest word (grid children default to min-width:auto), so on a phone the
+   right-hand column burst out of the card and clipped. Letting these cells
+   shrink makes the text wrap instead.
+   Deliberately scoped to this one table: applying min-width:0 to every grid
+   child regressed the CCO comparison pages, where a column then collapsed to
+   22px and its content overflowed, giving the page a 40px horizontal scroll. */
+[style*="grid-template-columns:1.4fr .7fr 2fr"] > *{min-width:0}
+.ga-x1:hover{background:#123163}
+.ga-x2:hover{border-color:#1E4FA1}
+.ga-x3:hover{border-color:#1E4FA1}
+.ga-x4:hover{border-color:#fff}
 .ga-x5:hover{color:#fff}
 .ga-x6:hover{color:#fff}
 .ga-x7:hover{color:#fff}
@@ -115,108 +93,372 @@
 .ga-x12:hover{color:#fff}
 .ga-x13:hover{color:#fff}
 .ga-x14:hover{color:#fff}
+.ga-x15:hover{color:#fff}
+.ga-x16:hover{color:#fff}
+.ga-x17:hover{color:#fff}
 </style>
+<noscript><style>
+  /* No JS: unwind the pinned stepper so all four beats read as a normal
+     stacked section, and force every animated element visible. */
+  [data-beat]{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:44px}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  [data-draw]{stroke-dashoffset:0!important}
+</style></noscript>
 </head>
 <body>
-<a class="skip" href="#library">Skip to research</a>
+<div style="overflow-x:clip">
+  <header style="position:sticky;top:0;z-index:50;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E2E6EA">
+    <nav style="max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+      <a href="https://www.gainadvisory.com/" style="display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;text-decoration:none">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:23px;color:#0B1D33;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:#5B6B7C">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:#5B6B7C">]</span>N</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em">Advisory</span>
+      </a>
+      <div class="ga-navlinks" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-family:'Inter',sans-serif;font-size:14px;font-weight:500"><a href="/#method" style="color:#14202F">Method</a><a href="/readiness" style="color:#14202F">Readiness</a><a href="/research" style="color:#14202F">Research</a><a href="/about" style="color:#14202F">About</a><a href="/#close" style="color:#14202F">Contact</a></div>
+      <a class="ga-header-cta ga-x1" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
+    </nav>
+  </header><button type="button" class="ga-burger" aria-label="Menu" aria-expanded="false" aria-controls="ga-mobile-nav">
+    <span class="ga-burger-bar"></span><span class="ga-burger-bar"></span><span class="ga-burger-bar"></span>
+  </button><div class="ga-mobile-nav" id="ga-mobile-nav" hidden><nav aria-label="Mobile"><a href="/#method">Method</a><a href="/readiness">Readiness</a><a href="/research">Research</a><a href="/about">About</a><a href="/#close">Contact</a><a class="ga-mobile-cta" href="/#close">Start the conversation</a></nav></div>
 
-<header class="ga-nav">
-  <nav class="ga-nav-inner" aria-label="Primary">
-    <a href="/" class="ga-logo" aria-label="Gain Advisory home">
-      <span class="ga-wm">G<span class="ga-br">[</span><span class="ga-ai">AI</span><span class="ga-br">]</span>N</span>
-      <span class="ga-adv">Advisory</span>
-    </a>
-    <div class="ga-navlinks"><a href="/#method">Method</a><a href="/readiness">Readiness</a><a href="/research">Research</a><a href="/about">About</a><a href="/#close">Contact</a></div>
-  </nav>
-</header>
-
-<section class="mast">
-  <div class="wrap">
-    <p class="eyebrow">Gain Advisory Research Series</p>
-    <h1>Evidence, before opinion.</h1>
-    <p>Commercial intelligence for founders, CEOs, and the boards they answer to. Every issue is built from a senior-practitioner corpus and the verified public record, audited claim by claim, then frozen before publication.</p>
-  </div>
-</section>
-
-<main class="lib" id="library">
-  <div class="wrap">
-    <p class="lib-h">Published</p>
-
-    <article class="issue">
-      <div class="issue-no">02</div>
-      <div>
-        <p class="issue-meta">Issue #2 &nbsp;&middot;&nbsp; July 2026 &nbsp;&middot;&nbsp; 12 min read</p>
-        <h2><a href="/research/ai-commercial-control">AI Capability Has Outrun Commercial Control</a></h2>
-        <p>The three questions every GTM leader should be able to answer about AI. Access and governance, reliability and verification, economics and accountability: three gaps that compound, read against what the best-resourced companies now admit on the record.</p>
-        <span class="tag">AI &amp; Modern GTM</span>
-      </div>
-      <div class="issue-go"><a href="/research/ai-commercial-control">Read &rarr;</a></div>
-    </article>
-
-    <article class="issue">
-      <div class="issue-no">01</div>
-      <div>
-        <p class="issue-meta">Issue #1 &nbsp;&middot;&nbsp; June 2026</p>
-        <h2><a href="/fintech-readiness">Fintech Commercial Readiness</a></h2>
-        <p>The commercial readiness gap in early-stage fintech: where founder-led traction stalls before it becomes a system a team can run and an investor can underwrite.</p>
-        <span class="tag">Fintech</span>
-      </div>
-      <div class="issue-go"><a href="/fintech-readiness">Read &rarr;</a></div>
-    </article>
-  </div>
-</main>
-
-<section class="note">
-  <div class="wrap note-grid">
-    <div>
-      <h3>How this research is built</h3>
-      <p>Each issue draws on an anonymized senior-practitioner corpus, a bounded refresh of the public record, and direct product testing. Claims are verified against preserved sources, then the research is frozen before writing begins. Figures that cannot be defended are not published.</p>
+  <!-- HERO -->
+  <section style="position:relative;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(38px,7vw,84px) 24px clamp(52px,8vw,92px)">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4">Gain Advisory Research Series</div>
+      <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6.4vw,84px);line-height:1.0;letter-spacing:-0.025em;margin:18px 0 0;max-width:14ch">Evidence, before opinion.</h1>
+      <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.7vw,20px);line-height:1.6;color:#AEBED0;margin:26px 0 0;max-width:64ch">Commercial intelligence for founders, CEOs, and the boards they answer to. Every issue is built from a senior-practitioner corpus and the verified public record, audited claim by claim, then frozen before publication.</p>
     </div>
-    <div>
-      <h3>GTMology</h3>
-      <p>The commercial intelligence engine behind Gain Advisory. It collects signals, normalizes company context, and synthesizes evidence so the research rests on what the market is actually doing, not on opinion. The judgment is the work.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer style="color:#fff;background:#0B1D33">
-    <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px clamp(36px,5vw,56px)">
+  <!-- LIBRARY -->
+  <section id="library" style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px 0">
+    <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Published</div>
+    <div style="display:flex;flex-direction:column;gap:20px;margin-top:clamp(24px,3vw,36px)">
+
+      <a href="https://www.gainadvisory.com/research/ai-commercial-control" class="ga-issue ga-x2" style="display:grid;grid-template-columns:120px 1fr;gap:clamp(18px,3vw,40px);align-items:start;background:#fff;border:1px solid #E2E6EA;border-radius:16px;padding:clamp(26px,3.4vw,40px);text-decoration:none">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,6vw,80px);line-height:.85;letter-spacing:-0.03em;color:#DDE3EA">02</div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:#8FA0B4">Issue #2 · July 2026 · 12 min read</div>
+          <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(23px,3vw,36px);line-height:1.08;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0">AI Capability Has Outrun Commercial Control</h2>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#5B6B7C;margin:14px 0 0;max-width:74ch">The three questions every GTM leader should be able to answer about AI. Access and governance, reliability and verification, economics and accountability: three gaps that compound, read against what the best-resourced companies now admit on the record.</p>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap">
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1E4FA1;background:#EDF1F7;border-radius:999px;padding:6px 13px">AI &amp; Modern GTM</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:#1E4FA1">Read &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.gainadvisory.com/fintech-readiness" class="ga-issue ga-x3" style="display:grid;grid-template-columns:120px 1fr;gap:clamp(18px,3vw,40px);align-items:start;background:#fff;border:1px solid #E2E6EA;border-radius:16px;padding:clamp(26px,3.4vw,40px);text-decoration:none">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(48px,6vw,80px);line-height:.85;letter-spacing:-0.03em;color:#DDE3EA">01</div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:#8FA0B4">Issue #1 · June 2026</div>
+          <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(23px,3vw,36px);line-height:1.08;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0">Fintech Commercial Readiness</h2>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#5B6B7C;margin:14px 0 0;max-width:74ch">The commercial readiness gap in early-stage fintech: where founder-led traction stalls before it becomes a system a team can run and an investor can underwrite.</p>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap">
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1E4FA1;background:#EDF1F7;border-radius:999px;padding:6px 13px">Fintech</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:#1E4FA1">Read &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- HOW IT IS BUILT + GTMOLOGY -->
+  <section style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,100px) 24px clamp(64px,9vw,120px)">
+    <div class="ga-build" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)">
+      <div style="background:#fff;border:1px solid #E2E6EA;border-radius:16px;padding:clamp(28px,3.4vw,40px)">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:-0.01em;color:#0B1D33;margin:0">How this research is built</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:16px 0 0">Each issue draws on an anonymized senior-practitioner corpus, a bounded refresh of the public record, and direct product testing. Claims are verified against preserved sources, then the research is frozen before writing begins. Figures that cannot be defended are not published.</p>
+      </div>
+      <div style="background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;border-radius:16px;padding:clamp(28px,3.4vw,40px);color:#fff">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em;color:#fff;margin:0;display:inline-flex;align-items:center;white-space:nowrap"><span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">GTM</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span><svg viewBox="0 0 48 48" style="height:.72em;width:.72em;margin:0 -.01em"><g fill="#5D9BD4"><rect x="20.5" y="1" width="7" height="10" rx="1.6"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(45 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(90 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(135 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(180 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(225 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(270 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(315 24 24)"/></g><circle cx="24" cy="24" r="15.5" fill="#5D9BD4"/><circle cx="24" cy="24" r="6.5" fill="#0B1D33"/></svg>l<svg viewBox="0 0 48 48" style="height:.72em;width:.72em;margin:0 -.01em"><g fill="#5D9BD4"><rect x="20.5" y="1" width="7" height="10" rx="1.6"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(45 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(90 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(135 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(180 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(225 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(270 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(315 24 24)"/></g><circle cx="24" cy="24" r="15.5" fill="#5D9BD4"/><circle cx="24" cy="24" r="6.5" fill="#0B1D33"/></svg>gy</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#AEBED0;margin:16px 0 0">The commercial intelligence engine behind Gain Advisory. It collects signals, normalizes company context, and synthesizes evidence so the research rests on what the market is actually doing, not on opinion. The judgment is the work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="color:#fff;background-color:#5a4028;background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,90px) 24px clamp(32px,5vw,52px)">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
-        <div style="min-width:240px">
-          <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
-            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:28px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span>N</span>
-            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+        <div style="min-width:220px">
+          <a href="https://www.gainadvisory.com/" style="display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;text-decoration:none">
+            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span>N</span>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
           </a>
-          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:22px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
-          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:12px 0 0">Commercial by Design</p>
-          <a class="ga-x1" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:20px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin:12px 0 0">Commercial by Design</p>
+          <a class="ga-x4" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:18px;border:1px solid rgba(255,255,255,.28);border-radius:8px;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.2 2.3-2.46 4.73-2.46 5.06 0 6 3.33 6 7.66V24h-5v-6.85c0-1.63-.03-3.73-2.27-3.73-2.27 0-2.62 1.77-2.62 3.6V24h-5V8z"/></svg></a>
         </div>
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Explore</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Explore</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x2" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
-            <a class="ga-x3" href="/readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Readiness</a>
-            <a class="ga-x4" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
-            <a class="ga-x5" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x6" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
-            <a class="ga-x7" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
-            <a class="ga-x8" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
-            <a class="ga-x9" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
+            <a class="ga-x5" href="https://www.gainadvisory.com/#method" style="color:rgba(255,255,255,.85)">The Method</a>
+            <a class="ga-x6" href="https://www.gainadvisory.com/readiness" style="color:rgba(255,255,255,.85)">Readiness</a>
+            <a class="ga-x7" href="https://www.gainadvisory.com/engagements" style="color:rgba(255,255,255,.85)">Engagements</a>
+            <a class="ga-x8" href="https://www.gainadvisory.com/capital-readiness" style="color:rgba(255,255,255,.85)">Capital Readiness</a>
+            <a class="ga-x9" href="https://www.gainadvisory.com/research" style="color:rgba(255,255,255,.85)">Research</a>
+            <a class="ga-x10" href="https://www.gainadvisory.com/#proof" style="color:rgba(255,255,255,.85)">Track Record</a>
+            <a class="ga-x11" href="https://www.gainadvisory.com/#intelligence" style="color:rgba(255,255,255,.85)">GTMology</a>
+            <a class="ga-x12" href="https://www.gainadvisory.com/#close" style="color:rgba(255,255,255,.85)">Contact</a>
           </div>
         </div>
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Briefings</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Briefings</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x10" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
-            <a class="ga-x11" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
-            <a class="ga-x12" href="/about" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
+            <a class="ga-x13" href="https://www.gainadvisory.com/cco-vs-cro" style="color:rgba(255,255,255,.85)">Fractional CCO vs CRO</a>
+            <a class="ga-x14" href="https://www.gainadvisory.com/cco-vs-cmo" style="color:rgba(255,255,255,.85)">Fractional CCO vs CMO</a>
+            <a class="ga-x15" href="https://www.gainadvisory.com/about" style="color:rgba(255,255,255,.85)">What Gain Advisory is (and isn't)</a>
           </div>
         </div>
       </div>
-      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
-        <span>© 2026 Gain Advisory LLC</span>
-        <span style="display:flex;gap:18px"><a class="ga-x13" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x14" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
+      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.6)">
+        <span>&copy; 2026 Gain Advisory LLC</span>
+        <span style="display:flex;gap:18px"><a class="ga-x16" href="https://www.gainadvisory.com/privacy" style="color:rgba(255,255,255,.6)">Privacy</a><a class="ga-x17" href="https://www.gainadvisory.com/terms" style="color:rgba(255,255,255,.6)">Terms</a></span>
       </div>
     </div>
   </footer>
+</div>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nodes = [].slice.call(document.querySelectorAll('[data-reveal],[data-draw]'));
+  var io = null;
+
+  function reveal(el){
+    if (el.dataset.drawn) return;
+    el.dataset.drawn = '1';
+    if (el.hasAttribute('data-draw')) el.style.strokeDashoffset = '0';
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  }
+
+  /* Method: pinned four-beat scroll stepper */
+  var method = null, methodRaf = null;
+  /* Method chapter-reader. Ported from the design's _initMethod/_updateMethod.
+     The connector fill (scaleX) spans lastActBottom - firstActTop - 0.55*vh so
+     it completes as the last act finishes; the active act is the last one whose
+     top has crossed 40% of the viewport. On the active change it drives the
+     sticky plate: the morphing chapter glyph (data-plate opacity), the Act 0N
+     counter, the plate label and eyebrow, and dims the inactive acts on
+     desktop. Labels/eyebrows are the design's own arrays, injected above. */
+  var method = null;
+  function updateMethod(){
+    var m = method;
+    if (!m || !m.secs || !m.secs.length) return;
+    var line = window.innerHeight * 0.4;
+    var first = m.secs[0].getBoundingClientRect();
+    var last = m.secs[m.secs.length - 1].getBoundingClientRect();
+    var span = last.bottom - first.top - window.innerHeight * 0.55;
+    var p = span > 0 ? (line - first.top) / span : 0;
+    p = Math.max(0, Math.min(1, p));
+    if (m.fill) m.fill.style.transform = 'scaleX(' + p + ')';
+    var beat = 0;
+    m.secs.forEach(function(sec, i){ if (sec.getBoundingClientRect().top <= line) beat = i; });
+    if (beat === m.beat) return;
+    m.beat = beat;
+    var dim = window.innerWidth > 860;
+    m.secs.forEach(function(sec, i){ sec.style.opacity = (!dim || i === beat) ? '1' : '0.34'; });
+    if (m.plates) m.plates.forEach(function(el, i){ el.style.opacity = i === beat ? '1' : '0'; });
+    if (m.num) m.num.textContent = String(beat + 1).padStart(2, '0');
+    if (m.label && m.labels) m.label.innerHTML = m.labels[beat];
+    if (m.eyebrow && m.eyebrows) m.eyebrow.textContent = m.eyebrows[beat];
+    m.ticks.forEach(function(el, i){ el.style.color = (i === beat) ? '#0B1D33' : '#B7B2A6'; });
+  }
+  var methodRaf = null;
+  function onMethodScroll(){
+    if (methodRaf) return;
+    methodRaf = requestAnimationFrame(function(){ methodRaf = null; updateMethod(); });
+  }
+  function initMethod(){
+    var idx = document.querySelector('.ga-method-index');
+    if (!idx) return;
+    method = {
+      secs: [].slice.call(document.querySelectorAll('[data-beat-sec]')),
+      ticks: [].slice.call(document.querySelectorAll('[data-tick]')),
+      plates: [].slice.call(document.querySelectorAll('[data-plate]')),
+      num: document.getElementById('ga-act-num'),
+      label: document.getElementById('ga-plate-label'),
+      eyebrow: document.getElementById('ga-plate-eyebrow'),
+      labels: [],
+      eyebrows: [],
+      fill: document.getElementById('ga-rail-fill'),
+      beat: -1
+    };
+    if (!method.secs.length) return;
+    method.secs.forEach(function(sec){ sec.style.transition = 'opacity .5s ease'; });
+    window.addEventListener('scroll', onMethodScroll, { passive: true });
+    window.addEventListener('resize', onMethodScroll, { passive: true });
+    updateMethod();
+  }
+
+  /* Journey rail. Ported from the design's _updateJourney: the fill tracks a
+     line at 62% of the viewport and each node lights once its midpoint passes. */
+  var journey = null;
+  function updateJourney(){
+    var j = journey;
+    if (!j || !j.track || !j.fill) return;
+    var line = window.innerHeight * 0.62;
+    var rect = j.track.getBoundingClientRect();
+    var ratio = (line - rect.top) / rect.height;
+    ratio = Math.max(0, Math.min(1, ratio));
+    j.fill.style.transform = 'scaleY(' + ratio + ')';
+    j.nodes.forEach(function(n){
+      var nr = n.getBoundingClientRect();
+      var on = nr.top + nr.height / 2 <= line;
+      n.style.background = on ? '#1E4FA1' : '#CBD3DB';
+      n.style.boxShadow = on ? '0 0 0 5px #FBFBF9, 0 0 0 8px rgba(30,79,161,.14)' : '0 0 0 5px #FBFBF9';
+      n.style.transform = on ? 'scale(1.12)' : 'none';
+    });
+  }
+  var journeyRaf = null;
+  function onJourneyScroll(){
+    if (journeyRaf) return;
+    journeyRaf = requestAnimationFrame(function(){ journeyRaf = null; updateJourney(); });
+  }
+
+  function initJourney(){
+    var track = document.getElementById('ga-journey-track');
+    var fill = document.getElementById('ga-journey-fill');
+    if (!track || !fill) return;
+    journey = { track: track, fill: fill, nodes: [].slice.call(document.querySelectorAll('[data-jnode]')) };
+    window.addEventListener('scroll', onJourneyScroll, { passive: true });
+    window.addEventListener('resize', onJourneyScroll, { passive: true });
+    updateJourney();
+  }
+
+  /* Proof stats count-up. Ported from the design's _initCounters/_countUp. The
+     markup renders the final value (content-first), so with JS off or under
+     reduced motion the reader sees $500M+/$6B+ immediately; with motion the
+     value eases from 0 once the stat crosses 50% of the viewport, once. */
+  function countUp(el, instant){
+    var to = parseFloat(el.getAttribute('data-count-to')) || 0;
+    var pre = el.getAttribute('data-count-prefix') || '';
+    var suf = el.getAttribute('data-count-suffix') || '';
+    var isInt = to % 1 === 0;
+    function fmt(v){ return pre + (isInt ? Math.round(v) : v.toFixed(1)) + suf; }
+    if (instant){ el.textContent = fmt(to); return; }
+    var dur = 1150, t0 = null;
+    function step(now){
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * eased);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
+    }
+    requestAnimationFrame(step);
+  }
+  function initCounters(){
+    var els = [].slice.call(document.querySelectorAll('[data-count-to]'));
+    if (!els.length) return;
+    if (reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ countUp(el, true); }); return; }
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    els.forEach(function(el){ cio.observe(el); });
+  }
+
+
+  /* Calendly is lazy-loaded (README: load on interaction/idle, not first
+     paint) so it never taxes initial load. Falls back to a new tab. */
+  var CAL_URL = 'https://calendly.com/jason-gainadvisory/30min';
+  var calLoading = false;
+  function loadCalendly(cb){
+    if (window.Calendly) return cb && cb();
+    if (calLoading) return;
+    calLoading = true;
+    var css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+    var s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.onload = function(){ cb && cb(); };
+    s.onerror = function(){ window.open(CAL_URL, '_blank', 'noopener'); };
+    document.head.appendChild(s);
+  }
+  /* Only warm Calendly on pages that actually offer a booking. The research
+     pages are reply-only, so without this check they would still fetch the
+     Calendly widget on idle: a third-party request on a page with no button. */
+  function hasCalTrigger(){
+    return !!document.querySelector('a[href*="calendly.com"], [onclick*="openCalendly"]');
+  }
+  if (hasCalTrigger()) {
+    if ('requestIdleCallback' in window) requestIdleCallback(function(){ loadCalendly(); }, { timeout: 6000 });
+    else addEventListener('load', function(){ setTimeout(loadCalendly, 3000); });
+  }
+
+  window.openCalendly = function(e){
+    if (e && e.preventDefault) e.preventDefault();
+    if (window.Calendly && window.Calendly.initPopupWidget) { window.Calendly.initPopupWidget({ url: CAL_URL }); return false; }
+    loadCalendly(function(){
+      if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: CAL_URL });
+      else window.open(CAL_URL, '_blank', 'noopener');
+    });
+    return false;
+  };
+
+
+  /* Contact form -> Formspree (same endpoint as the current live site). */
+  var FORM_ENDPOINT = 'https://formspree.io/f/xpqbjpqg';
+  window.sendMessage = function(e){
+    e.preventDefault();
+    var form = e.target;
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    var data = new FormData(form);
+    var who = (data.get('fullname') || '').toString().trim();
+    data.append('_subject', 'Conversation with ' + (who || 'a founder or CEO'));
+    fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+      .then(function(r){
+        if (!r.ok) throw new Error('bad response');
+        var ok = document.createElement('div');
+        ok.setAttribute('role', 'status');
+        ok.setAttribute('style', 'padding:22px 0;font-family:\'Inter\',sans-serif;font-size:16px;line-height:1.6;color:rgba(255,255,255,.72)');
+        ok.innerHTML = '<div style="font-family:\'Syne\',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-bottom:8px">Got it.</div>I will be back to you within one business day.';
+        form.parentNode.replaceChild(ok, form);
+      })
+      .catch(function(){
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        window.alert('Something went wrong. Please email jason@gainadvisory.com or reach out on LinkedIn.');
+      });
+    return false;
+  };
+
+  function boot(){
+    initMethod();
+    initJourney();
+    initCounters();
+    if ('IntersectionObserver' in window){
+      io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+    }
+    if (reduce || !io){ nodes.forEach(reveal); return; }
+    nodes.forEach(function(nd){ io.observe(nd); });
+    setTimeout(function(){ nodes.forEach(reveal); }, 4500);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+<script>
+(function(){
+  var btn = document.querySelector('.ga-burger');
+  var panel = document.getElementById('ga-mobile-nav');
+  if (!btn || !panel) return;
+  panel.hidden = false;                 // JS is running, so the panel can exist
+  function set(open){
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.setAttribute('data-open',''); else panel.removeAttribute('data-open');
+    document.documentElement.classList.toggle('ga-nav-open', open);
+  }
+  set(false);
+  btn.addEventListener('click', function(){ set(btn.getAttribute('aria-expanded') !== 'true'); });
+  panel.addEventListener('click', function(e){ if (e.target.tagName === 'A') set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+  // A resize past the breakpoint must not leave a fixed panel covering desktop.
+  addEventListener('resize', function(){ if (innerWidth > 860) set(false); }, { passive: true });
+})();
+</script>
 </body>
 </html>

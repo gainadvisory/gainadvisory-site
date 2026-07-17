@@ -50,7 +50,7 @@
    child regressed the CCO comparison pages, where a column then collapsed to
    22px and its content overflowed, giving the page a 40px horizontal scroll. */
 [style*="grid-template-columns:1.4fr .7fr 2fr"] > *{min-width:0}
-.ga-x12:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+.ga-x12:hover{border-color:#fff}
 .ga-x13:hover{color:#fff}
 .ga-x14:hover{color:#fff}
 .ga-x15:hover{color:#fff}
@@ -68,8 +68,6 @@
 <noscript><style>
   /* No JS: unwind the pinned stepper so all four beats read as a normal
      stacked section, and force every animated element visible. */
-  .ga-method{height:auto!important}
-  .ga-method-stage{position:static!important;height:auto!important;overflow:visible!important}
   [data-beat]{position:relative!important;opacity:1!important;transform:none!important;margin-bottom:44px}
   [data-reveal]{opacity:1!important;transform:none!important}
   [data-draw]{stroke-dashoffset:0!important}
@@ -287,42 +285,43 @@
     </div>
   </section>
 
-  <footer style="color:#fff;background:#0B1D33">
-    <div style="max-width:1180px;margin:0 auto;padding:clamp(64px,9vw,110px) 24px clamp(36px,5vw,56px)">
+  <footer style="color:#fff;background-color:#5a4028;background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,90px) 24px clamp(32px,5vw,52px)">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
-        <div style="min-width:240px">
-          <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
-            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:28px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span>N</span>
-            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+        <div style="min-width:220px">
+          <a href="https://www.gainadvisory.com/" style="display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;text-decoration:none">
+            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span>N</span>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
           </a>
-          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:22px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
-          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:12px 0 0">Commercial by Design</p>
-          <a class="ga-x12" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:20px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin:12px 0 0">Commercial by Design</p>
+          <a class="ga-x12" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:18px;border:1px solid rgba(255,255,255,.28);border-radius:8px;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.2 2.3-2.46 4.73-2.46 5.06 0 6 3.33 6 7.66V24h-5v-6.85c0-1.63-.03-3.73-2.27-3.73-2.27 0-2.62 1.77-2.62 3.6V24h-5V8z"/></svg></a>
         </div>
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Explore</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Explore</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x13" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
-            <a class="ga-x14" href="/readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Readiness</a>
-            <a class="ga-x15" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
-            <a class="ga-x16" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x17" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
-            <a class="ga-x18" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
-            <a class="ga-x19" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
-            <a class="ga-x20" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
+            <a class="ga-x13" href="https://www.gainadvisory.com/#method" style="color:rgba(255,255,255,.85)">The Method</a>
+            <a class="ga-x14" href="https://www.gainadvisory.com/readiness" style="color:rgba(255,255,255,.85)">Readiness</a>
+            <a class="ga-x15" href="https://www.gainadvisory.com/engagements" style="color:rgba(255,255,255,.85)">Engagements</a>
+            <a class="ga-x16" href="https://www.gainadvisory.com/capital-readiness" style="color:rgba(255,255,255,.85)">Capital Readiness</a>
+            <a class="ga-x17" href="https://www.gainadvisory.com/research" style="color:rgba(255,255,255,.85)">Research</a>
+            <a class="ga-x18" href="https://www.gainadvisory.com/#proof" style="color:rgba(255,255,255,.85)">Track Record</a>
+            <a class="ga-x19" href="https://www.gainadvisory.com/#intelligence" style="color:rgba(255,255,255,.85)">GTMology</a>
+            <a class="ga-x20" href="https://www.gainadvisory.com/#close" style="color:rgba(255,255,255,.85)">Contact</a>
           </div>
         </div>
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Briefings</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Briefings</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x21" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
-            <a class="ga-x22" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
-            <a class="ga-x23" href="/about" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
+            <a class="ga-x21" href="https://www.gainadvisory.com/cco-vs-cro" style="color:rgba(255,255,255,.85)">Fractional CCO vs CRO</a>
+            <a class="ga-x22" href="https://www.gainadvisory.com/cco-vs-cmo" style="color:rgba(255,255,255,.85)">Fractional CCO vs CMO</a>
+            <a class="ga-x23" href="https://www.gainadvisory.com/about" style="color:rgba(255,255,255,.85)">What Gain Advisory is (and isn't)</a>
           </div>
         </div>
       </div>
-      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
-        <span>© 2026 Gain Advisory LLC</span>
-        <span style="display:flex;gap:18px"><a class="ga-x24" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x25" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
+      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.6)">
+        <span>&copy; 2026 Gain Advisory LLC</span>
+        <span style="display:flex;gap:18px"><a class="ga-x24" href="https://www.gainadvisory.com/privacy" style="color:rgba(255,255,255,.6)">Privacy</a><a class="ga-x25" href="https://www.gainadvisory.com/terms" style="color:rgba(255,255,255,.6)">Terms</a></span>
       </div>
     </div>
   </footer>
@@ -343,64 +342,88 @@
 
   /* Method: pinned four-beat scroll stepper */
   var method = null, methodRaf = null;
+  /* Method chapter-reader. Ported from the design's _initMethod/_updateMethod.
+     The connector fill (scaleX) spans lastActBottom - firstActTop - 0.55*vh so
+     it completes as the last act finishes; the active act is the last one whose
+     top has crossed 40% of the viewport. On the active change it drives the
+     sticky plate: the morphing chapter glyph (data-plate opacity), the Act 0N
+     counter, the plate label and eyebrow, and dims the inactive acts on
+     desktop. Labels/eyebrows are the design's own arrays, injected above. */
+  var method = null;
   function updateMethod(){
-    var m = method; if (!m || !m.root) return;
-    var rect = m.root.getBoundingClientRect();
-    var scrollable = m.root.offsetHeight - window.innerHeight;
-    var p = scrollable > 0 ? (-rect.top) / scrollable : 0;
+    var m = method;
+    if (!m || !m.secs || !m.secs.length) return;
+    var line = window.innerHeight * 0.4;
+    var first = m.secs[0].getBoundingClientRect();
+    var last = m.secs[m.secs.length - 1].getBoundingClientRect();
+    var span = last.bottom - first.top - window.innerHeight * 0.55;
+    var p = span > 0 ? (line - first.top) / span : 0;
     p = Math.max(0, Math.min(1, p));
-    if (m.fill) m.fill.style.width = (12 + p * 88) + '%';
-    var beat = Math.floor(p * m.count);
-    if (beat >= m.count) beat = m.count - 1;
+    if (m.fill) m.fill.style.transform = 'scaleX(' + p + ')';
+    var beat = 0;
+    m.secs.forEach(function(sec, i){ if (sec.getBoundingClientRect().top <= line) beat = i; });
     if (beat === m.beat) return;
     m.beat = beat;
-    m.panels.forEach(function(el, i){
-      var on = i === beat;
-      el.style.opacity = on ? '1' : '0';
-      el.style.transform = on ? 'none' : 'translateY(20px)';
-      el.style.pointerEvents = on ? 'auto' : 'none';
-    });
-    m.ticks.forEach(function(el, i){
-      var on = i === beat;
-      el.style.color = on ? '#0B1D33' : '#9AA7B4';
-      el.style.fontWeight = on ? '700' : '500';
-    });
+    var dim = window.innerWidth > 860;
+    m.secs.forEach(function(sec, i){ sec.style.opacity = (!dim || i === beat) ? '1' : '0.34'; });
+    if (m.plates) m.plates.forEach(function(el, i){ el.style.opacity = i === beat ? '1' : '0'; });
+    if (m.num) m.num.textContent = String(beat + 1).padStart(2, '0');
+    if (m.label && m.labels) m.label.innerHTML = m.labels[beat];
+    if (m.eyebrow && m.eyebrows) m.eyebrow.textContent = m.eyebrows[beat];
+    m.ticks.forEach(function(el, i){ el.style.color = (i === beat) ? '#0B1D33' : '#B7B2A6'; });
   }
-  function onMethodScroll(){ if (methodRaf) return; methodRaf = requestAnimationFrame(function(){ methodRaf = null; updateMethod(); }); }
+  var methodRaf = null;
+  function onMethodScroll(){
+    if (methodRaf) return;
+    methodRaf = requestAnimationFrame(function(){ methodRaf = null; updateMethod(); });
+  }
   function initMethod(){
-    var root = document.getElementById('ga-method-scroll');
-    if (!root) return;
+    var idx = document.querySelector('.ga-method-index');
+    if (!idx) return;
     method = {
-      root: root,
-      panels: [].slice.call(document.querySelectorAll('[data-beat]')),
+      secs: [].slice.call(document.querySelectorAll('[data-beat-sec]')),
       ticks: [].slice.call(document.querySelectorAll('[data-tick]')),
+      plates: [].slice.call(document.querySelectorAll('[data-plate]')),
+      num: document.getElementById('ga-act-num'),
+      label: document.getElementById('ga-plate-label'),
+      eyebrow: document.getElementById('ga-plate-eyebrow'),
+      labels: [],
+      eyebrows: [],
       fill: document.getElementById('ga-rail-fill'),
       beat: -1
     };
-    method.count = method.panels.length || 1;
+    if (!method.secs.length) return;
+    method.secs.forEach(function(sec){ sec.style.transition = 'opacity .5s ease'; });
     window.addEventListener('scroll', onMethodScroll, { passive: true });
     window.addEventListener('resize', onMethodScroll, { passive: true });
     updateMethod();
   }
 
-  /* Journey: spine fills, nodes light as it passes */
-  var journey = null, jRaf = null;
+  /* Journey rail. Ported from the design's _updateJourney: the fill tracks a
+     line at 62% of the viewport and each node lights once its midpoint passes. */
+  var journey = null;
   function updateJourney(){
-    var j = journey; if (!j) return;
+    var j = journey;
+    if (!j || !j.track || !j.fill) return;
     var line = window.innerHeight * 0.62;
     var rect = j.track.getBoundingClientRect();
     var ratio = (line - rect.top) / rect.height;
     ratio = Math.max(0, Math.min(1, ratio));
     j.fill.style.transform = 'scaleY(' + ratio + ')';
-    j.nodes.forEach(function(nd){
-      var nr = nd.getBoundingClientRect();
+    j.nodes.forEach(function(n){
+      var nr = n.getBoundingClientRect();
       var on = nr.top + nr.height / 2 <= line;
-      nd.style.background = on ? '#1E4FA1' : '#CBD3DB';
-      nd.style.boxShadow = on ? '0 0 0 5px #FBFBF9, 0 0 0 8px rgba(30,79,161,.14)' : '0 0 0 5px #FBFBF9';
-      nd.style.transform = on ? 'scale(1.12)' : 'none';
+      n.style.background = on ? '#1E4FA1' : '#CBD3DB';
+      n.style.boxShadow = on ? '0 0 0 5px #FBFBF9, 0 0 0 8px rgba(30,79,161,.14)' : '0 0 0 5px #FBFBF9';
+      n.style.transform = on ? 'scale(1.12)' : 'none';
     });
   }
-  function onJourneyScroll(){ if (jRaf) return; jRaf = requestAnimationFrame(function(){ jRaf = null; updateJourney(); }); }
+  var journeyRaf = null;
+  function onJourneyScroll(){
+    if (journeyRaf) return;
+    journeyRaf = requestAnimationFrame(function(){ journeyRaf = null; updateJourney(); });
+  }
+
   function initJourney(){
     var track = document.getElementById('ga-journey-track');
     var fill = document.getElementById('ga-journey-fill');
@@ -409,6 +432,37 @@
     window.addEventListener('scroll', onJourneyScroll, { passive: true });
     window.addEventListener('resize', onJourneyScroll, { passive: true });
     updateJourney();
+  }
+
+  /* Proof stats count-up. Ported from the design's _initCounters/_countUp. The
+     markup renders the final value (content-first), so with JS off or under
+     reduced motion the reader sees $500M+/$6B+ immediately; with motion the
+     value eases from 0 once the stat crosses 50% of the viewport, once. */
+  function countUp(el, instant){
+    var to = parseFloat(el.getAttribute('data-count-to')) || 0;
+    var pre = el.getAttribute('data-count-prefix') || '';
+    var suf = el.getAttribute('data-count-suffix') || '';
+    var isInt = to % 1 === 0;
+    function fmt(v){ return pre + (isInt ? Math.round(v) : v.toFixed(1)) + suf; }
+    if (instant){ el.textContent = fmt(to); return; }
+    var dur = 1150, t0 = null;
+    function step(now){
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * eased);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
+    }
+    requestAnimationFrame(step);
+  }
+  function initCounters(){
+    var els = [].slice.call(document.querySelectorAll('[data-count-to]'));
+    if (!els.length) return;
+    if (reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ countUp(el, true); }); return; }
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    els.forEach(function(el){ cio.observe(el); });
   }
 
 
@@ -443,6 +497,7 @@
   function boot(){
     initMethod();
     initJourney();
+    initCounters();
     if ('IntersectionObserver' in window){
       io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
