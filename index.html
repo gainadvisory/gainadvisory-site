@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fractional GTM & Commercial Leadership for Founder-Led Companies | Gain Advisory</title>
 <meta name="description" content="Gain Advisory builds the commercial engine that turns founder-led traction into a system a team can run and an investor can underwrite. Commercial by Design.">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
 <style>
   html{scroll-behavior:smooth}
   body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
@@ -14,6 +17,18 @@
   ::selection{background:#1E4FA1;color:#fff}
   @media(max-width:860px){ .ga-navlinks{display:none !important} }
   @media(max-width:720px){ .ga-hero-motif{opacity:.28 !important} }
+  @media(max-width:860px){ .ga-method-grid{grid-template-columns:1fr !important} .ga-method-index{display:none !important} }
+  @keyframes ga-hub-pulse{0%,100%{r:16}45%{r:19}}
+  @keyframes ga-hub-ring{0%{r:16;opacity:.5}100%{r:32;opacity:0}}
+  @keyframes ga-mesh-in{0%{opacity:.25}100%{opacity:1}}
+  @media(prefers-reduced-motion:reduce){ .ga-hub-core,.ga-hub-ring,.ga-mesh-node{animation:none !important} }
+  @keyframes ga-dc-in{0%{transform:translateX(0);opacity:0}18%{opacity:1}82%{opacity:1}100%{transform:translateX(208px);opacity:0}}
+  @keyframes ga-dc-out{0%{transform:translateX(0);opacity:0}18%{opacity:1}82%{opacity:1}100%{transform:translateX(208px);opacity:0}}
+  .ga-dc-in{animation:ga-dc-in 1.15s cubic-bezier(.4,0,.4,1) .5s 1 both;animation-play-state:paused}
+  .ga-dc-out{animation:ga-dc-out 1.15s cubic-bezier(.4,0,.4,1) 1.6s 1 both;animation-play-state:paused}
+  @media(prefers-reduced-motion:reduce){ .ga-dc-in,.ga-dc-out{display:none} }
+  .ga-dist-v{display:none}
+  @media(max-width:640px){ .ga-dist-h{display:none !important} .ga-dist-v{display:block} }
 
   @media(max-width:860px){ .ga-navlinks{display:none !important} }
   .ga-burger{display:none;position:fixed;right:20px;top:12px;z-index:60;
@@ -79,25 +94,24 @@
    child regressed the CCO comparison pages, where a column then collapsed to
    22px and its content overflowed, giving the page a 40px horizontal scroll. */
 [style*="grid-template-columns:1.4fr .7fr 2fr"] > *{min-width:0}
-.ga-x37:hover{border-color:#1E4FA1;color:#1E4FA1}
-.ga-x101:focus{border-color:#5D9BD4}
-.ga-x102:focus{border-color:#5D9BD4}
-.ga-x103:focus{border-color:#5D9BD4}
-.ga-x104:focus{border-color:#5D9BD4}
-.ga-x105:hover{color:#fff;border-color:rgba(255,255,255,.5)}
-.ga-x106:hover{color:#fff}
-.ga-x107:hover{color:#fff}
-.ga-x108:hover{color:#fff}
-.ga-x109:hover{color:#fff}
-.ga-x110:hover{color:#fff}
-.ga-x111:hover{color:#fff}
-.ga-x112:hover{color:#fff}
-.ga-x113:hover{color:#fff}
-.ga-x114:hover{color:#fff}
-.ga-x115:hover{color:#fff}
-.ga-x116:hover{color:#fff}
-.ga-x117:hover{color:#fff}
-.ga-x118:hover{color:#fff}
+.ga-x116:focus{border-color:#5D9BD4}
+.ga-x117:focus{border-color:#5D9BD4}
+.ga-x118:focus{border-color:#5D9BD4}
+.ga-x119:focus{border-color:#5D9BD4}
+.ga-x120:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+.ga-x121:hover{color:#fff}
+.ga-x122:hover{color:#fff}
+.ga-x123:hover{color:#fff}
+.ga-x124:hover{color:#fff}
+.ga-x125:hover{color:#fff}
+.ga-x126:hover{color:#fff}
+.ga-x127:hover{color:#fff}
+.ga-x128:hover{color:#fff}
+.ga-x129:hover{color:#fff}
+.ga-x130:hover{color:#fff}
+.ga-x131:hover{color:#fff}
+.ga-x132:hover{color:#fff}
+.ga-x133:hover{color:#fff}
 /* Hidden-until-revealed state. Applied only when JS is available, so the
    markup itself stays content-first for crawlers and no-JS readers. */
 .ga-js .ga-x1{opacity:0;transform:translateY(16px)}
@@ -109,92 +123,108 @@
 .ga-js .ga-x7{opacity:0;transform:translateY(16px)}
 .ga-js .ga-x8{opacity:0;transform:translateY(16px)}
 .ga-js .ga-x9{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x10{stroke-dashoffset:1}
-.ga-js .ga-x11{stroke-dashoffset:1}
-.ga-js .ga-x12{stroke-dashoffset:1}
-.ga-js .ga-x13{opacity:0}
+.ga-js .ga-x10{opacity:0;transform:translateY(6px)}
+.ga-js .ga-x11{opacity:0}
+.ga-js .ga-x12{opacity:0;transform:translateY(6px)}
+.ga-js .ga-x13{stroke-dashoffset:1}
 .ga-js .ga-x14{stroke-dashoffset:1}
-.ga-js .ga-x15{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x16{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x17{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x18{stroke-dashoffset:1}
-.ga-js .ga-x19{stroke-dashoffset:1}
-.ga-js .ga-x20{stroke-dashoffset:1}
+.ga-js .ga-x15{stroke-dashoffset:1}
+.ga-js .ga-x16{opacity:0}
+.ga-js .ga-x17{stroke-dashoffset:1}
+.ga-js .ga-x18{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x19{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x20{opacity:0;transform:translateY(16px)}
 .ga-js .ga-x21{opacity:0}
-.ga-js .ga-x22{stroke-dashoffset:1}
-.ga-js .ga-x23{opacity:0}
-.ga-js .ga-x24{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x25{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x26{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x27{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x29{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x30{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x31{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x32{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x34{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x35{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x36{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x39{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x40{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x41{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x42{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x43{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x44{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x46{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x22{opacity:0}
+.ga-js .ga-x23{stroke-dashoffset:1}
+.ga-js .ga-x24{stroke-dashoffset:1}
+.ga-js .ga-x25{stroke-dashoffset:1}
+.ga-js .ga-x26{stroke-dashoffset:1}
+.ga-js .ga-x27{stroke-dashoffset:1}
+.ga-js .ga-x28{stroke-dashoffset:1}
+.ga-js .ga-x29{opacity:0}
+.ga-js .ga-x30{opacity:0}
+.ga-js .ga-x31{opacity:0}
+.ga-js .ga-x32{opacity:1}
+.ga-js .ga-x33{opacity:0}
+.ga-js .ga-x34{stroke-dashoffset:1}
+.ga-js .ga-x35{stroke-dashoffset:1}
+.ga-js .ga-x36{stroke-dashoffset:1}
+.ga-js .ga-x37{stroke-dashoffset:1}
+.ga-js .ga-x38{stroke-dashoffset:1}
+.ga-js .ga-x39{stroke-dashoffset:1}
+.ga-js .ga-x40{opacity:0}
+.ga-js .ga-x41{opacity:0}
+.ga-js .ga-x42{opacity:0}
+.ga-js .ga-x43{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x44{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x45{opacity:0;transform:translateY(16px)}
 .ga-js .ga-x47{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x48{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x49{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x50{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x51{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x49{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x50{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x52{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x53{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x54{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x55{opacity:0}
-.ga-js .ga-x56{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x56{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x57{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x58{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x59{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x60{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x61{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x62{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x63{stroke-dashoffset:1}
-.ga-js .ga-x64{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x65{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x58{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x59{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x60{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x61{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x63{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x64{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x65{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x66{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x67{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x68{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x69{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x70{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x71{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x72{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x67{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x68{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x69{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x70{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x71{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x72{opacity:0}
 .ga-js .ga-x73{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x74{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x74{opacity:0;transform:translateY(18px)}
 .ga-js .ga-x75{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x76{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x77{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x78{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x79{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x80{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x81{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x82{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x83{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x84{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x85{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x86{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x87{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x88{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x89{opacity:0;transform:translateY(10px)}
-.ga-js .ga-x90{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x91{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x92{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x93{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x94{opacity:0;transform:translateY(14px)}
-.ga-js .ga-x95{opacity:0;transform:translateY(12px)}
-.ga-js .ga-x96{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x97{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x98{opacity:0;transform:translateY(18px)}
-.ga-js .ga-x99{opacity:0;transform:translateY(16px)}
-.ga-js .ga-x100{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x76{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x77{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x78{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x79{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x80{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x81{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x82{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x83{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x84{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x85{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x86{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x87{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x88{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x89{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x90{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x91{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x92{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x93{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x94{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x95{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x96{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x97{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x98{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x99{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x100{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x101{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x102{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x103{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x104{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x105{opacity:0;transform:translateY(10px)}
+.ga-js .ga-x106{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x107{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x108{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x109{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x110{opacity:0;transform:translateY(14px)}
+.ga-js .ga-x111{opacity:0;transform:translateY(12px)}
+.ga-js .ga-x112{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x113{opacity:0;transform:translateY(18px)}
+.ga-js .ga-x114{opacity:0;transform:translateY(16px)}
+.ga-js .ga-x115{opacity:0;transform:translateY(16px)}
 /* Motion is progressive enhancement: reduced-motion users get the finished
    state immediately, never a hidden one. */
 @media (prefers-reduced-motion: reduce){
@@ -238,9 +268,10 @@
     </svg>
     <div style="position:relative;max-width:1180px;margin:0 auto;padding:0 24px">
       <div style="min-height:min(88vh,860px);display:flex;flex-direction:column;justify-content:center;padding:120px 0 130px;max-width:760px">
-        <div class="ga-x1" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#5D9BD4;transition:opacity .7s ease,transform .7s ease">Fractional GTM &amp; Commercial Leadership</div>
-        <h1 class="ga-x2" data-reveal style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(27px,7.6vw,92px);line-height:.98;letter-spacing:-0.025em;margin:22px 0 0;color:#fff;max-width:13ch;transition:opacity .8s ease .08s,transform .8s ease .08s">Builder of Commercial Engines</h1>
-        <p class="ga-x3" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#AEBED0;margin:26px 0 0;max-width:46ch;transition:opacity .8s ease .16s,transform .8s ease .16s">Companies engineer their products through disciplined testing, iteration, and continuous improvement, then leave revenue to improvisation. Gain Advisory applies the same discipline to the commercial engine, designing, testing, and evolving the strategy, systems, and operating model required for each stage of growth.</p><p class="ga-x4" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#AEBED0;margin:18px 0 0;max-width:46ch;transition:opacity .8s ease .16s,transform .8s ease .16s">Commercial by Design.</p>
+        <div class="ga-x1" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:clamp(11px,3vw,13px);letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;transition:opacity .7s ease,transform .7s ease">Fractional GTM &amp; Commercial Leadership</div>
+        <h1 class="ga-x2" data-reveal style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(30px,8.5vw,92px);line-height:1;letter-spacing:-0.025em;margin:22px 0 0;color:#fff;max-width:13ch;transition:opacity .8s ease .08s,transform .8s ease .08s">Builder of Commercial Engines</h1>
+        <p class="ga-x3" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:#AEBED0;margin:26px 0 0;max-width:46ch;transition:opacity .8s ease .16s,transform .8s ease .16s"><span style="display:block">Companies engineer their products through disciplined testing, iteration, and continuous improvement.</span><span style="display:block">Then leave revenue to improvisation.</span><span style="display:block;margin-top:1em">Gain Advisory applies that same discipline to the commercial engine, designing, testing, and evolving the strategy, systems, and operating model for each stage of growth.</span></p>
+        <p class="ga-x4" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:clamp(11px,3vw,13px);letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;margin:20px 0 0;transition:opacity .8s ease .2s,transform .8s ease .2s">Commercial by Design</p>
         <div class="ga-x5" data-reveal style="display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;transition:opacity .8s ease .24s,transform .8s ease .24s">
           <a href="#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#fff;padding:14px 24px;border-radius:6px">Start the conversation</a>
           <a href="#method" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;border:1px solid rgba(255,255,255,.34);padding:13px 23px;border-radius:6px">See the method</a>
@@ -255,33 +286,40 @@
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,160px) 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(40px,6vw,90px);align-items:center">
       <div>
         <div class="ga-x6" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The reframe</div>
-        <h2 class="ga-x7" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Traction is not<br>an engine.</h2>
-        <p class="ga-x8" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:54ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Early revenue proves a founder is good and a market has a pulse. It does not prove the company can sell without that founder in the room. What looks like a system is often one person, carrying every deal so well the results look like a machine. Right until the day it has to run without them.</p>
+        <h2 class="ga-x7" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">A company cannot scale what only a few people know.</h2>
+        <p class="ga-x8" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:54ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Early growth often depends on judgment that has never been made transferable: who to pursue, how to position, and how to win. A commercial engine turns that knowledge into a system the entire company can run, improve, and scale.</p>
       </div>
       <div class="ga-x9" data-reveal style="transition:opacity .8s ease,transform .8s ease">
         <div style="border:1px solid #E2E6EA;background:#fff;border-radius:12px;padding:clamp(22px,3vw,34px);box-shadow:0 18px 44px -30px rgba(11,29,51,.24)">
           <div style="display:flex;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4"><span>Dependency</span><span style="color:#1E4FA1">Engine</span></div>
           <svg viewBox="0 0 480 232" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;margin-top:16px" fill="none">
             <!-- DEPENDENCY: hub & spoke, everything through one -->
+            <g class="ga-x10" data-reveal style="transition:opacity .7s ease,transform .7s ease">
             <g stroke="#C7CDD4" stroke-width="1.6">
               <line x1="120" y1="110" x2="190" y2="110"/><line x1="120" y1="110" x2="155" y2="49"/><line x1="120" y1="110" x2="85" y2="49"/><line x1="120" y1="110" x2="50" y2="110"/><line x1="120" y1="110" x2="85" y2="171"/><line x1="120" y1="110" x2="155" y2="171"/>
             </g>
             <g fill="#F2F4F6" stroke="#8FA0B4" stroke-width="1.6"><circle cx="190" cy="110" r="9"/><circle cx="155" cy="49" r="9"/><circle cx="85" cy="49" r="9"/><circle cx="50" cy="110" r="9"/><circle cx="85" cy="171" r="9"/><circle cx="155" cy="171" r="9"/></g>
-            <circle cx="120" cy="110" r="16" fill="#1E4FA1"/>
-            <text x="120" y="205" font-family="DM Sans" font-size="10.5" letter-spacing="1.5" fill="#8FA0B4" text-anchor="middle">EVERYTHING THROUGH ONE</text>
+            <circle class="ga-hub-ring" cx="120" cy="110" r="16" fill="none" stroke="#1E4FA1" stroke-width="1.6" style="transform-box:fill-box;animation:ga-hub-ring 2.2s ease-out .15s 1 both;animation-play-state:paused"/>
+            <circle class="ga-hub-core" cx="120" cy="110" r="16" fill="#1E4FA1" style="animation:ga-hub-pulse 2.2s ease-in-out 1 both;animation-play-state:paused"/>
+            <text x="120" y="205" font-family="DM Sans" font-size="10.5" letter-spacing="1" fill="#8FA0B4" text-anchor="middle">Knowledge in a few people</text>
+            </g>
             <!-- divider -->
+            <g class="ga-x11" data-reveal style="transition:opacity .6s ease .45s">
             <line x1="240" y1="42" x2="240" y2="176" stroke="#E2E6EA" stroke-width="1.4" stroke-dasharray="3 5"/>
             <circle cx="240" cy="110" r="15" fill="#fff" stroke="#E2E6EA" stroke-width="1.4"/>
             <text x="240" y="114" font-family="Syne" font-weight="700" font-size="12" fill="#8FA0B4" text-anchor="middle">vs</text>
+            </g>
             <!-- ENGINE: distributed mesh, holds without any one -->
+            <g class="ga-x12" data-reveal style="transition:opacity .8s ease .7s,transform .8s ease .7s">
             <g stroke="#1E4FA1" stroke-width="1.6">
               <line x1="424" y1="110" x2="392" y2="55"/><line x1="392" y1="55" x2="328" y2="55"/><line x1="328" y1="55" x2="296" y2="110"/><line x1="296" y1="110" x2="328" y2="165"/><line x1="328" y1="165" x2="392" y2="165"/><line x1="392" y1="165" x2="424" y2="110"/>
               <line x1="424" y1="110" x2="296" y2="110"/><line x1="392" y1="55" x2="328" y2="165"/><line x1="328" y1="55" x2="392" y2="165"/>
             </g>
-            <g fill="#fff" stroke="#1E4FA1" stroke-width="2"><circle cx="424" cy="110" r="7"/><circle cx="392" cy="55" r="7"/><circle cx="328" cy="55" r="7"/><circle cx="296" cy="110" r="7"/><circle cx="328" cy="165" r="7"/><circle cx="392" cy="165" r="7"/></g>
-            <text x="360" y="205" font-family="DM Sans" font-size="10.5" letter-spacing="1.5" fill="#1E4FA1" text-anchor="middle">HOLDS WITHOUT ANY ONE</text>
+            <g fill="#fff" stroke="#1E4FA1" stroke-width="2"><circle class="ga-mesh-node" cx="424" cy="110" r="7" style="animation:ga-mesh-in .6s ease-out 1 both;animation-play-state:paused"/><circle class="ga-mesh-node" cx="392" cy="55" r="7" style="animation:ga-mesh-in .6s ease-out .1s 1 both;animation-play-state:paused"/><circle class="ga-mesh-node" cx="328" cy="55" r="7" style="animation:ga-mesh-in .6s ease-out .2s 1 both;animation-play-state:paused"/><circle class="ga-mesh-node" cx="296" cy="110" r="7" style="animation:ga-mesh-in .6s ease-out .3s 1 both;animation-play-state:paused"/><circle class="ga-mesh-node" cx="328" cy="165" r="7" style="animation:ga-mesh-in .6s ease-out .4s 1 both;animation-play-state:paused"/><circle class="ga-mesh-node" cx="392" cy="165" r="7" style="animation:ga-mesh-in .6s ease-out .5s 1 both;animation-play-state:paused"/></g>
+            <text x="360" y="205" font-family="DM Sans" font-size="10.5" letter-spacing="1" fill="#1E4FA1" text-anchor="middle">Capability across the company</text>
+            </g>
           </svg>
-          <p style="font-family:'Inter',sans-serif;font-size:13.5px;color:#5B6B7C;margin:12px 0 0;line-height:1.5;text-align:center">Engine vs Dependency - the one idea to remember.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:13.5px;color:#5B6B7C;margin:12px 0 0;line-height:1.5;text-align:center">Turn individual knowledge into organizational capability.</p>
         </div>
       </div>
     </div>
@@ -290,31 +328,91 @@
   <!-- DIVIDER -->
   <div style="max-width:1180px;margin:0 auto;padding:0 24px">
     <svg viewBox="0 0 1132 44" preserveAspectRatio="none" style="width:100%;height:40px" fill="none">
-      <path class="ga-x10" data-draw pathLength="1" d="M0,14 C 300,14 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease"/>
-      <path class="ga-x11" data-draw pathLength="1" d="M0,22 C 300,22 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .05s"/>
-      <path class="ga-x12" data-draw pathLength="1" d="M0,30 C 300,30 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .1s"/>
-      <circle class="ga-x13" data-reveal cx="560" cy="22" r="5" fill="#1E4FA1" style="transition:opacity .5s ease .5s"/>
-      <path class="ga-x14" data-draw pathLength="1" d="M560,22 L1132,22" stroke="#1E4FA1" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1.2s ease .45s"/>
+      <path class="ga-x13" data-draw pathLength="1" d="M0,14 C 300,14 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease"/>
+      <path class="ga-x14" data-draw pathLength="1" d="M0,22 C 300,22 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .05s"/>
+      <path class="ga-x15" data-draw pathLength="1" d="M0,30 C 300,30 420,22 560,22" stroke="#D6DBE1" stroke-width="1.4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .1s"/>
+      <circle class="ga-x16" data-reveal cx="560" cy="22" r="5" fill="#1E4FA1" style="transition:opacity .5s ease .5s"/>
+      <path class="ga-x17" data-draw pathLength="1" d="M560,22 L1132,22" stroke="#1E4FA1" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1.2s ease .45s"/>
     </svg>
   </div>
 
   <!-- THE DISTINCTION -->
   <section style="background:#FBFBF9">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,110px) 24px 0;text-align:center">
-      <div class="ga-x15" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The distinction</div>
-      <h2 class="ga-x16" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px auto 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s">One commercial truth, <br class="ga-brk-lg">not three stories.</h2>
-      <p class="ga-x17" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px auto 0;max-width:60ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Most companies tell one story to customers, another to investors, another to the board. A commercial architecture creates a single source of commercial truth. Marketing, sales, and product each work a facet of the same system. That is the deeper work, and it is where a company becomes both credible and investable.</p>
+      <div class="ga-x18" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The distinction</div>
+      <h2 class="ga-x19" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px auto 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s"><span style="display:block">Many inputs.</span><span style="display:block">One commercial truth.</span></h2>
+      <p class="ga-x20" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px auto 0;max-width:62ch;transition:opacity .7s ease .12s,transform .7s ease .12s"><span style="display:block">Marketing, sales, and product each hold part of the evidence.</span><span style="display:block;margin-top:1em">Commercial architecture brings it together into one truth about who buys, why they buy, and how the company wins, then carries that truth consistently to customers, investors, and the board.</span></p>
     </div>
     <div style="max-width:1000px;margin:0 auto;padding:clamp(30px,5vw,60px) 24px clamp(70px,10vw,130px)">
-      <svg viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto" fill="none">
-        <path class="ga-x18" data-draw pathLength="1" d="M40,90 C 260,90 380,150 520,150" stroke="#8FA0B4" stroke-width="2.5" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease"/>
-        <path class="ga-x19" data-draw pathLength="1" d="M40,150 C 260,150 380,150 520,150" stroke="#8FA0B4" stroke-width="2.5" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .12s"/>
-        <path class="ga-x20" data-draw pathLength="1" d="M40,210 C 260,210 380,150 520,150" stroke="#8FA0B4" stroke-width="2.5" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .24s"/>
-        <circle class="ga-x21" data-reveal cx="520" cy="150" r="10" fill="#1E4FA1" style="transition:opacity .5s ease .9s"/>
-        <path class="ga-x22" data-draw pathLength="1" d="M520,150 L860,150" stroke="#1E4FA1" stroke-width="4" style="stroke-dasharray:1;transition:stroke-dashoffset 1.1s ease .85s"/>
-        <circle class="ga-x23" data-reveal cx="860" cy="150" r="6" fill="#0B1D33" stroke="#1E4FA1" stroke-width="2" style="transition:opacity .5s ease 1.5s"/>
-        <text x="40" y="252" font-family="DM Sans" font-size="12" letter-spacing="2" fill="#8FA0B4">THREE VOICES</text>
-        <text x="860" y="188" font-family="DM Sans" font-size="12" letter-spacing="2" fill="#1E4FA1" text-anchor="end">ONE COMMERCIAL TRUTH</text>
+      <!-- desktop: internal evidence -> [ one commercial truth ] -> external consistency -->
+      <svg class="ga-dist-h" viewBox="0 0 900 176" preserveAspectRatio="xMidYMid meet" style="width:100%;max-width:840px;height:auto;display:block;margin:0 auto" fill="none">
+        <text class="ga-x21" data-reveal x="150" y="22" font-family="DM Sans" font-weight="500" font-size="11" letter-spacing="2.5" fill="#B0B7BF" style="transition:opacity .5s ease .1s">INTERNAL EVIDENCE</text>
+        <text class="ga-x22" data-reveal x="750" y="22" font-family="DM Sans" font-weight="500" font-size="11" letter-spacing="2.5" fill="#B0B7BF" text-anchor="end" style="transition:opacity .5s ease 1.4s">EXTERNAL CONSISTENCY</text>
+        <!-- left strands converge to the bracket's outer edge -->
+        <path class="ga-x23" data-draw pathLength="1" d="M150,52 C 260,52 310,88 358,88" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease"/>
+        <path class="ga-x24" data-draw pathLength="1" d="M150,88 L358,88" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease .1s"/>
+        <path class="ga-x25" data-draw pathLength="1" d="M150,124 C 260,124 310,88 358,88" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease .2s"/>
+        <!-- right strands diverge from the bracket's outer edge -->
+        <path class="ga-x26" data-draw pathLength="1" d="M542,88 C 600,88 640,52 750,52" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1s"/>
+        <path class="ga-x27" data-draw pathLength="1" d="M542,88 L750,88" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1.1s"/>
+        <path class="ga-x28" data-draw pathLength="1" d="M542,88 C 600,88 640,124 750,124" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1.2s"/>
+        <!-- input nodes + labels -->
+        <g class="ga-x29" data-reveal style="transition:opacity .5s ease .3s">
+          <circle cx="150" cy="52" r="3.5" fill="#8FA0B4"/><circle cx="150" cy="88" r="3.5" fill="#8FA0B4"/><circle cx="150" cy="124" r="3.5" fill="#8FA0B4"/>
+          <text x="138" y="56" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#5B6B7C" text-anchor="end">MARKETING</text>
+          <text x="138" y="92" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#5B6B7C" text-anchor="end">SALES</text>
+          <text x="138" y="128" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#5B6B7C" text-anchor="end">PRODUCT</text>
+        </g>
+        <!-- output nodes + labels -->
+        <g class="ga-x30" data-reveal style="transition:opacity .5s ease 1.3s">
+          <circle cx="750" cy="52" r="3.5" fill="#1E4FA1"/><circle cx="750" cy="88" r="3.5" fill="#1E4FA1"/><circle cx="750" cy="124" r="3.5" fill="#1E4FA1"/>
+          <text x="762" y="56" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#0B1D33" text-anchor="start">CUSTOMERS</text>
+          <text x="762" y="92" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#0B1D33" text-anchor="start">INVESTORS</text>
+          <text x="762" y="128" font-family="DM Sans" font-weight="500" font-size="13" letter-spacing="2" fill="#0B1D33" text-anchor="start">THE BOARD</text>
+        </g>
+        <!-- center truth, framed by the brand brackets -->
+        <g class="ga-x31" data-reveal style="transition:opacity .6s ease .8s">
+          <text x="366" y="126" font-family="Syne" font-weight="400" font-size="116" fill="#5D9BD4" text-anchor="middle">[</text>
+          <text x="534" y="126" font-family="Syne" font-weight="400" font-size="116" fill="#5D9BD4" text-anchor="middle">]</text>
+          <text x="450" y="74" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">One</text>
+          <text x="450" y="98" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">Commercial</text>
+          <text x="450" y="122" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">Truth</text>
+        </g>
+        <!-- one-time flow: into the bracket, then out (gated on reveal) -->
+        <g class="ga-x32" data-reveal>
+          <circle class="ga-dc-in" cx="150" cy="88" r="4.5" fill="#1E4FA1"/>
+          <circle class="ga-dc-out" cx="542" cy="88" r="4.5" fill="#1E4FA1"/>
+        </g>
+      </svg>
+      <!-- mobile: vertical stack -->
+      <svg class="ga-dist-v" viewBox="0 0 340 600" preserveAspectRatio="xMidYMid meet" style="width:100%;max-width:340px;margin:0 auto;height:auto" fill="none">
+        <text class="ga-x33" data-reveal x="170" y="24" font-family="DM Sans" font-weight="500" font-size="11" letter-spacing="2.5" fill="#B0B7BF" text-anchor="middle" style="transition:opacity .5s ease .1s">INTERNAL EVIDENCE</text>
+        <path class="ga-x34" data-draw pathLength="1" d="M70,74 C 70,150 170,150 170,214" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease"/>
+        <path class="ga-x35" data-draw pathLength="1" d="M170,74 L170,214" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease .1s"/>
+        <path class="ga-x36" data-draw pathLength="1" d="M270,74 C 270,150 170,150 170,214" stroke="#C2C8CF" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease .2s"/>
+        <path class="ga-x37" data-draw pathLength="1" d="M170,326 C 170,388 70,388 70,452" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1s"/>
+        <path class="ga-x38" data-draw pathLength="1" d="M170,326 L170,452" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1.1s"/>
+        <path class="ga-x39" data-draw pathLength="1" d="M170,326 C 170,388 270,388 270,452" stroke="#9DB6DC" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1s ease 1.2s"/>
+        <g class="ga-x40" data-reveal style="transition:opacity .5s ease .3s">
+          <circle cx="70" cy="74" r="4" fill="#8FA0B4"/><circle cx="170" cy="74" r="4" fill="#8FA0B4"/><circle cx="270" cy="74" r="4" fill="#8FA0B4"/>
+          <text x="70" y="56" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#5B6B7C" text-anchor="middle">MARKETING</text>
+          <text x="170" y="56" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#5B6B7C" text-anchor="middle">SALES</text>
+          <text x="270" y="56" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#5B6B7C" text-anchor="middle">PRODUCT</text>
+        </g>
+        <g class="ga-x41" data-reveal style="transition:opacity .6s ease .8s">
+          <text x="126" y="312" font-family="Syne" font-weight="400" font-size="120" fill="#5D9BD4" text-anchor="middle">[</text>
+          <text x="214" y="312" font-family="Syne" font-weight="400" font-size="120" fill="#5D9BD4" text-anchor="middle">]</text>
+          <text x="170" y="260" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">One</text>
+          <text x="170" y="284" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">Commercial</text>
+          <text x="170" y="308" font-family="Syne" font-weight="700" font-size="20" letter-spacing="-0.3" fill="#0B1D33" text-anchor="middle">Truth</text>
+        </g>
+        <g class="ga-x42" data-reveal style="transition:opacity .5s ease 1.3s">
+          <text x="170" y="500" font-family="DM Sans" font-weight="500" font-size="11" letter-spacing="2.5" fill="#B0B7BF" text-anchor="middle">EXTERNAL CONSISTENCY</text>
+          <circle cx="70" cy="452" r="4" fill="#1E4FA1"/><circle cx="170" cy="452" r="4" fill="#1E4FA1"/><circle cx="270" cy="452" r="4" fill="#1E4FA1"/>
+          <text x="70" y="476" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#0B1D33" text-anchor="middle">CUSTOMERS</text>
+          <text x="170" y="476" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#0B1D33" text-anchor="middle">INVESTORS</text>
+          <text x="270" y="476" font-family="DM Sans" font-weight="500" font-size="11.5" letter-spacing="1.5" fill="#0B1D33" text-anchor="middle">THE BOARD</text>
+        </g>
       </svg>
     </div>
   </section>
@@ -323,45 +421,50 @@
   <section id="method" style="background:#fff;border-top:1px solid #EEF0F3;border-bottom:1px solid #EEF0F3">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,150px) 24px clamp(18px,3vw,34px)">
       <div style="max-width:64ch">
-        <div class="ga-x24" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The method · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:.04em">D<span style="vertical-align:super;font-size:.72em">2</span>BT</span></div>
-        <h2 class="ga-x25" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Build your commercial motion the way you build a product.</h2>
-        <p class="ga-x26" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:56ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Diagnose what is true. Design the motion that fits. Build, validate, and iterate it in the market. Transfer it, so the company owns it. The engine is what remains.</p>
-        <div class="ga-x27" data-reveal style="display:flex;align-items:center;gap:9px;margin-top:26px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;transition:opacity .7s ease .18s,transform .7s ease .18s">Scroll to walk the method <span style="color:#1E4FA1">↓</span></div>
+        <div class="ga-x43" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The method · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:.04em">D<span style="vertical-align:super;font-size:.72em">2</span>BT</span></div>
+        <h2 class="ga-x44" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Build your commercial motion the way you build a product.</h2>
+        <p class="ga-x45" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:56ch;transition:opacity .7s ease .12s,transform .7s ease .12s"><span style="display:block">Diagnose what is true.</span><span style="display:block">Design the motion that fits.</span><span style="display:block">Build, test, and iterate it in the market.</span><span style="display:block">Transfer it so the company owns it.</span><span style="display:block;margin-top:1em">The engine is what remains.</span></p>
       </div>
     </div>
 
     <!-- D²BT · two-column sticky index + long-form beats -->
     <div style="max-width:1180px;margin:0 auto;padding:0 24px">
-      <div class="ga-method-grid" style="display:grid;grid-template-columns:236px minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start">
-        <aside class="ga-method-index" style="position:sticky;top:96px;align-self:start;padding-top:clamp(52px,8vw,92px)">
-          <div style="position:relative;padding-left:24px">
-            <div style="position:absolute;left:5px;top:12px;bottom:12px;width:2px;background:#E2E6EA;overflow:hidden"><div id="ga-rail-fill" style="position:absolute;left:0;top:0;width:100%;height:100%;background:#1E4FA1;transform:scaleY(0);transform-origin:top;transition:transform .3s ease"></div></div>
-            <a data-tick="0" href="#beat-d2" style="display:block;text-decoration:none;position:relative;padding:11px 0;color:#0B1D33;transition:color .3s"><span style="position:absolute;left:-24px;top:15px;width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px #FBFBF9;transition:color .3s"></span><span style="display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">Act 01</span><span style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:inherit;margin-top:3px;line-height:1.2">D² · Diagnose &amp; Design</span></a>
-            <a data-tick="1" href="#beat-build" style="display:block;text-decoration:none;position:relative;padding:11px 0;color:#9AA7B4;transition:color .3s"><span style="position:absolute;left:-24px;top:15px;width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px #FBFBF9;transition:color .3s"></span><span style="display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">Act 02</span><span style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:inherit;margin-top:3px;line-height:1.2">Build in the Market</span></a>
-            <a data-tick="2" href="#beat-loop" style="display:block;text-decoration:none;position:relative;padding:11px 0;color:#9AA7B4;transition:color .3s"><span style="position:absolute;left:-24px;top:15px;width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px #FBFBF9;transition:color .3s"></span><span style="display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">Act 03</span><span style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:inherit;margin-top:3px;line-height:1.2">Inside Build · The Loop</span></a>
-            <a data-tick="3" href="#beat-transfer" style="display:block;text-decoration:none;position:relative;padding:11px 0;color:#9AA7B4;transition:color .3s"><span style="position:absolute;left:-24px;top:15px;width:11px;height:11px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px #FBFBF9;transition:color .3s"></span><span style="display:block;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">Act 04</span><span style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:inherit;margin-top:3px;line-height:1.2">Transfer &amp; Institutionalize</span></a>
+      <div class="ga-method-grid" style="display:grid;grid-template-columns:264px minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start">
+        <aside class="ga-method-index" style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;align-self:start">
+          <div style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8B8677">The Method</div>
+          <div style="display:flex;align-items:baseline;gap:7px;margin-top:7px"><span id="ga-act-num" style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#1E4FA1">01</span><span style="font-family:'DM Sans',sans-serif;font-size:11px;color:#9AA0A0">/ 04</span></div>
+          <div style="position:relative;height:clamp(118px,15vw,182px);margin-top:16px">
+            <div data-plate="0" style="position:absolute;inset:0;opacity:1;transition:opacity .5s ease;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(96px,12vw,168px);line-height:.82;letter-spacing:-0.03em;color:#0B1D33">D<span style="font-size:.6em;vertical-align:super;color:#1E4FA1">2</span></div>
+            <div data-plate="1" style="position:absolute;inset:0;opacity:0;transition:opacity .5s ease;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(96px,12vw,168px);line-height:.82;letter-spacing:-0.03em;color:#0B1D33">B<span style="font-size:.32em;vertical-align:super;color:#1E4FA1">↻</span></div>
+            <div data-plate="2" style="position:absolute;inset:0;opacity:0;transition:opacity .5s ease;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(96px,12vw,168px);line-height:.82;letter-spacing:-0.03em;color:#1E4FA1">↻</div>
+            <div data-plate="3" style="position:absolute;inset:0;opacity:0;transition:opacity .5s ease;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(96px,12vw,168px);line-height:.82;letter-spacing:-0.03em;color:#1E4FA1">T</div>
+          </div>
+          <div id="ga-plate-eyebrow" style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#1E4FA1;font-weight:600;margin-top:18px">Think</div>
+          <div id="ga-plate-label" style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#0B1D33;margin-top:6px;line-height:1.2;max-width:13ch">Diagnose &amp; Design</div>
+          <div style="margin-top:22px;height:2px;background:#D8D0C1;border-radius:2px;overflow:hidden;max-width:190px"><div id="ga-rail-fill" style="height:100%;width:100%;background:#1E4FA1;transform:scaleX(0);transform-origin:left;transition:transform .3s ease"></div></div>
+          <div style="display:flex;gap:16px;margin-top:20px">
+            <a href="#beat-d2" data-tick="0" style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#0B1D33;transition:color .3s">D²</a>
+            <a href="#beat-build" data-tick="1" style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#B7B2A6;transition:color .3s">Build</a>
+            <a href="#beat-loop" data-tick="2" style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#B7B2A6;transition:color .3s">Loop</a>
+            <a href="#beat-transfer" data-tick="3" style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#B7B2A6;transition:color .3s">Transfer</a>
           </div>
         </aside>
         <div>
 
     <!-- BEAT 1 · D² -->
-    <div class="ga-x28" data-beat-sec="0" id="beat-d2" style="scroll-margin-top:110px">
+    <div class="ga-x46" data-beat-sec="0" id="beat-d2" style="scroll-margin-top:110px">
       <div style="max-width:1180px;margin:0 auto;padding:clamp(44px,6vw,72px) 0">
-        <div class="ga-x29" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
-          <div style="flex:0 0 auto">
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(72px,11vw,150px);line-height:.8;letter-spacing:-0.03em;color:#0B1D33">D<span style="font-size:.62em;vertical-align:super;color:#1E4FA1">2</span></div>
-            <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:12px">D² · Diagnose + Design</div>
-          </div>
+        <div class="ga-x47" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
           <div style="flex:1 1 380px;min-width:280px">
             <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Think</div>
             <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.015em">Understand before you build.</h3>
           </div>
         </div>
-        <div class="ga-x30" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
+        <div class="ga-x48" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">Most companies do not lack ideas about how to grow. They lack a shared, evidence-based understanding of what is actually working, what is not, and why.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">D² brings two disciplines together. Diagnose establishes the commercial truth. Design turns that truth into a commercial architecture the company can test.</p>
         </div>
-        <div class="ga-x31" data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:clamp(28px,4vw,40px);transition:opacity .7s ease .1s,transform .7s ease .1s">
+        <div class="ga-x49" data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:clamp(28px,4vw,40px);transition:opacity .7s ease .1s,transform .7s ease .1s">
           <div style="border:1px solid #E2E6EA;border-radius:14px;background:#fff;padding:28px;display:flex;flex-direction:column">
             <div style="display:flex;align-items:center;gap:12px"><span style="flex:0 0 auto;width:34px;height:34px;border-radius:7px;background:#0B1D33;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px">D</span><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:19px;color:#0B1D33">Diagnose</div></div>
             <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.04em;color:#1E4FA1;font-weight:600;margin-top:16px">Replace commercial assumptions with commercial truth.</div>
@@ -379,108 +482,99 @@
             <div style="margin-top:auto;padding-top:14px;border-top:1px solid #EEF0F3;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:#1E4FA1;font-weight:600">→ Commercial Architecture</div>
           </div>
         </div>
-        <div class="ga-x32" data-reveal style="margin-top:clamp(28px,4vw,40px);border-left:3px solid #1E4FA1;padding:6px 0 6px 22px;max-width:78ch;transition:opacity .7s ease .14s,transform .7s ease .14s">
-          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#0B1D33;letter-spacing:-0.01em">Two disciplines. One standard.</div>
+        <div class="ga-x50" data-reveal style="margin-top:clamp(28px,4vw,40px);border-left:3px solid #1E4FA1;padding:6px 0 6px 22px;max-width:78ch;transition:opacity .7s ease .14s,transform .7s ease .14s">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#0B1D33;letter-spacing:-0.01em"><span style="display:block">Two disciplines.</span><span style="display:block">One standard.</span></div>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3A4654;margin:12px 0 0">Diagnose prevents the company from scaling the wrong assumptions. Design converts what the company has learned into a coherent commercial hypothesis. That is the <strong style="color:#1E4FA1">D²</strong>: understand what is true, then design what should happen next.</p>
         </div>
       </div>
     </div>
 
     <!-- BEAT 2 · BUILD -->
-    <div class="ga-x33" data-beat-sec="1" id="beat-build" style="scroll-margin-top:150px;border-top:1px solid #EEF0F3">
+    <div class="ga-x51" data-beat-sec="1" id="beat-build" style="scroll-margin-top:150px;border-top:1px solid #EEF0F3">
       <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,8vw,92px) 24px">
-        <div class="ga-x34" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
-          <div style="flex:0 0 auto">
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(72px,11vw,150px);line-height:.8;letter-spacing:-0.03em;color:#0B1D33">B<span style="font-size:.34em;vertical-align:super;color:#1E4FA1">↻</span></div>
-            <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:12px">Build in the market</div>
-          </div>
+        <div class="ga-x52" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
           <div style="flex:1 1 380px;min-width:280px">
             <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">In the Market</div>
             <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.015em">Prove the motion before you scale it.</h3>
           </div>
         </div>
-        <div class="ga-x35" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
+        <div class="ga-x53" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">A commercial architecture is still a hypothesis until buyers respond to it.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">Build puts the motion into the market. We work inside real opportunities, with real buyers, to test the positioning, narrative, channels, process, roles, and economics under actual selling conditions.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">The objective is not activity for its own sake. It is evidence. We learn what creates engagement, what moves a buyer forward, what breaks under pressure, and what the company can execute consistently.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">Each cycle replaces more assumption with proof. The blueprint becomes a working commercial motion that the company has earned the right to scale.</p>
         </div>
-        <div class="ga-x36" data-reveal style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:clamp(24px,3.5vw,36px);transition:opacity .7s ease .12s,transform .7s ease .12s">
+        <div class="ga-x54" data-reveal style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:clamp(24px,3.5vw,36px);transition:opacity .7s ease .12s,transform .7s ease .12s">
           <span style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:#1E4FA1;font-weight:600">→ Repeatable Commercial Motion</span>
-          <a class="ga-x37" href="#beat-loop" style="display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border:1px solid #E2E6EA;border-radius:999px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B7C;text-decoration:none">Open the loop <span style="color:#1E4FA1">↓</span></a>
         </div>
       </div>
     </div>
 
-    <!-- BEAT 3 · INSIDE BUILD (loop) -->
-    <div class="ga-x38" data-beat-sec="2" id="beat-loop" style="scroll-margin-top:150px;border-top:1px solid #EEF0F3;background:#fff">
-      <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,8vw,92px) 24px">
-        <div class="ga-x39" data-reveal style="transition:opacity .7s ease,transform .7s ease">
-          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Inside Build · The Learning Loop</div>
-          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#0B1D33;margin:12px 0 0;letter-spacing:-0.015em;max-width:22ch">Build is a loop, not a launch.</h3>
+    <!-- BEAT 3 · INSIDE BUILD (loop) · navy -->
+    <div class="ga-x55" data-beat-sec="2" id="beat-loop" style="scroll-margin-top:150px">
+      <div style="background:#0B1D33;border-radius:18px;margin:clamp(20px,3vw,32px) 0">
+        <div style="max-width:1180px;margin:0 auto;padding:clamp(40px,5vw,64px) clamp(28px,4vw,52px)">
+        <div class="ga-x56" data-reveal style="transition:opacity .7s ease,transform .7s ease">
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;font-weight:600">Inside Build · The Learning Loop</div>
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#fff;margin:12px 0 0;letter-spacing:-0.015em;max-width:22ch">Build is a loop, not a launch.</h3>
         </div>
-        <div class="ga-x40" data-reveal style="max-width:74ch;margin-top:clamp(20px,3vw,32px);transition:opacity .7s ease .06s,transform .7s ease .06s">
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">The rigor a product team applies to the product should also be applied to how the company sells.</p>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">The first version is a Minimum Viable Motion: the smallest complete commercial motion capable of producing meaningful market evidence. It is deliberately built to learn.</p>
+        <div class="ga-x57" data-reveal style="max-width:74ch;margin-top:clamp(20px,3vw,32px);transition:opacity .7s ease .06s,transform .7s ease .06s">
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#AEBED0;margin:0">The rigor a product team applies to the product should also be applied to how the company sells.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#AEBED0;margin:16px 0 0">The first version is a Minimum Viable Motion: the smallest complete commercial motion capable of producing meaningful market evidence. It is deliberately built to learn.</p>
         </div>
-        <div class="ga-x41" data-reveal style="margin-top:clamp(24px,3.5vw,36px);transition:opacity .7s ease .1s,transform .7s ease .1s">
+        <div class="ga-x58" data-reveal style="margin-top:clamp(24px,3.5vw,36px);transition:opacity .7s ease .1s,transform .7s ease .1s">
           <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
-            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#F2F4F6;border:1px solid #E2E6EA;border-radius:8px;padding:11px 16px">Minimum Viable Motion</span>
-            <span style="color:#8FA0B4;font-size:18px">→</span>
-            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#F2F4F6;border:1px solid #E2E6EA;border-radius:8px;padding:11px 16px">Commercial Sprint <span style="color:#5B6B7C;font-weight:400">· 2 to 6 weeks</span></span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:11px 16px">Minimum Viable Motion</span>
+            <span style="color:#5D9BD4;font-size:18px">→</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:11px 16px">Commercial Sprint <span style="color:rgba(255,255,255,.6);font-weight:400">· 2 to 6 weeks</span></span>
           </div>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:12px;padding:13px 18px;border:1px dashed #C7CDD4;border-radius:10px;background:#FBFBF9">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:12px;padding:13px 18px;border:1px dashed rgba(255,255,255,.28);border-radius:10px;background:rgba(255,255,255,.04)">
             <span style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">The loop</span>
-            <span style="font-family:'Inter',sans-serif;font-size:15px;color:#3A4654">Measure → Learn → Pivot or Persevere → Refine</span>
-            <span style="color:#1E4FA1;font-weight:700;font-size:18px">↻</span>
+            <span style="font-family:'Inter',sans-serif;font-size:15px;color:#DCE5EF">Measure → Learn → Pivot or Persevere → Refine</span>
+            <span style="color:#5D9BD4;font-weight:700;font-size:18px">↻</span>
           </div>
         </div>
-        <div class="ga-x42" data-reveal style="margin-top:clamp(26px,4vw,38px);transition:opacity .7s ease .14s,transform .7s ease .14s">
+        <div class="ga-x59" data-reveal style="margin-top:clamp(26px,4vw,38px);transition:opacity .7s ease .14s,transform .7s ease .14s">
           <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8FA0B4">Every sprint must answer four questions</div>
           <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px">
-            <div style="border:1px solid #E2E6EA;border-radius:12px;background:#FBFBF9;padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#1E4FA1;font-weight:600">01</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33;margin-top:6px;line-height:1.2">What did we believe?</div></div>
-            <div style="border:1px solid #E2E6EA;border-radius:12px;background:#FBFBF9;padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#1E4FA1;font-weight:600">02</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33;margin-top:6px;line-height:1.2">What actually happened?</div></div>
-            <div style="border:1px solid #E2E6EA;border-radius:12px;background:#FBFBF9;padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#1E4FA1;font-weight:600">03</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33;margin-top:6px;line-height:1.2">What did we learn?</div></div>
-            <div style="border:1px solid #E2E6EA;border-radius:12px;background:#FBFBF9;padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#1E4FA1;font-weight:600">04</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33;margin-top:6px;line-height:1.2">What changes next?</div></div>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#5D9BD4;font-weight:600">01</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff;margin-top:6px;line-height:1.2">What did we believe?</div></div>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#5D9BD4;font-weight:600">02</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff;margin-top:6px;line-height:1.2">What actually happened?</div></div>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#5D9BD4;font-weight:600">03</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff;margin-top:6px;line-height:1.2">What did we learn?</div></div>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);padding:18px 20px"><div style="font-family:'DM Sans',sans-serif;font-size:12px;color:#5D9BD4;font-weight:600">04</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff;margin-top:6px;line-height:1.2">What changes next?</div></div>
           </div>
         </div>
-        <div class="ga-x43" data-reveal style="max-width:74ch;margin-top:clamp(24px,3.5vw,34px);transition:opacity .7s ease .18s,transform .7s ease .18s">
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">The answers determine what the company keeps, changes, removes, or tests again. With each cycle, the motion becomes clearer, stronger, and more repeatable.</p>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">This is how commercial knowledge compounds. Insights become decisions. Decisions become operating practices. Operating practices become a system.</p>
+        <div class="ga-x60" data-reveal style="max-width:74ch;margin-top:clamp(24px,3.5vw,34px);transition:opacity .7s ease .18s,transform .7s ease .18s">
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#AEBED0;margin:0">The answers determine what the company keeps, changes, removes, or tests again. With each cycle, the motion becomes clearer, stronger, and more repeatable.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#AEBED0;margin:16px 0 0">This is how commercial knowledge compounds. Insights become decisions. Decisions become operating practices. Operating practices become a system.</p>
         </div>
-        <div class="ga-x44" data-reveal style="margin-top:clamp(28px,4vw,40px);border-left:3px solid #1E4FA1;padding:6px 0 6px 22px;max-width:78ch;transition:opacity .7s ease .22s,transform .7s ease .22s">
-          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#0B1D33;letter-spacing:-0.01em">Commercial architecture is drawn in pencil, never in pen.</div>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3A4654;margin:12px 0 0">Markets evolve. Buyers change. Competitors move. Great commercial systems are designed to learn, not merely to execute.</p>
+        <div class="ga-x61" data-reveal style="margin-top:clamp(28px,4vw,40px);border-left:3px solid #5D9BD4;padding:6px 0 6px 22px;max-width:78ch;transition:opacity .7s ease .22s,transform .7s ease .22s">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#fff;letter-spacing:-0.01em"><span style="display:block">Commercial architecture is drawn in pencil,</span><span style="display:block">never in pen.</span></div>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#AEBED0;margin:12px 0 0">Markets evolve. Buyers change. Competitors move. Great commercial systems are designed to learn, not merely to execute.</p>
+        </div>
         </div>
       </div>
     </div>
 
     <!-- BEAT 4 · TRANSFER -->
-    <div class="ga-x45" data-beat-sec="3" id="beat-transfer" style="scroll-margin-top:150px;border-top:1px solid #EEF0F3">
+    <div class="ga-x62" data-beat-sec="3" id="beat-transfer" style="scroll-margin-top:150px;border-top:1px solid #EEF0F3">
       <div style="max-width:1180px;margin:0 auto;padding:clamp(52px,8vw,92px) 24px clamp(40px,5vw,64px)">
-        <div class="ga-x46" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
-          <div style="flex:0 0 auto">
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(72px,11vw,150px);line-height:.8;letter-spacing:-0.03em;color:#1E4FA1">T</div>
-            <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FA0B4;margin-top:12px">Transfer &amp; institutionalize</div>
-          </div>
+        <div class="ga-x63" data-reveal style="display:flex;align-items:flex-end;gap:clamp(20px,4vw,56px);flex-wrap:wrap;transition:opacity .7s ease,transform .7s ease">
           <div style="flex:1 1 380px;min-width:280px">
             <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;font-weight:600">Inside the Company</div>
-            <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.015em">The capability transfers. The system remains.</h3>
+            <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#0B1D33;margin:10px 0 0;letter-spacing:-0.015em"><span style="display:block">The capability transfers.</span><span style="display:block">The system remains.</span></h3>
           </div>
         </div>
-        <div class="ga-x47" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">A commercial engine is not complete while it still depends on the person who built it.</p>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">Transfer embeds the proven motion into the company. Strategy, execution, people, data, and decision-making are synchronized around one shared commercial truth.</p>
+        <div class="ga-x64" data-reveal style="max-width:74ch;margin-top:clamp(22px,3.5vw,36px);transition:opacity .7s ease .06s,transform .7s ease .06s">
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:0">A commercial engine is not complete while it still depends on the person who&nbsp;built&nbsp;it.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">Transfer embeds the proven motion into the company.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">The knowledge moves out of individual heads and into the operating system of the business. Playbooks document how the motion works. Enablement builds the team's ability to run it. Hiring profiles define who the system needs. Dashboards make performance visible. Operating cadences turn evidence into decisions.</p>
           <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">This is not a handoff of documents. It is the institutionalization of capability.</p>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#3A4654;margin:16px 0 0">The company does not simply receive a commercial system. It learns how to operate, measure, challenge, and improve it without depending on any single person.</p>
           <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:#1E4FA1;font-weight:600;margin-top:20px">→ A Commercial Engine the Company Can Run</div>
         </div>
-        <div class="ga-x48" data-reveal style="margin-top:clamp(36px,5vw,56px);border-radius:16px;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff;padding:clamp(30px,4.5vw,52px);transition:opacity .7s ease,transform .7s ease">
+        <div class="ga-x65" data-reveal style="margin-top:clamp(36px,5vw,56px);border-radius:16px;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff;padding:clamp(30px,4.5vw,52px);transition:opacity .7s ease,transform .7s ease">
           <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;font-weight:500">The whole of D²BT</div>
-          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#fff;margin:14px 0 0;letter-spacing:-0.02em">Build the engine. Do not be it.</h3>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#AEBED0;margin:20px 0 0;max-width:64ch">D²BT moves the company from commercial assumption to commercial truth, from commercial truth to architecture, from architecture to a proven motion, and from a proven motion to an institutional capability.</p>
-          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#AEBED0;margin:16px 0 0;max-width:64ch">The result is repeatable growth that no longer depends on founder instinct, individual heroics, or an outside advisor remaining in the room.</p>
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,44px);color:#fff;margin:14px 0 0;letter-spacing:-0.02em"><span style="display:block">Build the engine.</span><span style="display:block">Do not be it.</span></h3>
+          <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#AEBED0;margin:20px 0 0;max-width:64ch">The result is repeatable growth that no longer depends on individual instinct, heroic effort, or an outside advisor in the room.</p>
         </div>
       </div>
     </div>
@@ -493,9 +587,9 @@
   <section id="journey" style="background:#FBFBF9;position:relative;overflow:hidden">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,150px) 24px">
       <div style="max-width:64ch">
-        <div class="ga-x49" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The Journey</div>
-        <h2 class="ga-x50" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Find your bearings.</h2>
-        <p class="ga-x51" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:56ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Every company sits at a slightly different stage. Wherever you are in your journey, there is always an opportunity to level up the commercial engine, and to integrate the rigor that sets you up for long-term success. Prepare, Accelerate, and Scale are not a ladder you start at the bottom of. Enter where you are.</p>
+        <div class="ga-x66" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The Journey</div>
+        <h2 class="ga-x67" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Find your bearings.</h2>
+        <p class="ga-x68" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:56ch;transition:opacity .7s ease .12s,transform .7s ease .12s"><span style="display:block">Every company enters at a different stage.</span><span style="display:block">Prepare, Accelerate, and Scale are not a ladder.</span><span style="display:block">Enter where you are.</span></p>
       </div>
 
       <div id="ga-journey-track" style="position:relative;margin-top:clamp(44px,6vw,72px);padding-left:clamp(30px,5vw,54px)">
@@ -503,7 +597,7 @@
           <div id="ga-journey-fill" style="position:absolute;inset:0;background:#1E4FA1;transform:scaleY(0);transform-origin:top;transition:transform .25s linear"></div>
         </div>
 
-        <div class="ga-x52" data-reveal style="position:relative;transition:opacity .7s ease,transform .7s ease">
+        <div class="ga-x69" data-reveal style="position:relative;transition:opacity .7s ease,transform .7s ease">
           <span data-jnode="0" style="position:absolute;left:calc(-1 * clamp(30px,5vw,54px) + clamp(3px,1vw,9px));top:4px;width:14px;height:14px;border-radius:50%;background:#CBD3DB;box-shadow:0 0 0 5px #FBFBF9;transition:background .35s ease,box-shadow .35s ease,transform .35s ease"></span>
           <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px">
             <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);color:#0B1D33">Prepare</span>
@@ -521,7 +615,7 @@
           </div>
         </div>
 
-        <div class="ga-x53" data-reveal style="position:relative;margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease .1s,transform .7s ease .1s">
+        <div class="ga-x70" data-reveal style="position:relative;margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease .1s,transform .7s ease .1s">
           <span data-jnode="1" style="position:absolute;left:calc(-1 * clamp(30px,5vw,54px) + clamp(3px,1vw,9px));top:4px;width:14px;height:14px;border-radius:50%;background:#CBD3DB;box-shadow:0 0 0 5px #FBFBF9;transition:background .35s ease,box-shadow .35s ease,transform .35s ease"></span>
           <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px">
             <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);color:#0B1D33">Accelerate</span>
@@ -539,7 +633,7 @@
           </div>
         </div>
 
-        <div class="ga-x54" data-reveal style="position:relative;margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease .2s,transform .7s ease .2s">
+        <div class="ga-x71" data-reveal style="position:relative;margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease .2s,transform .7s ease .2s">
           <span data-jnode="2" style="position:absolute;left:calc(-1 * clamp(30px,5vw,54px) + clamp(3px,1vw,9px));top:4px;width:14px;height:14px;border-radius:50%;background:#CBD3DB;box-shadow:0 0 0 5px #FBFBF9;transition:background .35s ease,box-shadow .35s ease,transform .35s ease"></span>
           <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px">
             <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);color:#0B1D33">Scale</span>
@@ -557,7 +651,7 @@
           </div>
         </div>
       </div>
-      <p class="ga-x55" data-reveal style="font-family:'Inter',sans-serif;font-size:14.5px;color:#8FA0B4;margin:clamp(28px,4vw,44px) 0 0;padding-left:clamp(30px,5vw,54px);transition:opacity .7s ease">D²BT runs underneath all three acts. Enter at any act; Gain meets you where you are.</p>
+      <p class="ga-x72" data-reveal style="font-family:'Inter',sans-serif;font-size:14.5px;color:#8FA0B4;margin:clamp(28px,4vw,44px) 0 0;padding-left:clamp(30px,5vw,54px);transition:opacity .7s ease">D²BT runs underneath; Gain meets you where you are.</p>
     </div>
     <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:14px;background-image:url('assets/wood-wall.jpg');background-image:image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center 30%;opacity:.9;box-shadow:inset 0 4px 9px rgba(0,0,0,.28)"></div>
   </section>
@@ -572,9 +666,9 @@
       <line x1="440" y1="150" x2="640" y2="150" stroke="#5D9BD4" stroke-width="3"/>
     </svg>
     <div style="position:relative;max-width:1180px;margin:0 auto;padding:clamp(90px,13vw,170px) 24px">
-      <div class="ga-x56" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;transition:opacity .7s ease,transform .7s ease">The stakes</div>
-      <h2 class="ga-x57" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(32px,5.4vw,66px);line-height:1.02;letter-spacing:-0.02em;color:#fff;margin:18px 0 0;max-width:18ch;transition:opacity .8s ease .06s,transform .8s ease .06s">Commercial <span style="color:#5D9BD4;text-decoration:underline;text-decoration-color:rgba(93,155,212,.4);text-decoration-thickness:2px;text-underline-offset:8px">credibility</span> creates <span style="color:#5D9BD4;text-decoration:underline;text-decoration-color:rgba(93,155,212,.4);text-decoration-thickness:2px;text-underline-offset:8px">investability</span>.</h2>
-      <p class="ga-x58" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#AEBED0;margin:26px 0 0;max-width:58ch;transition:opacity .8s ease .12s,transform .8s ease .12s">A company that has designed its commercial engine is a company an investor can underwrite. Validated motion, evidence instead of assumption, revenue that scales and stays predictable because it does not rest on any one individual. That is what gives an investor conviction.</p>
+      <div class="ga-x73" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4;transition:opacity .7s ease,transform .7s ease">The stakes</div>
+      <h2 class="ga-x74" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(32px,5.4vw,66px);line-height:1.02;letter-spacing:-0.02em;color:#fff;margin:18px 0 0;max-width:18ch;transition:opacity .8s ease .06s,transform .8s ease .06s">Commercial <span style="color:#5D9BD4;text-decoration:underline;text-decoration-color:rgba(93,155,212,.4);text-decoration-thickness:2px;text-underline-offset:8px">credibility</span> creates <span style="color:#5D9BD4;text-decoration:underline;text-decoration-color:rgba(93,155,212,.4);text-decoration-thickness:2px;text-underline-offset:8px">investability</span>.</h2>
+      <p class="ga-x75" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#AEBED0;margin:26px 0 0;max-width:58ch;transition:opacity .8s ease .12s,transform .8s ease .12s">A company that has designed its commercial engine is a company an investor can underwrite. Validated motion, evidence instead of assumption, revenue that scales and stays predictable because it does not rest on any one individual. That is what gives an investor conviction.</p>
     </div>
   </section>
 
@@ -583,41 +677,37 @@
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,150px) 24px">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(30px,5vw,64px);align-items:end">
         <div>
-          <div class="ga-x59" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">Proof</div>
-          <h2 class="ga-x60" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s">The same pattern, repeated market after market.</h2>
-          <p class="ga-x61" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:52ch;transition:opacity .7s ease .12s,transform .7s ease .12s">A career spent commercializing complex data, technology, and software, with deep specialization in financial markets. Not just selling those products. Building the commercial systems that brought them to market and scaled the organizations behind them.</p>
+          <div class="ga-x76" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">Proof</div>
+          <h2 class="ga-x77" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s"><span style="display:block">The same pattern,</span><span style="display:block">repeated market after market.</span></h2>
+          <p class="ga-x78" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:52ch;transition:opacity .7s ease .12s,transform .7s ease .12s">A career spent commercializing complex data, technology, and software, with deep specialization in financial markets. Not just selling those products. Building the commercial systems that brought them to market and scaled the organizations behind them.</p>
         </div>
-        <div class="ga-x62" data-reveal style="transition:opacity .8s ease .1s,transform .8s ease .1s;display:flex;flex-direction:column;gap:clamp(20px,3vw,30px)">
+        <div class="ga-x79" data-reveal style="transition:opacity .8s ease .1s,transform .8s ease .1s;display:flex;flex-direction:column;gap:clamp(20px,3vw,30px)">
           <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,7.5vw,100px);line-height:.9;letter-spacing:-0.03em;color:#0B1D33">$500M+</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.9;letter-spacing:-0.03em;color:#0B1D33" data-count-to="500" data-count-prefix="$" data-count-suffix="M+">$500M+</div>
             <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#5B6B7C;margin-top:10px">Recurring revenue commercialized</div>
           </div>
           <div style="border-top:1px solid #E2E6EA;padding-top:clamp(20px,3vw,30px)">
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,7.5vw,100px);line-height:.9;letter-spacing:-0.03em;color:#0B1D33">$6B+</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(40px,6vw,72px);line-height:.9;letter-spacing:-0.03em;color:#0B1D33" data-count-to="6" data-count-prefix="$" data-count-suffix="B+">$6B+</div>
             <div style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#5B6B7C;margin-top:10px">In enterprise value</div>
           </div>
-          <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#8FA0B4;margin:0;max-width:44ch">Commercialized businesses that collectively generated more than $500M in recurring revenue and over $6B in enterprise value.</p>
         </div>
       </div>
 
       <!-- career through-line -->
       <div style="margin-top:clamp(52px,7vw,90px)">
-        <svg viewBox="0 0 1120 44" preserveAspectRatio="none" style="width:100%;height:26px;display:block" fill="none">
-          <path class="ga-x63" data-draw pathLength="1" d="M12,22 L1108,22" stroke="#1E4FA1" stroke-width="2" style="stroke-dasharray:1;transition:stroke-dashoffset 1.8s ease"/>
-        </svg>
         <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:20px">
-          <div class="ga-x64" data-reveal style="transition:opacity .5s ease .1s,transform .5s ease .1s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Nasdaq</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">$10M → $350M+ ARR</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Scaled recurring revenue</div></div>
-          <div class="ga-x65" data-reveal style="transition:opacity .5s ease .18s,transform .5s ease .18s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Q4</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">&lt;$1M → $40M+ ARR</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">IPO</div></div>
-          <div class="ga-x66" data-reveal style="transition:opacity .5s ease .26s,transform .5s ease .26s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Discovery Data</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">$6M → $60M+ ARR</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Strategic acquisition</div></div>
-          <div class="ga-x67" data-reveal style="transition:opacity .5s ease .34s,transform .5s ease .34s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">LTSE</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">Commercial launch</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Capital markets innovation</div></div>
-          <div class="ga-x68" data-reveal style="transition:opacity .5s ease .42s,transform .5s ease .42s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Figure</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">Digital securities GTM</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Private-market infrastructure</div></div>
-          <div class="ga-x69" data-reveal style="transition:opacity .5s ease .5s,transform .5s ease .5s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">EQ</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">10× revenue growth</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Returned business to profitability</div></div>
-          <div class="ga-x70" data-reveal style="transition:opacity .5s ease .58s,transform .5s ease .58s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Macrobond</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">+45% revenue • 3× pipeline</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Commercial transformation</div></div>
-          <div class="ga-x71" data-reveal style="transition:opacity .5s ease .66s,transform .5s ease .66s;flex:1 1 150px;min-width:140px;border-top:2px solid #0B1D33;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Gain Advisory</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#0B1D33;margin-top:7px;line-height:1.3">Commercial by Design</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Builder of Commercial Engines</div></div>
+          <div class="ga-x80" data-reveal style="transition:opacity .5s ease .1s,transform .5s ease .1s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Nasdaq</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">$10M → $150M Organic → $350M+</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Built and led the global commercial organization</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Scaled a business unit into a global platform</div></div>
+          <div class="ga-x81" data-reveal style="transition:opacity .5s ease .18s,transform .5s ease .18s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Q4</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">&lt;$1M → $40M+ → IPO</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Connected product strategy with commercial scale</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Built the global engine behind the growth</div></div>
+          <div class="ga-x82" data-reveal style="transition:opacity .5s ease .26s,transform .5s ease .26s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Discovery Data</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">$6M → $60M+</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Led the end-to-end commercial transformation</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Scaled the business through strategic acquisition</div></div>
+          <div class="ga-x83" data-reveal style="transition:opacity .5s ease .34s,transform .5s ease .34s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">LTSE</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">Launch → Multi-Million ARR</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Established the commercial model and market position</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Built the engine from the ground up</div></div>
+          <div class="ga-x84" data-reveal style="transition:opacity .5s ease .42s,transform .5s ease .42s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Figure</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">Complex-Market Commercialization</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Designed the commercial architecture for a regulated market</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Connected infrastructure, adoption, and revenue</div></div>
+          <div class="ga-x85" data-reveal style="transition:opacity .5s ease .5s,transform .5s ease .5s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">EQ</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">10× Revenue Growth | 67% Lower Losses</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Unified three businesses into one commercial platform</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Rebuilt the model for growth and economic performance</div></div>
+          <div class="ga-x86" data-reveal style="transition:opacity .5s ease .58s,transform .5s ease .58s;flex:1 1 150px;min-width:140px;border-top:2px solid #1E4FA1;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Macrobond</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#1E4FA1;margin-top:7px;line-height:1.3">+45% Revenue | 3× Pipeline</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Redesigned the Americas growth strategy</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">Rebuilt the regional commercial engine</div></div>
+          <div class="ga-x87" data-reveal style="transition:opacity .5s ease .66s,transform .5s ease .66s;flex:1 1 150px;min-width:140px;border-top:2px solid #0B1D33;padding-top:12px"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#0B1D33">Gain Advisory</div><div style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;color:#0B1D33;margin-top:7px;line-height:1.3">Builder of Commercial Engines</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:5px;line-height:1.35">Commercial by Design</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.04em;color:#8FA0B4;margin-top:2px;line-height:1.35">&nbsp;</div></div>
         </div>
-        <div class="ga-x72" data-reveal style="margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease,transform .7s ease">
-          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3.2vw,34px);color:#0B1D33;letter-spacing:-0.01em">My best work is still to come.</div>
-          <a href="#proof" style="display:inline-block;margin-top:14px;font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:#1E4FA1">About →</a>
+        <div class="ga-x88" data-reveal style="margin-top:clamp(34px,5vw,52px);transition:opacity .7s ease,transform .7s ease;max-width:70ch">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3.2vw,34px);color:#0B1D33;letter-spacing:-0.01em"><span style="display:block">Different companies.</span><span style="display:block">Different markets.</span><span style="display:block">The same mandate.</span></div>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(17px,1.9vw,23px);line-height:1.4;letter-spacing:-0.01em;color:#1E4FA1;margin:16px 0 0"><span style="display:block">Design the commercial model. Build the engine.</span><span style="display:block">Lead the transformation.</span></p>
         </div>
       </div>
     </div>
@@ -628,14 +718,14 @@
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,150px) 24px">
 
       <div style="max-width:66ch">
-        <div class="ga-x73" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The intelligence · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em">GTMology</span></div>
-        <h2 class="ga-x74" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s">The intelligence behind every engagement.</h2>
-        <p class="ga-x75" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:60ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Every recommendation I make is backed by GTMology, my proprietary commercial intelligence engine, built from decades of operating experience leading commercial organizations from early-stage startups to public companies.</p>
-        <p class="ga-x76" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:18px 0 0;max-width:60ch;transition:opacity .7s ease .18s,transform .7s ease .18s">It continuously analyzes thousands of commercial signals to build a complete picture of a company: its market, customers, competitors, leadership, and commercial readiness. It turns fragmented information into executive intelligence, so I can identify opportunities, prioritize initiatives, and decide on evidence instead of assumptions.</p>
+        <div class="ga-x89" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The intelligence · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:none;color:#0B1D33;display:inline-flex;align-items:center;vertical-align:middle"><span style="font-weight:400;color:#5B6B7C">[</span><span style="color:#5D9BD4">GTM</span><span style="font-weight:400;color:#5B6B7C">]</span><svg viewBox="0 0 48 48" style="height:.72em;width:.72em;margin:0 -.01em"><g fill="#5D9BD4"><rect x="20.5" y="1" width="7" height="10" rx="1.6"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(45 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(90 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(135 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(180 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(225 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(270 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(315 24 24)"/></g><circle cx="24" cy="24" r="15.5" fill="#5D9BD4"/><circle cx="24" cy="24" r="6.5" fill="#fff"/></svg>l<svg viewBox="0 0 48 48" style="height:.72em;width:.72em;margin:0 -.01em"><g fill="#5D9BD4"><rect x="20.5" y="1" width="7" height="10" rx="1.6"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(45 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(90 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(135 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(180 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(225 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(270 24 24)"/><rect x="20.5" y="1" width="7" height="10" rx="1.6" transform="rotate(315 24 24)"/></g><circle cx="24" cy="24" r="15.5" fill="#5D9BD4"/><circle cx="24" cy="24" r="6.5" fill="#fff"/></svg>gy</span></div>
+        <h2 class="ga-x90" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s">The intelligence behind every engagement.</h2>
+        <p class="ga-x91" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:60ch;transition:opacity .7s ease .12s,transform .7s ease .12s">Every recommendation I make is backed by GTMology, my proprietary commercial intelligence engine, built from decades of operating experience leading commercial organizations from early-stage startups to public companies.</p>
+        <p class="ga-x92" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:18px 0 0;max-width:60ch;transition:opacity .7s ease .18s,transform .7s ease .18s">It continuously analyzes thousands of commercial signals to build a complete picture of a company: its market, customers, competitors, leadership, and commercial readiness. It turns fragmented information into executive intelligence, so I can identify opportunities, prioritize initiatives, and decide on evidence instead of assumptions.</p>
       </div>
 
       <!-- intelligence console -->
-      <div class="ga-x77" data-reveal style="margin-top:clamp(40px,6vw,72px);border-radius:16px;overflow:hidden;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;box-shadow:0 30px 60px -40px rgba(11,29,51,.5);transition:opacity .8s ease,transform .8s ease">
+      <div class="ga-x93" data-reveal style="margin-top:clamp(40px,6vw,72px);border-radius:16px;overflow:hidden;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;box-shadow:0 30px 60px -40px rgba(11,29,51,.5);transition:opacity .8s ease,transform .8s ease">
         <div style="padding:clamp(26px,4vw,44px)">
 
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:18px">
@@ -644,46 +734,46 @@
           </div>
 
           <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px">
-            <span class="ga-x78" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.20s,transform .45s ease 0.20s">News</span>
-            <span class="ga-x79" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.23s,transform .45s ease 0.23s">Press</span>
-            <span class="ga-x80" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.26s,transform .45s ease 0.26s">Hiring</span>
-            <span class="ga-x81" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.29s,transform .45s ease 0.29s">Jobs</span>
-            <span class="ga-x82" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.32s,transform .45s ease 0.32s">SEC</span>
-            <span class="ga-x83" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.35s,transform .45s ease 0.35s">Product</span>
-            <span class="ga-x84" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.38s,transform .45s ease 0.38s">Patents</span>
-            <span class="ga-x85" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.41s,transform .45s ease 0.41s">Funding</span>
-            <span class="ga-x86" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.44s,transform .45s ease 0.44s">Strategy</span>
-            <span class="ga-x87" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.47s,transform .45s ease 0.47s">Research</span>
-            <span class="ga-x88" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.50s,transform .45s ease 0.50s">Engagement</span>
-            <span class="ga-x89" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.53s,transform .45s ease 0.53s">Transcripts</span>
+            <span class="ga-x94" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.20s,transform .45s ease 0.20s">News</span>
+            <span class="ga-x95" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.23s,transform .45s ease 0.23s">Press</span>
+            <span class="ga-x96" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.26s,transform .45s ease 0.26s">Hiring</span>
+            <span class="ga-x97" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.29s,transform .45s ease 0.29s">Jobs</span>
+            <span class="ga-x98" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.32s,transform .45s ease 0.32s">SEC</span>
+            <span class="ga-x99" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.35s,transform .45s ease 0.35s">Product</span>
+            <span class="ga-x100" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.38s,transform .45s ease 0.38s">Patents</span>
+            <span class="ga-x101" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.41s,transform .45s ease 0.41s">Funding</span>
+            <span class="ga-x102" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.44s,transform .45s ease 0.44s">Strategy</span>
+            <span class="ga-x103" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.47s,transform .45s ease 0.47s">Research</span>
+            <span class="ga-x104" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.50s,transform .45s ease 0.50s">Engagement</span>
+            <span class="ga-x105" data-reveal style="font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.03em;color:#DCE5EF;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:7px 12px;transition:opacity .45s ease 0.53s,transform .45s ease 0.53s">Transcripts</span>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.5);margin-top:16px;line-height:1.5">GTMology pulls each source in through its APIs, then specialized agents go to work. Each one deeply analyzes a single intelligence signal and surfaces the themes and patterns it finds. An orchestrator draws those together into the narrative, with a hallucination guard flagging every date and dollar claim before it is trusted.</div>
 
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px">
-            <div class="ga-x90" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .1s,transform .6s ease .1s">
+            <div class="ga-x106" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .1s,transform .6s ease .1s">
               <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff">Public-peer intelligence</div>
               <div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:rgba(220,229,239,.72);margin-top:8px">A private company, read through its public peer. Earnings calls and SEC filings frame the market and surface the headwinds and tailwinds shaping it.</div>
             </div>
-            <div class="ga-x91" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .18s,transform .6s ease .18s">
+            <div class="ga-x107" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .18s,transform .6s ease .18s">
               <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff">SellerIQ</div>
               <div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:rgba(220,229,239,.72);margin-top:8px">Codifies your value proposition, the buyers and titles you sell to, and the outcomes you deliver, so cross-referenced signals synthesize into outreach and conversations that understand a client's business and solve its deepest problems.</div>
             </div>
-            <div class="ga-x92" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .26s,transform .6s ease .26s">
+            <div class="ga-x108" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .26s,transform .6s ease .26s">
               <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff">Governance audit</div>
               <div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:rgba(220,229,239,.72);margin-top:8px">Every account evaluated through your company's lens runs through a specific governance audit, so we are always looking at the correct account and basing assumptions on the right one.</div>
             </div>
-            <div class="ga-x93" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .34s,transform .6s ease .34s">
+            <div class="ga-x109" data-reveal style="border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);border-radius:12px;padding:22px;transition:opacity .6s ease .34s,transform .6s ease .34s">
               <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#fff">Executive output</div>
               <div style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.5;color:rgba(220,229,239,.72);margin-top:8px">Intelligence that shapes the whole commercial picture: company strategy, go-to-market, marketing, sales, and the product roadmap.</div>
             </div>
           </div>
 
-          <div class="ga-x94" data-reveal style="margin-top:20px;border:1px solid rgba(93,155,212,.5);background:rgba(93,155,212,.1);border-radius:12px;padding:24px;transition:opacity .6s ease .42s,transform .6s ease .42s">
+          <div class="ga-x110" data-reveal style="margin-top:20px;border:1px solid rgba(93,155,212,.5);background:rgba(93,155,212,.1);border-radius:12px;padding:24px;transition:opacity .6s ease .42s,transform .6s ease .42s">
             <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5D9BD4">Signal synthesis · the nucleus</div>
             <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(17px,1.8vw,22px);line-height:1.38;letter-spacing:-0.01em;color:#fff;margin-top:12px;max-width:60ch">Not one signal, but many, read together for the pressure underneath, until a specific thesis emerges about a company. Often a sharper read than the company has of itself.</div>
           </div>
 
-          <div class="ga-x95" data-reveal style="margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;align-items:center;gap:14px;transition:opacity .7s ease .5s,transform .7s ease .5s">
+          <div class="ga-x111" data-reveal style="margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;align-items:center;gap:14px;transition:opacity .7s ease .5s,transform .7s ease .5s">
             <span style="font-family:'Inter',sans-serif;font-size:14.5px;color:rgba(255,255,255,.62)">Thousands of fragmented signals</span>
             <span style="color:#5D9BD4;font-size:18px">→</span>
             <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:#0B1D33;background:#5D9BD4;border-radius:999px;padding:9px 18px">Executive intelligence</span>
@@ -693,11 +783,8 @@
       </div>
 
       <!-- separates from AI tools + scale -->
-      <div style="margin-top:clamp(40px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(30px,5vw,60px);align-items:start">
-        <p class="ga-x96" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.4vw,17px);line-height:1.62;color:#5B6B7C;margin:0;transition:opacity .7s ease,transform .7s ease">GTMology is not a collection of prompts or off-the-shelf AI tools. It is a commercial intelligence system I have spent years designing to codify how experienced commercial operators evaluate markets, companies, and growth opportunities. AI accelerates the research. The methodology, reasoning, and commercial judgment are proprietary.</p>
-        <div class="ga-x97" data-reveal style="border-top:2px solid #1E4FA1;padding-top:20px;transition:opacity .7s ease .1s,transform .7s ease .1s">
-          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(17px,1.7vw,21px);line-height:1.4;letter-spacing:-0.01em;color:#0B1D33;margin:0">Built over hundreds of hours of research and development, GTMology combines proprietary frameworks, commercial methodologies, structured research, and narrative synthesis into one body of evidence behind the judgment.</p>
-        </div>
+      <div style="margin-top:clamp(40px,6vw,64px);max-width:74ch">
+        <p class="ga-x112" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:0;transition:opacity .7s ease,transform .7s ease">GTMology is not a collection of prompts or off-the-shelf AI tools. It is a proprietary commercial intelligence system, built over hundreds of hours to codify how experienced operators evaluate markets, companies, and growth opportunities.</p>
       </div>
 
     </div>
@@ -706,23 +793,23 @@
   <!-- CLOSE -->
   <section id="close" style="background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.97)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.97)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff">
     <div style="max-width:1180px;margin:0 auto;padding:clamp(90px,14vw,180px) 24px;text-align:center">
-      <h2 class="ga-x98" data-reveal style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6.6vw,84px);line-height:1;letter-spacing:-0.025em;color:#fff;margin:0 auto;max-width:16ch;transition:opacity .8s ease,transform .8s ease">Build the engine. Do not be it.</h2>
-      <p class="ga-x99" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#AEBED0;margin:26px auto 0;max-width:52ch;transition:opacity .8s ease .1s,transform .8s ease .1s">If you made it this far, more than one of these probably hit home.</p>
-      <div class="ga-x100" data-reveal style="margin-top:clamp(40px,6vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,52px);max-width:960px;margin-left:auto;margin-right:auto;text-align:left;transition:opacity .8s ease .18s,transform .8s ease .18s">
+      <h2 class="ga-x113" data-reveal style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6.6vw,84px);line-height:1;letter-spacing:-0.025em;color:#fff;margin:0 auto;max-width:16ch;transition:opacity .8s ease,transform .8s ease">Build the engine. Do not be it.</h2>
+      <p class="ga-x114" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#AEBED0;margin:26px auto 0;max-width:52ch;transition:opacity .8s ease .1s,transform .8s ease .1s">If you made it this far, more than one of these probably hit home.</p>
+      <div class="ga-x115" data-reveal style="margin-top:clamp(40px,6vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,52px);max-width:960px;margin-left:auto;margin-right:auto;text-align:left;transition:opacity .8s ease .18s,transform .8s ease .18s">
         <form onsubmit="return sendMessage(event)" style="display:grid;gap:16px">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
             <div>
               <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Name</label>
-              <input class="ga-x101" name="fullname" type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
+              <input class="ga-x116" name="fullname" type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
             </div>
             <div>
               <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Work email</label>
-              <input class="ga-x102" name="email" type="email" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
+              <input class="ga-x117" name="email" type="email" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
             </div>
           </div>
           <div>
             <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Company</label>
-            <input class="ga-x103" name="company" type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
+            <input class="ga-x118" name="company" type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
           </div>
           <div>
             <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">What is your biggest challenge right now?</label>
@@ -738,7 +825,7 @@
           </div>
           <div>
             <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Tell me more</label>
-            <textarea class="ga-x104" name="message" rows="3" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;resize:vertical"></textarea>
+            <textarea class="ga-x119" name="message" rows="3" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none;resize:vertical"></textarea>
           </div>
           <button type="submit" style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#0B1D33;background:#fff;padding:14px 26px;border:none;border-radius:6px;cursor:pointer;justify-self:start">Send message</button>
         </form>
@@ -769,37 +856,37 @@
           </a>
           <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:22px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
           <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:12px 0 0">Commercial by Design</p>
-          <a class="ga-x105" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+          <a class="ga-x120" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-top:20px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.85)"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
         </div>
         <div>
           <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Explore</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x106" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
-            <a class="ga-x107" href="/readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Readiness</a>
-            <a class="ga-x108" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
-            <a class="ga-x109" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x110" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
-            <a class="ga-x111" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
-            <a class="ga-x112" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
-            <a class="ga-x113" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
+            <a class="ga-x121" href="/#method" style="color:rgba(255,255,255,.85);transition:color .2s">The Method</a>
+            <a class="ga-x122" href="/readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Readiness</a>
+            <a class="ga-x123" href="/engagements" style="color:rgba(255,255,255,.85);transition:color .2s">Engagements</a>
+            <a class="ga-x124" href="/capital-readiness" style="color:rgba(255,255,255,.85);transition:color .2s">Capital Readiness</a><a class="ga-x125" href="/research" style="color:rgba(255,255,255,.85);transition:color .2s">Research</a>
+            <a class="ga-x126" href="/#proof" style="color:rgba(255,255,255,.85);transition:color .2s">Track Record</a>
+            <a class="ga-x127" href="/#intelligence" style="color:rgba(255,255,255,.85);transition:color .2s">GTMology</a>
+            <a class="ga-x128" href="/#close" style="color:rgba(255,255,255,.85);transition:color .2s">Contact</a>
           </div>
         </div>
         <div>
           <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)">Briefings</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x114" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
-            <a class="ga-x115" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
-            <a class="ga-x116" href="/about" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
+            <a class="ga-x129" href="/cco-vs-cro" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CRO</a>
+            <a class="ga-x130" href="/cco-vs-cmo" style="color:rgba(255,255,255,.85);transition:color .2s">Fractional CCO vs CMO</a>
+            <a class="ga-x131" href="/about" style="color:rgba(255,255,255,.85);transition:color .2s">What Gain Advisory is (and isn't)</a>
           </div>
         </div>
       </div>
       <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5)">
         <span>© 2026 Gain Advisory LLC</span>
-        <span style="display:flex;gap:18px"><a class="ga-x117" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x118" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
+        <span style="display:flex;gap:18px"><a class="ga-x132" href="/privacy" style="color:rgba(255,255,255,.85);transition:color .2s">Privacy</a><a class="ga-x133" href="/terms" style="color:rgba(255,255,255,.85);transition:color .2s">Terms</a></span>
       </div>
     </div>
   </footer>
 
-  </div>
+</div>
 <script>
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -816,31 +903,35 @@
 
   /* Method: pinned four-beat scroll stepper */
   var method = null, methodRaf = null;
-  /* Method: two-column sticky index. Ported from the design's
-     _initMethod/_updateMethod. The connector fill spans lastActBottom -
-     firstActTop - 0.55*viewport so it completes as the last act finishes
-     rather than racing ahead, and the active act is the last one whose top has
-     crossed 40% of the viewport, which sits beside the copy being read. */
+  /* Method chapter-reader. Ported from the design's _initMethod/_updateMethod.
+     The connector fill (scaleX) spans lastActBottom - firstActTop - 0.55*vh so
+     it completes as the last act finishes; the active act is the last one whose
+     top has crossed 40% of the viewport. On the active change it drives the
+     sticky plate: the morphing chapter glyph (data-plate opacity), the Act 0N
+     counter, the plate label and eyebrow, and dims the inactive acts on
+     desktop. Labels/eyebrows are the design's own arrays, injected above. */
   var method = null;
   function updateMethod(){
     var m = method;
-    if (!m || !m.secs.length) return;
+    if (!m || !m.secs || !m.secs.length) return;
     var line = window.innerHeight * 0.4;
     var first = m.secs[0].getBoundingClientRect();
     var last = m.secs[m.secs.length - 1].getBoundingClientRect();
     var span = last.bottom - first.top - window.innerHeight * 0.55;
     var p = span > 0 ? (line - first.top) / span : 0;
     p = Math.max(0, Math.min(1, p));
-    if (m.fill) m.fill.style.transform = 'scaleY(' + p + ')';
+    if (m.fill) m.fill.style.transform = 'scaleX(' + p + ')';
     var beat = 0;
     m.secs.forEach(function(sec, i){ if (sec.getBoundingClientRect().top <= line) beat = i; });
     if (beat === m.beat) return;
     m.beat = beat;
-    m.ticks.forEach(function(el, i){
-      var on = i === beat;
-      el.style.color = on ? '#0B1D33' : '#9AA7B4';
-      el.style.fontWeight = on ? '700' : '500';
-    });
+    var dim = window.innerWidth > 860;
+    m.secs.forEach(function(sec, i){ sec.style.opacity = (!dim || i === beat) ? '1' : '0.34'; });
+    if (m.plates) m.plates.forEach(function(el, i){ el.style.opacity = i === beat ? '1' : '0'; });
+    if (m.num) m.num.textContent = String(beat + 1).padStart(2, '0');
+    if (m.label && m.labels) m.label.innerHTML = m.labels[beat];
+    if (m.eyebrow && m.eyebrows) m.eyebrow.textContent = m.eyebrows[beat];
+    m.ticks.forEach(function(el, i){ el.style.color = (i === beat) ? '#0B1D33' : '#B7B2A6'; });
   }
   var methodRaf = null;
   function onMethodScroll(){
@@ -853,10 +944,17 @@
     method = {
       secs: [].slice.call(document.querySelectorAll('[data-beat-sec]')),
       ticks: [].slice.call(document.querySelectorAll('[data-tick]')),
+      plates: [].slice.call(document.querySelectorAll('[data-plate]')),
+      num: document.getElementById('ga-act-num'),
+      label: document.getElementById('ga-plate-label'),
+      eyebrow: document.getElementById('ga-plate-eyebrow'),
+      labels: ['Diagnose & Design', 'Build in the Market', 'Inside Build', 'Transfer<span style="display:block;font-family:\'DM Sans\',sans-serif;font-weight:400;font-size:12px;letter-spacing:.02em;color:#8B8677;margin-top:3px">and institutionalize</span>'],
+      eyebrows: ['Think', 'In the Market', 'The Learning Loop', 'Inside the Company'],
       fill: document.getElementById('ga-rail-fill'),
       beat: -1
     };
     if (!method.secs.length) return;
+    method.secs.forEach(function(sec){ sec.style.transition = 'opacity .5s ease'; });
     window.addEventListener('scroll', onMethodScroll, { passive: true });
     window.addEventListener('resize', onMethodScroll, { passive: true });
     updateMethod();
@@ -895,6 +993,37 @@
     window.addEventListener('scroll', onJourneyScroll, { passive: true });
     window.addEventListener('resize', onJourneyScroll, { passive: true });
     updateJourney();
+  }
+
+  /* Proof stats count-up. Ported from the design's _initCounters/_countUp. The
+     markup renders the final value (content-first), so with JS off or under
+     reduced motion the reader sees $500M+/$6B+ immediately; with motion the
+     value eases from 0 once the stat crosses 50% of the viewport, once. */
+  function countUp(el, instant){
+    var to = parseFloat(el.getAttribute('data-count-to')) || 0;
+    var pre = el.getAttribute('data-count-prefix') || '';
+    var suf = el.getAttribute('data-count-suffix') || '';
+    var isInt = to % 1 === 0;
+    function fmt(v){ return pre + (isInt ? Math.round(v) : v.toFixed(1)) + suf; }
+    if (instant){ el.textContent = fmt(to); return; }
+    var dur = 1150, t0 = null;
+    function step(now){
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(to * eased);
+      if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
+    }
+    requestAnimationFrame(step);
+  }
+  function initCounters(){
+    var els = [].slice.call(document.querySelectorAll('[data-count-to]'));
+    if (!els.length) return;
+    if (reduce || !('IntersectionObserver' in window)){ els.forEach(function(el){ countUp(el, true); }); return; }
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    els.forEach(function(el){ cio.observe(el); });
   }
 
 
@@ -967,6 +1096,7 @@
   function boot(){
     initMethod();
     initJourney();
+    initCounters();
     if ('IntersectionObserver' in window){
       io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
