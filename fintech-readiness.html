@@ -509,7 +509,7 @@
       nodes.forEach(function(nd){
         if (nd.getBoundingClientRect().top < window.innerHeight) reveal(nd);
       });
-    }, 4500);
+    }, 100);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();

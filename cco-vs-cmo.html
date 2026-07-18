@@ -514,16 +514,18 @@
     }
     if (reduce || !io){ nodes.forEach(reveal); return; }
     nodes.forEach(function(nd){ io.observe(nd); });
-    /* Failsafe (Jason, 2026-07-18): if the observer somehow misses an element
-       that is already on screen, reveal it after a beat. Crucially, only reveal
-       elements in or above the viewport, NEVER below-the-fold ones, so sections
-       the reader has not scrolled to yet (reframe, distinction) still animate on
-       arrival instead of being pre-revealed off-screen. */
+    /* Above-the-fold content must appear on load. The deeper -22% observer
+       trigger is meant for scroll-in sections; on load it strands content low in
+       the first screen. The hero paragraph, for example, sits below the -22%
+       line, never meets the threshold, and would wait seconds before showing.
+       So a beat after the hidden state paints, reveal whatever is already in the
+       viewport. The observer still fires deeper in view for below-the-fold
+       sections (reframe, distinction, ...) as the reader scrolls to them. */
     setTimeout(function(){
       nodes.forEach(function(nd){
         if (nd.getBoundingClientRect().top < window.innerHeight) reveal(nd);
       });
-    }, 4500);
+    }, 100);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
