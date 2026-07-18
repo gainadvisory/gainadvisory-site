@@ -256,62 +256,112 @@
     if (el.hasAttribute('data-draw')) el.style.strokeDashoffset = '0';
     el.style.opacity = '1';
     el.style.transform = 'none';
+    /* Kick off any looping sub-animations (hub/mesh/dataflow) once revealed;
+       they ship paused so a no-JS/reduced-motion reader gets a still image. */
+    var pulse = el.querySelectorAll('.ga-hub-core,.ga-hub-ring,.ga-mesh-node,.ga-dc-in,.ga-dc-out');
+    if (pulse.length) [].forEach.call(pulse, function(nd){ nd.style.animationPlayState = 'running'; });
   }
 
-  /* Method: pinned four-beat scroll stepper */
-  var method = null, methodRaf = null;
-  /* Method chapter-reader. Ported from the design's _initMethod/_updateMethod.
-     The connector fill (scaleX) spans lastActBottom - firstActTop - 0.55*vh so
-     it completes as the last act finishes; the active act is the last one whose
-     top has crossed 40% of the viewport. On the active change it drives the
-     sticky plate: the morphing chapter glyph (data-plate opacity), the Act 0N
-     counter, the plate label and eyebrow, and dims the inactive acts on
-     desktop. Labels/eyebrows are the design's own arrays, injected above. */
-  var method = null;
+  /* Method: scroll-driven D²BT engine (NET-NEW item 1). Ported verbatim from the
+     design's _initMethod/_updateMethod. Progress p is #ga-build's scroll fraction
+     (-top / (height - vh)); it drives the active beat, a confidence value c, the
+     version index, the continuous Transfer rail (destinations light as the
+     _xferAt thresholds are crossed), the architecture line ink/dash, the signals
+     fade-in, and per-version node drift. Hooks: #ga-build wrap, [data-build-beat],
+     #ga-arch-*, .ga-arch-drift, #ga-xfer-rail .ga-xfer-node. No copy arrays. */
+  var mb = null, methodRaf = null, reink = null;
+  var XFER_AT = [0.30, 0.42, 0.54, 0.66, 0.78, 0.88];
+  var DRIFT_MAP = [[[0,0],[0,0]], [[3,-3],[-3,2]], [[-2,4],[4,-2]], [[2,-2],[-3,-3]]];
   function updateMethod(){
-    var m = method;
-    if (!m || !m.secs || !m.secs.length) return;
-    var line = window.innerHeight * 0.4;
-    var first = m.secs[0].getBoundingClientRect();
-    var last = m.secs[m.secs.length - 1].getBoundingClientRect();
-    var span = last.bottom - first.top - window.innerHeight * 0.55;
-    var p = span > 0 ? (line - first.top) / span : 0;
+    var b = mb;
+    if (!b || !b.wrap) return;
+    var r = b.wrap.getBoundingClientRect();
+    /* Scroll lead-in (Jason, 2026-07-18): hold the animation until #ga-build has
+       scrolled up by ~LEAD_FRAC viewport heights, so the first Build beats do not
+       fly past at the top of the pinned stage. Raise LEAD_FRAC to delay the start
+       further (e.g. 0.8), lower it to start sooner. */
+    var LEAD_FRAC = 0.6;
+    var lead = window.innerHeight * LEAD_FRAC;
+    var span = r.height - window.innerHeight;
+    var p = (span - lead) > 0 ? (-r.top - lead) / (span - lead) : 0;
     p = Math.max(0, Math.min(1, p));
-    if (m.fill) m.fill.style.transform = 'scaleX(' + p + ')';
-    var beat = 0;
-    m.secs.forEach(function(sec, i){ if (sec.getBoundingClientRect().top <= line) beat = i; });
-    if (beat === m.beat) return;
-    m.beat = beat;
-    var dim = window.innerWidth > 860;
-    m.secs.forEach(function(sec, i){ sec.style.opacity = (!dim || i === beat) ? '1' : '0.34'; });
-    if (m.plates) m.plates.forEach(function(el, i){ el.style.opacity = i === beat ? '1' : '0'; });
-    if (m.num) m.num.textContent = String(beat + 1).padStart(2, '0');
-    if (m.label && m.labels) m.label.innerHTML = m.labels[beat];
-    if (m.eyebrow && m.eyebrows) m.eyebrow.textContent = m.eyebrows[beat];
-    m.ticks.forEach(function(el, i){ el.style.color = (i === beat) ? '#0B1D33' : '#B7B2A6'; });
+    var n = b.beats.length || 6;
+    var beat = Math.min(n - 1, Math.max(0, Math.floor(p * n + 0.0001)));
+    var c = Math.max(0, Math.min(1, (p - 0.05) / 0.8));
+    var vIdx = p < 0.5 ? 0 : p < 0.56 ? 1 : p < 0.62 ? 2 : 3;
+    var wide = window.innerWidth > 860;
+
+    if (beat !== b.beat){
+      b.beat = beat;
+      b.beats.forEach(function(el, i){ el.style.opacity = (!wide || i === beat) ? '1' : '0.3'; });
+      if (b.panel) b.panel.style.opacity = (wide && beat === 2) ? '0.5' : '1';
+      var word = c < 0.34 ? 'Unproven' : c < 0.72 ? 'Increasing' : 'Validated pattern';
+      if (b.status) b.status.textContent = word;
+    }
+
+    if (b.conffill) b.conffill.style.width = Math.round(8 + c * 88) + '%';
+
+    var lit = 0, i;
+    for (i = 0; i < XFER_AT.length; i++){ if (p >= XFER_AT[i]) lit = i + 1; }
+    if (lit !== b.lit){
+      var rising = lit > b.lit;
+      b.lit = lit;
+      b.xnodes.forEach(function(node, k){
+        var on = k < lit;
+        var dot = node.querySelector('.ga-xfer-dot');
+        node.style.opacity = on ? '1' : '0.38';
+        if (dot){ dot.style.background = on ? '#5D9BD4' : '#0B1D33'; dot.style.borderColor = on ? '#5D9BD4' : '#5A6B80'; }
+      });
+      if (rising && lit > 0 && !reduce){
+        var ld = b.xnodes[lit - 1] && b.xnodes[lit - 1].querySelector('.ga-xfer-dot');
+        if (ld){
+          ld.style.boxShadow = '0 0 0 0 rgba(93,155,212,.55)';
+          requestAnimationFrame(function(){ ld.style.boxShadow = '0 0 0 9px rgba(93,155,212,0)'; });
+        }
+      }
+    }
+
+    var gap = (5 * (1 - c)).toFixed(1);
+    var op = (0.4 + 0.55 * c).toFixed(2);
+    b.lines.forEach(function(l){ l.style.strokeDasharray = '3 ' + gap; l.style.opacity = op; });
+
+    var sig = Math.max(0, Math.min(1, (p - 0.08) / 0.26));
+    if (b.signals) b.signals.style.opacity = sig.toFixed(2);
+
+    if (vIdx !== b.vIdx){
+      b.vIdx = vIdx;
+      if (b.version) b.version.textContent = 'v1.' + vIdx;
+      var dm = DRIFT_MAP[vIdx] || [[0,0],[0,0]];
+      b.drifts.forEach(function(g, k){ var dd = dm[k] || [0,0]; g.style.transform = 'translate(' + dd[0] + 'px,' + dd[1] + 'px)'; });
+      if (!reduce){
+        b.lines.forEach(function(l){ l.style.stroke = '#5D9BD4'; });
+        clearTimeout(reink);
+        reink = setTimeout(function(){ b.lines.forEach(function(l){ l.style.stroke = '#8FA0B4'; }); }, 420);
+      }
+    }
   }
-  var methodRaf = null;
   function onMethodScroll(){
     if (methodRaf) return;
     methodRaf = requestAnimationFrame(function(){ methodRaf = null; updateMethod(); });
   }
   function initMethod(){
-    var idx = document.querySelector('.ga-method-index');
-    if (!idx) return;
-    method = {
-      secs: [].slice.call(document.querySelectorAll('[data-beat-sec]')),
-      ticks: [].slice.call(document.querySelectorAll('[data-tick]')),
-      plates: [].slice.call(document.querySelectorAll('[data-plate]')),
-      num: document.getElementById('ga-act-num'),
-      label: document.getElementById('ga-plate-label'),
-      eyebrow: document.getElementById('ga-plate-eyebrow'),
-      labels: [],
-      eyebrows: [],
-      fill: document.getElementById('ga-rail-fill'),
-      beat: -1
+    var wrap = document.getElementById('ga-build');
+    if (!wrap) return;
+    mb = {
+      wrap: wrap,
+      panel: document.getElementById('ga-arch-panel'),
+      beats: [].slice.call(document.querySelectorAll('[data-build-beat]')),
+      lines: [].slice.call(document.querySelectorAll('#ga-arch-lines line')),
+      signals: document.getElementById('ga-arch-signals'),
+      version: document.getElementById('ga-arch-version'),
+      status: document.getElementById('ga-arch-status'),
+      conffill: document.getElementById('ga-arch-conffill'),
+      drifts: [].slice.call(document.querySelectorAll('.ga-arch-drift')),
+      xnodes: [].slice.call(document.querySelectorAll('#ga-xfer-rail .ga-xfer-node')),
+      vIdx: -1, beat: -1, lit: -1
     };
-    if (!method.secs.length) return;
-    method.secs.forEach(function(sec){ sec.style.transition = 'opacity .5s ease'; });
+    mb.lines.forEach(function(l){ l.style.transition = 'stroke .5s ease,opacity .45s ease'; });
+    if (mb.signals) mb.signals.style.transition = 'opacity .4s ease';
     window.addEventListener('scroll', onMethodScroll, { passive: true });
     window.addEventListener('resize', onMethodScroll, { passive: true });
     updateMethod();
@@ -455,9 +505,12 @@
     initJourney();
     initCounters();
     if ('IntersectionObserver' in window){
+      /* Reveal timing (Jason, 2026-07-18): fire animations deeper in view, not
+         at the bottom edge. rootMargin -22% delays the trigger until the element
+         is ~22% up from the viewport bottom; more negative = later, less = sooner. */
       io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
-      }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+      }, { threshold: 0.25, rootMargin: '0px 0px -22% 0px' });
     }
     if (reduce || !io){ nodes.forEach(reveal); return; }
     nodes.forEach(function(nd){ io.observe(nd); });

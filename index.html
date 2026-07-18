@@ -1267,9 +1267,12 @@
     initJourney();
     initCounters();
     if ('IntersectionObserver' in window){
+      /* Reveal timing (Jason, 2026-07-18): fire animations deeper in view, not
+         at the bottom edge. rootMargin -22% delays the trigger until the element
+         is ~22% up from the viewport bottom; more negative = later, less = sooner. */
       io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
-      }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+      }, { threshold: 0.25, rootMargin: '0px 0px -22% 0px' });
     }
     if (reduce || !io){ nodes.forEach(reveal); return; }
     nodes.forEach(function(nd){ io.observe(nd); });
