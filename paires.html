@@ -533,7 +533,11 @@
     }
     if (reduce || !io){ nodes.forEach(reveal); return; }
     nodes.forEach(function(nd){ io.observe(nd); });
-    setTimeout(function(){ nodes.forEach(reveal); }, 4500);
+    setTimeout(function(){
+      nodes.forEach(function(nd){
+        if (nd.getBoundingClientRect().top < window.innerHeight) reveal(nd);
+      });
+    }, 4500);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
