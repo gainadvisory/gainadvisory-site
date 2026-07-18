@@ -13,11 +13,6 @@
       "permanent": true
     },
     {
-      "source": "/paires",
-      "destination": "/engagements",
-      "permanent": true
-    },
-    {
       "source": "/diagnostic",
       "destination": "/readiness",
       "permanent": true
