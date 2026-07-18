@@ -914,15 +914,15 @@
       <h2 class="ga-x105" data-reveal style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6.6vw,84px);line-height:1;letter-spacing:-0.025em;color:#fff;margin:0 auto;max-width:16ch;transition:opacity .8s ease,transform .8s ease">Start your engine.</h2>
       <p class="ga-x106" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:#AEBED0;margin:26px auto 0;max-width:52ch;transition:opacity .8s ease .1s,transform .8s ease .1s">If you made it this far, more than one of these probably hit home.</p>
       <div class="ga-x107" data-reveal style="margin-top:clamp(40px,6vw,60px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,52px);max-width:960px;margin-left:auto;margin-right:auto;text-align:left;transition:opacity .8s ease .18s,transform .8s ease .18s">
-        <form onsubmit="return sendMessage(event)" style="display:grid;gap:16px">
+        <form onsubmit="return sendMessage(event)" style="display:grid;gap:16px"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
             <div>
               <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Name</label>
-              <input class="ga-x108" name="fullname" type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
+              <input class="ga-x108" name="fullname" required type="text" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
             </div>
             <div>
               <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:7px">Work email</label>
-              <input class="ga-x109" name="email" type="email" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
+              <input class="ga-x109" name="email" required type="email" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;outline:none">
             </div>
           </div>
           <div>
@@ -1284,7 +1284,7 @@
         if (nd.getBoundingClientRect().top < line) reveal(nd);
       }
     }
-    sweep(1);                       // load: reveal the full first screen
+    setTimeout(function(){ sweep(1); }, 100); // load: reveal the full first screen (a beat after paint so it fades in)
     var ticking = false;
     var raf = window.requestAnimationFrame || function(cb){ return setTimeout(cb, 16); };
     function onScroll(){
