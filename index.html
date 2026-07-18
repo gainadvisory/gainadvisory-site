@@ -1038,8 +1038,14 @@
     var b = mb;
     if (!b || !b.wrap) return;
     var r = b.wrap.getBoundingClientRect();
-    var total = r.height - window.innerHeight;
-    var p = total > 0 ? (-r.top) / total : 0;
+    /* Scroll lead-in (Jason, 2026-07-18): hold the animation until #ga-build has
+       scrolled up by ~LEAD_FRAC viewport heights, so the first Build beats do not
+       fly past at the top of the pinned stage. Raise LEAD_FRAC to delay the start
+       further (e.g. 0.8), lower it to start sooner. */
+    var LEAD_FRAC = 0.6;
+    var lead = window.innerHeight * LEAD_FRAC;
+    var span = r.height - window.innerHeight;
+    var p = (span - lead) > 0 ? (-r.top - lead) / (span - lead) : 0;
     p = Math.max(0, Math.min(1, p));
     var n = b.beats.length || 6;
     var beat = Math.min(n - 1, Math.max(0, Math.floor(p * n + 0.0001)));
