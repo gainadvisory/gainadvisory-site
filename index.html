@@ -1266,28 +1266,34 @@
     initMethod();
     initJourney();
     initCounters();
-    if ('IntersectionObserver' in window){
-      /* Reveal timing (Jason, 2026-07-18): fire animations deeper in view, not
-         at the bottom edge. rootMargin -22% delays the trigger until the element
-         is ~22% up from the viewport bottom; more negative = later, less = sooner. */
-      io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
-      }, { threshold: 0.25, rootMargin: '0px 0px -22% 0px' });
+    if (reduce){ nodes.forEach(reveal); return; }
+    /* Reveal on scroll with a plain scroll listener rather than an
+       IntersectionObserver (Jason, 2026-07-18). The observer's percentage
+       rootMargin (-22%) was unreliable in Safari and on mobile, where the
+       reframe and distinction diagrams never revealed at all. The same scroll
+       math behaves identically in every browser. On load the whole first screen
+       reveals, so the hero never waits; as the reader scrolls, each element
+       reveals once its top passes REVEAL_LINE of the viewport height, a bit
+       inside the bottom edge rather than at it (lower = deeper). */
+    var REVEAL_LINE = 0.85;
+    function sweep(frac){
+      var line = window.innerHeight * frac;
+      for (var i = 0; i < nodes.length; i++){
+        var nd = nodes[i];
+        if (nd.dataset.drawn) continue;
+        if (nd.getBoundingClientRect().top < line) reveal(nd);
+      }
     }
-    if (reduce || !io){ nodes.forEach(reveal); return; }
-    nodes.forEach(function(nd){ io.observe(nd); });
-    /* Above-the-fold content must appear on load. The deeper -22% observer
-       trigger is meant for scroll-in sections; on load it strands content low in
-       the first screen. The hero paragraph, for example, sits below the -22%
-       line, never meets the threshold, and would wait seconds before showing.
-       So a beat after the hidden state paints, reveal whatever is already in the
-       viewport. The observer still fires deeper in view for below-the-fold
-       sections (reframe, distinction, ...) as the reader scrolls to them. */
-    setTimeout(function(){
-      nodes.forEach(function(nd){
-        if (nd.getBoundingClientRect().top < window.innerHeight) reveal(nd);
-      });
-    }, 100);
+    sweep(1);                       // load: reveal the full first screen
+    var ticking = false;
+    var raf = window.requestAnimationFrame || function(cb){ return setTimeout(cb, 16); };
+    function onScroll(){
+      if (ticking) return;
+      ticking = true;
+      raf(function(){ ticking = false; sweep(REVEAL_LINE); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
