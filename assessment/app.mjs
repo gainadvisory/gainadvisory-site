@@ -215,7 +215,8 @@ function contextHTML() {
         </select>
       </label>
     </div>
-    <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(40px,6vw,56px);padding-top:26px;border-top:1px solid #E2E6EA">
+    <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;color:#8B8677;margin:clamp(28px,4vw,38px) 0 0;max-width:62ch">Your answers stay in your browser. When you generate your report, these details and your result are sent to Gain Advisory so we can follow up. See our <a class="cra-link" href="/privacy" style="color:#5B6B7C;text-decoration:underline">privacy policy</a>.</p>
+    <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(24px,3vw,32px);padding-top:26px;border-top:1px solid #E2E6EA">
       <button class="cra-ghost" data-action="back-intro" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">&larr; Back</button>
       <div style="display:flex;align-items:center;gap:22px">
         <button class="cra-ghost" data-action="skip" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer">Skip for now</button>
