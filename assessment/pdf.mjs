@@ -130,10 +130,12 @@ export async function buildReportBlob(model) {
     y = top + lines.length * lineH;
   }
 
-  // Two-column check grid (unlocks).
+  // Two-column check grid (unlocks). Font is set up front so line wrapping used
+  // for measurement (measureCheckGrid) matches what is actually drawn.
   function checkGrid(items) {
     const gap = 22, colw = (W - gap) / 2;
     const rowGap = 6;
+    setFont('Inter', 'normal', 9.5, C.body);
     for (let i = 0; i < items.length; i += 2) {
       const left = items[i], right = items[i + 1];
       const leftLines = wrap(left, colw - 16).length;
@@ -146,6 +148,22 @@ export async function buildReportBlob(model) {
       if (right) { y = rowTop; checkItem(right, M + colw + gap, colw); }
       y = Math.max(afterLeft, y) + rowGap;
     }
+  }
+
+  // Height of one grid row (row i/i+1), using the exact wrap/leading of checkGrid.
+  function checkRowHeight(items, i) {
+    const gap = 22, colw = (W - gap) / 2, rowGap = 6;
+    setFont('Inter', 'normal', 9.5, C.body);
+    const l = wrap(items[i], colw - 16).length;
+    const r = items[i + 1] ? wrap(items[i + 1], colw - 16).length : 0;
+    return Math.max(l, r) * 9.5 * 1.42 + rowGap;
+  }
+
+  // Total height of the whole two-column grid (all rows), matching checkGrid.
+  function measureCheckGrid(items) {
+    let h = 0;
+    for (let i = 0; i < items.length; i += 2) h += checkRowHeight(items, i);
+    return h;
   }
 
   // Marker list (filled dot or drawn x), single column.
@@ -347,7 +365,17 @@ export async function buildReportBlob(model) {
     let py = plTop + 12;
     for (const ln of plLines) { doc.text(ln, M + 14, py, { baseline: 'top' }); py += 10 * 1.5; }
     y = plTop + plH + 14;
-    // unlocks
+    // unlocks: treat the "What building this unlocks" heading and the whole
+    // two-column grid as one keep-together block. If it does not fit in the
+    // space left on this page, move it intact to the next page. Only split it
+    // when the block is physically taller than a full printable page, and even
+    // then keep the heading with at least the first row. This is generic and
+    // runs for every condition, not any specific one.
+    const headH = 8 * 1.4 + 10; // unlock eyebrow: size 8 + gapAfter 10
+    const gridH = measureCheckGrid(c.unlocks);
+    const printable = PAGE_BOTTOM - TOP;
+    if (headH + gridH <= printable) ensure(headH + gridH);
+    else ensure(headH + checkRowHeight(c.unlocks, 0));
     eyebrow('What building this unlocks', { color: C.faint, gapAfter: 10 });
     checkGrid(c.unlocks);
   }
@@ -448,7 +476,10 @@ export async function buildReportBlob(model) {
     h += leadLines.length * 17 * 1.28 + 16;
     h += bodyLines.length * 10 * 1.55 + 22;
     stepLines.forEach((sl, i) => { h += (i ? 12 : 0) + Math.max(sl.length, 1) * 10 * 1.5 + 4; });
-    h += 18 + closeLines.length * 10 * 1.55 + 30;
+    // Bottom padding below the closing line, so it is not jammed against the
+    // panel's lower edge (breathing room above the footer). The panel still ends
+    // well clear of the page footer and stays whole on its page.
+    h += 18 + closeLines.length * 10 * 1.55 + 54;
     ensure(h + 24);
     y += 24;
     const top = y;
