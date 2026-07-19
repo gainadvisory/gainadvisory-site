@@ -75,7 +75,7 @@ export const DIMENSIONS = [
       'Our sales motion matches how the buyer actually makes this decision, not how we wish they would.',
       'We know the real reasons our deals stall, and they are not filed under timing or budget.',
       'We have identified and removed the specific risks that make our buyer hesitate at the end.',
-      'The way we sell accounts for everyone the buyer has to convince inside their own company.',
+      'Our sales motion accounts for everyone involved in the buyer’s decision.',
       'When the market tells us the motion is wrong, we change the motion instead of pushing harder.',
     ],
   },
