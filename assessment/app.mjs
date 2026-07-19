@@ -18,43 +18,11 @@
 
 import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS, QUESTION_HELP } from './content.mjs';
 import { computeProfile } from './engine.mjs';
-import { BAND_READ, CONDITION, FAILURE_PATTERN, execSummary, synthesizeConstraints, BUILDING_ENGINE } from './report.mjs';
+import { DBT, PLATEAU, UNLOCKS, NARRATIVE, tierOf, CONDITION, FAILURE_PATTERN, execSummary, synthesizeConstraints, MONDAY, BUILDING_ENGINE } from './report.mjs';
 
 // ---------------------------------------------------------------------------
 // Design presentation copy (from the approved .dc.html). Kept verbatim.
 // ---------------------------------------------------------------------------
-
-// Per-condition reads for the results cards, keyed by frozen dimension id.
-const CONDITION_COPY = {
-  commercialTruth: {
-    priority: 'Growth rests on assumptions about the buyer that have not been tested against real evidence. Establish who controls the budget and why they move before building on top of it.',
-    strong: 'The company operates from evidence about who buys and why, not inherited theory. Everything above is built on solid ground.',
-  },
-  positioning: {
-    priority: 'The promise is not yet sharp enough to do work in the market. Sharpen who it is for, and who it is deliberately not for, so it attracts and repels on its own.',
-    strong: 'The positioning does real work: it pulls the right buyer in and turns the wrong one away before your team spends effort on them.',
-  },
-  repeatability: {
-    priority: 'Winning still depends on specific individuals rather than a defined motion. Make the motion explicit and teachable so it survives any one person.',
-    strong: 'Deals close through a defined motion rather than a single hero. The engine can carry load without one person at the center.',
-  },
-  fit: {
-    priority: 'The sales motion is not yet aligned to how the buyer really decides. Align it to the actual decision, including everyone the buyer must convince internally.',
-    strong: 'The motion matches the buyer’s real decision process, so effort lands where the decision is actually made.',
-  },
-  adaptability: {
-    priority: 'Learning is not yet institutional. Move what your best people know out of their heads and into the organization so it compounds.',
-    strong: 'The company learns continuously and that learning belongs to the organization, so the engine keeps improving on its own.',
-  },
-};
-
-// Overall body, keyed by the FROZEN four bands (design copy mapped to them).
-const OVERALL_BODY = {
-  Built: 'Every condition is built. The commercial engine holds without depending on any single person. The work now is to keep the learning loop running so it compounds.',
-  Forming: 'The foundation is largely in place. One or more conditions are close but not yet built. Closing them, in order, converts a good motion into an owned engine.',
-  Assumed: 'The engine is taking shape, but a condition high in the order still depends on individual judgment. That ceiling caps everything beneath it until it is addressed.',
-  Absent: 'The commercial engine is not yet built as a system. This is a clear starting point, not a verdict. The path is to build the first condition, then the next, in order.',
-};
 
 // Visual treatment per frozen band. Warm accent is reserved for Absent (risk).
 const BAND_STYLE = {
@@ -405,24 +373,32 @@ function resultsHTML() {
   }).join('');
 
   // ---- condition-by-condition deep dive ----
+  // Each block teaches the discipline (D2BT), reads the condition at its tier,
+  // names why companies plateau here, then shows what building it unlocks.
   const deep = dims.map((x, i) => {
     const d = DIMENSIONS[i];
     const bs = BAND_STYLE[x.classification];
-    const c = CONDITION[d.id];
+    const dbt = DBT[d.id];
     const isPriority = i === priorityIdx && !profile.allBuilt;
-    return `<div style="padding:clamp(22px,3vw,30px) 0;border-top:1px solid #EEF0F3">
+    const narrative = NARRATIVE[d.id][tierOf(x.classification)];
+    const unlocks = UNLOCKS[d.id].map((u) => `<li style="display:flex;gap:9px;align-items:baseline;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#3A4654;margin:0 0 8px"><span style="flex:0 0 auto;color:#1E4FA1;font-weight:700;font-size:13px">&#10003;</span><span>${esc(u)}</span></li>`).join('');
+    return `<div style="padding:clamp(24px,3.4vw,36px) 0;border-top:1px solid #EEF0F3">
       <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#C7CDD4">${NUM[i]}</span>
         <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,25px);letter-spacing:-0.01em;color:#0B1D33">${esc(d.name)}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#1E4FA1;border:1px solid #CFDDF0;padding:4px 10px;border-radius:20px">${esc(dbt.tag)}</span>
         <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:${bs.color};background:${bs.tint};padding:5px 11px;border-radius:6px">${x.classification}</span>
         <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#8FA0B4">${x.score} / 25</span>
         ${isPriority ? '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#B0603F;background:#FBF0EC">First priority</span>' : ''}
       </div>
-      <p style="${RP}">${esc(BAND_READ[d.id][x.classification])}</p>
-      <div style="${RLABEL}">Why this condition matters</div>
-      <p style="${RP};margin-top:6px">${esc(c.stakes)}</p>
-      <div style="${RLABEL}">What strengthening it unlocks</div>
-      <p style="${RP};margin-top:6px">${esc(c.unlocks)}</p>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#5B6B7C;margin:12px 0 0;max-width:70ch;font-style:italic">${esc(dbt.line)}</p>
+      <p style="${RP}">${esc(narrative)}</p>
+      <div style="margin-top:20px;border-left:2px solid #C7CDD4;padding:2px 0 2px 16px">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677">Why companies plateau here</div>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.6;color:#3A4654;margin:8px 0 0;max-width:68ch">${esc(PLATEAU[d.id])}</p>
+      </div>
+      <div style="${RLABEL}">What building this unlocks</div>
+      <ul style="list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px 28px">${unlocks}</ul>
     </div>`;
   }).join('');
 
@@ -496,12 +472,22 @@ function resultsHTML() {
             <p style="${RP};margin-top:10px">${esc(pc.whyFirst)}</p>
           </div>
           <div style="padding:clamp(22px,3vw,30px)">
-            <div style="${RLABEL};margin-top:0">What to do first</div>
-            <p style="${RP};margin-top:6px">${esc(pc.buildFirst)}</p>
-            <div style="${RLABEL}">The conversation to have</div>
+            <div style="${RLABEL};margin-top:0">The conversation to have</div>
             <p style="${RP};margin-top:6px">${esc(pc.conversations)}</p>
             <div style="${RLABEL}">What should not happen yet</div>
             <p style="${RP};margin-top:6px">${esc(pc.notYet)} Strengthening anything lower in the order right now creates very little leverage, because it rests on ${esc(priorityDim.name)} above it.</p>
+          </div>
+        </div>
+
+        <!-- if I walked in Monday morning -->
+        <div style="margin-top:clamp(28px,4vw,40px);border:1px solid #E2E6EA;border-radius:16px;padding:clamp(24px,3.4vw,36px);background:#FAFBFC">
+          ${rsHead('The first three weeks', 'If we walked into your company on Monday', 'This is how the work on ' + priorityDim.name + ' would actually begin. Not a plan on a page. The first three weeks in the building.')}
+          <div style="margin-top:22px;display:flex;flex-direction:column;gap:2px">
+            ${[['Week one', MONDAY[priorityDim.id].week1], ['Week two', MONDAY[priorityDim.id].week2], ['Week three', MONDAY[priorityDim.id].week3]].map(([wk, txt], i) => `
+              <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.4vw,26px);align-items:baseline;padding:${i ? '20px' : '2px'} 0 20px;${i ? 'border-top:1px solid #EEF0F3' : ''}">
+                <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#1E4FA1;white-space:nowrap;padding-top:3px">${wk}</div>
+                <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.62;color:#3A4654;margin:0;max-width:66ch">${esc(txt)}</p>
+              </div>`).join('')}
           </div>
         </div>
 
@@ -552,9 +538,9 @@ function resultsHTML() {
     <div class="cra-noprint" style="margin-top:26px;border:1px solid #E2E6EA;border-radius:16px;background:#fff;padding:clamp(24px,4vw,38px)">
       <div class="cra-ctx2" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:start">
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Next step</div>
-          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.12;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0;max-width:22ch">Want the detailed read sent over, or a conversation?</h3>
-          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">Optional. Adding your email sends this summary to Gain Advisory so they can follow up. Nothing is stored on this page.</p>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Where this goes next</div>
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.12;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0;max-width:24ch">This is the first cut. The full diagnosis is where the engine gets built.</h3>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">This profile came from twenty-five answers. The real work reads your calls, your pipeline, and your buyers, and turns the priority above into an engine the company owns. Send this over and we will show you how we got here, and what the next layer reveals.</p>
         </div>
         <div id="cra-emailcol">
           <label style="display:block">
@@ -572,7 +558,7 @@ function resultsHTML() {
 
     <div class="cra-noprint" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:32px">
       <button class="cra-dark" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">Download the report</button>
-      <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">Book a working session &rarr;</a>
+      <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">See how we got here &rarr;</a>
       <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;margin-left:auto">Start over</button>
     </div>
   </section>`;
