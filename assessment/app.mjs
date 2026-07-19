@@ -2,7 +2,7 @@
 // Joins engine (computation) + content (questions) + results (copy). No methodology
 // or scoring lives here; this is presentation and flow only.
 
-import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS } from './content.mjs';
+import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS, QUESTION_HELP } from './content.mjs';
 import { computeProfile } from './engine.mjs';
 import {
   CLASSIFICATION_SUMMARY, DIMENSION_INTERPRETATION, SHAPE_OVER_TOTAL, FALSE_STRENGTH, DIMENSION_GUIDANCE,
@@ -82,9 +82,9 @@ function renderIntro() {
   return `
   <div class="wrap section">
     <p class="eyebrow">Commercial Readiness Assessment</p>
-    <h1 class="cra" data-focus tabindex="-1">Does your company own a commercial engine, or does it own a few people?</h1>
+    <h1 class="cra" data-focus tabindex="-1">Does your company own a commercial engine, or does growth still depend on a few indispensable people?</h1>
     ${FACILITATED ? '' : `
-    <p class="lead">This measures whether your company has a commercial engine it owns, or revenue that still depends on particular people. It is written for founders and executives running an early or growth-stage company.</p>
+    <p class="lead">Most companies cannot answer that objectively. This assessment shows where commercial capability belongs to the company and where growth still depends on individual judgment.</p>
     <p class="lead">Twenty five questions across five conditions. Seven to ten minutes. The goal is an accurate score, not a high one, and the five conditions are read in sequence, because a weakness high in the order caps everything beneath it. Your answers are self reported. They are a diagnostic starting point, not proof.</p>`}
     ${FACILITATED ? '<p class="lead">Twenty five questions across five conditions, read in sequence. The goal is an accurate read, not a high score.</p>' : ''}
     ${resumable ? `<div class="email-box"><strong>You have an assessment in progress.</strong> <div class="btn-row"><button class="btn btn-primary" data-act="resume">Resume where you left off</button><button class="btn btn-ghost" data-act="restart">Start over</button></div></div>` : ''}
@@ -99,33 +99,59 @@ const STAGE_OPTS = ['', 'Pre-seed', 'Seed', 'Series A', 'Series B', 'Series C or
 const ARR_OPTS = ['', 'Pre-revenue', 'Under $1M', '$1M to $5M', '$5M to $20M', '$20M to $50M', 'Over $50M'];
 const EMP_OPTS = ['', '1 to 10', '11 to 50', '51 to 200', '201 to 500', 'Over 500'];
 const FOUNDER_OPTS = ['', 'Yes, the founder still leads most of it', 'Partly', 'No, a team runs it'];
+const INDUSTRY_OPTS = ['', 'Fintech', 'Financial Services', 'Capital Markets / Market Infrastructure',
+  'SaaS / Enterprise Software', 'AI / Data', 'Professional Services', 'Healthcare',
+  'Manufacturing / Industrial', 'Consumer', 'Other'];
 
-function selectField(name, label, opts, value) {
-  return `<div><label class="fl" for="f_${name}">${esc(label)}</label>
-    <select class="ti" id="f_${name}" name="${name}">${opts.map((o) => `<option value="${esc(o)}"${o === value ? ' selected' : ''}>${o === '' ? 'Prefer not to say' : esc(o)}</option>`).join('')}</select></div>`;
+// required context fields (validated on Continue; Skip bypasses)
+const REQUIRED_CTX = ['role', 'stage', 'industry'];
+
+// a small Required/Optional marker for a field label
+function reqMark(required) {
+  return required ? '<span class="req">Required</span>' : '<span class="optl">Optional</span>';
+}
+// text input field with a marked label + inline error slot
+function textField(name, label, value, { required = false, full = false, autocomplete = '' } = {}) {
+  return `<div${full ? ' class="full"' : ''}>
+    <label class="fl" for="f_${name}">${esc(label)} ${reqMark(required)}</label>
+    <input class="ti" id="f_${name}" name="${name}" value="${esc(value)}"${autocomplete ? ` autocomplete="${autocomplete}"` : ''}${required ? ' aria-required="true"' : ''}>
+    <p class="field-error field-error-inline" id="err_${name}" hidden></p></div>`;
+}
+function selectField(name, label, opts, value, { required = false, full = false, placeholder = 'Prefer not to say' } = {}) {
+  const options = opts.map((o) => `<option value="${esc(o)}"${o === value ? ' selected' : ''}>${o === '' ? esc(placeholder) : esc(o)}</option>`).join('');
+  return `<div${full ? ' class="full"' : ''}>
+    <label class="fl" for="f_${name}">${esc(label)} ${reqMark(required)}</label>
+    <select class="ti" id="f_${name}" name="${name}"${required ? ' aria-required="true"' : ''}>${options}</select>
+    <p class="field-error field-error-inline" id="err_${name}" hidden></p></div>`;
 }
 function renderContext() {
   const c = state.context || {};
+  const isOther = c.industry === 'Other';
   return `
   <div class="wrap section">
-    <p class="eyebrow">Optional context</p>
-    <h2 class="cra" data-focus tabindex="-1">A little context sharpens the result.</h2>
-    <p class="lead">All optional. These help interpret your answers. You can skip every one.</p>
+    <p class="eyebrow">Context</p>
+    <h2 class="cra" data-focus tabindex="-1">Context helps place the result in the reality of your company.</h2>
+    <p class="lead">These answers do not change your score. They help make the profile more useful during review and allow the result to be understood in relation to your company’s stage, market, and operating environment.</p>
     <form id="ctx" novalidate>
       <div class="form-grid">
-        <div class="full"><label class="fl" for="f_company">Company name</label><input class="ti" id="f_company" name="company" value="${esc(c.company)}" autocomplete="organization"></div>
-        <div><label class="fl" for="f_participant">Your name</label><input class="ti" id="f_participant" name="participant" value="${esc(c.participant)}" autocomplete="name"></div>
-        <div><label class="fl" for="f_role">Your role</label><input class="ti" id="f_role" name="role" value="${esc(c.role)}"></div>
-        ${selectField('stage', 'Company stage', STAGE_OPTS, c.stage)}
+        ${textField('company', 'Company name', c.company, { full: true, autocomplete: 'organization' })}
+        ${textField('participant', 'Your name', c.participant, { autocomplete: 'name' })}
+        ${textField('role', 'Your role', c.role, { required: true })}
+        ${selectField('stage', 'Company stage', STAGE_OPTS, c.stage, { required: true, placeholder: 'Select one' })}
         ${selectField('arr', 'Annual recurring revenue', ARR_OPTS, c.arr)}
         ${selectField('employees', 'Employees', EMP_OPTS, c.employees)}
-        <div><label class="fl" for="f_industry">Industry</label><input class="ti" id="f_industry" name="industry" value="${esc(c.industry)}"></div>
-        <div class="full">${selectField('founderLed', 'Does the founder still lead most commercial activity?', FOUNDER_OPTS, c.founderLed).replace('<div>', '').replace(/<\/div>$/, '')}</div>
+        ${selectField('industry', 'Industry', INDUSTRY_OPTS, c.industry, { required: true, placeholder: 'Select one' })}
+        <div class="full" id="industryOtherWrap"${isOther ? '' : ' hidden'}>
+          <label class="fl" for="f_industryOther">Describe your industry <span class="req">Required</span></label>
+          <input class="ti" id="f_industryOther" name="industryOther" value="${esc(c.industryOther)}" aria-required="true">
+          <p class="field-error field-error-inline" id="err_industryOther" hidden></p>
+        </div>
+        ${selectField('founderLed', 'Does the founder still lead most commercial activity?', FOUNDER_OPTS, c.founderLed, { full: true })}
       </div>
       <div class="btn-row between">
         <button type="button" class="btn btn-ghost" data-act="back-intro">Back</button>
         <span>
-          <button type="button" class="btn btn-secondary" data-act="skip-context">Skip</button>
+          <button type="button" class="btn btn-ghost" data-act="skip-context">Skip for now</button>
           <button type="submit" class="btn btn-primary">Continue</button>
         </span>
       </div>
@@ -137,6 +163,7 @@ function renderAssess() {
   const dim = DIMENSIONS[state.dimIndex];
   const answers = state.answers[dim.id];
   const pct = Math.round(((state.dimIndex) / DIMENSIONS.length) * 100);
+  const help = QUESTION_HELP[dim.id] || [];
   const qHtml = dim.questions.map((q, qi) => {
     const opts = RESPONSE_OPTIONS.map((o) => {
       const sel = answers[qi] === o.value;
@@ -144,8 +171,13 @@ function renderAssess() {
         <input type="radio" name="q_${qi}" value="${o.value}"${sel ? ' checked' : ''}>
         <span class="dot" aria-hidden="true"></span><span class="otext">${esc(o.label)}</span></label>`;
     }).join('');
+    const helpId = `qhelp_${dim.id}_${qi}`;
+    const helpCtl = help[qi] ? `
+      <button type="button" class="qhelp-btn" aria-expanded="false" aria-controls="${helpId}">
+        <span class="qhelp-ic" aria-hidden="true">i</span><span class="qhelp-label">What this means</span></button>
+      <div class="qhelp" id="${helpId}" role="region" aria-label="Guidance for question ${qi + 1}" hidden>${esc(help[qi])}</div>` : '';
     return `<fieldset class="q" data-qi="${qi}">
-      <legend class="qtext">${qi + 1}. ${esc(q)}</legend>
+      <legend class="qtext">${qi + 1}. ${esc(q)}</legend>${helpCtl}
       <div class="opts" role="radiogroup" aria-label="Response for question ${qi + 1}">${opts}</div>
     </fieldset>`;
   }).join('');
@@ -323,7 +355,16 @@ function summaryText() {
 function wire() {
   app.querySelectorAll('[data-act]').forEach((btn) => btn.addEventListener('click', onAction));
   const ctx = document.getElementById('ctx');
-  if (ctx) ctx.addEventListener('submit', (e) => { e.preventDefault(); readContext(ctx); go('assess', 0); });
+  if (ctx) {
+    // reveal/hide the conditional "Describe your industry" field
+    const ind = document.getElementById('f_industry');
+    if (ind) ind.addEventListener('change', () => toggleIndustryOther(ind.value));
+    ctx.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!validateContext(ctx)) return;
+      readContext(ctx); go('assess', 0);
+    });
+  }
   const af = document.getElementById('assessForm');
   if (af) {
     af.addEventListener('change', (e) => {
@@ -335,15 +376,77 @@ function wire() {
       }
     });
     af.addEventListener('submit', (e) => { e.preventDefault(); onAssessSubmit(); });
+    // per-question help: expand/collapse, one open at a time (keyboard + click)
+    af.addEventListener('click', (e) => { const b = e.target.closest('.qhelp-btn'); if (b) onHelpToggle(b); });
   }
   const ef = document.getElementById('emailForm');
   if (ef) ef.addEventListener('submit', onEmailSubmit);
 }
 
+// Reveal/hide the conditional "Describe your industry" field and set its required state.
+function toggleIndustryOther(value) {
+  const wrap = document.getElementById('industryOtherWrap');
+  const input = document.getElementById('f_industryOther');
+  if (!wrap || !input) return;
+  const other = value === 'Other';
+  wrap.hidden = !other;
+  if (other) input.setAttribute('aria-required', 'true');
+  else { input.removeAttribute('aria-required'); input.value = ''; clearFieldError('industryOther'); }
+}
+
+function setFieldError(name, msg) {
+  const el = document.getElementById('err_' + name);
+  const input = document.getElementById('f_' + name);
+  if (el) { el.textContent = msg; el.hidden = false; }
+  if (input) input.setAttribute('aria-invalid', 'true');
+}
+function clearFieldError(name) {
+  const el = document.getElementById('err_' + name);
+  const input = document.getElementById('f_' + name);
+  if (el) { el.textContent = ''; el.hidden = true; }
+  if (input) input.removeAttribute('aria-invalid');
+}
+
+const CTX_LABELS = { role: 'Your role', stage: 'Company stage', industry: 'Industry', industryOther: 'Describe your industry' };
+// Validate the three required context fields (+ Describe your industry when Other).
+// Returns true if valid; otherwise marks fields, announces, and focuses the first.
+function validateContext(form) {
+  const missing = [];
+  const check = REQUIRED_CTX.slice();
+  if ((form.querySelector('#f_industry') || {}).value === 'Other') check.push('industryOther');
+  check.forEach((name) => {
+    const el = form.querySelector('#f_' + name);
+    const val = el ? String(el.value || '').trim() : '';
+    if (!val) { setFieldError(name, CTX_LABELS[name] + ' is required.'); missing.push(name); }
+    else clearFieldError(name);
+  });
+  if (missing.length) {
+    announce('Please complete the required fields: ' + missing.map((n) => CTX_LABELS[n]).join(', ') + '.');
+    const first = form.querySelector('#f_' + missing[0]);
+    if (first && first.focus) first.focus();
+    return false;
+  }
+  return true;
+}
+
 function readContext(form) {
   const fd = new FormData(form); const c = {};
   for (const [k, v] of fd.entries()) c[k] = String(v).trim().slice(0, 120);
+  // store the industry cleanly: only keep industryOther when Industry is "Other"
+  if (c.industry !== 'Other') delete c.industryOther;
   state.context = c; save();
+}
+
+// Expand a question's help; collapse any other open panel so only one is open.
+function onHelpToggle(btn) {
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+  document.querySelectorAll('.qhelp-btn[aria-expanded="true"]').forEach((b) => {
+    b.setAttribute('aria-expanded', 'false');
+    const p = document.getElementById(b.getAttribute('aria-controls')); if (p) p.hidden = true;
+  });
+  if (willOpen && panel) { btn.setAttribute('aria-expanded', 'true'); panel.hidden = false; announce('Guidance expanded.'); }
+  else announce('Guidance collapsed.');
 }
 
 function onAssessSubmit() {

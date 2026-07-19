@@ -93,3 +93,46 @@ export const DIMENSIONS = [
 ];
 
 export const DIMENSION_ORDER = DIMENSIONS.map((d) => d.id);
+
+// Per-question scoring help. Content layer, NOT engine: these strings are never
+// read by scoring. Each entry explains, in plain executive language, what the
+// statement means in practice and what to weigh when choosing a frequency, so a
+// participant can tell an occasional individual act from a capability the company
+// demonstrates consistently. One entry per question, in question order.
+export const QUESTION_HELP = {
+  commercialTruth: [
+    'This is about the economic buyer, the person who can release the money, not the user who loves the product or the champion who advocates internally. Consider whether your team can name that person by role and authority on most live deals, or whether they usually find out late, one deal at a time.',
+    'The test is language, not theory. Can your team repeat the problem the way the buyer describes it, in the buyer’s words and stakes, rather than your product framing. Consider whether that phrasing is shared across the team and drawn from real conversations, or whether each seller improvises their own version.',
+    'Consider where your reasons-to-buy actually come from: recent evidence from real buyers, win-loss conversations, and lost deals, or a story the team told itself early and never retested. The distinction is whether the belief would survive contact with a dozen current buyers, not whether it feels convincing internally.',
+    'Early customers often come from the founder’s network and are not representative. Consider whether you have deliberately checked, recently, that the buyer you target is the right one, or whether your definition of the customer is simply the shape of whoever bought first. Frequency matters more than a one-time exercise.',
+    'This asks whether your knowledge of the buyer lives in the company or in one person’s head. Consider whether a capable new hire could learn who to target and why from written, shared material, or whether that understanding would walk out the door with your strongest seller.',
+  ],
+  positioning: [
+    'Generic positioning describes a category, not you. Consider whether a competitor could paste your positioning onto their site with no edits. If it would fit ten other companies, it is not positioning, it is wallpaper. The test is specificity that only your company could credibly claim.',
+    'Strong positioning is a filter, not a net. Consider whether your promise actively makes the wrong-fit buyer self-select out, or whether it is agreeable enough that everyone leans in and your team burns cycles disqualifying late. Repelling the wrong buyer is a feature, not a risk.',
+    'Consider handing your positioning to someone outside the company. Could they state, in a sentence, who it serves and who it does not, without you explaining. If they hesitate or ask what you mean, the clarity lives in your team’s heads, not on the page.',
+    'Saying no is the hard part. Consider whether you have an explicit definition of who you do not serve, and whether you hold it when a poor-fit deal with real revenue appears. Choosing on a slide is easy. The test is whether the line survives a tempting quarter.',
+    'Consider whether your description of the company shifts by audience. A consistent promise across customers, investors, and the board signals real clarity. Divergent stories usually mean the positioning is still unsettled, and the differences reveal where the team itself has not agreed on what you are.',
+  ],
+  repeatability: [
+    'Consider your recent closed deals. How many advanced to signature without the founder or one indispensable person personally carrying them. Occasional founder involvement is fine. The question is whether meaningful deals can and do close without that person in the room, or whether every real deal still routes through them.',
+    'This is about depth, not headcount. Consider whether at least two people can independently run a deal from first contact to signature, or whether others can only assist while one person does the real work. A motion only one person can run is a dependency wearing the costume of a system.',
+    'Consider how your last commercial hire got up to speed: through a defined, documented motion they could follow, or by watching one talented person and absorbing what they could. Shadowing transfers some instinct but not a system, and it does not scale past the star’s available hours.',
+    'Consider your answer to why you win. If it centers on a person’s talent, relationships, or hustle, the result is not yet transferable. If it names repeatable steps and choices anyone competent could execute, you have a process. Personality-driven wins are real, but they do not survive that person.',
+    'Consider what happens to the pipeline when a key person takes two weeks off. If deals stall and the forecast wobbles, revenue depends on presence, not a system. Consistently means the motion holds through absence. This is the clearest real-world test of whether the company owns the engine.',
+  ],
+  fit: [
+    'Consider whether your process mirrors the buyer’s real decision path, including their internal steps, approvals, and timing, or an idealized version that is convenient for you. Motions built on wishful buyer behavior feel efficient until deals stall on steps you never accounted for.',
+    'Timing and budget are usually symptoms, not causes. Consider whether your team has diagnosed the actual reason deals freeze, an unaddressed risk, a missing stakeholder, unclear value, or whether stalls get logged under convenient labels that end the inquiry before the real cause is found.',
+    'Late-stage hesitation is usually perceived risk, not lost interest. Consider whether you know the specific fears that surface near signature, security, switching cost, internal politics, and have deliberately engineered them out, or whether you push harder and hope. Removing the risk beats adding pressure.',
+    'Few real purchases are made by one person. Consider whether your motion equips your champion to sell internally to finance, security, legal, and leadership, or whether you engage one contact and assume they will carry the rest. Deals often stall in rooms you are never in.',
+    'Consider your response to repeated losses or stalls. Do you treat them as evidence and change the motion, or as a reason to do more of the same with more effort. Pushing harder on a motion the market is rejecting mistakes persistence for progress.',
+  ],
+  adaptability: [
+    'Consider what usually triggers change in how you sell: evidence that the market shifted, acted on early, or a crisis that left no choice. Companies that only change under duress are always adapting late. Consistently means revising on signal, before the pain forces your hand.',
+    'Consider whether your best people’s hard-won judgment is captured where others can use it, or held privately as individual instinct. This is not about documents for their own sake. It is whether the knowledge that wins deals would remain in the company if those people left.',
+    'Consider what happens to a valuable insight from a single deal. Does it get shared and absorbed into how everyone sells, or does it stay with the person who found it. Individual learning is common. The test is whether learning becomes organizational capability rather than private advantage.',
+    'Pencil, not Sharpie means the motion is treated as a testable hypothesis: stable enough to run consistently, but easy to revise when market evidence proves something should change. Consider whether you hold the motion firmly enough to get a clean read, yet loosely enough to change it when the evidence is clear.',
+    'This is the final test of ownership. Consider whether commercial improvement depends on one architect’s continued presence, or whether the capacity to learn and improve is now embedded in the organization. A system that stops getting better the moment its builder leaves was rented, not owned.',
+  ],
+};

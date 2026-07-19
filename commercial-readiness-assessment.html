@@ -98,6 +98,13 @@ h3.cra{font-family:var(--syne);font-weight:700;font-size:19px;color:var(--navy);
 .opt.sel .otext{color:var(--navy);font-weight:500}
 .opt:focus-within{outline:2px solid var(--blue);outline-offset:2px}
 .field-error{color:var(--absent);font-size:14px;margin-top:10px;font-weight:500}
+/* per-question help control */
+.qhelp-btn{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;padding:7px 12px 7px 8px;background:transparent;border:1px solid var(--line);border-radius:16px;color:var(--slate);font-family:var(--inter);font-size:12.5px;font-weight:500;cursor:pointer;transition:border-color .15s ease,color .15s ease,background .15s ease}
+.qhelp-btn:hover{border-color:var(--muted2);color:var(--navy)}
+.qhelp-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.qhelp-btn[aria-expanded="true"]{border-color:var(--lightblue);color:var(--navy);background:#F3F6FB}
+.qhelp-ic{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--lightblue);color:#fff;font-family:var(--syne);font-weight:700;font-size:11px;font-style:italic}
+.qhelp{font-family:var(--inter);font-size:14px;line-height:1.55;color:#33465b;background:#F7F9FC;border-left:3px solid var(--lightblue);border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 14px;max-width:64ch}
 
 /* context form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
@@ -105,6 +112,12 @@ h3.cra{font-family:var(--syne);font-weight:700;font-size:19px;color:var(--navy);
 label.fl{display:block;font-family:var(--dm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin:0 0 6px}
 input.ti,select.ti{width:100%;font-family:var(--inter);font-size:15px;color:var(--navy);padding:12px 14px;border:1px solid #C7CDD4;border-radius:8px;background:#fff}
 input.ti:focus,select.ti:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.fl .req,.fl .optl{display:inline-block;font-family:var(--dm);font-size:9.5px;letter-spacing:.06em;font-weight:600;padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.fl .req{color:var(--blue);background:#EAF1FB}
+.fl .optl{color:var(--muted);background:#F1F3F6}
+input.ti[aria-invalid="true"],select.ti[aria-invalid="true"]{border-color:var(--absent)}
+input.ti[aria-invalid="true"]:focus,select.ti[aria-invalid="true"]:focus{outline-color:var(--absent);border-color:var(--absent)}
+.field-error-inline{margin-top:6px;font-size:13px}
 
 /* results: readiness profile header */
 .rp-total{font-family:var(--syne);font-weight:700;font-size:15px;color:var(--muted)}

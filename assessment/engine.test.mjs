@@ -4,7 +4,8 @@ import {
   scoreDimension, classify, scoreAll, totalScore, firstPriority,
   readyThrough, strongest, allBuilt, computeProfile,
 } from './engine.mjs';
-import { DIMENSIONS, DIMENSION_ORDER } from './content.mjs';
+import { DIMENSIONS, DIMENSION_ORDER, QUESTION_HELP } from './content.mjs';
+import * as engineNS from './engine.mjs';
 import { DIMENSION_GUIDANCE, DIMENSION_INTERPRETATION, CLASSIFICATION_SUMMARY, overallStateText } from './results.mjs';
 
 let passed = 0, failed = 0;
@@ -104,6 +105,33 @@ ok('interpretations do not fall back to the generic band summary',
 eq('overallStateText for all-Built',
   overallStateText(computeProfile(answers({ commercialTruth: 20, positioning: 20, repeatability: 20, fit: 20, adaptability: 20 }))),
   'Self-assessed as a commercially ready engine');
+
+// ---- question help (content layer): all 25 present, sized, distinct, no engine leak ----
+const wc = (s) => String(s).trim().split(/\s+/).length;
+ok('help exists for every dimension', DIMENSION_ORDER.every((id) => Array.isArray(QUESTION_HELP[id])));
+eq('help has 5 entries per dimension', DIMENSION_ORDER.map((id) => (QUESTION_HELP[id] || []).length), [5, 5, 5, 5, 5]);
+{
+  const all = DIMENSION_ORDER.flatMap((id) => QUESTION_HELP[id] || []);
+  eq('25 help entries total', all.length, 25);
+  ok('every help entry is a non-empty string', all.every((h) => typeof h === 'string' && h.trim().length > 0));
+  ok('every help entry is roughly 30 to 80 words', all.every((h) => wc(h) >= 30 && wc(h) <= 80));
+  ok('all 25 help entries are distinct (not one repeated guidance)', new Set(all).size === 25);
+  // help must map 1:1 to the 25 scored questions
+  ok('help count matches scored-question count', all.length === DIMENSIONS.reduce((n, d) => n + d.questions.length, 0));
+}
+// Pencil, not Sharpie explanation is present and explains the phrase
+{
+  const idx = DIMENSIONS.find((d) => d.id === 'adaptability').questions.findIndex((q) => q.includes('Pencil, not Sharpie'));
+  ok('a question references Pencil, not Sharpie', idx >= 0);
+  ok('its help explains the phrase as a testable hypothesis',
+    QUESTION_HELP.adaptability[idx].includes('Pencil, not Sharpie means the motion is treated as a testable hypothesis'));
+}
+// separation: help copy lives in content, never in the scoring engine
+ok('engine.mjs does not export QUESTION_HELP', engineNS.QUESTION_HELP === undefined);
+ok('engine profile output carries no help text', (() => {
+  const p = engineNS.computeProfile(answers({ commercialTruth: 15, positioning: 15, repeatability: 15, fit: 15, adaptability: 15 }));
+  return p.dimensions.every((d) => d.help === undefined && d.questionHelp === undefined);
+})());
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);
