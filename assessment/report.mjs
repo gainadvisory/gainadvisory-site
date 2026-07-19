@@ -31,7 +31,7 @@ export function tierOf(band) {
 // the report teaches D2BT without lecturing.
 export const DBT = {
   commercialTruth: { tag: 'Diagnose', line: 'This is Diagnose. Before anything is prescribed, you establish what is actually true about who buys and why. Commercial Truth is what Diagnose produces, or what its absence leaves missing.' },
-  positioning: { tag: 'Design', line: 'This is where Design begins. Positioning turns Commercial Truth into a Commercial Architecture the market can read in a sentence.' },
+  positioning: { tag: 'Design', line: 'This is where Design begins. Positioning is the first market-facing expression of Commercial Architecture. It turns Commercial Truth into a promise the right buyer can recognize and the wrong buyer can reject.' },
   repeatability: { tag: 'Build', line: 'This is Build. It decides whether the motion the company operates belongs to the company, or to one person.' },
   fit: { tag: 'Build, tested', line: 'This is where the market confirms or rejects the architecture. A motion is not validated until it matches how the buyer actually decides.' },
   adaptability: { tag: 'Transfer', line: 'This is Transfer and the learning loop. It decides whether what the company knows becomes shared capability, or hardens into stale process held by a few people.' },
@@ -51,7 +51,7 @@ export const PLATEAU = {
 export const UNLOCKS = {
   commercialTruth: ['Positioning becomes simpler', 'Qualification improves', 'Marketing narrows', 'Sales cycles shorten', 'Product hears one commercial language'],
   positioning: ['The right buyer self-selects in', 'The wrong buyer self-selects out', 'Every campaign starts from a sharper premise', 'Sales stops re-explaining what you are', 'The story holds from first touch to the board'],
-  repeatability: ['A new hire can reach productivity from a defined path', 'Deals close without the founder in the room', 'The forecast survives a key absence', 'Winning becomes a process you can teach', 'The company can add load without adding risk'],
+  repeatability: ['A new hire can reach productivity from a defined path', 'Deals close without the founder in the room', 'The forecast survives a key absence', 'Winning becomes a motion the company can teach and run', 'The company can add load without adding risk'],
   fit: ['Effort lands where the decision is actually made', 'Late-stage stalls stop being a mystery', 'The champion can sell internally without you', 'Cycle and price match how the buyer decides', 'Scaling multiplies wins instead of stalls'],
   adaptability: ['The playbook changes on evidence, not on crisis', 'One person’s insight becomes shared capability', 'The engine keeps improving without its architect', 'The company reads the market before the numbers do', 'What works is held in pencil, ready to be revised'],
 };
@@ -72,7 +72,7 @@ export const NARRATIVE = {
   repeatability: {
     weak: 'The results look like a system, and they route through a person. That is the most expensive illusion in a commercial organization, because on a good day an engine and a dependency look identical. They separate the moment the person is stretched, distracted, or gone. Until the winning motion is pulled out of one head and into something the company owns, the forecast is really a forecast of one person’s availability, and every new hire is asked to absorb instinct instead of running a defined path. Traction is not an engine.',
     building: 'A defined motion is emerging, and the easier deals now run without a hero. The harder deals still route back to one or two people, which means the system holds under normal conditions and bends under pressure. The distance left to travel is the distance between a motion that works when the right people are present and one the company owns whether they are or not.',
-    built: 'Deals close through a defined motion rather than a single hero, and a new person can reach productivity without shadowing a star. This is what lets the company carry more load without carrying more risk. Protect it by writing down each new thing that starts to work, before it quietly becomes the next dependency.',
+    built: 'Deals close through a defined motion rather than a single hero, and a new person can reach productivity without shadowing a star. This is what lets the company carry more load without carrying more risk. Protect it by transferring each validated learning into shared judgment, operating practice, and capability before it quietly becomes the next dependency.',
   },
   fit: {
     weak: 'The motion is built for the buyer you wish you had, not the one you have. That is why deals freeze near the finish and get filed under timing or budget, when the real cause is a risk the motion never accounted for. A motion that does not match how the buyer actually decides does not fail loudly. It gets more expensive as it scales, because you spend more to push harder against a decision the buyer makes in a room you are not in.',
@@ -139,7 +139,7 @@ export const CONDITION = {
       'Do not set aggressive quota against a pipeline only one person can move.',
       'Do not add tooling to systematize a process no one has actually defined yet.',
     ],
-    strongRead: 'Deals close through a defined motion rather than a single hero, and a new person can reach productivity without shadowing a star. The engine can carry load without one person at the center, which is what lets you scale safely. Keep it that way by writing down each new thing that starts to work, before it quietly becomes another dependency.',
+    strongRead: 'Deals close through a defined motion rather than a single hero, and a new person can reach productivity without shadowing a star. The engine can carry load without one person at the center, which is what lets you scale safely. Keep it that way by transferring each validated learning into shared judgment, operating practice, and capability before it becomes another dependency.',
   },
   fit: {
     whyFirst: 'A repeatable motion aimed at the wrong decision just repeats the wrong conversation faster. Fit is where the motion meets how the buyer actually decides, before you ask the organization to scale it. Before you scale the selling, prove the selling.',
@@ -197,14 +197,14 @@ export function execSummary({ band, priorityName, strongName, total, readyThroug
   }
   if (band === 'Absent') {
     return [
-      'Your commercial engine is not yet built as a system. Read in sequence, the first condition that is not in place is ' + priorityName + ', and it is not merely weak, it is absent. That single fact shapes the whole profile, because the conditions below a gap cannot be trusted until the gap is closed. This is a clear starting point, not a verdict, and it is more useful than a comfortable score would have been.',
+      'Your commercial engine is not yet built as a system. Read in sequence, the first condition that is not in place is ' + priorityName + ', and it is not merely weak, it is absent. That single fact shapes the whole profile, because the conditions below it cannot be trusted until it is resolved. This is a clear starting point, not a verdict, and it is more useful than a comfortable score would have been.',
       'Companies here usually feel busy and stuck at the same time. Revenue may exist, and it comes from effort, founder energy, and relationships rather than a system, so growth costs more each quarter instead of less. The instinct is to add: another salesperson, more demand, a new tool. Each addition is individually sensible and scales the effort without designing the whole, which is exactly why companies at this stage plateau. The problem is not a lack of effort.',
       'The work is to build ' + priorityName + ' first, on evidence, and then the next condition, in order. Your total across the five conditions is ' + total + ' out of 125, and the number is the least important thing on this page. The order is what matters. A commercial engine is built by design, in sequence, not assembled out of order and hoped into place.',
     ];
   }
   if (band === 'Assumed') {
     return [
-      'Your commercial engine is taking shape, and a condition high in the order still rests on assumption rather than evidence. Read in sequence, the first gap is ' + priorityName + ', currently Assumed: the company can describe it fluently, and that fluency is hiding how little of it has actually been proven. We demand evidence from product. This is the place the company is still accepting an assumption from commercial.',
+      'Your commercial engine is taking shape, and a condition high in the order still rests on assumption rather than evidence. Read in sequence, the first condition below Built is ' + priorityName + ', currently Assumed: the company can describe it fluently, and that fluency is hiding how little of it has actually been proven. We demand evidence from product. This is the place the company is still accepting an assumption from commercial.',
       'Companies at this stage are often the most convinced they are ready. The team speaks about the customer, the positioning, or the motion with real conviction, and closes enough deals to reinforce the story. The trap is that conviction is not evidence, and a motion built on an assumed truth simply travels faster in the wrong direction. This is why companies here plateau just as they start to scale: they add people and spend against a foundation that has never been tested, and the returns quietly diminish.',
       'The classification matters because it tells you where leverage actually is. Strengthening anything below ' + priorityName + ' produces very little, because it rests on the assumption above it. The work is to replace that assumption with evidence, discipline by discipline, in order. Your strongest condition, ' + strongName + ', is a real asset, and the most valuable thing you can do with it is aim it at the first condition that is not yet built. Your total is ' + total + ' out of 125; the shape of the profile matters more than the sum.',
     ];
@@ -259,7 +259,7 @@ export const MONDAY = {
   commercialTruth: {
     week1: 'I would spend the first week on evidence, not opinions. I would sit in on live sales calls, listen back through recent wins and losses in the buyer’s own words, and read the last two quarters of closed and lost opportunities for the pattern in who actually controlled the budget. The point of week one is not to fix anything. It is to separate what the company knows from what it believes.',
     week2: 'In week two I would talk to your recent buyers directly, the ones who signed and the ones who walked, and compare the language they use to the language on your site and in your deck. Where those two diverge is exactly where Commercial Truth is missing. I would also map who really pulls out the budget, by role and authority, across your last set of deals.',
-    week3: 'By week three I would write the Commercial Truth down where the company owns it, not where one person remembers it: who buys, why they buy, what opens the budget, and what evidence would disprove it. That document becomes the thing every later decision is checked against. Three weeks in, the company would be operating from evidence instead of instinct, and every downstream choice would inherit certainty rather than doubt.',
+    week3: 'By week three I would write the Commercial Truth down where the company owns it, not where one person remembers it: who buys, why they buy, what opens the budget, and what evidence would disprove it. That document becomes the thing every later decision is checked against. Three weeks in, the company would be operating from evidence instead of instinct, and every downstream choice would begin from evidence rather than inherited belief.',
   },
   positioning: {
     week1: 'I would spend the first week testing how the market actually reads you. I would hand your positioning to people outside the company and see whether they can say, in a sentence, who it is for and who it is not for. I would listen to sales calls for the moment the rep has to re-explain what you are, because that moment is the positioning failing in real time.',

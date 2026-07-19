@@ -520,7 +520,7 @@ function resultsHTML() {
         <!-- evidence to collect -->
         <div style="margin-top:clamp(38px,5vw,56px)">
           ${rsHead('Evidence to collect next', 'Gather proof before you rebuild the motion')}
-          <p style="${RP}">These are not tasks. They are the specific commercial evidence that turns ${esc(priorityDim.name)} from assumption into fact:</p>
+          <p style="${RP}">These are not tasks. They are the specific commercial evidence that turns ${esc(priorityDim.name)} from an assumption into an evidence-backed condition the company can operate from:</p>
           <ul style="list-style:none;margin:20px 0 0;padding:0">${evidenceList}</ul>
         </div>
       </div>

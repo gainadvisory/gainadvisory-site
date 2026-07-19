@@ -39,10 +39,21 @@
   }
   @media print{
     .cra-noprint{display:none !important}
-    body{background:#fff}
-    .cra-print{box-shadow:none !important;border:none !important}
+    html,body{background:#fff !important;margin:0 !important}
+    /* The app wraps every screen in a min-height:100vh flex column. In print
+       that forces an extra empty trailing page (the blank "page 10") and pushes
+       whitespace down. Flatten the wrapper and the results section's screen
+       padding/max-width so the report ends exactly where its content ends. */
+    #app > div{min-height:0 !important;display:block !important}
+    #app main{display:block !important}
+    #app main > section{max-width:none !important;margin:0 !important;padding:0 !important}
+    .cra-print{box-shadow:none !important;border:none !important;border-radius:0 !important;overflow:visible !important;margin:0 !important}
     .cra-print,.cra-print *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
-    @page{margin:14mm}
+    /* No browser-injected header or footer (date, title, URL, page numbers):
+       a zero page margin removes the margin box those are drawn in. The report's
+       own section padding supplies the inner whitespace, and the navy masthead
+       and closing panel read as intentional full-bleed bands. */
+    @page{margin:0}
   }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
