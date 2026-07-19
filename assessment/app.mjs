@@ -79,6 +79,7 @@ let state = {
   ctx: { company: '', role: '', stage: '', arr: '', founder: '' },
   email: '',
   consent: true,
+  returnToReview: false, // set when a condition is opened via Edit on the review screen
 };
 
 function save() {
@@ -117,6 +118,8 @@ function announce(msg) { const el = document.getElementById('cra-live'); if (el)
 const app = document.getElementById('app');
 
 function go(screen) {
+  // Leaving the assessment for the review or the start clears the edit round-trip.
+  if (screen === 'review' || screen === 'intro') state.returnToReview = false;
   state.screen = screen;
   save();
   render();
@@ -247,10 +250,13 @@ function contextHTML() {
   </section>`;
 }
 
+// One row of the agreement scale. Layout only inline; colours + selected state
+// live in injected CSS so nothing fights inline specificity (the earlier blank-
+// cell bug was inline background beating the selected class).
 function cellBase(idx) {
   const first = idx === 0, last = idx === 4;
-  const radius = `border-radius:${first ? '8px' : '0'} ${last ? '8px' : '0'} ${last ? '8px' : '0'} ${first ? '8px' : '0'};`;
-  return `flex:1;min-width:0;padding:13px 6px;text-align:center;cursor:pointer;border:1px solid #E2E6EA;${radius}margin-left:${first ? '0' : '-1px'};position:relative;z-index:1;transition:all .16s ease;background:#fff;color:#5B6B7C;`;
+  const radius = `border-radius:${first ? '8px 8px 0 0' : last ? '0 0 8px 8px' : '0'};`;
+  return `display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;padding:14px 16px;cursor:pointer;border:1px solid #E2E6EA;${radius}margin-top:${first ? '0' : '-1px'};position:relative;z-index:1;transition:all .16s ease;`;
 }
 
 function railHTML() {
@@ -275,7 +281,7 @@ function assessmentHTML() {
     const answered = val != null;
     const key = `${d.id}:${qi}`;
     const open = !!state.open[key];
-    const cells = RESPONSE_OPTIONS.map((o, idx) => `<button class="cra-cell" role="radio" aria-checked="${val === o.value}" aria-label="${esc(o.label)}" data-action="answer" data-dim="${d.id}" data-qi="${qi}" data-val="${o.value}" style="${cellBase(idx)}"><span style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;pointer-events:none">${esc(o.label)}</span></button>`).join('');
+    const cells = RESPONSE_OPTIONS.map((o, idx) => `<button class="cra-cell" role="radio" aria-checked="${val === o.value}" aria-label="${esc(o.label)}" data-action="answer" data-dim="${d.id}" data-qi="${qi}" data-val="${o.value}" style="${cellBase(idx)}"><span class="cra-clabel" style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:14.5px;pointer-events:none">${esc(o.label)}</span><span class="cra-check" aria-hidden="true" style="flex:0 0 auto;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;pointer-events:none">✓</span></button>`).join('');
     return `<div class="cra-card${answered ? ' answered' : ''}" data-card="${key}" style="background:#fff;border:1px solid #EEF0F3;border-left:3px solid #E2E6EA;border-radius:12px;padding:clamp(20px,2.5vw,26px);transition:border-color .2s ease">
       <div style="display:flex;gap:14px;align-items:baseline">
         <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#C7CDD4;flex:0 0 auto">${qi + 1}</span>
@@ -284,9 +290,9 @@ function assessmentHTML() {
       <div style="padding-left:29px;margin-top:14px">
         <button class="cra-help${open ? ' open' : ''}" data-action="help" data-key="${key}" aria-expanded="${open}" aria-controls="help-${d.id}-${qi}" style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#1E4FA1;background:#fff;border:1px solid #E2E6EA;border-radius:20px;padding:6px 14px 6px 11px;cursor:pointer;transition:all .16s ease">
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:#1E4FA1">i</span>
-          <span data-help-label>${open ? 'Hide' : 'What this means'}</span>
+          <span data-help-label>${open ? 'Hide' : 'How true is this today?'}</span>
         </button>
-        <div id="help-${d.id}-${qi}" role="region" aria-label="What this means" ${open ? '' : 'hidden'} style="margin-top:12px;border-left:2px solid #1E4FA1;background:#F4F7FC;border-radius:0 8px 8px 0;padding:14px 18px">
+        <div id="help-${d.id}-${qi}" role="region" aria-label="How true is this today" ${open ? '' : 'hidden'} style="margin-top:12px;border-left:2px solid #1E4FA1;background:#F4F7FC;border-radius:0 8px 8px 0;padding:14px 18px">
           <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:#3A4654;margin:0">${esc(help[qi] || '')}</p>
         </div>
         <div class="cra-scale" role="radiogroup" aria-label="Response for question ${qi + 1}" style="display:flex;gap:6px;margin-top:16px">${cells}</div>
@@ -311,10 +317,12 @@ function assessmentHTML() {
         <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18px);line-height:1.55;color:#5B6B7C;margin:14px 0 0;max-width:60ch">${esc(d.definition)}</p>
         <div style="display:flex;flex-direction:column;gap:12px;margin-top:clamp(30px,4vw,46px)">${questions}</div>
         <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(36px,5vw,52px)">
-          <button class="cra-ghost" data-action="prev" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">${prevLabel}</button>
+          ${state.returnToReview
+            ? `<button class="cra-ghost" data-action="to-review" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">&larr; Back to review</button>`
+            : `<button class="cra-ghost" data-action="prev" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">${prevLabel}</button>`}
           <div style="display:flex;align-items:center;gap:18px">
             <span id="cra-answered" style="font-family:'DM Sans',sans-serif;font-size:12.5px;color:#8B8677">${ac} of 5 answered</span>
-            <button id="cra-next" class="cra-dark" data-action="next" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${allAns ? '#0B1D33' : '#9AA6B4'};border:none;padding:13px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">${nextLabel}</button>
+            <button id="cra-next" class="cra-dark" data-action="${state.returnToReview ? 'to-review' : 'next'}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${allAns ? '#0B1D33' : '#9AA6B4'};border:none;padding:13px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">${state.returnToReview ? 'Back to review' : nextLabel}</button>
           </div>
         </div>
       </div>
@@ -432,9 +440,9 @@ function resultsHTML() {
         <div>
           <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Next step</div>
           <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.12;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0;max-width:22ch">Want the detailed read sent over, or a conversation?</h3>
-          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">Optional. Your result is not stored anywhere. Adding your email opens your own mail app with the summary, addressed to Gain Advisory.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">Optional. Adding your email sends this summary to Gain Advisory so they can follow up. Nothing is stored on this page.</p>
         </div>
-        <div>
+        <div id="cra-emailcol">
           <label style="display:block">
             <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C">Business email</span>
             <input data-field="email" value="${esc(state.email)}" type="email" placeholder="you@company.com" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">
@@ -502,30 +510,61 @@ function onHelp(btn) {
   btn.setAttribute('aria-expanded', String(nowOpen));
   btn.classList.toggle('open', nowOpen);
   const label = btn.querySelector('[data-help-label]');
-  if (label) label.textContent = nowOpen ? 'Hide' : 'What this means';
+  if (label) label.textContent = nowOpen ? 'Hide' : 'How true is this today?';
   const panel = document.getElementById('help-' + key.replace(':', '-'));
   if (panel) panel.hidden = !nowOpen;
 }
 
-function sendResult() {
-  if (!(state.email && state.consent)) return;
+// Deliver the result to Gain Advisory. Primary path is a real send through the
+// site's Formspree endpoint (same one the homepage contact form uses), so the
+// summary reaches the shared inbox with the visitor's email as reply-to. If that
+// request fails, fall back to opening a prefilled mail draft.
+const FORM_ENDPOINT = 'https://formspree.io/f/xpqbjpqg';
+
+function resultSummary() {
   const profile = computeProfile(state.answers);
   const dims = profile.dimensions;
   let priorityIdx = dims.findIndex((x) => x.classification !== 'Built');
   if (priorityIdx < 0) priorityIdx = dims.length - 1;
   const overallBand = profile.allBuilt ? 'Built' : dims[priorityIdx].classification;
-  const strongId = profile.strongestIds[0];
+  const strongName = DIMENSIONS[DIMENSION_ORDER.indexOf(profile.strongestIds[0])].name;
   const perLine = dims.map((x, i) => `- ${DIMENSIONS[i].name}: ${x.classification}`).join('\n');
-  const subject = 'Commercial Readiness result - ' + (state.ctx.company || 'company');
-  const body =
-    'Overall readiness: ' + overallBand + '\n\n' +
-    'First priority: ' + DIMENSIONS[priorityIdx].name + '\n' +
-    'Strongest condition: ' + DIMENSIONS[DIMENSION_ORDER.indexOf(strongId)].name + '\n\n' +
-    'By condition:\n' + perLine + '\n\n' +
-    'From: ' + state.email + (state.ctx.role ? ' (' + state.ctx.role + ')' : '') + '\n' +
-    'I would like Gain Advisory to see this result and follow up.';
+  const lines = [
+    'Overall readiness: ' + overallBand, '',
+    'First priority: ' + DIMENSIONS[priorityIdx].name,
+    'Strongest condition: ' + strongName, '',
+    'By condition:', perLine, '',
+  ];
+  if (state.ctx.company) lines.push('Company: ' + state.ctx.company);
+  if (state.ctx.role) lines.push('Role: ' + state.ctx.role);
+  if (state.ctx.stage) lines.push('Stage: ' + state.ctx.stage);
+  return { subject: 'Commercial Readiness result - ' + (state.ctx.company || 'company'), body: lines.join('\n') };
+}
+
+function emailSuccess() {
+  const col = document.getElementById('cra-emailcol');
+  if (col) col.innerHTML = '<div role="status" style="border:1px solid #CFE0F4;background:#F4F7FC;border-radius:12px;padding:22px"><div style="font-family:\'Syne\',sans-serif;font-weight:700;font-size:19px;color:#0B1D33">Sent.</div><p style="font-family:\'Inter\',sans-serif;font-size:14px;line-height:1.6;color:#3A4654;margin:8px 0 0">Your readiness summary is on its way to Gain Advisory. They will follow up at the email you provided.</p></div>';
+  announce('Result sent to Gain Advisory.');
+}
+
+function sendResult() {
+  if (!(state.email && state.consent)) return;
+  const btn = document.getElementById('cra-send');
+  const { subject, body } = resultSummary();
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; btn.style.cursor = 'default'; }
+  const data = new FormData();
+  data.append('email', state.email);
+  data.append('_subject', subject);
+  data.append('message', body);
+  data.append('_gotcha', '');
   track('email_result_requested', {});
-  window.location.href = 'mailto:hello@gainadvisory.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+    .then((r) => { if (!r.ok) throw new Error('bad response'); track('email_result_sent', {}); emailSuccess(); })
+    .catch(() => {
+      if (btn) { btn.disabled = false; btn.textContent = 'Send my result to Gain Advisory'; btn.style.cursor = 'pointer'; }
+      // graceful fallback: open a prefilled draft to the shared inbox
+      window.location.href = 'mailto:hello@gainadvisory.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + state.email);
+    });
 }
 
 function restart() {
@@ -557,7 +596,8 @@ function onClick(e) {
     case 'next':
       if (state.ci === 4) { go('review'); } else { state.ci += 1; go('assessment'); }
       break;
-    case 'edit': state.ci = +btn.getAttribute('data-idx'); go('assessment'); break;
+    case 'edit': state.ci = +btn.getAttribute('data-idx'); state.returnToReview = true; go('assessment'); break;
+    case 'to-review': go('review'); break;
     case 'back-review': state.ci = 4; go('assessment'); break;
     case 'generate': if (allComplete()) { track('profile_generated', {}); go('results'); } break;
     case 'print': track('report_printed', {}); window.print(); break;
@@ -619,10 +659,13 @@ function injectStyles() {
   const s = document.createElement('style');
   s.id = 'cra-style';
   s.textContent = `
+    .cra-scale{display:flex;flex-direction:column}
+    .cra-cell{background:#fff;color:#5B6B7C}
     .cra-cell:hover{border-color:#0B1D33;color:#0B1D33;z-index:2}
     .cra-cell[aria-checked="true"]{background:#0B1D33;color:#fff;border-color:#0B1D33;z-index:2}
-    .cra-cell[aria-checked="true"] span{color:#fff}
-    .cra-cell[aria-checked="true"]:hover{color:#fff}
+    .cra-cell[aria-checked="true"] .cra-clabel{font-weight:600}
+    .cra-check{opacity:0;transition:opacity .16s ease}
+    .cra-cell[aria-checked="true"] .cra-check{opacity:1}
     .cra-card.answered{border-color:#DCE2EA;border-left-color:#0B1D33}
     .cra-dark:hover{background:#16305a}
     .cra-ghost:hover{color:#0B1D33}
@@ -631,12 +674,6 @@ function injectStyles() {
     .cra-rail-btn:hover{background:#F1F4F8}
     .cra-help.open{background:#EEF3FB;border-color:#CADAF0}
     .cra-help:hover{border-color:#CADAF0}
-    @media(max-width:560px){
-      .cra-scale{flex-direction:column;gap:0}
-      .cra-scale .cra-cell{margin-left:0 !important;margin-top:-1px;border-radius:0 !important;padding:12px 14px !important;text-align:left !important}
-      .cra-scale .cra-cell:first-child{margin-top:0;border-radius:8px 8px 0 0 !important}
-      .cra-scale .cra-cell:last-child{border-radius:0 0 8px 8px !important}
-    }
   `;
   document.head.appendChild(s);
 }

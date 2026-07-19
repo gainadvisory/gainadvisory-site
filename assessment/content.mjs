@@ -1,4 +1,4 @@
-// Commercial Readiness Assessment — frozen CONTENT (Gain Advisory).
+// Commercial Readiness Assessment: frozen CONTENT (Gain Advisory).
 // Source of truth = the Commercial by Design manuscript + Jason's frozen spec
 // (2026-07-18). Questions are verbatim. Do NOT paraphrase.
 //
@@ -9,12 +9,15 @@
 //
 // House rules: no person or company named except Jason; no em dashes.
 
+// Agreement scale. The questions are declarative statements, so an agreement
+// scale reads naturally where a frequency scale did not. Values are unchanged
+// (1..5), so scoring, bands, and the engine are unaffected.
 export const RESPONSE_OPTIONS = [
-  { value: 1, label: 'Never' },
-  { value: 2, label: 'Rarely' },
-  { value: 3, label: 'Sometimes' },
-  { value: 4, label: 'Usually' },
-  { value: 5, label: 'Consistently' },
+  { value: 1, label: 'Strongly Disagree' },
+  { value: 2, label: 'Disagree' },
+  { value: 3, label: 'Neither Agree nor Disagree' },
+  { value: 4, label: 'Agree' },
+  { value: 5, label: 'Strongly Agree' },
 ];
 
 // The five conditions, IN SEQUENCE. The order is load-bearing methodology, not a
