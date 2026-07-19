@@ -174,10 +174,12 @@ function introHTML() {
   const resumable = anyAnswer() && !allComplete();
   return `<section style="max-width:1140px;margin:0 auto;padding:clamp(52px,9vw,120px) 24px clamp(60px,9vw,120px)">
     <div class="cra-two" style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(36px,6vw,88px);align-items:start">
-      <div style="max-width:24ch">
-        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E4FA1">The entry diagnostic</div>
-        <h1 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:-0.03em;color:#0B1D33;margin:22px 0 0;text-wrap:balance">Every company believes it has a commercial engine.</h1>
-        <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(20px,2.6vw,30px);line-height:1.26;letter-spacing:-0.01em;color:#1E4FA1;margin:24px 0 0;max-width:36ch">Most have a few people the engine cannot run without.</p>
+      <div>
+        <div style="max-width:24ch">
+          <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E4FA1">The entry diagnostic</div>
+          <h1 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,64px);line-height:1.04;letter-spacing:-0.03em;color:#0B1D33;margin:22px 0 0;text-wrap:balance">Every company believes it&nbsp;has&nbsp;a commercial engine.</h1>
+        </div>
+        <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(20px,2.6vw,30px);line-height:1.3;letter-spacing:-0.01em;color:#1E4FA1;margin:26px 0 0;max-width:30ch;text-wrap:balance">Most have a few people the engine cannot run without.</p>
       </div>
       <div style="padding-top:clamp(8px,3vw,54px)">
         <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18.5px);line-height:1.64;color:#3A4654;margin:0;max-width:46ch">This assessment tells the two apart. It shows where commercial capability genuinely belongs to the company, and where growth still depends on individual judgment, memory, and relationships.</p>
