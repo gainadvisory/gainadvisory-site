@@ -1,525 +1,657 @@
-// Commercial Readiness Assessment — UI application.
-// Joins engine (computation) + content (questions) + results (copy). No methodology
-// or scoring lives here; this is presentation and flow only.
+// Commercial Readiness Assessment: redesigned UI (Gain Advisory).
+//
+// This is the PRESENTATION layer only. It wires the FROZEN engine (engine.mjs)
+// and FROZEN content (content.mjs: questions + approved help) into the approved
+// redesign from `Commercial Readiness Assessment.dc.html`. The DC/support.js
+// runtime is not used; this is a plain ES module rendering into #app.
+//
+// What is real (frozen product), not design placeholder:
+//   - the five conditions, their order, and the 25 questions        -> content.mjs
+//   - the response scale (Never..Consistently) and 1..5 mapping     -> content.mjs
+//   - scoring, the four bands (Built/Forming/Assumed/Absent),
+//     first-non-Built priority, strongest condition                 -> engine.mjs
+//   - the "What this means" help copy                               -> content.mjs QUESTION_HELP
+// The redesign's presentation copy (condition sub, first-priority / strongest
+// reads, overall body, and the static screen copy) is kept from the .dc.html.
+//
+// House rule: no em dashes or en dashes anywhere. Regular hyphens only.
 
 import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS, QUESTION_HELP } from './content.mjs';
 import { computeProfile } from './engine.mjs';
-import {
-  CLASSIFICATION_SUMMARY, DIMENSION_INTERPRETATION, SHAPE_OVER_TOTAL, FALSE_STRENGTH, DIMENSION_GUIDANCE,
-  overallStateText, strongestText, WHAT_THIS_MEANS, ALL_BUILT,
-} from './results.mjs';
 
-const byId = Object.fromEntries(DIMENSIONS.map((d) => [d.id, d]));
-const STORAGE_KEY = 'cra_v1';
-const REVIEW_EMAIL = 'jason@gainadvisory.com';
-const params = new URLSearchParams(location.search);
-const FACILITATED = params.get('mode') === 'facilitated';
-const SOURCE = (params.get('source') || '').slice(0, 40);
+// ---------------------------------------------------------------------------
+// Design presentation copy (from the approved .dc.html). Kept verbatim.
+// ---------------------------------------------------------------------------
 
-const app = document.getElementById('app');
+// Per-condition reads for the results cards, keyed by frozen dimension id.
+const CONDITION_COPY = {
+  commercialTruth: {
+    priority: 'Growth rests on assumptions about the buyer that have not been tested against real evidence. Establish who controls the budget and why they move before building on top of it.',
+    strong: 'The company operates from evidence about who buys and why, not inherited theory. Everything above is built on solid ground.',
+  },
+  positioning: {
+    priority: 'The promise is not yet sharp enough to do work in the market. Sharpen who it is for, and who it is deliberately not for, so it attracts and repels on its own.',
+    strong: 'The positioning does real work: it pulls the right buyer in and turns the wrong one away before your team spends effort on them.',
+  },
+  repeatability: {
+    priority: 'Winning still depends on specific individuals rather than a defined motion. Make the motion explicit and teachable so it survives any one person.',
+    strong: 'Deals close through a defined motion rather than a single hero. The engine can carry load without one person at the center.',
+  },
+  fit: {
+    priority: 'The sales motion is not yet aligned to how the buyer really decides. Align it to the actual decision, including everyone the buyer must convince internally.',
+    strong: 'The motion matches the buyer’s real decision process, so effort lands where the decision is actually made.',
+  },
+  adaptability: {
+    priority: 'Learning is not yet institutional. Move what your best people know out of their heads and into the organization so it compounds.',
+    strong: 'The company learns continuously and that learning belongs to the organization, so the engine keeps improving on its own.',
+  },
+};
 
-// ---- helpers ----------------------------------------------------------------
-const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
-  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-function track(name, data) { try { if (window.va) window.va('event', { name, ...(data || {}) }); } catch (e) {} }
-function announce(msg) { let r = document.getElementById('cra-live'); if (r) r.textContent = msg; }
+// Overall body, keyed by the FROZEN four bands (design copy mapped to them).
+const OVERALL_BODY = {
+  Built: 'Every condition is built. The commercial engine holds without depending on any single person. The work now is to keep the learning loop running so it compounds.',
+  Forming: 'The foundation is largely in place. One or more conditions are close but not yet built. Closing them, in order, converts a good motion into an owned engine.',
+  Assumed: 'The engine is taking shape, but a condition high in the order still depends on individual judgment. That ceiling caps everything beneath it until it is addressed.',
+  Absent: 'The commercial engine is not yet built as a system. This is a clear starting point, not a verdict. The path is to build the first condition, then the next, in order.',
+};
 
-function todayLabel() {
-  try { return new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }); }
-  catch (e) { return ''; }
-}
+// Visual treatment per frozen band. Warm accent is reserved for Absent (risk).
+const BAND_STYLE = {
+  Built: { color: '#0B1D33', tint: '#E7EBF1', bar: '#0B1D33' },
+  Forming: { color: '#1E4FA1', tint: '#EEF3FB', bar: '#1E4FA1' },
+  Assumed: { color: '#3A6BB0', tint: '#EEF3FB', bar: '#5D9BD4' },
+  Absent: { color: '#B0603F', tint: '#FBF0EC', bar: '#C46B5A' },
+};
 
-// ---- state ------------------------------------------------------------------
+const NUM = ['01', '02', '03', '04', '05'];
+
+// ---------------------------------------------------------------------------
+// State + persistence
+// ---------------------------------------------------------------------------
+const LS_KEY = 'cra_v2';
 const emptyAnswers = () => Object.fromEntries(DIMENSION_ORDER.map((id) => [id, [null, null, null, null, null]]));
-let state = { screen: 'intro', dimIndex: 0, answers: emptyAnswers(), context: {}, startedAt: null, date: null };
+
+let state = {
+  screen: 'intro', // intro | context | assessment | review | results
+  ci: 0,           // 0..4
+  answers: emptyAnswers(),
+  open: {},        // help panels open, key `${dimId}:${qi}`
+  ctx: { company: '', role: '', stage: '', arr: '', founder: '' },
+  email: '',
+  consent: true,
+};
 
 function save() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      screen: state.screen, dimIndex: state.dimIndex, answers: state.answers,
-      context: state.context, startedAt: state.startedAt, date: state.date,
-    }));
-  } catch (e) {}
+  try { localStorage.setItem(LS_KEY, JSON.stringify({ screen: state.screen, ci: state.ci, answers: state.answers, ctx: state.ctx })); } catch (e) { /* private mode */ }
 }
 function load() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY); if (!raw) return null;
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return;
     const s = JSON.parse(raw);
-    if (!s || !s.answers) return null;
-    // shape-guard: ensure every dimension has a 5-slot array
-    const answers = emptyAnswers();
-    for (const id of DIMENSION_ORDER) if (Array.isArray(s.answers[id]) && s.answers[id].length === 5) answers[id] = s.answers[id];
-    return { screen: s.screen, dimIndex: s.dimIndex | 0, answers, context: s.context || {}, startedAt: s.startedAt, date: s.date };
-  } catch (e) { return null; }
+    if (s && typeof s === 'object') {
+      const answers = emptyAnswers();
+      if (s.answers) for (const id of DIMENSION_ORDER) if (Array.isArray(s.answers[id])) answers[id] = s.answers[id].map((v) => (Number.isInteger(v) && v >= 1 && v <= 5 ? v : null)).slice(0, 5);
+      state.answers = answers;
+      if (s.ctx && typeof s.ctx === 'object') state.ctx = { ...state.ctx, ...s.ctx };
+      if (Number.isInteger(s.ci) && s.ci >= 0 && s.ci <= 4) state.ci = s.ci;
+      if (typeof s.screen === 'string') state.screen = s.screen;
+    }
+  } catch (e) { /* ignore */ }
 }
-function clearSaved() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
-function hasAnyAnswer() { return DIMENSION_ORDER.some((id) => state.answers[id].some((a) => a != null)); }
-function dimComplete(id) { return state.answers[id].every((a) => a != null); }
-function allComplete() { return DIMENSION_ORDER.every(dimComplete); }
-function answeredCount(id) { return state.answers[id].filter((a) => a != null).length; }
 
-// ---- navigation -------------------------------------------------------------
-function go(screen, dimIndex) {
+// ---------------------------------------------------------------------------
+// Small helpers
+// ---------------------------------------------------------------------------
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function dimDone(id) { return state.answers[id].every((v) => v != null); }
+function answeredCount(id) { return state.answers[id].filter((v) => v != null).length; }
+function allComplete() { return DIMENSION_ORDER.every((id) => dimDone(id)); }
+function anyAnswer() { return DIMENSION_ORDER.some((id) => state.answers[id].some((v) => v != null)); }
+
+function track(name, data) { try { if (window.va) window.va('event', { name, ...(data || {}) }); } catch (e) { /* ignore */ } }
+function announce(msg) { const el = document.getElementById('cra-live'); if (el) el.textContent = msg; }
+
+const app = document.getElementById('app');
+
+function go(screen) {
   state.screen = screen;
-  if (dimIndex != null) state.dimIndex = dimIndex;
-  save(); render();
-}
-
-// ---- render dispatcher ------------------------------------------------------
-function render() {
-  const fns = { intro: renderIntro, context: renderContext, assess: renderAssess, review: renderReview, results: renderResults };
-  app.innerHTML = '<div id="cra-live" class="visually-hidden" role="status" aria-live="polite"></div>' + (fns[state.screen] || renderIntro)();
-  wire();
-  // focus the primary heading for keyboard + screen-reader users
-  const h = app.querySelector('[data-focus]') || app;
-  if (h.focus) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: false }); }
+  save();
+  render();
   window.scrollTo(0, 0);
 }
 
-// ---- screens ----------------------------------------------------------------
-function renderIntro() {
-  const resumable = hasAnyAnswer() && !allComplete();
-  return `
-  <div class="wrap section">
-    <p class="eyebrow">Commercial Readiness Assessment</p>
-    <h1 class="cra" data-focus tabindex="-1">Does your company own a commercial engine, or does growth still depend on a few indispensable people?</h1>
-    ${FACILITATED ? '' : `
-    <p class="lead">Most companies cannot answer that objectively. This assessment shows where commercial capability belongs to the company and where growth still depends on individual judgment.</p>
-    <p class="lead">Twenty five questions across five conditions. Seven to ten minutes. The goal is an accurate score, not a high one, and the five conditions are read in sequence, because a weakness high in the order caps everything beneath it. Your answers are self reported. They are a diagnostic starting point, not proof.</p>`}
-    ${FACILITATED ? '<p class="lead">Twenty five questions across five conditions, read in sequence. The goal is an accurate read, not a high score.</p>' : ''}
-    ${resumable ? `<div class="email-box"><strong>You have an assessment in progress.</strong> <div class="btn-row"><button class="btn btn-primary" data-act="resume">Resume where you left off</button><button class="btn btn-ghost" data-act="restart">Start over</button></div></div>` : ''}
-    <div class="btn-row">
-      <button class="btn btn-primary" data-act="begin">Begin the assessment</button>
-      <a class="btn btn-ghost" href="/#method">Learn about Commercial by Design</a>
+// ---------------------------------------------------------------------------
+// Shared chrome
+// ---------------------------------------------------------------------------
+function logo(size, dark) {
+  const wordColor = dark ? '#fff' : '#0B1D33';
+  const subColor = dark ? '#8FA0B4' : '#5B6B7C';
+  const sub = size <= 16 ? 0 : (dark ? 7.5 : 8);
+  return `<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1">
+    <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:${size}px;color:${wordColor};line-height:1;white-space:nowrap">G<span style="font-weight:400;color:#5D9BD4">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:#5D9BD4">]</span>N</span>
+    ${sub ? `<span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:${sub}px;letter-spacing:.3em;text-transform:uppercase;color:${subColor};margin-top:.55em;text-align:center;padding-left:.3em">Advisory</span>` : ''}
+  </span>`;
+}
+
+function header() {
+  return `<header class="cra-noprint" style="border-bottom:1px solid #EEF0F3;background:rgba(251,251,249,.9);backdrop-filter:blur(8px);position:sticky;top:0;z-index:20">
+    <div style="max-width:1140px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+      ${logo(22, false)}
+      <span style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8B8677">Commercial Readiness Assessment</span>
     </div>
-  </div>`;
+  </header>`;
 }
 
-const STAGE_OPTS = ['', 'Pre-seed', 'Seed', 'Series A', 'Series B', 'Series C or later', 'Bootstrapped', 'Profitable / self-funded'];
-const ARR_OPTS = ['', 'Pre-revenue', 'Under $1M', '$1M to $5M', '$5M to $20M', '$20M to $50M', 'Over $50M'];
-const EMP_OPTS = ['', '1 to 10', '11 to 50', '51 to 200', '201 to 500', 'Over 500'];
-const FOUNDER_OPTS = ['', 'Yes, the founder still leads most of it', 'Partly', 'No, a team runs it'];
-const INDUSTRY_OPTS = ['', 'Fintech', 'Financial Services', 'Capital Markets / Market Infrastructure',
-  'SaaS / Enterprise Software', 'AI / Data', 'Professional Services', 'Healthcare',
-  'Manufacturing / Industrial', 'Consumer', 'Other'];
+function footer() {
+  return `<footer class="cra-noprint" style="background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.975)),url('/assets/wood-wall.png');background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff;margin-top:auto">
+    <div style="max-width:1140px;margin:0 auto;padding:30px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      ${logo(16, true)}
+      <span style="font-family:'Inter',sans-serif;font-size:13px;color:#8FA0B4">Gain Advisory, Builder of Commercial Engines</span>
+      <a class="cra-link" href="https://www.gainadvisory.com/" style="font-family:'Inter',sans-serif;font-size:13px;color:#AEBED0;text-decoration:none">gainadvisory.com</a>
+    </div>
+  </footer>`;
+}
 
-// required context fields (validated on Continue; Skip bypasses)
-const REQUIRED_CTX = ['role', 'stage', 'industry'];
-
-// a small Required/Optional marker for a field label
-function reqMark(required) {
-  return required ? '<span class="req">Required</span>' : '<span class="optl">Optional</span>';
-}
-// text input field with a marked label + inline error slot
-function textField(name, label, value, { required = false, full = false, autocomplete = '' } = {}) {
-  return `<div${full ? ' class="full"' : ''}>
-    <label class="fl" for="f_${name}">${esc(label)} ${reqMark(required)}</label>
-    <input class="ti" id="f_${name}" name="${name}" value="${esc(value)}"${autocomplete ? ` autocomplete="${autocomplete}"` : ''}${required ? ' aria-required="true"' : ''}>
-    <p class="field-error field-error-inline" id="err_${name}" hidden></p></div>`;
-}
-function selectField(name, label, opts, value, { required = false, full = false, placeholder = 'Prefer not to say' } = {}) {
-  const options = opts.map((o) => `<option value="${esc(o)}"${o === value ? ' selected' : ''}>${o === '' ? esc(placeholder) : esc(o)}</option>`).join('');
-  return `<div${full ? ' class="full"' : ''}>
-    <label class="fl" for="f_${name}">${esc(label)} ${reqMark(required)}</label>
-    <select class="ti" id="f_${name}" name="${name}"${required ? ' aria-required="true"' : ''}>${options}</select>
-    <p class="field-error field-error-inline" id="err_${name}" hidden></p></div>`;
-}
-function renderContext() {
-  const c = state.context || {};
-  const isOther = c.industry === 'Other';
-  return `
-  <div class="wrap section">
-    <p class="eyebrow">Context</p>
-    <h2 class="cra" data-focus tabindex="-1">Context helps place the result in the reality of your company.</h2>
-    <p class="lead">These answers do not change your score. They help make the profile more useful during review and allow the result to be understood in relation to your company’s stage, market, and operating environment.</p>
-    <form id="ctx" novalidate>
-      <div class="form-grid">
-        ${textField('company', 'Company name', c.company, { full: true, autocomplete: 'organization' })}
-        ${textField('participant', 'Your name', c.participant, { autocomplete: 'name' })}
-        ${textField('role', 'Your role', c.role, { required: true })}
-        ${selectField('stage', 'Company stage', STAGE_OPTS, c.stage, { required: true, placeholder: 'Select one' })}
-        ${selectField('arr', 'Annual recurring revenue', ARR_OPTS, c.arr)}
-        ${selectField('employees', 'Employees', EMP_OPTS, c.employees)}
-        ${selectField('industry', 'Industry', INDUSTRY_OPTS, c.industry, { required: true, placeholder: 'Select one' })}
-        <div class="full" id="industryOtherWrap"${isOther ? '' : ' hidden'}>
-          <label class="fl" for="f_industryOther">Describe your industry <span class="req">Required</span></label>
-          <input class="ti" id="f_industryOther" name="industryOther" value="${esc(c.industryOther)}" aria-required="true">
-          <p class="field-error field-error-inline" id="err_industryOther" hidden></p>
+// ---------------------------------------------------------------------------
+// Screens
+// ---------------------------------------------------------------------------
+function introHTML() {
+  const rows = DIMENSIONS.map((d, i) => `
+    <div style="display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,32px);align-items:baseline;padding:20px 4px;border-bottom:1px solid #E2E6EA">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(16px,1.6vw,19px);color:#C7CDD4;width:2ch">${NUM[i]}</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,26px);letter-spacing:-0.015em;color:#0B1D33">${esc(d.name)}</div>
+        <div style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;color:#5B6B7C;margin-top:6px;max-width:62ch">${esc(d.definition)}</div>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8B8677;white-space:nowrap">5 questions</div>
+    </div>`).join('');
+  const resumable = anyAnswer() && !allComplete();
+  return `<section style="max-width:1140px;margin:0 auto;padding:clamp(52px,9vw,120px) 24px clamp(60px,9vw,120px)">
+    <div class="cra-two" style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(36px,6vw,88px);align-items:start">
+      <div style="max-width:24ch">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E4FA1">The entry diagnostic</div>
+        <h1 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:-0.03em;color:#0B1D33;margin:22px 0 0;text-wrap:balance">Every company believes it has a commercial engine.</h1>
+        <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(20px,2.6vw,30px);line-height:1.26;letter-spacing:-0.01em;color:#1E4FA1;margin:24px 0 0;max-width:36ch">Most have a few people the engine cannot run without.</p>
+      </div>
+      <div style="padding-top:clamp(8px,3vw,54px)">
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18.5px);line-height:1.64;color:#3A4654;margin:0;max-width:46ch">This assessment tells the two apart. It shows where commercial capability genuinely belongs to the company, and where growth still depends on individual judgment, memory, and relationships.</p>
+        <div style="height:1px;background:#E2E6EA;margin:28px 0"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:26px 40px">
+          <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#0B1D33">25</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677;margin-top:4px">Questions</div></div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#0B1D33">5</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677;margin-top:4px">Conditions</div></div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#0B1D33">7-10</div><div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677;margin-top:4px">Minutes</div></div>
         </div>
-        ${selectField('founderLed', 'Does the founder still lead most commercial activity?', FOUNDER_OPTS, c.founderLed, { full: true })}
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:#5B6B7C;margin:26px 0 0;max-width:46ch">The five conditions are read in sequence, because a weakness high in the order caps everything beneath it. The goal is an accurate score, not a high one. Answers are self-reported: a diagnostic starting point, not proof.</p>
       </div>
-      <div class="btn-row between">
-        <button type="button" class="btn btn-ghost" data-act="back-intro">Back</button>
-        <span>
-          <button type="button" class="btn btn-ghost" data-act="skip-context">Skip for now</button>
-          <button type="submit" class="btn btn-primary">Continue</button>
-        </span>
-      </div>
-    </form>
-  </div>`;
-}
-
-function renderAssess() {
-  const dim = DIMENSIONS[state.dimIndex];
-  const answers = state.answers[dim.id];
-  const pct = Math.round(((state.dimIndex) / DIMENSIONS.length) * 100);
-  const help = QUESTION_HELP[dim.id] || [];
-  const qHtml = dim.questions.map((q, qi) => {
-    const opts = RESPONSE_OPTIONS.map((o) => {
-      const sel = answers[qi] === o.value;
-      return `<label class="opt${sel ? ' sel' : ''}">
-        <input type="radio" name="q_${qi}" value="${o.value}"${sel ? ' checked' : ''}>
-        <span class="dot" aria-hidden="true"></span><span class="otext">${esc(o.label)}</span></label>`;
-    }).join('');
-    const helpId = `qhelp_${dim.id}_${qi}`;
-    const helpCtl = help[qi] ? `
-      <button type="button" class="qhelp-btn" aria-expanded="false" aria-controls="${helpId}">
-        <span class="qhelp-ic" aria-hidden="true">i</span><span class="qhelp-label">What this means</span></button>
-      <div class="qhelp" id="${helpId}" role="region" aria-label="Guidance for question ${qi + 1}" hidden>${esc(help[qi])}</div>` : '';
-    return `<fieldset class="q" data-qi="${qi}">
-      <legend class="qtext">${qi + 1}. ${esc(q)}</legend>${helpCtl}
-      <div class="opts" role="radiogroup" aria-label="Response for question ${qi + 1}">${opts}</div>
-    </fieldset>`;
-  }).join('');
-  return `
-  <div class="wrap section">
-    <div class="progress"><span class="progress-label">Condition ${state.dimIndex + 1} of ${DIMENSIONS.length}</span>
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div></div>
-    <div class="dim-head">
-      <div class="n">Condition ${dim.order} of 5</div>
-      <h2 class="cra" data-focus tabindex="-1" style="margin:4px 0 6px">${esc(dim.name)}</h2>
-      <p class="muted" style="margin:0">${esc(dim.definition)}</p>
     </div>
-    ${state.dimIndex === 0 ? '<p class="scoring-note">Answer based on what the company does in practice, not what it intends to do.</p>' : ''}
-    <form id="assessForm">${qHtml}
-      <p class="field-error" id="assessError" style="display:none" role="alert">Please answer every question before continuing.</p>
-      <div class="btn-row between">
-        <button type="button" class="btn btn-ghost" data-act="prev-dim">Back</button>
-        <button type="submit" class="btn btn-primary">${state.dimIndex === DIMENSIONS.length - 1 ? 'Review answers' : 'Next condition'}</button>
-      </div>
-    </form>
-  </div>`;
+    <div style="margin-top:clamp(48px,7vw,88px)">
+      <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8B8677;margin-bottom:18px">What gets measured, in order</div>
+      <div style="border-top:1px solid #E2E6EA">${rows}</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:clamp(40px,6vw,64px)">
+      <button class="cra-dark" data-action="begin" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:15px 30px;border-radius:7px;cursor:pointer;transition:background .18s ease">${resumable ? 'Resume the assessment' : 'Begin the assessment'}</button>
+      ${resumable ? '<button class="cra-ghost" data-action="restart" style="font-family:\'Inter\',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer">Start over</button>' : ''}
+      <a class="cra-link" href="https://www.gainadvisory.com/#method" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#1E4FA1;text-decoration:none">Learn about Commercial by Design</a>
+    </div>
+  </section>`;
 }
 
-function renderReview() {
-  const rows = DIMENSIONS.map((d) => {
-    const done = dimComplete(d.id);
-    return `<div class="review-row${done ? '' : ' incomplete'}">
-      <span><span class="rl">${d.order}. ${esc(d.name)}</span></span>
-      <span style="display:flex;align-items:center;gap:14px">
-        <span class="rs">${done ? 'Complete' : answeredCount(d.id) + ' of 5 answered'}</span>
-        <button class="btn btn-ghost" data-act="edit" data-dim="${d.order - 1}">Edit</button>
-      </span></div>`;
+function ctxSelect(field, label, badge, options) {
+  const opts = options.map(([v, t]) => `<option value="${esc(v)}"${state.ctx[field] === v ? ' selected' : ''}>${esc(t)}</option>`).join('');
+  return `<label style="display:block">
+    <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C;display:flex;align-items:center;gap:8px">${esc(label)}${badge ? ' <span style="font-family:\'DM Sans\',sans-serif;font-size:9px;letter-spacing:.08em;color:#1E4FA1;background:#EEF3FB;border-radius:4px;padding:2px 6px">Sharpens result</span>' : ''}</span>
+    <select data-field="${field}" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">${opts}</select>
+  </label>`;
+}
+
+function contextHTML() {
+  const c = state.ctx;
+  return `<section style="max-width:940px;margin:0 auto;padding:clamp(44px,7vw,84px) 24px clamp(60px,9vw,110px)">
+    <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E4FA1">Calibration</div>
+    <h2 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.06;letter-spacing:-0.02em;color:#0B1D33;margin:16px 0 0;max-width:20ch">The same score means different things at different stages.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18px);line-height:1.62;color:#3A4654;margin:20px 0 0;max-width:58ch">These answers do not change your score. They calibrate how it is read, so your result is understood against your company's stage, market, and operating reality rather than in the abstract. Two fields make the profile materially sharper; the rest are optional.</p>
+    <div style="margin-top:clamp(34px,5vw,52px);display:flex;flex-direction:column;gap:26px">
+      <div class="cra-ctx2" style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+        ${ctxSelect('stage', 'Company stage', true, [['', 'Select one'], ['Pre-revenue', 'Pre-revenue'], ['Early revenue', 'Early revenue, finding repeatability'], ['Scaling', 'Scaling a proven motion'], ['Established', 'Established, optimizing']])}
+        <label style="display:block">
+          <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C;display:flex;align-items:center;gap:8px">Your role <span style="font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.08em;color:#1E4FA1;background:#EEF3FB;border-radius:4px;padding:2px 6px">Sharpens result</span></span>
+          <input data-field="role" value="${esc(c.role)}" placeholder="e.g. Founder, CEO, CCO" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">
+        </label>
+      </div>
+      <div style="height:1px;background:#EEF0F3"></div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B8677">Optional context</div>
+      <div class="cra-ctx2" style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+        <label style="display:block">
+          <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C">Company name</span>
+          <input data-field="company" value="${esc(c.company)}" placeholder="Appears on your report" autocomplete="organization" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">
+        </label>
+        ${ctxSelect('arr', 'Annual recurring revenue', false, [['', 'Prefer not to say'], ['Pre-revenue', 'Pre-revenue'], ['<$1M', 'Under $1M'], ['$1M-$5M', '$1M - $5M'], ['$5M-$20M', '$5M - $20M'], ['$20M+', '$20M+']])}
+      </div>
+      <label style="display:block">
+        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C">Does a single person still lead most commercial activity?</span>
+        <select data-field="founder" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F;max-width:420px">
+          ${[['', 'Prefer not to say'], ['Yes, entirely', 'Yes, entirely'], ['Mostly', 'Mostly'], ['Shared', 'Shared across a team'], ['No', 'No, it runs without them']].map(([v, t]) => `<option value="${esc(v)}"${c.founder === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}
+        </select>
+      </label>
+    </div>
+    <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(40px,6vw,56px);padding-top:26px;border-top:1px solid #E2E6EA">
+      <button class="cra-ghost" data-action="back-intro" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">&larr; Back</button>
+      <div style="display:flex;align-items:center;gap:22px">
+        <button class="cra-ghost" data-action="skip" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer">Skip for now</button>
+        <button class="cra-dark" data-action="start" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 28px;border-radius:7px;cursor:pointer;transition:background .18s ease">Continue</button>
+      </div>
+    </div>
+  </section>`;
+}
+
+function cellBase(idx) {
+  const first = idx === 0, last = idx === 4;
+  const radius = `border-radius:${first ? '8px' : '0'} ${last ? '8px' : '0'} ${last ? '8px' : '0'} ${first ? '8px' : '0'};`;
+  return `flex:1;min-width:0;padding:13px 6px;text-align:center;cursor:pointer;border:1px solid #E2E6EA;${radius}margin-left:${first ? '0' : '-1px'};position:relative;z-index:1;transition:all .16s ease;background:#fff;color:#5B6B7C;`;
+}
+
+function railHTML() {
+  return DIMENSIONS.map((d, i) => {
+    const done = dimDone(d.id);
+    const active = i === state.ci;
+    const dotBg = active ? 'background:#0B1D33;color:#fff;' : done ? 'background:#1E4FA1;color:#fff;' : 'background:#fff;color:#8B8677;border:1px solid #D9DEE4;';
+    const dotText = done && !active ? '✓' : String(i + 1);
+    const nameColor = active ? '#0B1D33' : done ? '#3A4654' : '#8B8677';
+    return `<button class="cra-rail-btn" data-action="rail" data-idx="${i}" aria-current="${active ? 'step' : 'false'}" style="display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:${active ? '#F1F4F8' : 'transparent'};border:none;border-radius:9px;padding:11px 12px;cursor:pointer;transition:background .16s ease">
+      <span style="flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;${dotBg}">${dotText}</span>
+      <span style="text-align:left;min-width:0"><span style="display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;color:${nameColor}">${esc(d.name)}</span></span>
+    </button>`;
+  }).join('');
+}
+
+function assessmentHTML() {
+  const d = DIMENSIONS[state.ci];
+  const help = QUESTION_HELP[d.id] || [];
+  const questions = d.questions.map((q, qi) => {
+    const val = state.answers[d.id][qi];
+    const answered = val != null;
+    const key = `${d.id}:${qi}`;
+    const open = !!state.open[key];
+    const cells = RESPONSE_OPTIONS.map((o, idx) => `<button class="cra-cell" role="radio" aria-checked="${val === o.value}" aria-label="${esc(o.label)}" data-action="answer" data-dim="${d.id}" data-qi="${qi}" data-val="${o.value}" style="${cellBase(idx)}"><span style="display:block;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;pointer-events:none">${esc(o.label)}</span></button>`).join('');
+    return `<div class="cra-card${answered ? ' answered' : ''}" data-card="${key}" style="background:#fff;border:1px solid #EEF0F3;border-left:3px solid #E2E6EA;border-radius:12px;padding:clamp(20px,2.5vw,26px);transition:border-color .2s ease">
+      <div style="display:flex;gap:14px;align-items:baseline">
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#C7CDD4;flex:0 0 auto">${qi + 1}</span>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#0B1D33;margin:0;font-weight:500">${esc(q)}</p>
+      </div>
+      <div style="padding-left:29px;margin-top:14px">
+        <button class="cra-help${open ? ' open' : ''}" data-action="help" data-key="${key}" aria-expanded="${open}" aria-controls="help-${d.id}-${qi}" style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;color:#1E4FA1;background:#fff;border:1px solid #E2E6EA;border-radius:20px;padding:6px 14px 6px 11px;cursor:pointer;transition:all .16s ease">
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:#1E4FA1">i</span>
+          <span data-help-label>${open ? 'Hide' : 'What this means'}</span>
+        </button>
+        <div id="help-${d.id}-${qi}" role="region" aria-label="What this means" ${open ? '' : 'hidden'} style="margin-top:12px;border-left:2px solid #1E4FA1;background:#F4F7FC;border-radius:0 8px 8px 0;padding:14px 18px">
+          <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:#3A4654;margin:0">${esc(help[qi] || '')}</p>
+        </div>
+        <div class="cra-scale" role="radiogroup" aria-label="Response for question ${qi + 1}" style="display:flex;gap:6px;margin-top:16px">${cells}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const ac = answeredCount(d.id);
+  const allAns = ac === 5;
+  const prevLabel = state.ci === 0 ? '← Calibration' : '← Previous condition';
+  const nextLabel = state.ci === 4 ? 'Review answers' : 'Next condition';
+  return `<section style="max-width:1140px;margin:0 auto;padding:0 24px">
+    <div class="cra-two" style="display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(28px,4vw,60px);align-items:start">
+      <aside class="cra-rail" style="position:sticky;top:64px;height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 40px 0;border-right:1px solid #EEF0F3">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8B8677">Read in sequence</div>
+        <div style="margin-top:20px;display:flex;flex-direction:column">${railHTML()}</div>
+        <div style="margin-top:26px;padding-top:20px;border-top:1px solid #EEF0F3;font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.55;color:#8B8677;max-width:34ch">A weakness high in the order caps everything beneath it. Answer for what the company does in practice, not what it intends.</div>
+      </aside>
+      <div style="padding:clamp(36px,5vw,64px) 0 clamp(60px,8vw,100px)">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Condition ${NUM[state.ci]} of 5</div>
+        <h2 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);line-height:1.04;letter-spacing:-0.02em;color:#0B1D33;margin:12px 0 0">${esc(d.name)}</h2>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18px);line-height:1.55;color:#5B6B7C;margin:14px 0 0;max-width:60ch">${esc(d.definition)}</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:clamp(30px,4vw,46px)">${questions}</div>
+        <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(36px,5vw,52px)">
+          <button class="cra-ghost" data-action="prev" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">${prevLabel}</button>
+          <div style="display:flex;align-items:center;gap:18px">
+            <span id="cra-answered" style="font-family:'DM Sans',sans-serif;font-size:12.5px;color:#8B8677">${ac} of 5 answered</span>
+            <button id="cra-next" class="cra-dark" data-action="next" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${allAns ? '#0B1D33' : '#9AA6B4'};border:none;padding:13px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">${nextLabel}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function reviewHTML() {
+  const rows = DIMENSIONS.map((d, i) => {
+    const done = dimDone(d.id);
+    return `<div style="display:grid;grid-template-columns:auto 1fr auto auto;gap:18px;align-items:center;padding:20px 22px;border-bottom:1px solid #EEF0F3">
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#C7CDD4;width:2ch">${NUM[i]}</span>
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(17px,1.9vw,21px);letter-spacing:-0.01em;color:#0B1D33">${esc(d.name)}</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:${done ? '#1E4FA1' : '#B0603F'}">${done ? 'Complete' : 'Incomplete'}</span>
+      <button class="cra-edit" data-action="edit" data-idx="${i}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;color:#1E4FA1;background:none;border:none;cursor:pointer">Edit</button>
+    </div>`;
   }).join('');
   const ready = allComplete();
-  return `
-  <div class="wrap section">
-    <p class="eyebrow">Review</p>
-    <h2 class="cra" data-focus tabindex="-1">One look before the profile.</h2>
-    <p class="lead">You can return to any condition. When all five are complete, generate your readiness profile.</p>
-    <div class="review-list">${rows}</div>
-    <div class="btn-row between">
-      <button class="btn btn-ghost" data-act="prev-dim">Back</button>
-      <button class="btn btn-primary" data-act="generate"${ready ? '' : ' disabled'}>Generate readiness profile</button>
+  return `<section style="max-width:820px;margin:0 auto;padding:clamp(52px,8vw,100px) 24px clamp(60px,9vw,110px)">
+    <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1E4FA1">Review</div>
+    <h2 data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-0.02em;color:#0B1D33;margin:16px 0 0;max-width:18ch">One look before the profile.</h2>
+    <p style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:#5B6B7C;margin:18px 0 0;max-width:54ch">You can return to any condition. When all five are complete, generate your readiness profile.</p>
+    <div style="margin-top:clamp(34px,5vw,48px);border:1px solid #E2E6EA;border-radius:14px;overflow:hidden;background:#fff">${rows}</div>
+    <div class="cra-noprint" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:32px">
+      <button class="cra-ghost" data-action="back-review" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;padding:8px 0">&larr; Back</button>
+      <button class="${ready ? 'cra-dark' : ''}" data-action="generate" ${ready ? '' : 'aria-disabled="true"'} style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${ready ? '#0B1D33' : '#9AA6B4'};border:none;padding:14px 28px;border-radius:7px;cursor:${ready ? 'pointer' : 'not-allowed'}">Generate readiness profile</button>
     </div>
-    ${ready ? '' : '<p class="field-error" style="margin-top:12px">Complete every condition to generate the profile.</p>'}
-  </div>`;
+  </section>`;
 }
 
-function renderResults() {
+function resultsHTML() {
   const profile = computeProfile(state.answers);
-  const c = state.context || {};
-  track('results_viewed', { source: SOURCE || undefined });
+  const dims = profile.dimensions; // in order
+  // overall band = Built if all built, else band of the first non-built (priority)
+  let priorityIdx = dims.findIndex((x) => x.classification !== 'Built');
+  if (priorityIdx < 0) priorityIdx = dims.length - 1;
+  const overallBand = profile.allBuilt ? 'Built' : dims[priorityIdx].classification;
+  // strongest: first of the highest-scoring ids; tag only when it is a real strength
+  const strongId = profile.strongestIds[0];
+  const strongIdx = DIMENSION_ORDER.indexOf(strongId);
+  const strongIsReal = ['Built', 'Forming'].includes(dims[strongIdx].classification);
 
-  // 1 Header
-  const header = `
-    <p class="eyebrow">Commercial Readiness Profile</p>
-    ${c.company ? `<h1 class="cra" data-focus tabindex="-1" style="margin-bottom:6px">${esc(c.company)}</h1>` : `<h1 class="cra" data-focus tabindex="-1" style="margin-bottom:6px">Your Commercial Readiness Profile</h1>`}
-    <p class="muted" style="margin:0">${esc(todayLabel())}${c.participant ? ' &middot; ' + esc(c.participant) : ''}</p>`;
-
-  // 2 Readiness Profile (state dominant, total subordinate)
-  const readiness = `
-    <div class="rsec" style="border-top:0;padding-top:26px">
-      <div class="rp-total">${profile.total} of 125</div>
-      <div class="rp-state">${esc(overallStateText(profile))}</div>
-      <p class="rp-principle">${esc(SHAPE_OVER_TOTAL)}</p>
-    </div>`;
-
-  // 3 Five-Dimension Sequence (ordered ladder; break-point shown, full profile below stays visible)
-  let rungs = '';
-  profile.dimensions.forEach((d, i) => {
-    if (i === profile.readyThrough && profile.readyThrough > 0 && !profile.allBuilt) {
-      rungs += `<div class="breakline">Readiness holds through the ${profile.readyThrough === 1 ? 'first condition' : 'first ' + profile.readyThrough + ' conditions'}. The conditions below still count, and rest on the next one.</div>`;
-    }
-    const meta = byId[d.id];
-    rungs += `<div class="rung${d.isPriority ? ' priority' : ''}">
-      <div class="idx">${meta.order}</div>
-      <div>
-        <div class="rname">${esc(meta.name)}</div>
-        <div class="rdef">${esc(meta.definition)}</div>
-        <div class="rmeaning">${esc(DIMENSION_INTERPRETATION[meta.id][d.classification])}</div>
-        ${d.isPriority ? '<div class="starthere">Start here</div>' : ''}
-        ${d.isStrongest && !d.isPriority ? '<div class="strong-tag">Relative strength</div>' : ''}
+  const ladder = dims.map((x, i) => {
+    const d = DIMENSIONS[i];
+    const bs = BAND_STYLE[x.classification];
+    const pct = Math.max(6, Math.round(((x.score - 5) / 20) * 100));
+    const isPriority = i === priorityIdx && !profile.allBuilt;
+    const isStrong = i === strongIdx && strongIsReal && !isPriority;
+    const tag = isPriority ? 'First priority' : (isStrong ? 'Strongest' : '');
+    const tagStyle = isPriority
+      ? 'font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#B0603F;background:#FBF0EC'
+      : 'font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#1E4FA1;background:#EEF3FB';
+    return `<div style="padding:22px 4px;border-bottom:1px solid #E2E6EA;${isPriority ? 'background:linear-gradient(90deg,#FCF6F3,transparent 60%);' : ''}">
+      <div style="display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,2.5vw,26px);align-items:center">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#C7CDD4;width:2ch">${NUM[i]}</span>
+        <div style="min-width:0">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(18px,2vw,23px);letter-spacing:-0.01em;color:#0B1D33">${esc(d.name)}</span>
+            ${tag ? `<span style="${tagStyle}">${tag}</span>` : ''}
+          </div>
+          <div style="height:6px;border-radius:4px;background:#EEF0F3;margin-top:12px;overflow:hidden;max-width:420px"><span style="display:block;height:100%;width:${pct}%;background:${bs.bar};border-radius:4px;transition:width .6s ease"></span></div>
+        </div>
+        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;white-space:nowrap;color:${bs.color};background:${bs.tint};padding:6px 12px;border-radius:6px">${x.classification}</span>
       </div>
-      <div class="rright"><span class="rscore">${d.score} / 25</span><span class="badge ${d.classification}">${d.classification}</span></div>
+      ${isPriority ? '<div style="font-family:\'Inter\',sans-serif;font-size:13.5px;line-height:1.5;color:#8B6A5C;margin:12px 0 0 calc(2ch + clamp(14px,2.5vw,26px));max-width:56ch">Read in sequence, this is the first condition that is not yet built. It sets the ceiling for everything below it.</div>' : ''}
     </div>`;
-  });
-  const ladder = `<div class="rsec"><p class="eyebrow">The five conditions, in sequence</p><div class="ladder">${rungs}</div></div>`;
+  }).join('');
 
-  // 4 First Thing to Build (dominant) OR all-Built variant
-  let build = '';
-  if (profile.allBuilt) {
-    build = `<div class="build-block"><p class="eyebrow">The read</p>
-      <h2>${esc(ALL_BUILT.headline)}</h2>
-      <p class="para">${esc(ALL_BUILT.body)}</p></div>`;
-  } else {
-    const g = DIMENSION_GUIDANCE[profile.priorityId];
-    const pd = profile.dimensions.find((d) => d.id === profile.priorityId);
-    // false-strength note only when a lower condition scores higher than the priority
-    const laterHigher = profile.dimensions.some((d) => byId[d.id].order > byId[profile.priorityId].order && d.score > pd.score);
-    build = `<div class="build-block"><p class="eyebrow">First thing to build</p>
-      <h2>${esc(byId[profile.priorityId].name)}</h2>
-      <div class="cls">${pd.classification} &middot; ${pd.score} of 25</div>
-      <p class="para">${esc(g.whyFirst)}</p>
-      <p class="para"><b>The risk right now.</b> ${esc(g.risk)}</p>
-      <p class="para"><b>What building it means.</b> ${esc(g.whatItMeans)}</p>
-      <p class="para"><b>What it does for the rest.</b> ${esc(g.effectBelow)}</p>
-      ${laterHigher ? `<p class="false-strength">${esc(FALSE_STRENGTH)}</p>` : ''}</div>`;
-  }
+  const meta = [state.ctx.role, state.ctx.stage, new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })].filter(Boolean).map(esc).join('  ·  ');
+  const priorityDim = DIMENSIONS[priorityIdx];
+  const strongDim = DIMENSIONS[strongIdx];
 
-  // 5 Strongest Condition
-  const strongNames = profile.strongestIds.map((id) => byId[id].name);
-  const strong = `<div class="rsec"><p class="eyebrow">Strongest condition</p>
-    <p class="lead" style="margin-bottom:0">${esc(strongestText(strongNames, profile.strongestTied))}</p></div>`;
-
-  // 6 What This Means
-  const means = `<div class="rsec"><p class="eyebrow">What this result is, and is not</p>
-    <ul>${WHAT_THIS_MEANS.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`;
-
-  // 7 Recommended Next Step
-  const next = `<div class="rsec"><p class="eyebrow">Recommended next step</p>
-    <p class="lead">Use this result as the starting point for a focused conversation about what your company should build first, and in what order.</p></div>`;
-
-  // 8 CTA + handling
-  const cta = `<div class="rsec" style="border-top:0;padding-top:8px">
-    <div class="next-ctas">
-      <a class="btn btn-primary" href="/#close" data-act="review-cta">Schedule a Commercial Readiness Review</a>
-      <a class="btn btn-secondary" href="/#method">Read Commercial by Design</a>
+  return `<section style="max-width:900px;margin:0 auto;padding:clamp(40px,6vw,72px) 24px clamp(60px,9vw,110px)">
+    <div class="cra-print" style="background:#fff;border:1px solid #E2E6EA;border-radius:16px;overflow:hidden">
+      <div style="background-color:#0B1D33;color:#fff;padding:clamp(30px,5vw,52px) clamp(28px,5vw,52px)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap">
+          <div>
+            <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4">Commercial Readiness Profile</div>
+            <div data-focus tabindex="-1" style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:-0.01em;margin-top:10px">${esc(state.ctx.company || 'Your company')}</div>
+            <div style="font-family:'Inter',sans-serif;font-size:13.5px;color:#8FA0B4;margin-top:6px">${meta}</div>
+          </div>
+          ${logo(20, true)}
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,.14);margin:clamp(24px,4vw,36px) 0"></div>
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8FA0B4">Overall readiness</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,6vw,60px);line-height:1.02;letter-spacing:-0.025em;margin:12px 0 0;max-width:16ch">${overallBand}</div>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#AEBED0;margin:18px 0 0;max-width:60ch">${esc(OVERALL_BODY[overallBand])}</p>
+      </div>
+      <div style="padding:clamp(28px,5vw,48px)">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8B8677;margin-bottom:6px">The five conditions</div>
+        <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#5B6B7C;margin:0 0 24px;max-width:60ch">Read top to bottom. Each condition rests on the one above it.</p>
+        <div style="border-top:1px solid #E2E6EA">${ladder}</div>
+        <div class="cra-ctx2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:clamp(28px,4vw,40px)">
+          <div style="border:1px solid #E2E6EA;border-radius:12px;padding:22px;border-top:3px solid #C46B5A">
+            <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#B0603F">Your first priority</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,24px);letter-spacing:-0.01em;color:#0B1D33;margin-top:10px">${esc(priorityDim.name)}</div>
+            <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#3A4654;margin:10px 0 0">${esc(CONDITION_COPY[priorityDim.id].priority)}</p>
+          </div>
+          <div style="border:1px solid #E2E6EA;border-radius:12px;padding:22px;border-top:3px solid #1E4FA1">
+            <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#1E4FA1">Your strongest condition</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,24px);letter-spacing:-0.01em;color:#0B1D33;margin-top:10px">${esc(strongDim.name)}</div>
+            <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#3A4654;margin:10px 0 0">${esc(CONDITION_COPY[strongDim.id].strong)}</p>
+          </div>
+        </div>
+        <div style="margin-top:clamp(28px,4vw,40px);background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),url('/assets/wood-wall.png');background-size:cover;background-position:center;background-blend-mode:multiply;border-radius:14px;padding:clamp(24px,4vw,38px);color:#fff">
+          <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4">Where this leads</div>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,25px);line-height:1.3;letter-spacing:-0.01em;margin:14px 0 0;max-width:40ch">This is a starting point, not a verdict. The work is to move the first non-built condition, in order.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:#AEBED0;margin:16px 0 0;max-width:60ch">A short working session translates this profile into the specific evidence, sequence, and ownership required to close the gap.</p>
+        </div>
+      </div>
     </div>
-    <div class="handling">
-      <button class="btn btn-ghost" data-act="print">Print or save</button>
-      <button class="btn btn-ghost" data-act="copy">Copy summary</button>
-      <button class="btn btn-ghost" data-act="restart">Start over</button>
+
+    <div class="cra-noprint" style="margin-top:26px;border:1px solid #E2E6EA;border-radius:16px;background:#fff;padding:clamp(24px,4vw,38px)">
+      <div class="cra-ctx2" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:start">
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Next step</div>
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.12;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0;max-width:22ch">Want the detailed read sent over, or a conversation?</h3>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">Optional. Your result is not stored anywhere. Adding your email opens your own mail app with the summary, addressed to Gain Advisory.</p>
+        </div>
+        <div>
+          <label style="display:block">
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C">Business email</span>
+            <input data-field="email" value="${esc(state.email)}" type="email" placeholder="you@company.com" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">
+          </label>
+          <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;cursor:pointer">
+            <input type="checkbox" data-field="consent" ${state.consent ? 'checked' : ''} style="margin-top:3px;width:16px;height:16px;accent-color:#1E4FA1;flex:0 0 auto">
+            <span style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;color:#5B6B7C">I would like Gain Advisory to see this result and follow up. I understand nothing is stored on this site.</span>
+          </label>
+          <button id="cra-send" data-action="send" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${state.email && state.consent ? '#0B1D33' : '#9AA6B4'};border:none;padding:13px 24px;border-radius:7px;margin-top:18px;cursor:${state.email && state.consent ? 'pointer' : 'not-allowed'};transition:background .18s ease">Send my result to Gain Advisory</button>
+        </div>
+      </div>
     </div>
-    <div class="email-box">
-      <strong>Want the detailed read sent over, or a conversation?</strong>
-      <p class="muted" style="margin:8px 0 0;font-size:14px">Optional. Your result is not stored anywhere. Adding your email opens your own mail app with the summary, addressed to Gain Advisory.</p>
-      <form id="emailForm" style="margin-top:12px">
-        <label class="fl" for="f_email">Business email</label>
-        <input class="ti" id="f_email" name="email" type="email" placeholder="you@company.com" autocomplete="email">
-        <label class="consent"><input type="checkbox" id="f_consent" required> I would like Gain Advisory to see this result and follow up. I understand nothing is stored on this site.</label>
-        <div class="btn-row" style="margin-top:12px"><button class="btn btn-secondary" type="submit">Send my result to Gain Advisory</button></div>
-      </form>
+
+    <div class="cra-noprint" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:32px">
+      <button class="cra-dark" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">Download the report</button>
+      <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">Book a working session &rarr;</a>
+      <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;margin-left:auto">Start over</button>
     </div>
-    <p class="copied" id="copied" style="display:none;color:var(--blue);font-size:14px;margin-top:10px" role="status">Summary copied.</p>
-  </div>`;
-
-  return `<div class="wrap-wide section" id="results-root">${header}${readiness}${ladder}${build}${strong}${means}${next}${cta}</div>`;
+  </section>`;
 }
 
-// ---- summary text (for copy + email) ---------------------------------------
-function summaryText() {
-  const p = computeProfile(state.answers);
-  const c = state.context || {};
-  const lines = [];
-  lines.push('Commercial Readiness Profile');
-  if (c.company) lines.push('Company: ' + c.company);
-  if (c.participant) lines.push('Participant: ' + c.participant);
-  lines.push('Date: ' + todayLabel());
-  lines.push('');
-  lines.push(overallStateText(p) + '  (total ' + p.total + ' of 125)');
-  lines.push('');
-  p.dimensions.forEach((d) => {
-    lines.push(byId[d.id].name + ': ' + d.classification + ' (' + d.score + '/25)' +
-      (d.isPriority ? '  <- first thing to build' : '') + (d.isStrongest ? '  (relative strength)' : ''));
-  });
-  lines.push('');
-  if (p.priorityId) lines.push('First thing to build: ' + byId[p.priorityId].name);
-  else lines.push('All five conditions self-assessed as Built. Test against external evidence.');
-  lines.push('');
-  lines.push('This is a self-assessment, not proof. Next step: a focused Commercial Readiness Review.');
-  return lines.join('\n');
-}
-
-// ---- event wiring -----------------------------------------------------------
-function wire() {
-  app.querySelectorAll('[data-act]').forEach((btn) => btn.addEventListener('click', onAction));
-  const ctx = document.getElementById('ctx');
-  if (ctx) {
-    // reveal/hide the conditional "Describe your industry" field
-    const ind = document.getElementById('f_industry');
-    if (ind) ind.addEventListener('change', () => toggleIndustryOther(ind.value));
-    ctx.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!validateContext(ctx)) return;
-      readContext(ctx); go('assess', 0);
-    });
+function screenHTML() {
+  switch (state.screen) {
+    case 'context': return contextHTML();
+    case 'assessment': return assessmentHTML();
+    case 'review': return reviewHTML();
+    case 'results': return resultsHTML();
+    default: return introHTML();
   }
-  const af = document.getElementById('assessForm');
-  if (af) {
-    af.addEventListener('change', (e) => {
-      const t = e.target; if (t && t.name && t.name.indexOf('q_') === 0) {
-        const qi = +t.name.slice(2); state.answers[DIMENSIONS[state.dimIndex].id][qi] = +t.value;
-        // reflect selection styling without a full re-render
-        af.querySelectorAll(`fieldset[data-qi="${qi}"] .opt`).forEach((l) => l.classList.toggle('sel', l.querySelector('input').checked));
-        save();
-      }
-    });
-    af.addEventListener('submit', (e) => { e.preventDefault(); onAssessSubmit(); });
-    // per-question help: expand/collapse, one open at a time (keyboard + click)
-    af.addEventListener('click', (e) => { const b = e.target.closest('.qhelp-btn'); if (b) onHelpToggle(b); });
+}
+
+function render() {
+  app.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column">${header()}<main style="flex:1">${screenHTML()}</main>${footer()}</div>`;
+  const h = app.querySelector('[data-focus]');
+  if (h && h.focus) h.focus({ preventScroll: true });
+}
+
+// ---------------------------------------------------------------------------
+// Interaction: one delegated handler per event type (attached once)
+// ---------------------------------------------------------------------------
+function onAnswer(btn) {
+  const dim = btn.getAttribute('data-dim');
+  const qi = +btn.getAttribute('data-qi');
+  const val = +btn.getAttribute('data-val');
+  state.answers[dim][qi] = val;
+  save();
+  track('question_answered', { dimension: dim, index: qi, value: val });
+  const card = app.querySelector(`[data-card="${dim}:${qi}"]`);
+  if (card) {
+    card.classList.add('answered');
+    card.querySelectorAll('.cra-cell').forEach((c) => c.setAttribute('aria-checked', String(+c.getAttribute('data-val') === val)));
   }
-  const ef = document.getElementById('emailForm');
-  if (ef) ef.addEventListener('submit', onEmailSubmit);
+  const ac = answeredCount(dim);
+  const lbl = document.getElementById('cra-answered');
+  if (lbl) lbl.textContent = `${ac} of 5 answered`;
+  const nextBtn = document.getElementById('cra-next');
+  if (nextBtn) nextBtn.style.background = ac === 5 ? '#0B1D33' : '#9AA6B4';
+  if (ac === 5) { announce(`${DIMENSIONS[state.ci].name} complete.`); track('condition_completed', { dimension: dim }); }
 }
 
-// Reveal/hide the conditional "Describe your industry" field and set its required state.
-function toggleIndustryOther(value) {
-  const wrap = document.getElementById('industryOtherWrap');
-  const input = document.getElementById('f_industryOther');
-  if (!wrap || !input) return;
-  const other = value === 'Other';
-  wrap.hidden = !other;
-  if (other) input.setAttribute('aria-required', 'true');
-  else { input.removeAttribute('aria-required'); input.value = ''; clearFieldError('industryOther'); }
+function onHelp(btn) {
+  const key = btn.getAttribute('data-key');
+  const nowOpen = !state.open[key];
+  state.open[key] = nowOpen;
+  btn.setAttribute('aria-expanded', String(nowOpen));
+  btn.classList.toggle('open', nowOpen);
+  const label = btn.querySelector('[data-help-label]');
+  if (label) label.textContent = nowOpen ? 'Hide' : 'What this means';
+  const panel = document.getElementById('help-' + key.replace(':', '-'));
+  if (panel) panel.hidden = !nowOpen;
 }
 
-function setFieldError(name, msg) {
-  const el = document.getElementById('err_' + name);
-  const input = document.getElementById('f_' + name);
-  if (el) { el.textContent = msg; el.hidden = false; }
-  if (input) input.setAttribute('aria-invalid', 'true');
-}
-function clearFieldError(name) {
-  const el = document.getElementById('err_' + name);
-  const input = document.getElementById('f_' + name);
-  if (el) { el.textContent = ''; el.hidden = true; }
-  if (input) input.removeAttribute('aria-invalid');
-}
-
-const CTX_LABELS = { role: 'Your role', stage: 'Company stage', industry: 'Industry', industryOther: 'Describe your industry' };
-// Validate the three required context fields (+ Describe your industry when Other).
-// Returns true if valid; otherwise marks fields, announces, and focuses the first.
-function validateContext(form) {
-  const missing = [];
-  const check = REQUIRED_CTX.slice();
-  if ((form.querySelector('#f_industry') || {}).value === 'Other') check.push('industryOther');
-  check.forEach((name) => {
-    const el = form.querySelector('#f_' + name);
-    const val = el ? String(el.value || '').trim() : '';
-    if (!val) { setFieldError(name, CTX_LABELS[name] + ' is required.'); missing.push(name); }
-    else clearFieldError(name);
-  });
-  if (missing.length) {
-    announce('Please complete the required fields: ' + missing.map((n) => CTX_LABELS[n]).join(', ') + '.');
-    const first = form.querySelector('#f_' + missing[0]);
-    if (first && first.focus) first.focus();
-    return false;
-  }
-  return true;
+function sendResult() {
+  if (!(state.email && state.consent)) return;
+  const profile = computeProfile(state.answers);
+  const dims = profile.dimensions;
+  let priorityIdx = dims.findIndex((x) => x.classification !== 'Built');
+  if (priorityIdx < 0) priorityIdx = dims.length - 1;
+  const overallBand = profile.allBuilt ? 'Built' : dims[priorityIdx].classification;
+  const strongId = profile.strongestIds[0];
+  const perLine = dims.map((x, i) => `- ${DIMENSIONS[i].name}: ${x.classification}`).join('\n');
+  const subject = 'Commercial Readiness result - ' + (state.ctx.company || 'company');
+  const body =
+    'Overall readiness: ' + overallBand + '\n\n' +
+    'First priority: ' + DIMENSIONS[priorityIdx].name + '\n' +
+    'Strongest condition: ' + DIMENSIONS[DIMENSION_ORDER.indexOf(strongId)].name + '\n\n' +
+    'By condition:\n' + perLine + '\n\n' +
+    'From: ' + state.email + (state.ctx.role ? ' (' + state.ctx.role + ')' : '') + '\n' +
+    'I would like Gain Advisory to see this result and follow up.';
+  track('email_result_requested', {});
+  window.location.href = 'mailto:hello@gainadvisory.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
 
-function readContext(form) {
-  const fd = new FormData(form); const c = {};
-  for (const [k, v] of fd.entries()) c[k] = String(v).trim().slice(0, 120);
-  // store the industry cleanly: only keep industryOther when Industry is "Other"
-  if (c.industry !== 'Other') delete c.industryOther;
-  state.context = c; save();
+function restart() {
+  state.answers = emptyAnswers();
+  state.open = {};
+  state.ci = 0;
+  state.screen = 'intro';
+  save();
+  render();
+  window.scrollTo(0, 0);
+  announce('Assessment reset.');
 }
 
-// Expand a question's help; collapse any other open panel so only one is open.
-function onHelpToggle(btn) {
-  const panel = document.getElementById(btn.getAttribute('aria-controls'));
-  const willOpen = btn.getAttribute('aria-expanded') !== 'true';
-  document.querySelectorAll('.qhelp-btn[aria-expanded="true"]').forEach((b) => {
-    b.setAttribute('aria-expanded', 'false');
-    const p = document.getElementById(b.getAttribute('aria-controls')); if (p) p.hidden = true;
-  });
-  if (willOpen && panel) { btn.setAttribute('aria-expanded', 'true'); panel.hidden = false; announce('Guidance expanded.'); }
-  else announce('Guidance collapsed.');
-}
-
-function onAssessSubmit() {
-  const dim = DIMENSIONS[state.dimIndex];
-  if (!dimComplete(dim.id)) {
-    const err = document.getElementById('assessError'); if (err) { err.style.display = 'block'; announce('Please answer every question before continuing.'); }
-    return;
-  }
-  track('dimension_completed', { dimension: dim.id, index: state.dimIndex });
-  if (state.dimIndex === DIMENSIONS.length - 1) go('review');
-  else go('assess', state.dimIndex + 1);
-}
-
-function onAction(e) {
-  const act = e.currentTarget.getAttribute('data-act');
-  switch (act) {
-    case 'begin':
-      if (!state.startedAt) { state.startedAt = Date.now(); state.date = todayLabel(); track('assessment_started', { facilitated: FACILITATED || undefined, source: SOURCE || undefined }); }
-      go('context'); break;
-    case 'resume': go(hasAnyAnswer() ? (allComplete() ? 'review' : 'assess') : 'context'); break;
-    case 'restart': e.preventDefault(); restart(); break;
+function onClick(e) {
+  const btn = e.target.closest('[data-action]');
+  if (!btn || !app.contains(btn)) return;
+  const action = btn.getAttribute('data-action');
+  switch (action) {
+    case 'begin': track('assessment_started', {}); go('context'); break;
     case 'back-intro': go('intro'); break;
-    case 'skip-context': go('assess', 0); break;
-    case 'prev-dim':
-      if (state.screen === 'review') go('assess', DIMENSIONS.length - 1);
-      else if (state.dimIndex === 0) go('context');
-      else go('assess', state.dimIndex - 1);
+    case 'skip': track('context_skipped', {}); go('assessment'); break;
+    case 'start': go('assessment'); break;
+    case 'answer': onAnswer(btn); break;
+    case 'help': onHelp(btn); break;
+    case 'rail': state.ci = +btn.getAttribute('data-idx'); go('assessment'); break;
+    case 'prev':
+      if (state.ci === 0) { go('context'); } else { state.ci -= 1; go('assessment'); }
       break;
-    case 'edit': go('assess', +e.currentTarget.getAttribute('data-dim')); break;
-    case 'generate':
-      if (allComplete()) { track('assessment_completed', { source: SOURCE || undefined }); go('results'); }
+    case 'next':
+      if (state.ci === 4) { go('review'); } else { state.ci += 1; go('assessment'); }
       break;
-    case 'print': track('report_printed'); window.print(); break;
-    case 'copy': doCopy(); break;
-    case 'review-cta': track('readiness_review_clicked', { source: SOURCE || undefined }); break; // href navigates
+    case 'edit': state.ci = +btn.getAttribute('data-idx'); go('assessment'); break;
+    case 'back-review': state.ci = 4; go('assessment'); break;
+    case 'generate': if (allComplete()) { track('profile_generated', {}); go('results'); } break;
+    case 'print': track('report_printed', {}); window.print(); break;
+    case 'send': sendResult(); break;
+    case 'restart': restart(); break;
     default: break;
   }
 }
 
-function restart() {
-  if (!confirm('Start over? This clears your saved answers.')) return;
-  track('assessment_restarted');
-  clearSaved();
-  state = { screen: 'intro', dimIndex: 0, answers: emptyAnswers(), context: {}, startedAt: null, date: null };
-  render();
-}
-
-async function doCopy() {
-  const text = summaryText();
-  try { await navigator.clipboard.writeText(text); }
-  catch (e) {
-    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); } catch (e2) {} document.body.removeChild(ta);
+function onFieldInput(e) {
+  const el = e.target.closest('[data-field]');
+  if (!el) return;
+  const f = el.getAttribute('data-field');
+  if (f === 'consent') return; // handled on change
+  if (f === 'email') {
+    state.email = el.value;
+    const b = document.getElementById('cra-send');
+    if (b) { const ok = state.email && state.consent; b.style.background = ok ? '#0B1D33' : '#9AA6B4'; b.style.cursor = ok ? 'pointer' : 'not-allowed'; }
+    return;
   }
-  const c = document.getElementById('copied'); if (c) { c.style.display = 'block'; announce('Summary copied.'); setTimeout(() => { c.style.display = 'none'; }, 2500); }
+  if (f in state.ctx) { state.ctx[f] = el.value; save(); }
 }
 
-function onEmailSubmit(e) {
+function onFieldChange(e) {
+  const el = e.target.closest('[data-field]');
+  if (!el) return;
+  const f = el.getAttribute('data-field');
+  if (f === 'consent') {
+    state.consent = el.checked;
+    const b = document.getElementById('cra-send');
+    if (b) { const ok = state.email && state.consent; b.style.background = ok ? '#0B1D33' : '#9AA6B4'; b.style.cursor = ok ? 'pointer' : 'not-allowed'; }
+    return;
+  }
+  if (f in state.ctx) { state.ctx[f] = el.value; save(); }
+}
+
+// keyboard: arrow keys move within a scale radiogroup
+function onKeydown(e) {
+  const cell = e.target.closest && e.target.closest('.cra-cell');
+  if (!cell) return;
+  if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key)) return;
+  const group = cell.parentElement;
+  const cells = [...group.querySelectorAll('.cra-cell')];
+  let idx = cells.indexOf(cell);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') idx = Math.max(0, idx - 1);
+  else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') idx = Math.min(cells.length - 1, idx + 1);
+  else if (e.key === 'Home') idx = 0;
+  else if (e.key === 'End') idx = cells.length - 1;
   e.preventDefault();
-  const email = (document.getElementById('f_email').value || '').trim();
-  const consent = document.getElementById('f_consent').checked;
-  if (!email || !consent) { announce('Enter your email and confirm consent to send.'); return; }
-  track('email_result_requested');
-  const c = state.context || {};
-  const subject = 'Commercial Readiness Assessment result' + (c.company ? ' — ' + c.company : '');
-  const body = summaryText() + '\n\nFrom: ' + email + (c.company ? '\nCompany: ' + c.company : '') + (SOURCE ? '\nSource: ' + SOURCE : '');
-  window.location.href = 'mailto:' + REVIEW_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  const target = cells[idx];
+  target.focus();
+  onAnswer(target);
 }
 
-// ---- boot -------------------------------------------------------------------
-const saved = load();
-if (saved) state = { ...state, ...saved };
-// A resumed session lands on intro (which offers Resume) unless mid-results.
-if (state.screen === 'results' && !allComplete()) state.screen = 'intro';
-track('assessment_viewed', { facilitated: FACILITATED || undefined, source: SOURCE || undefined });
-render();
+// ---------------------------------------------------------------------------
+// Boot
+// ---------------------------------------------------------------------------
+function injectStyles() {
+  const s = document.createElement('style');
+  s.id = 'cra-style';
+  s.textContent = `
+    .cra-cell:hover{border-color:#0B1D33;color:#0B1D33;z-index:2}
+    .cra-cell[aria-checked="true"]{background:#0B1D33;color:#fff;border-color:#0B1D33;z-index:2}
+    .cra-cell[aria-checked="true"] span{color:#fff}
+    .cra-cell[aria-checked="true"]:hover{color:#fff}
+    .cra-card.answered{border-color:#DCE2EA;border-left-color:#0B1D33}
+    .cra-dark:hover{background:#16305a}
+    .cra-ghost:hover{color:#0B1D33}
+    .cra-link:hover{color:#123163}
+    .cra-edit:hover{color:#123163}
+    .cra-rail-btn:hover{background:#F1F4F8}
+    .cra-help.open{background:#EEF3FB;border-color:#CADAF0}
+    .cra-help:hover{border-color:#CADAF0}
+    @media(max-width:560px){
+      .cra-scale{flex-direction:column;gap:0}
+      .cra-scale .cra-cell{margin-left:0 !important;margin-top:-1px;border-radius:0 !important;padding:12px 14px !important;text-align:left !important}
+      .cra-scale .cra-cell:first-child{margin-top:0;border-radius:8px 8px 0 0 !important}
+      .cra-scale .cra-cell:last-child{border-radius:0 0 8px 8px !important}
+    }
+  `;
+  document.head.appendChild(s);
+}
+
+function boot() {
+  injectStyles();
+  load();
+  // guard: never land on a report that cannot be computed
+  if (state.screen === 'results' && !allComplete()) state.screen = anyAnswer() ? 'review' : 'intro';
+  app.addEventListener('click', onClick);
+  app.addEventListener('input', onFieldInput);
+  app.addEventListener('change', onFieldChange);
+  app.addEventListener('keydown', onKeydown);
+  render();
+  track('assessment_viewed', {});
+}
+
+boot();

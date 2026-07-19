@@ -1,230 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commercial Readiness Assessment | Gain Advisory</title>
-<meta name="description" content="Assess whether your company has a commercial engine it owns, or revenue that still depends on particular people. Twenty-five questions across Commercial Truth, Positioning, Repeatability, Fit, and Adaptability.">
+<meta name="description" content="A short diagnostic that shows where your commercial capability genuinely belongs to the company, and where growth still depends on a few people. Twenty five questions, five conditions, read in sequence.">
 <link rel="canonical" href="https://gainadvisory.com/commercial-readiness-assessment">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Gain Advisory">
-<meta property="og:url" content="https://gainadvisory.com/commercial-readiness-assessment">
 <meta property="og:title" content="Commercial Readiness Assessment | Gain Advisory">
-<meta property="og:description" content="Twenty-five questions across five conditions. An accurate read of whether your company has a commercial engine it owns, or revenue that depends on particular people.">
-<meta property="og:image" content="https://gainadvisory.com/assets/og-card.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="Does your company own a commercial engine, or does growth still depend on a few indispensable people? Find out in seven to ten minutes.">
+<meta property="og:url" content="https://gainadvisory.com/commercial-readiness-assessment">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Commercial Readiness Assessment | Gain Advisory">
-<meta name="twitter:description" content="Twenty-five questions across five conditions. An accurate read of your company's commercial readiness.">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<meta name="twitter:description" content="Does your company own a commercial engine, or does growth still depend on a few indispensable people?">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/cra-favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/cra-favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0B1D33; --blue:#1E4FA1; --lightblue:#5D9BD4; --slate:#5B6B7C;
-  --muted:#8FA0B4; --muted2:#AEBED0; --line:#E2E6EA; --line2:#DCE5EF; --cream:#FBFBF9;
-  --syne:'Syne',sans-serif; --inter:'Inter',sans-serif; --dm:'DM Sans',sans-serif;
-  /* classification accents (restrained, on-brand) */
-  --built:#1E4FA1; --forming:#5D9BD4; --assumed:#8FA0B4; --absent:#C2853F;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:var(--inter);color:var(--navy);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--blue);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:760px;margin:0 auto;padding:0 24px}
-.wrap-wide{max-width:900px;margin:0 auto;padding:0 24px}
-
-/* header / footer chrome (inherits the site wordmark) */
-.cra-header{border-bottom:1px solid var(--line);background:var(--cream)}
-.cra-header .row{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-.cra-mark{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none}
-.cra-mark .word{font-family:var(--syne);font-weight:800;letter-spacing:-0.02em;font-size:22px;color:var(--navy);line-height:1;white-space:nowrap}
-.cra-mark .word b{font-weight:400;color:var(--slate)}
-.cra-mark .word i{font-style:normal;color:var(--lightblue)}
-.cra-mark .sub{font-family:var(--dm);font-weight:400;font-size:8px;letter-spacing:.34em;text-transform:uppercase;color:var(--slate);margin-top:.55em;margin-left:.34em}
-.cra-header .label{font-family:var(--dm);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--slate)}
-.cra-footer{border-top:1px solid var(--line);margin-top:80px;background:var(--navy);color:rgba(255,255,255,.72)}
-.cra-footer .row{max-width:900px;margin:0 auto;padding:40px 24px;font-family:var(--inter);font-size:13px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between}
-.cra-footer a{color:rgba(255,255,255,.72)}
-.cra-footer .word{font-family:var(--syne);font-weight:800;font-size:18px;color:#fff}
-.cra-footer .word b{font-weight:400;color:rgba(255,255,255,.72)} .cra-footer .word i{font-style:normal;color:var(--lightblue)}
-
-/* typography helpers */
-.eyebrow{font-family:var(--dm);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin:0 0 14px}
-h1.cra{font-family:var(--syne);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:1.04;letter-spacing:-0.02em;color:var(--navy);margin:0 0 20px}
-h2.cra{font-family:var(--syne);font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1.1;letter-spacing:-0.015em;color:var(--navy);margin:0 0 14px}
-h3.cra{font-family:var(--syne);font-weight:700;font-size:19px;color:var(--navy);margin:0 0 8px}
-.lead{font-size:clamp(16px,1.6vw,19px);color:#33465b;margin:0 0 18px}
-.muted{color:var(--slate)}
-.section{padding:48px 0}
-.brackets{color:var(--lightblue);font-family:var(--syne);font-weight:400}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--inter);font-weight:600;font-size:15px;padding:14px 26px;border-radius:8px;border:0;cursor:pointer;text-align:center;transition:background .18s ease,color .18s ease,border-color .18s ease}
-.btn-primary{background:var(--navy);color:#fff}
-.btn-primary:hover{background:#16304f;text-decoration:none}
-.btn-secondary{background:transparent;color:var(--navy);border:1px solid #C7CDD4}
-.btn-secondary:hover{border-color:var(--slate);text-decoration:none}
-.btn-ghost{background:transparent;color:var(--slate);padding:10px 14px}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-.btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
-.btn-row.between{justify-content:space-between}
-
-/* progress */
-.progress{display:flex;align-items:center;gap:12px;margin:0 0 30px}
-.progress-track{flex:1;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s ease}
-.progress-label{font-family:var(--dm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);white-space:nowrap}
-
-/* question card */
-.dim-head{border-left:3px solid var(--blue);padding-left:16px;margin:0 0 26px}
-.scoring-note{font-family:var(--inter);font-size:14px;color:var(--navy);background:#F3F6FB;border-left:3px solid var(--lightblue);border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 24px;line-height:1.5}
-.dim-head .n{font-family:var(--dm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--slate)}
-.q{padding:22px 0;border-top:1px solid var(--line)}
-.q:first-of-type{border-top:0}
-.q .qtext{font-size:17px;color:var(--navy);margin:0 0 14px;font-weight:500}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:#fff;transition:border-color .15s ease,background .15s ease}
-.opt:hover{border-color:var(--muted2)}
-.opt input{position:absolute;opacity:0;width:1px;height:1px}
-.opt .dot{width:18px;height:18px;border-radius:50%;border:2px solid #C7CDD4;flex:0 0 auto;transition:border-color .15s ease,background .15s ease}
-.opt .otext{font-size:15px;color:#33465b}
-.opt.sel{border-color:var(--blue);background:#F3F7FC}
-.opt.sel .dot{border-color:var(--blue);background:var(--blue);box-shadow:inset 0 0 0 3px #fff}
-.opt.sel .otext{color:var(--navy);font-weight:500}
-.opt:focus-within{outline:2px solid var(--blue);outline-offset:2px}
-.field-error{color:var(--absent);font-size:14px;margin-top:10px;font-weight:500}
-/* per-question help control */
-.qhelp-btn{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;padding:7px 12px 7px 8px;background:transparent;border:1px solid var(--line);border-radius:16px;color:var(--slate);font-family:var(--inter);font-size:12.5px;font-weight:500;cursor:pointer;transition:border-color .15s ease,color .15s ease,background .15s ease}
-.qhelp-btn:hover{border-color:var(--muted2);color:var(--navy)}
-.qhelp-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.qhelp-btn[aria-expanded="true"]{border-color:var(--lightblue);color:var(--navy);background:#F3F6FB}
-.qhelp-ic{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--lightblue);color:#fff;font-family:var(--syne);font-weight:700;font-size:11px;font-style:italic}
-.qhelp{font-family:var(--inter);font-size:14px;line-height:1.55;color:#33465b;background:#F7F9FC;border-left:3px solid var(--lightblue);border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 14px;max-width:64ch}
-
-/* context form */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
-.form-grid .full{grid-column:1/-1}
-label.fl{display:block;font-family:var(--dm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin:0 0 6px}
-input.ti,select.ti{width:100%;font-family:var(--inter);font-size:15px;color:var(--navy);padding:12px 14px;border:1px solid #C7CDD4;border-radius:8px;background:#fff}
-input.ti:focus,select.ti:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
-.fl .req,.fl .optl{display:inline-block;font-family:var(--dm);font-size:9.5px;letter-spacing:.06em;font-weight:600;padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
-.fl .req{color:var(--blue);background:#EAF1FB}
-.fl .optl{color:var(--muted);background:#F1F3F6}
-input.ti[aria-invalid="true"],select.ti[aria-invalid="true"]{border-color:var(--absent)}
-input.ti[aria-invalid="true"]:focus,select.ti[aria-invalid="true"]:focus{outline-color:var(--absent);border-color:var(--absent)}
-.field-error-inline{margin-top:6px;font-size:13px}
-
-/* results: readiness profile header */
-.rp-total{font-family:var(--syne);font-weight:700;font-size:15px;color:var(--muted)}
-.rp-state{font-family:var(--syne);font-weight:800;font-size:clamp(24px,3.4vw,34px);line-height:1.1;letter-spacing:-0.015em;color:var(--navy);margin:6px 0 12px}
-.rp-principle{font-size:16px;color:#33465b;border-left:3px solid var(--line2);padding-left:16px;margin:14px 0 0}
-
-/* the ordered ladder (five-dimension sequence) */
-.ladder{margin:26px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.rung{display:grid;grid-template-columns:34px 1fr auto;gap:16px;align-items:start;padding:18px 20px;border-top:1px solid var(--line);position:relative}
-.rung:first-child{border-top:0}
-.rung .idx{font-family:var(--syne);font-weight:800;font-size:15px;color:var(--muted2);line-height:1.6}
-.rung .rname{font-family:var(--syne);font-weight:700;font-size:17px;color:var(--navy)}
-.rung .rdef{font-size:13.5px;color:var(--slate);margin-top:2px}
-.rung .rmeaning{font-size:13.5px;color:#33465b;margin-top:8px}
-.rung .rright{text-align:right;white-space:nowrap}
-.rung .rscore{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--muted);display:block}
-.badge{display:inline-block;font-family:var(--dm);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;color:#fff}
-.badge.Built{background:var(--built)} .badge.Forming{background:var(--forming)} .badge.Assumed{background:var(--assumed)} .badge.Absent{background:var(--absent)}
-/* break-point marker: shows where readiness stops, without hiding what's below */
-.rung.priority{background:#FBF6EF}
-.rung.priority::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--absent)}
-.breakline{display:flex;align-items:center;gap:10px;font-family:var(--dm);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--absent);padding:8px 20px;background:#FBF6EF;border-top:1px dashed #E4C79E}
-.rung .starthere{font-family:var(--dm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--absent);font-weight:600;margin-top:8px}
-.rung .strong-tag{font-family:var(--dm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-top:8px}
-
-/* first-thing-to-build block (dominant) */
-.build-block{margin:34px 0 0;background:var(--navy);color:#fff;border-radius:14px;padding:34px 30px}
-.build-block .eyebrow{color:var(--lightblue)}
-.build-block h2{color:#fff;font-family:var(--syne);font-weight:800;font-size:clamp(22px,3vw,30px);letter-spacing:-0.015em;margin:0 0 4px}
-.build-block .cls{font-family:var(--dm);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2);margin:0 0 18px}
-.build-block .para{color:rgba(255,255,255,.82);font-size:15.5px;margin:0 0 14px}
-.build-block .para b{color:#fff;font-weight:600}
-.build-block .false-strength{border-left:3px solid var(--lightblue);padding-left:16px;color:#fff;font-size:15.5px;margin:20px 0 0;font-style:normal}
-
-/* generic result section */
-.rsec{margin:34px 0 0;padding-top:34px;border-top:1px solid var(--line)}
-.rsec ul{margin:10px 0 0;padding:0 0 0 18px}
-.rsec li{margin:0 0 8px;color:#33465b}
-.next-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.handling{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.email-box{margin-top:18px;border:1px solid var(--line);border-radius:10px;padding:18px;background:#fff}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--slate);margin-top:10px}
-.consent input{margin-top:3px}
-
-.review-list{margin:20px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-.review-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;border-top:1px solid var(--line)}
-.review-row:first-child{border-top:0}
-.review-row .rl{font-family:var(--syne);font-weight:700;color:var(--navy)}
-.review-row .rs{font-size:13px;color:var(--slate)}
-.review-row.incomplete .rs{color:var(--absent);font-weight:600}
-
-.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;left:-999px;top:0;background:#fff;padding:10px 16px;z-index:10}
-.skip:focus{left:12px;top:12px}
-
-@media (max-width:620px){
-  .form-grid{grid-template-columns:1fr}
-  .rung{grid-template-columns:26px 1fr;grid-template-areas:"idx main" "sp right"}
-  .rung .idx{grid-area:idx}
-  .rung .rright{grid-area:right;text-align:left;margin-top:6px}
-  .btn-row.between{flex-direction:column-reverse;align-items:stretch}
-  .btn{justify-content:center}
-}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-
-/* print: a clean report, no chrome, no buttons */
-@media print{
-  .cra-header,.cra-footer,.btn,.btn-row,.handling,.email-box,.progress,.skip,.next-ctas{display:none!important}
-  body{background:#fff;color:#000}
-  .build-block{background:#fff;color:#000;border:2px solid #000;border-radius:0}
-  .build-block .eyebrow,.build-block h2,.build-block .cls,.build-block .para,.build-block .para b,.build-block .false-strength{color:#000}
-  .badge{color:#000!important;background:#fff!important;border:1px solid #000}
-  .wrap,.wrap-wide{max-width:100%}
-  a[href]:after{content:""}
-}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  ::selection{background:#1E4FA1;color:#fff}
+  input,select,button,textarea{font-family:'Inter',sans-serif}
+  input:focus,select:focus{outline:none;border-color:#1E4FA1 !important;box-shadow:0 0 0 3px rgba(30,79,161,.12)}
+  button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #1E4FA1;outline-offset:2px;border-radius:6px}
+  [data-focus]:focus,[data-focus]:focus-visible{outline:none}
+  .cra-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:880px){
+    .cra-two{grid-template-columns:1fr !important}
+    .cra-rail{position:static !important;height:auto !important;border-right:none !important;border-bottom:1px solid #E2E6EA;padding:24px 0 20px !important;justify-content:flex-start !important}
+    .cra-ctx2{grid-template-columns:1fr !important}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none !important;animation:none !important}
+  }
+  @media print{
+    .cra-noprint{display:none !important}
+    body{background:#fff}
+    .cra-print{box-shadow:none !important;border:none !important}
+    .cra-print,.cra-print *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    @page{margin:14mm}
+  }
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<a class="skip" href="#app">Skip to assessment</a>
-<header class="cra-header">
-  <div class="row">
-    <a class="cra-mark" href="/" aria-label="Gain Advisory home">
-      <span class="word">G<b>[</b><i>AI</i><b>]</b>N</span>
-      <span class="sub">Advisory</span>
-    </a>
-    <span class="label">Commercial Readiness Assessment</span>
-  </div>
-</header>
-
-<main id="app" tabindex="-1"><!-- app renders here --></main>
-
-<footer class="cra-footer">
-  <div class="row">
-    <a class="word" href="/">G<b>[</b><i>AI</i><b>]</b>N</a>
-    <span>Gain Advisory, Builder of Commercial Engines</span>
-    <span><a href="/">gainadvisory.com</a></span>
-  </div>
-</footer>
-
+<div id="app"></div>
+<div id="cra-live" class="cra-sr" role="status" aria-live="polite"></div>
 <noscript>
-  <div class="wrap section">
-    <h1 class="cra">Commercial Readiness Assessment</h1>
-    <p class="lead">This assessment needs JavaScript to run. Please enable it, or <a href="/#close">start a conversation</a> and we will walk you through the five conditions directly.</p>
+  <div style="max-width:640px;margin:80px auto;padding:0 24px;font-family:'Inter',system-ui,sans-serif;color:#3A4654">
+    <h1 style="font-family:'Syne',sans-serif;color:#0B1D33">Commercial Readiness Assessment</h1>
+    <p>This assessment needs JavaScript enabled. To take it, please enable JavaScript, or contact Gain Advisory at hello@gainadvisory.com.</p>
   </div>
 </noscript>
-
-<script defer src="/_vercel/insights/script.js"></script>
 <script type="module" src="/assessment/app.mjs"></script>
 </body>
 </html>
