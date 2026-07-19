@@ -664,8 +664,22 @@ function emailSuccess() {
 function emailError() {
   const btn = document.getElementById('cra-send');
   if (btn) { btn.disabled = false; btn.textContent = 'Send my result to Gain Advisory'; btn.style.background = state.email && state.consent ? '#0B1D33' : '#9AA6B4'; btn.style.cursor = 'pointer'; }
-  emailMessage('#B0603F', 'That did not go through. Please try again, or email your profile to hello@gainadvisory.com.');
-  announce('Submission failed. Please try again.');
+  // Never dead-end a lead: on failure, offer a prefilled mail draft carrying the
+  // full profile, with the visitor's address as the reply-to line.
+  const { subject, body } = resultSummary();
+  const mailBody = body + '\nReply to: ' + (state.email || '');
+  const href = 'mailto:hello@gainadvisory.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(mailBody);
+  emailMessage('#B0603F', 'That did not go through. ');
+  const el = document.getElementById('cra-emailmsg');
+  const span = el && el.querySelector('span');
+  if (span) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = 'Email your profile to Gain Advisory instead.';
+    a.setAttribute('style', "font-family:'Inter',sans-serif;font-size:13.5px;color:#1E4FA1;text-decoration:underline");
+    span.appendChild(a);
+  }
+  announce('Submission failed. A prefilled email is available as a fallback.');
 }
 
 function sendResult() {
