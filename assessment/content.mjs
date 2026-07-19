@@ -10,11 +10,11 @@
 // House rules: no person or company named except Jason; no em dashes.
 
 export const RESPONSE_OPTIONS = [
-  { value: 1, label: 'Not true' },
-  { value: 2, label: 'Mostly not true' },
-  { value: 3, label: 'Partly true' },
-  { value: 4, label: 'Mostly true' },
-  { value: 5, label: 'Fully true' },
+  { value: 1, label: 'Never' },
+  { value: 2, label: 'Rarely' },
+  { value: 3, label: 'Sometimes' },
+  { value: 4, label: 'Usually' },
+  { value: 5, label: 'Consistently' },
 ];
 
 // The five conditions, IN SEQUENCE. The order is load-bearing methodology, not a

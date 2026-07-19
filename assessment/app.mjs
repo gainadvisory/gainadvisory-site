@@ -158,6 +158,7 @@ function renderAssess() {
       <h2 class="cra" data-focus tabindex="-1" style="margin:4px 0 6px">${esc(dim.name)}</h2>
       <p class="muted" style="margin:0">${esc(dim.definition)}</p>
     </div>
+    ${state.dimIndex === 0 ? '<p class="scoring-note">Answer based on what the company does in practice, not what it intends to do.</p>' : ''}
     <form id="assessForm">${qHtml}
       <p class="field-error" id="assessError" style="display:none" role="alert">Please answer every question before continuing.</p>
       <div class="btn-row between">
