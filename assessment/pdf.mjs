@@ -538,7 +538,16 @@ export async function buildReportBlob(model) {
     'Not a re-listing of scores. These are the binding constraints on growth, read across the whole system.');
   y += 16; markerList(model.constraints, 'warm');
 
+  // Common Failure Pattern: keep the heading and its single paragraph together
+  // so the sentence never breaks across a page. Measure the whole block and move
+  // it intact to the next page when it does not fit in the space left here (it
+  // only splits if it were taller than a full printable page, which it is not).
   y += 24;
+  setFont('Syne', 'bold', 19, C.ink);
+  const cfpHeadH = 8 * 1.4 + 10 + wrap('Where companies like this usually go wrong', W).length * 19 * 1.1;
+  setFont('Inter', 'normal', 10.5, C.body);
+  const cfpBodyH = heightOf(model.failurePattern, 10.5, 1.6, W);
+  if (cfpHeadH + 6 + cfpBodyH <= PAGE_BOTTOM - TOP) ensure(cfpHeadH + 6 + cfpBodyH);
   sectionHead('Common failure pattern', 'Where companies like this usually go wrong');
   y += 6; para(model.failurePattern, { size: 10.5, color: C.body, leading: 1.6, gapAfter: 0 });
 
