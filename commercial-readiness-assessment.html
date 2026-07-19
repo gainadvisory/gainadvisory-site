@@ -49,6 +49,10 @@
     #app main > section{max-width:none !important;margin:0 !important;padding:0 !important}
     .cra-print{box-shadow:none !important;border:none !important;border-radius:0 !important;overflow:visible !important;margin:0 !important}
     .cra-print,.cra-print *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    /* Keep composed blocks whole across page breaks, and never strand a heading
+       at the foot of a page away from the copy it introduces. */
+    .cra-keep{break-inside:avoid;page-break-inside:avoid}
+    .cra-print h3{break-after:avoid;page-break-after:avoid}
     /* No browser-injected header or footer (date, title, URL, page numbers):
        a zero page margin removes the margin box those are drawn in. The report's
        own section padding supplies the inner whitespace, and the navy masthead

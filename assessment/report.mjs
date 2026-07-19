@@ -34,7 +34,7 @@ export const DBT = {
   positioning: { tag: 'Design', line: 'This is where Design begins. Positioning is the first market-facing expression of Commercial Architecture. It turns Commercial Truth into a promise the right buyer can recognize and the wrong buyer can reject.' },
   repeatability: { tag: 'Build', line: 'This is Build. It decides whether the motion the company operates belongs to the company, or to one person.' },
   fit: { tag: 'Build, tested', line: 'This is where the market confirms or rejects the architecture. A motion is not validated until it matches how the buyer actually decides.' },
-  adaptability: { tag: 'Transfer', line: 'This is Transfer and the learning loop. It decides whether what the company knows becomes shared capability, or hardens into stale process held by a few people.' },
+  adaptability: { tag: 'Transfer', line: 'This is Transfer and the learning loop. It decides whether what the company knows becomes shared capability, or remains trapped as stale knowledge held by a few people.' },
 };
 
 // Why companies plateau at this condition. Not why fixing it helps. Why growth

@@ -18,7 +18,10 @@
 
 import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS, QUESTION_HELP } from './content.mjs';
 import { computeProfile } from './engine.mjs';
-import { DBT, PLATEAU, UNLOCKS, NARRATIVE, tierOf, CONDITION, FAILURE_PATTERN, execSummary, synthesizeConstraints, MONDAY, BUILDING_ENGINE } from './report.mjs';
+import { buildReportModel } from './reportModel.mjs';
+// The client-side PDF module (pdf.mjs) and its font/jsPDF assets are imported
+// dynamically, only when the visitor clicks Download PDF, so nothing here loads
+// them up front.
 
 // ---------------------------------------------------------------------------
 // Design presentation copy (from the approved .dc.html). Kept verbatim.
@@ -50,6 +53,10 @@ let state = {
   consent: true,
   returnToReview: false, // set when a condition is opened via Edit on the review screen
 };
+
+// The most recently rendered report model, reused by the Download PDF handler so
+// the PDF is guaranteed to match exactly what is on screen.
+let lastModel = null;
 
 function save() {
   try { localStorage.setItem(LS_KEY, JSON.stringify({ screen: state.screen, ci: state.ci, answers: state.answers, ctx: state.ctx })); } catch (e) { /* private mode */ }
@@ -332,42 +339,41 @@ const RP = 'font-family:\'Inter\',sans-serif;font-size:clamp(15px,1.5vw,17px);li
 const RLABEL = 'font-family:\'DM Sans\',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677;margin:18px 0 0';
 
 function resultsHTML() {
-  const profile = computeProfile(state.answers);
-  const dims = profile.dimensions; // in order
-  // overall band = Built if all built, else band of the first non-built (priority)
-  let priorityIdx = dims.findIndex((x) => x.classification !== 'Built');
-  if (priorityIdx < 0) priorityIdx = dims.length - 1;
-  const overallBand = profile.allBuilt ? 'Built' : dims[priorityIdx].classification;
-  const strongId = profile.strongestIds[0];
-  const strongIdx = DIMENSION_ORDER.indexOf(strongId);
-  const strongIsReal = ['Built', 'Forming'].includes(dims[strongIdx].classification);
-  const priorityDim = DIMENSIONS[priorityIdx];
-  const strongDim = DIMENSIONS[strongIdx];
+  // Single shared source: the website report and the client-side PDF both read
+  // this exact model (assembled from the frozen engine + frozen report copy).
+  const model = buildReportModel(state.answers, state.ctx);
+  lastModel = model;
+
+  const overallBand = model.overallBand;
+  const total = model.total;
   const obs = BAND_STYLE[overallBand];
+  const priorityDim = { id: model.priorityId, name: model.priorityName };
+  const strongDim = { name: model.strongName };
+  const priorityHead = model.priorityHead;
+  const meta = esc(model.meta);
 
   // ---- at-a-glance ladder ----
-  const ladder = dims.map((x, i) => {
-    const d = DIMENSIONS[i];
-    const bs = BAND_STYLE[x.classification];
-    const pct = Math.max(6, Math.round(((x.score - 5) / 20) * 100));
-    const isPriority = i === priorityIdx && !profile.allBuilt;
-    const isStrong = i === strongIdx && strongIsReal && !isPriority;
+  const ladder = model.conditions.map((c) => {
+    const bs = BAND_STYLE[c.classification];
+    const pct = Math.max(6, Math.round(((c.score - 5) / 20) * 100));
+    const isPriority = c.isPriority;
+    const isStrong = c.isStrongest && !isPriority;
     const tag = isPriority ? 'First priority' : (isStrong ? 'Strongest' : '');
     const tagStyle = isPriority
       ? 'font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#B0603F;background:#FBF0EC'
       : 'font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#1E4FA1;background:#EEF3FB';
     return `<div style="padding:20px 4px;border-bottom:1px solid #E2E6EA;${isPriority ? 'background:linear-gradient(90deg,#FCF6F3,transparent 60%);' : ''}">
       <div style="display:grid;grid-template-columns:auto 1fr auto auto;gap:clamp(12px,2.2vw,22px);align-items:center">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#C7CDD4;width:2ch">${NUM[i]}</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#C7CDD4;width:2ch">${NUM[c.index]}</span>
         <div style="min-width:0">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-            <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(17px,2vw,22px);letter-spacing:-0.01em;color:#0B1D33">${esc(d.name)}</span>
+            <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(17px,2vw,22px);letter-spacing:-0.01em;color:#0B1D33">${esc(c.name)}</span>
             ${tag ? `<span style="${tagStyle}">${tag}</span>` : ''}
           </div>
           <div style="height:6px;border-radius:4px;background:#EEF0F3;margin-top:10px;overflow:hidden;max-width:360px"><span style="display:block;height:100%;width:${pct}%;background:${bs.bar};border-radius:4px"></span></div>
         </div>
-        <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#8FA0B4;white-space:nowrap">${x.score}<span style="font-size:11px;color:#C7CDD4"> / 25</span></span>
-        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;white-space:nowrap;color:${bs.color};background:${bs.tint};padding:6px 12px;border-radius:6px">${x.classification}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#8FA0B4;white-space:nowrap">${c.score}<span style="font-size:11px;color:#C7CDD4"> / 25</span></span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;white-space:nowrap;color:${bs.color};background:${bs.tint};padding:6px 12px;border-radius:6px">${c.classification}</span>
       </div>
     </div>`;
   }).join('');
@@ -375,49 +381,43 @@ function resultsHTML() {
   // ---- condition-by-condition deep dive ----
   // Each block teaches the discipline (D2BT), reads the condition at its tier,
   // names why companies plateau here, then shows what building it unlocks.
-  const deep = dims.map((x, i) => {
-    const d = DIMENSIONS[i];
-    const bs = BAND_STYLE[x.classification];
-    const dbt = DBT[d.id];
-    const isPriority = i === priorityIdx && !profile.allBuilt;
-    const narrative = NARRATIVE[d.id][tierOf(x.classification)];
-    const unlocks = UNLOCKS[d.id].map((u) => `<li style="display:flex;gap:9px;align-items:baseline;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#3A4654;margin:0 0 8px"><span style="flex:0 0 auto;color:#1E4FA1;font-weight:700;font-size:13px">&#10003;</span><span>${esc(u)}</span></li>`).join('');
-    return `<div style="padding:clamp(24px,3.4vw,36px) 0;border-top:1px solid #EEF0F3">
+  const deep = model.conditions.map((c) => {
+    const bs = BAND_STYLE[c.classification];
+    const isPriority = c.isPriority;
+    const unlocks = c.unlocks.map((u) => `<li style="display:flex;gap:9px;align-items:baseline;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#3A4654;margin:0 0 8px"><span style="flex:0 0 auto;color:#1E4FA1;font-weight:700;font-size:13px">&#10003;</span><span>${esc(u)}</span></li>`).join('');
+    return `<div class="cra-keep" style="padding:clamp(24px,3.4vw,36px) 0;border-top:1px solid #EEF0F3">
       <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#C7CDD4">${NUM[i]}</span>
-        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,25px);letter-spacing:-0.01em;color:#0B1D33">${esc(d.name)}</span>
-        <span style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#1E4FA1;border:1px solid #CFDDF0;padding:4px 10px;border-radius:20px">${esc(dbt.tag)}</span>
-        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:${bs.color};background:${bs.tint};padding:5px 11px;border-radius:6px">${x.classification}</span>
-        <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#8FA0B4">${x.score} / 25</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#C7CDD4">${NUM[c.index]}</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,25px);letter-spacing:-0.01em;color:#0B1D33">${esc(c.name)}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#1E4FA1;border:1px solid #CFDDF0;padding:4px 10px;border-radius:20px">${esc(c.dbtTag)}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:${bs.color};background:${bs.tint};padding:5px 11px;border-radius:6px">${c.classification}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#8FA0B4">${c.score} / 25</span>
         ${isPriority ? '<span style="font-family:\'DM Sans\',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:5px;color:#B0603F;background:#FBF0EC">First priority</span>' : ''}
       </div>
-      <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#5B6B7C;margin:12px 0 0;max-width:70ch;font-style:italic">${esc(dbt.line)}</p>
-      <p style="${RP}">${esc(narrative)}</p>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#5B6B7C;margin:12px 0 0;max-width:70ch;font-style:italic">${esc(c.dbtLine)}</p>
+      <p style="${RP}">${esc(c.narrative)}</p>
       <div style="margin-top:20px;border-left:2px solid #C7CDD4;padding:2px 0 2px 16px">
         <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8B8677">Why companies plateau here</div>
-        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.6;color:#3A4654;margin:8px 0 0;max-width:68ch">${esc(PLATEAU[d.id])}</p>
+        <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.6;color:#3A4654;margin:8px 0 0;max-width:68ch">${esc(c.plateau)}</p>
       </div>
       <div style="${RLABEL}">What building this unlocks</div>
       <ul style="list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px 28px">${unlocks}</ul>
     </div>`;
   }).join('');
 
-  // ---- composed intelligence ----
-  const summary = execSummary({ band: overallBand, priorityName: priorityDim.name, strongName: strongDim.name, total: profile.total, readyThrough: profile.readyThrough, allBuilt: profile.allBuilt })
+  // ---- composed intelligence (all from the shared model) ----
+  const summary = model.executiveSummary
     .map((para) => `<p style="${RP}">${esc(para)}</p>`).join('');
-  const pc = CONDITION[priorityDim.id];
-  const sc = CONDITION[strongDim.id];
-  const constraints = synthesizeConstraints(profile)
+  const pc = { whyFirst: model.priority.whyFirst, conversations: model.priority.conversations, notYet: model.priority.notYet };
+  const sc = { strongRead: model.strongest.strongRead };
+  const constraints = model.constraints
     .map((t) => `<li style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:0 0 12px;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:#C46B5A;font-weight:700">&rsaquo;</span>${esc(t)}</li>`).join('');
-  const evidenceList = pc.evidence.map((t) => `<li style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:0 0 12px;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1;font-weight:700">&rsaquo;</span>${esc(t)}</li>`).join('');
-  const notList = pc.whatNotToDo.map((t) => `<li style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:0 0 12px;padding-left:22px;position:relative"><span style="position:absolute;left:0;color:#B0603F;font-weight:700">&times;</span>${esc(t)}</li>`).join('');
-  const steps = BUILDING_ENGINE.steps.map((s, i) => `<div style="display:flex;gap:14px;align-items:baseline;padding:12px 0${i ? ';border-top:1px solid rgba(255,255,255,.12)' : ''}">
+  const evidenceList = model.evidence.map((t) => `<li style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:0 0 12px;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:#1E4FA1;font-weight:700">&rsaquo;</span>${esc(t)}</li>`).join('');
+  const notList = model.whatNotToDo.map((t) => `<li style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:#3A4654;margin:0 0 12px;padding-left:22px;position:relative"><span style="position:absolute;left:0;color:#B0603F;font-weight:700">&times;</span>${esc(t)}</li>`).join('');
+  const steps = model.buildingTheEngine.steps.map((s, i) => `<div style="display:flex;gap:14px;align-items:baseline;padding:12px 0${i ? ';border-top:1px solid rgba(255,255,255,.12)' : ''}">
       <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#5D9BD4;flex:0 0 auto;width:8ch">${esc(s.k)}</span>
       <span style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#AEBED0">${esc(s.d)}</span>
     </div>`).join('');
-
-  const meta = [state.ctx.role, state.ctx.stage, new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })].filter(Boolean).map(esc).join('  ·  ');
-  const priorityHead = profile.allBuilt ? 'Where to focus next' : 'What you build first';
 
   return `<section style="max-width:900px;margin:0 auto;padding:clamp(40px,6vw,72px) 24px clamp(60px,9vw,110px)">
     <div class="cra-print" style="background:#fff;border:1px solid #E2E6EA;border-radius:16px;overflow:hidden">
@@ -440,7 +440,7 @@ function resultsHTML() {
           </div>
           <div style="padding-bottom:8px">
             <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8FA0B4">Overall score</div>
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1;letter-spacing:-0.02em;margin:10px 0 0;color:${obs.bar === '#0B1D33' ? '#fff' : obs.bar}">${profile.total}<span style="font-size:.5em;color:#8FA0B4;font-weight:700"> / 125</span></div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1;letter-spacing:-0.02em;margin:10px 0 0;color:${obs.bar === '#0B1D33' ? '#fff' : obs.bar}">${total}<span style="font-size:.5em;color:#8FA0B4;font-weight:700"> / 125</span></div>
           </div>
         </div>
         <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.55;color:#8FA0B4;margin:16px 0 0;max-width:62ch">Overall readiness is set by the first condition that is not yet Built, the one that caps everything beneath it. The score is the aggregate across all five conditions. It supports the classification; it does not replace it.</p>
@@ -465,7 +465,7 @@ function resultsHTML() {
         </div>
 
         <!-- what you build first -->
-        <div style="margin-top:clamp(38px,5vw,56px);border:1px solid #E2E6EA;border-radius:16px;overflow:hidden">
+        <div class="cra-keep" style="margin-top:clamp(38px,5vw,56px);border:1px solid #E2E6EA;border-radius:16px;overflow:hidden">
           <div style="background:#FCF6F3;border-bottom:1px solid #F0E3DD;padding:clamp(22px,3vw,30px)">
             <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#B0603F">${priorityHead}</div>
             <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,32px);line-height:1.08;letter-spacing:-0.015em;color:#0B1D33;margin:10px 0 0">${esc(priorityDim.name)}</h3>
@@ -480,10 +480,10 @@ function resultsHTML() {
         </div>
 
         <!-- if I walked in Monday morning -->
-        <div style="margin-top:clamp(28px,4vw,40px);border:1px solid #E2E6EA;border-radius:16px;padding:clamp(24px,3.4vw,36px);background:#FAFBFC">
+        <div class="cra-keep" style="margin-top:clamp(28px,4vw,40px);border:1px solid #E2E6EA;border-radius:16px;padding:clamp(24px,3.4vw,36px);background:#FAFBFC">
           ${rsHead('The first three weeks', 'If we walked into your company on Monday', 'This is how the work on ' + priorityDim.name + ' would actually begin. Not a plan on a page. The first three weeks in the building.')}
           <div style="margin-top:22px;display:flex;flex-direction:column;gap:2px">
-            ${[['Week one', MONDAY[priorityDim.id].week1], ['Week two', MONDAY[priorityDim.id].week2], ['Week three', MONDAY[priorityDim.id].week3]].map(([wk, txt], i) => `
+            ${[['Week one', model.firstThreeWeeks.week1], ['Week two', model.firstThreeWeeks.week2], ['Week three', model.firstThreeWeeks.week3]].map(([wk, txt], i) => `
               <div style="display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,2.4vw,26px);align-items:baseline;padding:${i ? '20px' : '2px'} 0 20px;${i ? 'border-top:1px solid #EEF0F3' : ''}">
                 <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#1E4FA1;white-space:nowrap;padding-top:3px">${wk}</div>
                 <p style="font-family:'Inter',sans-serif;font-size:clamp(15px,1.5vw,16.5px);line-height:1.62;color:#3A4654;margin:0;max-width:66ch">${esc(txt)}</p>
@@ -492,7 +492,7 @@ function resultsHTML() {
         </div>
 
         <!-- strongest condition -->
-        <div style="margin-top:clamp(28px,4vw,40px);border:1px solid #E2E6EA;border-radius:16px;padding:clamp(22px,3vw,30px);border-top:3px solid #1E4FA1">
+        <div class="cra-keep" style="margin-top:clamp(28px,4vw,40px);border:1px solid #E2E6EA;border-radius:16px;padding:clamp(22px,3vw,30px);border-top:3px solid #1E4FA1">
           <div style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#1E4FA1">Your strongest condition</div>
           <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,27px);letter-spacing:-0.015em;color:#0B1D33;margin:10px 0 0">${esc(strongDim.name)}</h3>
           <p style="${RP};margin-top:10px">${esc(sc.strongRead)}</p>
@@ -505,9 +505,9 @@ function resultsHTML() {
         </div>
 
         <!-- common failure pattern -->
-        <div style="margin-top:clamp(38px,5vw,56px)">
+        <div class="cra-keep" style="margin-top:clamp(38px,5vw,56px)">
           ${rsHead('Common failure pattern', 'Where companies like this usually go wrong')}
-          <p style="${RP}">${esc(FAILURE_PATTERN[overallBand])}</p>
+          <p style="${RP}">${esc(model.failurePattern)}</p>
         </div>
 
         <!-- what not to do -->
@@ -526,12 +526,12 @@ function resultsHTML() {
       </div>
 
       <!-- building the engine (D2BT) -->
-      <div style="background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),url('/assets/wood-wall.png');background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff;padding:clamp(30px,5vw,52px)">
+      <div class="cra-keep" style="background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.95),rgba(11,29,51,.972)),url('/assets/wood-wall.png');background-size:cover;background-position:center;background-blend-mode:multiply;color:#fff;padding:clamp(30px,5vw,52px)">
         <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5D9BD4">Building the engine</div>
-        <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,26px);line-height:1.28;letter-spacing:-0.01em;margin:14px 0 0;max-width:46ch">${esc(BUILDING_ENGINE.lead)}</p>
-        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.62;color:#AEBED0;margin:16px 0 0;max-width:64ch">${esc(BUILDING_ENGINE.body)}</p>
+        <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,26px);line-height:1.28;letter-spacing:-0.01em;margin:14px 0 0;max-width:46ch">${esc(model.buildingTheEngine.lead)}</p>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.62;color:#AEBED0;margin:16px 0 0;max-width:64ch">${esc(model.buildingTheEngine.body)}</p>
         <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,.14);padding-top:8px">${steps}</div>
-        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.62;color:#AEBED0;margin:18px 0 0;max-width:64ch">${esc(BUILDING_ENGINE.close)}</p>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.62;color:#AEBED0;margin:18px 0 0;max-width:64ch">${esc(model.buildingTheEngine.close)}</p>
       </div>
     </div>
 
@@ -556,10 +556,14 @@ function resultsHTML() {
       </div>
     </div>
 
-    <div class="cra-noprint" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:32px">
-      <button class="cra-dark" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">Download the report</button>
-      <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">See how we got here &rarr;</a>
-      <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;margin-left:auto">Start over</button>
+    <div class="cra-noprint" style="margin-top:32px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px">
+        <button id="cra-pdf" class="cra-dark" data-action="pdf" aria-label="Download your Commercial Readiness Profile as a PDF" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">Download PDF</button>
+        <button class="cra-outline" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#fff;border:1px solid #D9DEE4;padding:13px 24px;border-radius:7px;cursor:pointer;transition:border-color .18s ease">Print report</button>
+        <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">See how we got here &rarr;</a>
+        <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;margin-left:auto">Start over</button>
+      </div>
+      <div id="cra-pdfmsg" role="status" style="margin-top:12px"></div>
     </div>
   </section>`;
 }
@@ -698,6 +702,45 @@ function sendResult() {
     .catch(() => { track('email_result_failed', {}); emailError(); });
 }
 
+// Download the report as a real PDF, generated entirely in the browser. The PDF
+// module and its jsPDF + font assets are dynamically imported here, on first
+// click only. Duplicate clicks are ignored while a generation is in flight.
+function pdfMessage(color, text) {
+  const el = document.getElementById('cra-pdfmsg');
+  if (el) el.innerHTML = `<span style="font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.5;color:${color}">${esc(text)}</span>`;
+}
+
+async function onDownloadPdf(btn) {
+  if (btn.getAttribute('aria-busy') === 'true') return; // duplicate-click guard
+  const original = btn.textContent;
+  btn.setAttribute('aria-busy', 'true');
+  btn.disabled = true;
+  btn.style.cursor = 'default';
+  btn.style.background = '#4C5A6C';
+  btn.textContent = 'Preparing PDF...';
+  pdfMessage('#5B6B7C', 'Preparing your report. This runs entirely in your browser and may take a moment.');
+  announce('Preparing your PDF.');
+  track('report_pdf_requested', {});
+  try {
+    const model = lastModel || buildReportModel(state.answers, state.ctx);
+    const mod = await import('./pdf.mjs');
+    await mod.downloadReportPDF(model);
+    pdfMessage('#1E4FA1', 'Your PDF has downloaded.');
+    announce('Your PDF has downloaded.');
+    track('report_pdf_downloaded', {});
+  } catch (err) {
+    pdfMessage('#B0603F', 'The PDF could not be generated. Please try again, or use Print report.');
+    announce('PDF generation failed. Please try again or use Print report.');
+    track('report_pdf_failed', {});
+  } finally {
+    btn.removeAttribute('aria-busy');
+    btn.disabled = false;
+    btn.style.cursor = 'pointer';
+    btn.style.background = '#0B1D33';
+    btn.textContent = original;
+  }
+}
+
 function restart() {
   state.answers = emptyAnswers();
   state.open = {};
@@ -731,6 +774,7 @@ function onClick(e) {
     case 'to-review': go('review'); break;
     case 'back-review': state.ci = 4; go('assessment'); break;
     case 'generate': if (allComplete()) { track('profile_generated', {}); go('results'); } break;
+    case 'pdf': onDownloadPdf(btn); break;
     case 'print': track('report_printed', {}); window.print(); break;
     case 'send': sendResult(); break;
     case 'restart': restart(); break;
@@ -799,6 +843,7 @@ function injectStyles() {
     .cra-cell[aria-checked="true"] .cra-check{opacity:1}
     .cra-card.answered{border-color:#DCE2EA;border-left-color:#0B1D33}
     .cra-dark:hover{background:#16305a}
+    .cra-outline:hover{border-color:#0B1D33}
     .cra-ghost:hover{color:#0B1D33}
     .cra-link:hover{color:#123163}
     .cra-edit:hover{color:#123163}
