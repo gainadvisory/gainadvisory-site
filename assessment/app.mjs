@@ -17,7 +17,6 @@
 // House rule: no em dashes or en dashes anywhere. Regular hyphens only.
 
 import { DIMENSIONS, DIMENSION_ORDER, RESPONSE_OPTIONS, QUESTION_HELP } from './content.mjs';
-import { computeProfile } from './engine.mjs';
 import { buildReportModel } from './reportModel.mjs';
 // The client-side PDF module (pdf.mjs) and its font/jsPDF assets are imported
 // dynamically, only when the visitor clicks Download PDF, so nothing here loads
@@ -49,8 +48,6 @@ let state = {
   answers: emptyAnswers(),
   open: {},        // help panels open, key `${dimId}:${qi}`
   ctx: { company: '', role: '', stage: '', arr: '', founder: '' },
-  email: '',
-  consent: true,
   returnToReview: false, // set when a condition is opened via Edit on the review screen
 };
 
@@ -536,34 +533,20 @@ function resultsHTML() {
     </div>
 
     <div class="cra-noprint" style="margin-top:26px;border:1px solid #E2E6EA;border-radius:16px;background:#fff;padding:clamp(24px,4vw,38px)">
-      <div class="cra-ctx2" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:start">
+      <div class="cra-ctx2" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(22px,4vw,44px);align-items:center">
         <div>
           <div style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1">Where this goes next</div>
           <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(21px,2.4vw,28px);line-height:1.12;letter-spacing:-0.015em;color:#0B1D33;margin:12px 0 0;max-width:24ch">This is the first cut. The full diagnosis is where the engine gets built.</h3>
-          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">This profile came from twenty-five answers. The real work reads your calls, your pipeline, and your buyers, and turns the priority above into an engine the company owns. Send this over and we will show you how we got here, and what the next layer reveals.</p>
+          <p style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;color:#5B6B7C;margin:14px 0 0;max-width:46ch">This profile came from twenty-five answers. The real work reads your calls, your pipeline, and your buyers, and turns the priority above into an engine the company owns. Book a call and we will show you how we got here, and what the next layer reveals.</p>
         </div>
-        <div id="cra-emailcol">
-          <label style="display:block">
-            <span style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B6B7C">Business email</span>
-            <input data-field="email" value="${esc(state.email)}" type="email" placeholder="you@company.com" style="width:100%;margin-top:10px;padding:13px 14px;border:1px solid #D9DEE4;border-radius:8px;background:#fff;font-size:15px;color:#14202F">
-          </label>
-          <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;cursor:pointer">
-            <input type="checkbox" data-field="consent" ${state.consent ? 'checked' : ''} style="margin-top:3px;width:16px;height:16px;accent-color:#1E4FA1;flex:0 0 auto">
-            <span style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;color:#5B6B7C">I would like Gain Advisory to see this result and follow up. I understand nothing is stored on this site.</span>
-          </label>
-          <button id="cra-send" data-action="send" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:${state.email && state.consent ? '#0B1D33' : '#9AA6B4'};border:none;padding:13px 24px;border-radius:7px;margin-top:18px;cursor:${state.email && state.consent ? 'pointer' : 'not-allowed'};transition:background .18s ease">Send my result to Gain Advisory</button>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button id="cra-pdf" class="cra-dark" data-action="pdf" aria-label="Download your Commercial Readiness Profile as a PDF" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease;text-align:center">Download PDF</button>
+          <button class="cra-outline" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#fff;border:1px solid #D9DEE4;padding:13px 24px;border-radius:7px;cursor:pointer;transition:border-color .18s ease;text-align:center">Print report</button>
+          <a class="cra-cta" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#1E4FA1;padding:14px 26px;border-radius:7px;text-decoration:none;text-align:center;transition:background .18s ease">Book a call</a>
+          <div id="cra-pdfmsg" role="status" style="margin-top:2px"></div>
+          <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:#5B6B7C;background:none;border:none;cursor:pointer;align-self:center;margin-top:2px">Start over</button>
         </div>
       </div>
-    </div>
-
-    <div class="cra-noprint" style="margin-top:32px">
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px">
-        <button id="cra-pdf" class="cra-dark" data-action="pdf" aria-label="Download your Commercial Readiness Profile as a PDF" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#fff;background:#0B1D33;border:none;padding:14px 26px;border-radius:7px;cursor:pointer;transition:background .18s ease">Download PDF</button>
-        <button class="cra-outline" data-action="print" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;background:#fff;border:1px solid #D9DEE4;padding:13px 24px;border-radius:7px;cursor:pointer;transition:border-color .18s ease">Print report</button>
-        <a class="cra-link" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#1E4FA1;text-decoration:none">See how we got here &rarr;</a>
-        <button class="cra-ghost" data-action="restart" style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;color:#5B6B7C;background:none;border:none;cursor:pointer;margin-left:auto">Start over</button>
-      </div>
-      <div id="cra-pdfmsg" role="status" style="margin-top:12px"></div>
     </div>
   </section>`;
 }
@@ -619,87 +602,46 @@ function onHelp(btn) {
   if (panel) panel.hidden = !nowOpen;
 }
 
-// Deliver the result to Gain Advisory. Primary path is a real send through the
-// site's Formspree endpoint (same one the homepage contact form uses), so the
-// summary reaches the shared inbox with the visitor's email as reply-to. If that
-// request fails, fall back to opening a prefilled mail draft.
+// When a report is generated, quietly notify Gain Advisory through the site's
+// Formspree endpoint with the details the visitor entered on the calibration
+// screen plus the computed result. This runs in the background and never blocks
+// or affects the report. The visitor is not asked for anything.
 const FORM_ENDPOINT = 'https://formspree.io/f/xpqbjpqg';
+let alertSent = false; // one alert per generated report
 
 function resultSummary() {
-  const profile = computeProfile(state.answers);
-  const dims = profile.dimensions;
-  let priorityIdx = dims.findIndex((x) => x.classification !== 'Built');
-  if (priorityIdx < 0) priorityIdx = dims.length - 1;
-  const overallBand = profile.allBuilt ? 'Built' : dims[priorityIdx].classification;
-  const strongName = DIMENSIONS[DIMENSION_ORDER.indexOf(profile.strongestIds[0])].name;
-  const perLine = dims.map((x, i) => `- ${DIMENSIONS[i].name}: ${x.classification}`).join('\n');
+  const model = buildReportModel(state.answers, state.ctx);
+  const c = state.ctx;
+  const byCondition = model.conditions.map((x) => `- ${x.name}: ${x.classification} (${x.score}/25)`).join('\n');
   const lines = [
-    'Overall readiness: ' + overallBand, '',
-    'First priority: ' + DIMENSIONS[priorityIdx].name,
-    'Strongest condition: ' + strongName, '',
-    'By condition:', perLine, '',
+    'A Commercial Readiness report was just generated.', '',
+    'FROM THE ASSESSMENT (calibration screen):',
+    'Company: ' + (c.company || '(not provided)'),
+    'Role: ' + (c.role || '(not provided)'),
+    'Stage: ' + (c.stage || '(not provided)'),
+    'ARR: ' + (c.arr || '(not provided)'),
+    'Single person still leads commercial: ' + (c.founder || '(not provided)'), '',
+    'RESULT:',
+    'Overall readiness: ' + model.overallBand + '  (' + model.total + ' / 125)',
+    'First priority: ' + model.priorityName,
+    'Strongest condition: ' + model.strongName, '',
+    'By condition:', byCondition,
   ];
-  if (state.ctx.company) lines.push('Company: ' + state.ctx.company);
-  if (state.ctx.role) lines.push('Role: ' + state.ctx.role);
-  if (state.ctx.stage) lines.push('Stage: ' + state.ctx.stage);
-  return { subject: 'Commercial Readiness result - ' + (state.ctx.company || 'company'), body: lines.join('\n') };
+  return { subject: 'New Commercial Readiness report - ' + (c.company || 'company'), body: lines.join('\n') };
 }
 
-function emailMessage(color, text) {
-  let el = document.getElementById('cra-emailmsg');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'cra-emailmsg';
-    el.setAttribute('role', 'status');
-    el.style.marginTop = '14px';
-    const btn = document.getElementById('cra-send');
-    if (btn && btn.parentNode) btn.parentNode.appendChild(el); else return;
-  }
-  el.innerHTML = `<span style="font-family:'Inter',sans-serif;font-size:13.5px;line-height:1.5;color:${color}">${esc(text)}</span>`;
-}
-
-function emailSuccess() {
-  const btn = document.getElementById('cra-send');
-  if (btn) { btn.textContent = '✓ Sent'; btn.disabled = true; btn.style.background = '#1E4FA1'; btn.style.cursor = 'default'; btn.removeAttribute('data-action'); }
-  emailMessage('#1E4FA1', 'Your Commercial Readiness Profile has been sent successfully.');
-  announce('Your Commercial Readiness Profile has been sent successfully.');
-}
-
-function emailError() {
-  const btn = document.getElementById('cra-send');
-  if (btn) { btn.disabled = false; btn.textContent = 'Send my result to Gain Advisory'; btn.style.background = state.email && state.consent ? '#0B1D33' : '#9AA6B4'; btn.style.cursor = 'pointer'; }
-  // Never dead-end a lead: on failure, offer a prefilled mail draft carrying the
-  // full profile, with the visitor's address as the reply-to line.
-  const { subject, body } = resultSummary();
-  const mailBody = body + '\nReply to: ' + (state.email || '');
-  const href = 'mailto:hello@gainadvisory.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(mailBody);
-  emailMessage('#B0603F', 'That did not go through. ');
-  const el = document.getElementById('cra-emailmsg');
-  const span = el && el.querySelector('span');
-  if (span) {
-    const a = document.createElement('a');
-    a.href = href;
-    a.textContent = 'Email your profile to Gain Advisory instead.';
-    a.setAttribute('style', "font-family:'Inter',sans-serif;font-size:13.5px;color:#1E4FA1;text-decoration:underline");
-    span.appendChild(a);
-  }
-  announce('Submission failed. A prefilled email is available as a fallback.');
-}
-
-function sendResult() {
-  if (!(state.email && state.consent)) return;
-  const btn = document.getElementById('cra-send');
-  const { subject, body } = resultSummary();
-  if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; btn.style.cursor = 'default'; }
-  const data = new FormData();
-  data.append('email', state.email);
-  data.append('_subject', subject);
-  data.append('message', body);
-  data.append('_gotcha', '');
-  track('email_result_requested', {});
-  fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-    .then((r) => { if (!r.ok) throw new Error('bad response'); track('email_result_sent', {}); emailSuccess(); })
-    .catch(() => { track('email_result_failed', {}); emailError(); });
+function sendReportAlert() {
+  if (alertSent) return;
+  alertSent = true;
+  try {
+    const { subject, body } = resultSummary();
+    const data = new FormData();
+    data.append('_subject', subject);
+    data.append('message', body);
+    data.append('_gotcha', '');
+    track('report_alert_sent', {});
+    fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } }).catch(() => { /* never block the report */ });
+  } catch (e) { /* never block the report */ }
 }
 
 // Download the report as a real PDF, generated entirely in the browser. The PDF
@@ -745,6 +687,7 @@ function restart() {
   state.answers = emptyAnswers();
   state.open = {};
   state.ci = 0;
+  alertSent = false; // a fresh run should alert again
   state.screen = 'intro';
   save();
   render();
@@ -773,10 +716,9 @@ function onClick(e) {
     case 'edit': state.ci = +btn.getAttribute('data-idx'); state.returnToReview = true; go('assessment'); break;
     case 'to-review': go('review'); break;
     case 'back-review': state.ci = 4; go('assessment'); break;
-    case 'generate': if (allComplete()) { track('profile_generated', {}); go('results'); } break;
+    case 'generate': if (allComplete()) { track('profile_generated', {}); sendReportAlert(); go('results'); } break;
     case 'pdf': onDownloadPdf(btn); break;
     case 'print': track('report_printed', {}); window.print(); break;
-    case 'send': sendResult(); break;
     case 'restart': restart(); break;
     default: break;
   }
@@ -786,13 +728,6 @@ function onFieldInput(e) {
   const el = e.target.closest('[data-field]');
   if (!el) return;
   const f = el.getAttribute('data-field');
-  if (f === 'consent') return; // handled on change
-  if (f === 'email') {
-    state.email = el.value;
-    const b = document.getElementById('cra-send');
-    if (b) { const ok = state.email && state.consent; b.style.background = ok ? '#0B1D33' : '#9AA6B4'; b.style.cursor = ok ? 'pointer' : 'not-allowed'; }
-    return;
-  }
   if (f in state.ctx) { state.ctx[f] = el.value; save(); }
 }
 
@@ -800,12 +735,6 @@ function onFieldChange(e) {
   const el = e.target.closest('[data-field]');
   if (!el) return;
   const f = el.getAttribute('data-field');
-  if (f === 'consent') {
-    state.consent = el.checked;
-    const b = document.getElementById('cra-send');
-    if (b) { const ok = state.email && state.consent; b.style.background = ok ? '#0B1D33' : '#9AA6B4'; b.style.cursor = ok ? 'pointer' : 'not-allowed'; }
-    return;
-  }
   if (f in state.ctx) { state.ctx[f] = el.value; save(); }
 }
 
@@ -844,6 +773,7 @@ function injectStyles() {
     .cra-card.answered{border-color:#DCE2EA;border-left-color:#0B1D33}
     .cra-dark:hover{background:#16305a}
     .cra-outline:hover{border-color:#0B1D33}
+    .cra-cta:hover{background:#123163}
     .cra-ghost:hover{color:#0B1D33}
     .cra-link:hover{color:#123163}
     .cra-edit:hover{color:#123163}
