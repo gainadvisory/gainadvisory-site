@@ -337,7 +337,7 @@
     <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,110px) 24px 0;text-align:center">
       <div class="ga-x18" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The distinction</div>
       <h2 class="ga-x19" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px auto 0;max-width:20ch;transition:opacity .7s ease .06s,transform .7s ease .06s"><span style="display:block">Many inputs.</span><span style="display:block">One commercial truth.</span></h2>
-      <p class="ga-x20" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px auto 0;max-width:62ch;transition:opacity .7s ease .12s,transform .7s ease .12s"><span style="display:block">Marketing, sales, and product each hold part of the evidence.</span><span style="display:block;margin-top:1em">Commercial architecture brings it together into one truth about who buys, why they buy, and how the company wins, then carries that truth consistently to customers, investors, and the board.</span></p>
+      <p class="ga-x20" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px auto 0;max-width:62ch;transition:opacity .7s ease .12s,transform .7s ease .12s"><span style="display:block">Marketing, sales, and product each hold part of the evidence.</span><span style="display:block;margin-top:1em">Diagnose brings that evidence together into one Commercial Truth about who buys and why. Commercial Architecture turns that truth into how the company positions, operates, and wins, then carries it consistently to customers, investors, and the board.</span></p>
     </div>
     <div style="max-width:1000px;margin:0 auto;padding:clamp(30px,5vw,60px) 24px clamp(70px,10vw,130px)">
       <!-- desktop: internal evidence -> [ one commercial truth ] -> external consistency -->
@@ -419,7 +419,7 @@
     <!-- Header -->
     <div style="max-width:1180px;margin:0 auto;padding:clamp(80px,12vw,150px) 24px clamp(24px,3vw,44px)">
       <div style="max-width:66ch">
-        <div class="ga-x43" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The method · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:.04em">D<span style="vertical-align:super;font-size:.72em">2</span>BT</span></div>
+        <div class="ga-x43" data-reveal style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#1E4FA1;transition:opacity .7s ease,transform .7s ease">The method · <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:.04em">D²BT</span></div>
         <h2 class="ga-x44" data-reveal style="font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-0.015em;color:#0B1D33;margin:16px 0 0;transition:opacity .7s ease .06s,transform .7s ease .06s">Not a sequence of steps. An engine that learns.</h2>
         <p class="ga-x45" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:22px 0 0;max-width:62ch;transition:opacity .7s ease .12s,transform .7s ease .12s">D&sup2; establishes what is true and designs the motion worth testing. Build takes that motion into the market, where execution produces evidence and evidence improves the architecture. Transfer converts validated learning into organizational capability.</p>
         <p class="ga-x46" data-reveal style="font-family:'Inter',sans-serif;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#5B6B7C;margin:14px 0 0;max-width:62ch;transition:opacity .7s ease .16s,transform .7s ease .16s">The disciplines begin in sequence. They do not remain linear. New evidence can trigger refinement, redesign, or a new diagnosis. The engine becomes progressively smarter because learning and transfer never stop.</p>
@@ -1047,8 +1047,16 @@
     var span = r.height - window.innerHeight;
     var p = (span - lead) > 0 ? (-r.top - lead) / (span - lead) : 0;
     p = Math.max(0, Math.min(1, p));
-    var n = b.beats.length || 6;
-    var beat = Math.min(n - 1, Math.max(0, Math.floor(p * n + 0.0001)));
+    // Active beat = the panel whose center is nearest the viewport center. The
+    // beats have unequal heights, so mapping equal progress buckets (floor(p*n))
+    // lagged the early beats and left 02/03 dim while centered. Geometry keeps
+    // every beat's active/inactive state in step with what is actually on screen.
+    var vmid = window.innerHeight / 2, beat = 0, bestD = Infinity;
+    for (var bqi = 0; bqi < b.beats.length; bqi++) {
+      var rq = b.beats[bqi].getBoundingClientRect();
+      var dq = Math.abs((rq.top + rq.height / 2) - vmid);
+      if (dq < bestD) { bestD = dq; beat = bqi; }
+    }
     var c = Math.max(0, Math.min(1, (p - 0.05) / 0.8));
     var vIdx = p < 0.5 ? 0 : p < 0.56 ? 1 : p < 0.62 ? 2 : 3;
     var wide = window.innerWidth > 860;
