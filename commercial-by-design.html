@@ -54,24 +54,17 @@
 
   /* hero */
   .cbd-hero{border-bottom:1px solid #E2E6EA;background:radial-gradient(circle at 82% 40%,rgba(93,155,212,.14),transparent 26%),linear-gradient(135deg,#FBFBF9 0%,#FBFBF9 60%,#F1F4F8 100%)}
-  .cbd-hero-in{max-width:1180px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px clamp(60px,7vw,100px);display:grid;grid-template-columns:1.05fr .95fr;gap:6vw;align-items:center}
-  .cbd-hero h1{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.045em;line-height:.9;color:#0B1D33;font-size:clamp(52px,7vw,104px);margin:0}
+  .cbd-hero-in{max-width:1180px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px clamp(60px,7vw,100px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,4.5vw,72px);align-items:center}
+  .cbd-hero-in>*{min-width:0}
+  .cbd-hero h1{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.045em;line-height:.9;color:#0B1D33;font-size:clamp(44px,5vw,72px);margin:0}
   .cbd-dek{max-width:600px;margin:28px 0 32px;color:#3A4654;font-size:20px;line-height:1.55}
   .cbd-hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
   .cbd-meta{color:#5B6B7C;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;margin-top:26px}
-  /* book cover (restrained 3D placeholder; replace with /assets/commercial-by-design-cover.webp when available) */
-  .cbd-stage{display:grid;place-items:center;perspective:1500px}
-  .cbd-book{position:relative;width:min(340px,80vw);aspect-ratio:34/48;border-radius:2px 6px 6px 2px;color:#fff;padding:30px 30px 26px 38px;
-    display:flex;flex-direction:column;justify-content:space-between;transform:rotateY(-13deg) rotateZ(1deg);
-    background:radial-gradient(circle at 84% 16%,rgba(93,155,212,.5),transparent 24%),linear-gradient(150deg,#0B1D33,#14304f 58%,#0B1D33);
-    box-shadow:-10px 8px 0 #E2E6EA,-30px 40px 60px rgba(11,29,51,.30)}
-  .cbd-book:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(93,155,212,.4);border-radius:50%;right:-105px;bottom:-80px;box-shadow:0 0 0 22px rgba(30,79,161,.10)}
-  .cbd-book .r{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-  .cbd-book .r b{font-family:'Syne',sans-serif;font-size:11px;letter-spacing:.04em}
-  .cbd-book .r i{color:#5D9BD4;font-style:normal;font-size:7px}
-  .cbd-book .mid{position:relative;z-index:1}
-  .cbd-book .mid h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,4vw,46px);letter-spacing:-.05em;line-height:.94;margin:0 0 18px;color:#fff}
-  .cbd-book .mid p{font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:#C7D4E4;margin:0}
+  /* book cover — the actual PDF cover, in a restrained 3D presentation */
+  .cbd-stage{display:grid;place-items:center;perspective:1600px}
+  .cbd-cover{width:min(340px,80vw);height:auto;display:block;border-radius:2px 6px 6px 2px;
+    transform:rotateY(-8deg) rotateZ(.6deg);
+    box-shadow:-9px 8px 0 #E2E6EA,-26px 34px 54px rgba(11,29,51,.30)}
 
   /* section shell */
   .cbd-section{padding:clamp(64px,8vw,110px) 0}
@@ -238,11 +231,8 @@
           <p class="cbd-meta">Free and ungated &middot; 57 pages &middot; By Jason Brausewetter</p>
         </div>
         <div class="cbd-stage">
-          <div class="cbd-book" role="img" aria-label="Commercial by Design, the Gain Advisory playbook, cover">
-            <div class="r"><span>Gain Advisory</span><b>G <i>[AI]</i> N</b></div>
-            <div class="mid"><h2>Commercial<br>by Design</h2><p>Build the commercial engine.<br>Make it belong to the company.</p></div>
-            <div class="r"><span>Jason Brausewetter</span><b>D&sup2; &middot; B &middot; T &#8635;</b></div>
-          </div>
+          <img class="cbd-cover" src="/assets/commercial-by-design-cover.png" width="633" height="820"
+               alt="Commercial by Design, the Gain Advisory playbook by Jason Brausewetter, cover">
         </div>
       </div>
     </section>
@@ -391,7 +381,7 @@
         <div>
           <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Explore</div>
           <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
-            <a class="ga-x6" href="https://www.gainadvisory.com/#method" style="color:rgba(255,255,255,.85)">The Method</a><a class="ga-x6" href="https://www.gainadvisory.com/commercial-by-design" style="color:rgba(255,255,255,.85)">Commercial by Design</a>
+            <a class="ga-x6" href="https://www.gainadvisory.com/#method" style="color:rgba(255,255,255,.85)">The Method</a><a class="ga-x6" href="https://www.gainadvisory.com/commercial-by-design" style="color:rgba(255,255,255,.85)">Playbook</a>
             <a class="ga-x7" href="https://www.gainadvisory.com/readiness" style="color:rgba(255,255,255,.85)">Readiness</a>
             <a class="ga-x8" href="https://www.gainadvisory.com/engagements" style="color:rgba(255,255,255,.85)">Engagements</a>
             <a class="ga-x9" href="https://www.gainadvisory.com/capital-readiness" style="color:rgba(255,255,255,.85)">Capital Readiness</a>
