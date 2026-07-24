@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commercial by Design | Gain Advisory</title>
+<meta name="description" content="A free playbook for turning individual commercial judgment into a learning engine the company can run, improve, and scale. Free and ungated.">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FBFBF9;color:#14202F;-webkit-font-smoothing:antialiased;font-family:'Inter',system-ui,sans-serif}
+  *{box-sizing:border-box}
+  a{color:#1E4FA1;text-decoration:none}
+  a:hover{color:#123163}
+  ::selection{background:#1E4FA1;color:#fff}
+  h1,h2,h3{text-wrap:balance}
+  p{text-wrap:pretty}
+  img{max-width:100%}
+  /* shared nav / burger system (matches the rest of the site) */
+  @media(max-width:860px){ .ga-navlinks{display:none !important} }
+  .ga-burger{display:none;position:fixed;right:20px;top:12px;z-index:60;
+    width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    background:transparent;border:0;cursor:pointer;padding:0}
+  .ga-burger-bar{display:block;width:22px;height:2px;background:#0B1D33;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar{background:#fff}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(2){opacity:0}
+  .ga-burger[aria-expanded="true"] .ga-burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .ga-mobile-nav{display:none;position:fixed;inset:0;background:#0B1D33;z-index:55;padding:96px 24px 32px;overflow-y:auto}
+  .ga-mobile-nav nav{display:flex;flex-direction:column;gap:4px;max-width:520px;margin:0 auto}
+  .ga-mobile-nav a{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;letter-spacing:-0.01em;color:#fff;
+    text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .ga-mobile-nav a:active{color:#5D9BD4}
+  .ga-mobile-cta{margin-top:24px;border-bottom:0 !important;font-size:16px !important;font-family:'Inter',sans-serif !important;
+    font-weight:600 !important;background:#fff;color:#0B1D33 !important;border-radius:6px;padding:15px 22px !important;text-align:center}
+  html.ga-js .ga-burger{display:none}
+  @media(max-width:860px){ html.ga-js .ga-burger{display:flex} .ga-mobile-nav[data-open]{display:block} html.ga-js .ga-header-cta{display:none} }
+  html.ga-nav-open,html.ga-nav-open body{overflow:hidden}
+  @media (prefers-reduced-motion: reduce){ .ga-burger-bar{transition:none} }
+
+  /* ---- Commercial by Design page ---- */
+  .cbd-eyebrow{font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#1E4FA1;margin:0 0 20px}
+  .cbd-wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .cbd-h2{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.03em;line-height:1.03;color:#0B1D33;font-size:clamp(30px,4.4vw,54px);margin:0}
+  .cbd-btn{display:inline-flex;align-items:center;gap:12px;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;
+    padding:14px 22px;border-radius:6px;transition:background .2s,color .2s,border-color .2s}
+  .cbd-btn-primary{background:#0B1D33;color:#fff}
+  .cbd-btn-primary:hover{background:#123163;color:#fff}
+  .cbd-btn-light{background:#fff;color:#0B1D33;border:1px solid #E2E6EA}
+  .cbd-btn-light:hover{border-color:#0B1D33;color:#0B1D33}
+  .cbd-btn .cbd-ar{color:#5D9BD4;font-weight:700}
+  .cbd-textlink{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:#0B1D33;border-bottom:1px solid #0B1D33;padding-bottom:3px}
+  .cbd-textlink:hover{color:#1E4FA1;border-color:#1E4FA1}
+  .cbd-textlink .cbd-ar{color:#1E4FA1}
+
+  /* hero */
+  .cbd-hero{border-bottom:1px solid #E2E6EA;background:radial-gradient(circle at 82% 40%,rgba(93,155,212,.14),transparent 26%),linear-gradient(135deg,#FBFBF9 0%,#FBFBF9 60%,#F1F4F8 100%)}
+  .cbd-hero-in{max-width:1180px;margin:0 auto;padding:clamp(56px,7vw,96px) 24px clamp(60px,7vw,100px);display:grid;grid-template-columns:1.05fr .95fr;gap:6vw;align-items:center}
+  .cbd-hero h1{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.045em;line-height:.9;color:#0B1D33;font-size:clamp(52px,7vw,104px);margin:0}
+  .cbd-dek{max-width:600px;margin:28px 0 32px;color:#3A4654;font-size:20px;line-height:1.55}
+  .cbd-hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .cbd-meta{color:#5B6B7C;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.06em;margin-top:26px}
+  /* book cover (restrained 3D placeholder; replace with /assets/commercial-by-design-cover.webp when available) */
+  .cbd-stage{display:grid;place-items:center;perspective:1500px}
+  .cbd-book{position:relative;width:min(340px,80vw);aspect-ratio:34/48;border-radius:2px 6px 6px 2px;color:#fff;padding:30px 30px 26px 38px;
+    display:flex;flex-direction:column;justify-content:space-between;transform:rotateY(-13deg) rotateZ(1deg);
+    background:radial-gradient(circle at 84% 16%,rgba(93,155,212,.5),transparent 24%),linear-gradient(150deg,#0B1D33,#14304f 58%,#0B1D33);
+    box-shadow:-10px 8px 0 #E2E6EA,-30px 40px 60px rgba(11,29,51,.30)}
+  .cbd-book:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(93,155,212,.4);border-radius:50%;right:-105px;bottom:-80px;box-shadow:0 0 0 22px rgba(30,79,161,.10)}
+  .cbd-book .r{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .cbd-book .r b{font-family:'Syne',sans-serif;font-size:11px;letter-spacing:.04em}
+  .cbd-book .r i{color:#5D9BD4;font-style:normal;font-size:7px}
+  .cbd-book .mid{position:relative;z-index:1}
+  .cbd-book .mid h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,4vw,46px);letter-spacing:-.05em;line-height:.94;margin:0 0 18px;color:#fff}
+  .cbd-book .mid p{font-family:'Inter',sans-serif;font-size:12px;line-height:1.6;color:#C7D4E4;margin:0}
+
+  /* section shell */
+  .cbd-section{padding:clamp(64px,8vw,110px) 0}
+  .cbd-two{display:grid;grid-template-columns:1fr .82fr;gap:8vw;align-items:start}
+  .cbd-copy{border-left:1px solid #E2E6EA;padding-left:38px;color:#48586d;font-size:17px;line-height:1.7}
+  .cbd-copy p:first-child{color:#14202F;font-size:21px;margin-top:0}
+  /* reframe */
+  .cbd-reframe{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:24px;align-items:center;margin-top:64px;padding-top:32px;border-top:1px solid #E2E6EA}
+  .cbd-reframe>div:last-child{text-align:right}
+  .cbd-reframe span{display:block;font-family:'DM Sans',sans-serif;color:#8b96a6;font-size:10px;text-transform:uppercase;letter-spacing:.16em;margin-bottom:9px}
+  .cbd-reframe strong{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:#0B1D33}
+  .cbd-reframe-line{display:flex;align-items:center;gap:14px;color:#1E4FA1;font-family:'DM Sans',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.12em;text-align:center;white-space:nowrap}
+  .cbd-reframe-line i{height:1px;background:linear-gradient(90deg,#1E4FA1,#5D9BD4);width:100%}
+
+  /* disciplines */
+  .cbd-learn{background:#fff;border-top:1px solid #E2E6EA;border-bottom:1px solid #E2E6EA}
+  .cbd-heading{display:grid;grid-template-columns:.6fr 1fr .8fr;gap:4vw;align-items:end}
+  .cbd-heading .cbd-eyebrow{align-self:start}
+  .cbd-heading>p:last-child{color:#5B6B7C;line-height:1.7;margin:0;font-size:16px}
+  .cbd-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#E2E6EA;margin-top:56px;border:1px solid #E2E6EA}
+  .cbd-grid4 article{background:#fff;padding:32px 26px;min-height:300px;display:flex;flex-direction:column}
+  .cbd-grid4 article>span{font-family:'DM Sans',sans-serif;color:#1E4FA1;font-size:11px;letter-spacing:.15em}
+  .cbd-grid4 h3{font-family:'Syne',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em;margin:24px 0 14px;color:#0B1D33}
+  .cbd-grid4 p{color:#5B6B7C;line-height:1.65;font-size:14px;margin:0}
+  .cbd-grid4 strong{margin-top:auto;padding-top:18px;font-family:'DM Sans',sans-serif;color:#1E4FA1;font-size:11px;text-transform:uppercase;letter-spacing:.09em}
+
+  /* method loop */
+  .cbd-method{color:#fff;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.955),rgba(11,29,51,.972)),image-set(url('/assets/wood-wall.webp') type('image/webp'),url('/assets/wood-wall.png') type('image/png'));background-size:cover;background-position:center}
+  .cbd-method-in{max-width:1180px;margin:0 auto;padding:clamp(64px,8vw,110px) 24px;display:grid;grid-template-columns:.85fr 1.15fr;gap:7vw;align-items:center}
+  .cbd-method .cbd-eyebrow{color:#5D9BD4}
+  .cbd-method h2{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.03em;line-height:1.03;font-size:clamp(30px,4.4vw,54px);margin:0;color:#fff}
+  .cbd-method .cbd-lead{color:#AEBED0;line-height:1.7;max-width:560px;font-size:17px;margin:22px 0 0}
+  .cbd-loop{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:1/.82}
+  .cbd-loop-track{position:absolute;inset:14% 12%;border:1px solid rgba(93,155,212,.42);border-radius:50%;transform:rotate(-8deg);box-shadow:0 0 50px rgba(93,155,212,.09) inset}
+  .cbd-node{width:clamp(120px,20vw,150px);aspect-ratio:1;border-radius:50%;background:#12283f;border:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:absolute;box-shadow:0 16px 50px rgba(0,0,0,.25);padding:10px}
+  .cbd-node span{font-family:'DM Sans',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#8fa1b8}
+  .cbd-node strong{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(30px,5vw,42px);margin:6px 0 2px;color:#fff}
+  .cbd-node small{font-size:10px;color:#AEBED0;line-height:1.3}
+  .cbd-node.n1{left:0;top:34%}
+  .cbd-node.n2{left:40%;top:2%}
+  .cbd-node.n3{right:0;top:52%;background:linear-gradient(150deg,#183253,#1E2f5a)}
+  .cbd-loop-cap{position:absolute;bottom:0;left:12%;color:#8fa1b8;font-family:'DM Sans',sans-serif;font-size:11px}
+  .cbd-loop-cap b{color:#5D9BD4}
+
+  /* audience */
+  .cbd-aud-heading{display:grid;grid-template-columns:.4fr 1.5fr;gap:4vw;align-items:end}
+  .cbd-aud{margin-top:56px;border-top:1px solid #E2E6EA}
+  .cbd-aud article{display:grid;grid-template-columns:.15fr .5fr 1fr;gap:28px;padding:28px 0;border-bottom:1px solid #E2E6EA;align-items:center}
+  .cbd-aud span{font-family:'DM Sans',sans-serif;color:#1E4FA1;font-size:11px}
+  .cbd-aud h3{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;margin:0;color:#0B1D33}
+  .cbd-aud p{color:#5B6B7C;margin:0;line-height:1.6;max-width:640px}
+
+  /* preview / inside the playbook */
+  .cbd-preview{background:#F1F4F8;border-top:1px solid #E2E6EA}
+  .cbd-preview-card{display:grid;grid-template-columns:1.25fr .75fr;background:#fff;box-shadow:0 25px 70px rgba(11,29,51,.10)}
+  .cbd-preview-copy{padding:clamp(40px,5vw,64px) 5vw clamp(40px,5vw,64px) 52px}
+  .cbd-preview-copy h2{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-size:clamp(28px,3.6vw,46px);color:#0B1D33;margin:0}
+  .cbd-preview-copy>p{color:#5B6B7C;line-height:1.75;max-width:640px}
+  .cbd-quote{margin:44px 0 0;padding-left:22px;border-left:2px solid #5D9BD4;font-family:'Syne',sans-serif;font-weight:600;font-size:22px;line-height:1.45;color:#14202F}
+  .cbd-contents{background:#0B1D33;color:#fff;padding:clamp(40px,5vw,55px) 44px}
+  .cbd-contents>p{font-family:'DM Sans',sans-serif;color:#5D9BD4;font-size:11px;text-transform:uppercase;letter-spacing:.16em;margin:0}
+  .cbd-contents ol{list-style:none;padding:0;margin:32px 0 26px}
+  .cbd-contents li{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);font-family:'Inter',sans-serif;font-size:15px;color:#fff}
+  .cbd-contents li span{font-family:'DM Sans',sans-serif;color:#8193aa;display:inline-block;width:38px;font-size:11px}
+  .cbd-contents small{color:#AEBED0;line-height:1.5;font-size:12px}
+
+  /* download band */
+  .cbd-download{color:#fff;background-color:#0B1D33;background-image:linear-gradient(rgba(11,29,51,.92),rgba(11,29,51,.95)),image-set(url('/assets/wood-wall.webp') type('image/webp'),url('/assets/wood-wall.png') type('image/png'));background-size:cover;background-position:center}
+  .cbd-download-in{max-width:1180px;margin:0 auto;padding:clamp(64px,8vw,110px) 24px;display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:8vw}
+  .cbd-download .cbd-eyebrow{color:#5D9BD4}
+  .cbd-download h2{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.03;font-size:clamp(34px,5vw,66px);color:#fff;margin:0}
+  .cbd-download .cbd-lead{color:#AEBED0;line-height:1.7;max-width:640px;margin:22px 0 0}
+  .cbd-download-actions{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+  .cbd-download-actions .cbd-btn-light{min-width:280px;justify-content:space-between}
+  .cbd-download-actions>span{font-family:'DM Sans',sans-serif;color:#8fa1b8;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+
+  /* next step */
+  .cbd-next-in{max-width:1180px;margin:0 auto;padding:clamp(64px,8vw,110px) 24px;display:grid;grid-template-columns:1fr .82fr;gap:8vw;align-items:center}
+  .cbd-next .cbd-lead{color:#5B6B7C;line-height:1.7;max-width:620px;font-size:17px;margin:26px 0}
+  .cbd-journey{border-top:1px solid #E2E6EA}
+  .cbd-journey div{display:grid;grid-template-columns:56px 1fr;align-items:center;border-bottom:1px solid #E2E6EA;padding:22px 0}
+  .cbd-journey span{font-family:'DM Sans',sans-serif;color:#1E4FA1;font-size:11px}
+  .cbd-journey strong{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:#0B1D33}
+
+  @media(max-width:960px){
+    .cbd-hero-in,.cbd-two,.cbd-method-in,.cbd-download-in,.cbd-next-in,.cbd-heading,.cbd-aud-heading{grid-template-columns:1fr}
+    .cbd-hero-in>div{min-width:0}
+    .cbd-method-in,.cbd-next-in{gap:48px}
+    .cbd-grid4{grid-template-columns:repeat(2,1fr)}
+    .cbd-preview-card{grid-template-columns:1fr}
+    .cbd-download-in{gap:40px}
+    .cbd-book{transform:rotateY(-9deg)}
+  }
+  @media(max-width:680px){
+    .cbd-hero-in{padding-top:44px}
+    .cbd-hero h1{font-size:clamp(29px,8.2vw,52px);letter-spacing:-0.04em}
+    .cbd-grid4{grid-template-columns:1fr}
+    .cbd-grid4 article{min-height:0}
+    .cbd-reframe{grid-template-columns:1fr;text-align:left}
+    .cbd-reframe>div:last-child{text-align:left}
+    .cbd-loop{max-width:420px}
+    .cbd-aud article{grid-template-columns:34px 1fr}
+    .cbd-aud p{grid-column:2}
+    .cbd-preview-copy,.cbd-contents{padding:40px 26px}
+  }
+  @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*:before,*:after{transition:none !important} }
+</style>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Syne-800.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Inter-400.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/DMSans-500.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script>document.documentElement.className+=' ga-js'</script>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<link rel="canonical" href="https://gainadvisory.com/commercial-by-design">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gain Advisory">
+<meta property="og:url" content="https://gainadvisory.com/commercial-by-design">
+<meta property="og:title" content="Commercial by Design | Gain Advisory">
+<meta property="og:description" content="A free playbook for turning individual commercial judgment into a learning engine the company can run, improve, and scale. Free and ungated, 57 pages.">
+<meta property="og:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gain Advisory, Builder of Commercial Engines">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Commercial by Design | Gain Advisory">
+<meta name="twitter:description" content="A free playbook for turning individual commercial judgment into a learning engine the company can run, improve, and scale.">
+<meta name="twitter:image" content="https://gainadvisory.com/assets/og-card.jpg">
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div style="overflow-x:clip">
+
+  <header style="position:sticky;top:0;z-index:50;background:rgba(251,251,249,.88);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E2E6EA">
+    <nav style="max-width:1180px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px" aria-label="Primary">
+      <a href="/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none" aria-label="Gain Advisory home">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#0B1D33;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:#5B6B7C">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:#5B6B7C">]</span>N</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#5B6B7C;margin-top:.5em;margin-left:.34em">Advisory</span>
+      </a>
+      <div class="ga-navlinks" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);font-family:'Inter',sans-serif;font-size:14px;font-weight:500"><a href="/#method" style="color:#14202F">Method</a><a href="/readiness" style="color:#14202F">Readiness</a><a href="/research" style="color:#14202F">Research</a><a href="/about" style="color:#14202F">About</a><a href="/#close" style="color:#14202F">Contact</a></div>
+      <a class="ga-header-cta ga-x1" href="https://www.gainadvisory.com/#close" style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#fff;background:#0B1D33;padding:10px 18px;border-radius:6px">Start the conversation</a>
+    </nav>
+  </header><button type="button" class="ga-burger" aria-label="Menu" aria-expanded="false" aria-controls="ga-mobile-nav">
+    <span class="ga-burger-bar"></span><span class="ga-burger-bar"></span><span class="ga-burger-bar"></span>
+  </button><div class="ga-mobile-nav" id="ga-mobile-nav" hidden><nav aria-label="Mobile"><a href="/#method">Method</a><a href="/readiness">Readiness</a><a href="/research">Research</a><a href="/about">About</a><a href="/#close">Contact</a><a class="ga-mobile-cta" href="/#close">Start the conversation</a></nav></div>
+
+  <main>
+    <!-- HERO -->
+    <section class="cbd-hero" aria-labelledby="cbd-title">
+      <div class="cbd-hero-in">
+        <div>
+          <p class="cbd-eyebrow">The Gain Advisory Playbook</p>
+          <h1 id="cbd-title">Commercial<br>by Design</h1>
+          <p class="cbd-dek">How to turn individual commercial judgment into a learning engine the company can run, improve, and scale.</p>
+          <div class="cbd-hero-actions">
+            <a class="cbd-btn cbd-btn-primary" href="/assets/commercial-by-design.pdf" download data-va-event="commercial_by_design_download" data-va-location="hero">Download the free playbook <span class="cbd-ar" aria-hidden="true">&darr;</span></a>
+            <a class="cbd-textlink" href="/commercial-readiness-assessment" data-va-event="commercial_by_design_assessment" data-va-location="hero">Take the Readiness Assessment <span class="cbd-ar" aria-hidden="true">&#8599;</span></a>
+          </div>
+          <p class="cbd-meta">Free and ungated &middot; 57 pages &middot; By Jason Brausewetter</p>
+        </div>
+        <div class="cbd-stage">
+          <div class="cbd-book" role="img" aria-label="Commercial by Design, the Gain Advisory playbook, cover">
+            <div class="r"><span>Gain Advisory</span><b>G <i>[AI]</i> N</b></div>
+            <div class="mid"><h2>Commercial<br>by Design</h2><p>Build the commercial engine.<br>Make it belong to the company.</p></div>
+            <div class="r"><span>Jason Brausewetter</span><b>D&sup2; &middot; B &middot; T &#8635;</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTRAL PROBLEM -->
+    <section class="cbd-section" aria-labelledby="cbd-problem">
+      <div class="cbd-wrap">
+        <p class="cbd-eyebrow">The central problem</p>
+        <div class="cbd-two">
+          <h2 class="cbd-h2" id="cbd-problem">A company cannot scale what only a few people know.</h2>
+          <div class="cbd-copy">
+            <p>Early revenue proves that someone in the company can sell. It does not prove the company can.</p>
+            <p>Commercial by Design is about the work between those two conditions: discovering how the company actually wins, testing it in the market, and transferring the learning into a capability the organization owns.</p>
+          </div>
+        </div>
+        <div class="cbd-reframe">
+          <div><span>Dependency</span><strong>Knowledge held by a few</strong></div>
+          <div class="cbd-reframe-line"><i></i><b>Commercial by Design</b><i></i></div>
+          <div><span>Engine</span><strong>Capability held by the company</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUR DISCIPLINES -->
+    <section class="cbd-section cbd-learn" aria-labelledby="cbd-disc">
+      <div class="cbd-wrap">
+        <div class="cbd-heading">
+          <p class="cbd-eyebrow">Inside the playbook</p>
+          <h2 class="cbd-h2" id="cbd-disc">Four disciplines.<br>One learning engine.</h2>
+          <p>The playbook follows the path from assumptions to organizational capability, without pretending commercial growth is a linear checklist.</p>
+        </div>
+        <div class="cbd-grid4">
+          <article><span>01</span><h3>Diagnose</h3><p>Replace inherited assumptions with evidence about who buys, why they buy, and what actually opens the budget.</p><strong>&rarr; Commercial Truth</strong></article>
+          <article><span>02</span><h3>Design</h3><p>Turn what is true into an explicit, connected commercial motion the organization can test.</p><strong>&rarr; Commercial Architecture</strong></article>
+          <article><span>03</span><h3>Build</h3><p>Put the architecture into the market, learn from what happens, and let evidence earn every change.</p><strong>&rarr; Market Evidence</strong></article>
+          <article><span>04</span><h3>Transfer</h3><p>Move validated learning out of individual heads and into a system the company can own.</p><strong>&rarr; Organizational Capability</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- D2BT METHOD -->
+    <section class="cbd-method" aria-labelledby="cbd-method-h">
+      <div class="cbd-method-in">
+        <div>
+          <p class="cbd-eyebrow">The method &middot; D&sup2;BT</p>
+          <h2 id="cbd-method-h">Not a sequence of steps.<br>An engine that learns.</h2>
+          <p class="cbd-lead">The disciplines begin in sequence. They do not remain linear. Execution produces evidence, evidence improves the architecture, and validated learning transfers continuously into the organization.</p>
+        </div>
+        <div class="cbd-loop" role="img" aria-label="The D-squared B T learning engine: Think (Diagnose and Design), Learn in the market (Build), and Institutionalize (Transfer continuously), with evidence returning the engine to a more accurate truth.">
+          <div class="cbd-loop-track" aria-hidden="true"></div>
+          <div class="cbd-node n1"><span>01 &middot; Think</span><strong>D&sup2;</strong><small>Diagnose + Design</small></div>
+          <div class="cbd-node n2"><span>02 &middot; Learn</span><strong>B</strong><small>Build in the market</small></div>
+          <div class="cbd-node n3"><span>03 &middot; Institutionalize</span><strong>T</strong><small>Transfer continuously</small></div>
+          <p class="cbd-loop-cap"><b>&#8635;</b> Evidence returns the engine to a more accurate truth.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section class="cbd-section" aria-labelledby="cbd-aud-h">
+      <div class="cbd-wrap">
+        <div class="cbd-aud-heading">
+          <p class="cbd-eyebrow">Who it is for</p>
+          <h2 class="cbd-h2" id="cbd-aud-h">For the people responsible for what happens next.</h2>
+        </div>
+        <div class="cbd-aud">
+          <article><span>01</span><h3>Founders</h3><p>Whose growth still depends on their judgment, relationships, or presence in every important deal.</p></article>
+          <article><span>02</span><h3>CEOs</h3><p>Preparing to hire, raise, enter a new market, or turn early traction into repeatable growth.</p></article>
+          <article><span>03</span><h3>Commercial leaders</h3><p>Inheriting a motion that produces activity but does not yet learn, transfer, or scale.</p></article>
+          <article><span>04</span><h3>Boards &amp; investors</h3><p>Evaluating whether revenue is supported by a commercial system they can underwrite.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIDE THE PLAYBOOK / PREVIEW -->
+    <section class="cbd-section cbd-preview" aria-labelledby="cbd-preview-h">
+      <div class="cbd-wrap">
+        <div class="cbd-preview-card">
+          <div class="cbd-preview-copy">
+            <p class="cbd-eyebrow">A practical argument, built from experience</p>
+            <h2 id="cbd-preview-h">What separates a motion that works from an engine the company owns?</h2>
+            <p>Across five parts, Commercial by Design connects real operating stories to Commercial Truth, Commercial Architecture, market learning, institutionalized capability, and Commercial Readiness.</p>
+            <blockquote class="cbd-quote">&ldquo;People always eventually leave. Only what was transferred stays.&rdquo;</blockquote>
+          </div>
+          <div class="cbd-contents">
+            <p>Contents</p>
+            <ol>
+              <li><span>I</span>Reality</li>
+              <li><span>II</span>Architecture</li>
+              <li><span>III</span>Learning</li>
+              <li><span>IV</span>Capability</li>
+              <li><span>V</span>The Commercial Engine</li>
+            </ol>
+            <small>Includes the complete Commercial Readiness Assessment.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="cbd-download" aria-labelledby="cbd-dl-h">
+      <div class="cbd-download-in">
+        <div>
+          <p class="cbd-eyebrow">Commercial by Design</p>
+          <h2 id="cbd-dl-h">Read the whole thing.<br>No form. No gate.</h2>
+          <p class="cbd-lead">The playbook is free because the thinking should travel. If it changes how you see your company, the next step is to find out where your commercial engine actually stands.</p>
+        </div>
+        <div class="cbd-download-actions">
+          <a class="cbd-btn cbd-btn-light" href="/assets/commercial-by-design.pdf" download data-va-event="commercial_by_design_download" data-va-location="download_band">Download the playbook <span class="cbd-ar" aria-hidden="true">&darr;</span></a>
+          <span>PDF &middot; 57 pages</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT STEP -->
+    <section class="cbd-section cbd-next" aria-labelledby="cbd-next-h">
+      <div class="cbd-next-in">
+        <div>
+          <p class="cbd-eyebrow">The next step</p>
+          <h2 class="cbd-h2" id="cbd-next-h">Reading explains the system.<br>The assessment shows where you stand.</h2>
+          <p class="cbd-lead">Take the 25-question Commercial Readiness Assessment for an immediate scored profile across five dimensions, and a clearer view of what should be built first.</p>
+          <a class="cbd-btn cbd-btn-primary" href="/commercial-readiness-assessment" data-va-event="commercial_by_design_assessment" data-va-location="next_step">Take the assessment <span class="cbd-ar" aria-hidden="true">&#8599;</span></a>
+        </div>
+        <div class="cbd-journey" aria-label="The reader journey">
+          <div><span>01</span><strong>Read</strong></div>
+          <div><span>02</span><strong>Recognize</strong></div>
+          <div><span>03</span><strong>Assess</strong></div>
+          <div><span>04</span><strong>Converse</strong></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="color:#fff;background-color:#5a4028;background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),url('assets/wood-wall.jpg');background-image:linear-gradient(rgba(16,11,6,.42),rgba(12,8,4,.55)),image-set(url('assets/wood-wall.webp') type('image/webp'),url('assets/wood-wall.jpg') type('image/jpeg'));background-size:cover;background-position:center">
+    <div style="max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,90px) 24px clamp(32px,5vw,52px)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+        <div style="min-width:220px">
+          <a href="https://www.gainadvisory.com/" style="display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none">
+            <span style="font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.02em;font-size:24px;color:#fff;line-height:1;white-space:nowrap">G<span style="font-weight:400;color:rgba(255,255,255,.72)">[</span><span style="color:#5D9BD4">AI</span><span style="font-weight:400;color:rgba(255,255,255,.72)">]</span>N</span>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:.5em;margin-left:.34em">Advisory</span>
+          </a>
+          <p style="font-family:'Syne',sans-serif;font-weight:600;font-size:16px;color:#fff;margin:20px 0 0;line-height:1.35;white-space:nowrap">Builder of Commercial Engines</p>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin:12px 0 0">Commercial by Design</p>
+          <a class="ga-x5" href="https://www.linkedin.com/company/gain-advisory/" target="_blank" rel="noopener" title="Gain Advisory on LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-top:18px;border:1px solid rgba(255,255,255,.28);border-radius:8px;color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.2 2.3-2.46 4.73-2.46 5.06 0 6 3.33 6 7.66V24h-5v-6.85c0-1.63-.03-3.73-2.27-3.73-2.27 0-2.62 1.77-2.62 3.6V24h-5V8z"/></svg></a>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Explore</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x6" href="https://www.gainadvisory.com/#method" style="color:rgba(255,255,255,.85)">The Method</a>
+            <a class="ga-x7" href="https://www.gainadvisory.com/readiness" style="color:rgba(255,255,255,.85)">Readiness</a>
+            <a class="ga-x8" href="https://www.gainadvisory.com/engagements" style="color:rgba(255,255,255,.85)">Engagements</a>
+            <a class="ga-x9" href="https://www.gainadvisory.com/capital-readiness" style="color:rgba(255,255,255,.85)">Capital Readiness</a>
+            <a class="ga-x10" href="https://www.gainadvisory.com/research" style="color:rgba(255,255,255,.85)">Research</a>
+            <a class="ga-x11" href="https://www.gainadvisory.com/#proof" style="color:rgba(255,255,255,.85)">Track Record</a>
+            <a class="ga-x12" href="https://www.gainadvisory.com/#intelligence" style="color:rgba(255,255,255,.85)">GTMology</a>
+            <a class="ga-x13" href="https://www.gainadvisory.com/#close" style="color:rgba(255,255,255,.85)">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)">Briefings</div>
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:16px;font-family:'Inter',sans-serif;font-size:14px">
+            <a class="ga-x14" href="https://www.gainadvisory.com/cco-vs-cro" style="color:rgba(255,255,255,.85)">Fractional CCO vs CRO</a>
+            <a class="ga-x15" href="https://www.gainadvisory.com/cco-vs-cmo" style="color:rgba(255,255,255,.85)">Fractional CCO vs CMO</a>
+            <a class="ga-x16" href="https://www.gainadvisory.com/about" style="color:rgba(255,255,255,.85)">What Gain Advisory is (and isn't)</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:clamp(40px,6vw,64px);padding-top:22px;border-top:1px solid rgba(255,255,255,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.6)">
+        <span>&copy; 2026 Gain Advisory LLC</span>
+        <span style="display:flex;gap:18px"><a class="ga-x17" href="https://www.gainadvisory.com/privacy" style="color:rgba(255,255,255,.6)">Privacy</a><a class="ga-x18" href="https://www.gainadvisory.com/terms" style="color:rgba(255,255,255,.6)">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<style>
+  .ga-x1:hover{background:#123163}
+  .ga-x5:hover{border-color:#fff}
+  .ga-x6:hover,.ga-x7:hover,.ga-x8:hover,.ga-x9:hover,.ga-x10:hover,.ga-x11:hover,.ga-x12:hover,.ga-x13:hover,.ga-x14:hover,.ga-x15:hover,.ga-x16:hover,.ga-x17:hover,.ga-x18:hover{color:#fff}
+</style>
+<script>
+/* Mobile nav (matches the rest of the site). */
+(function(){
+  var btn = document.querySelector('.ga-burger');
+  var panel = document.getElementById('ga-mobile-nav');
+  if (!btn || !panel) return;
+  panel.hidden = false;
+  function set(open){
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.setAttribute('data-open',''); else panel.removeAttribute('data-open');
+    document.documentElement.classList.toggle('ga-nav-open', open);
+  }
+  set(false);
+  btn.addEventListener('click', function(){ set(btn.getAttribute('aria-expanded') !== 'true'); });
+  panel.addEventListener('click', function(e){ if (e.target.tagName === 'A') set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+  addEventListener('resize', function(){ if (innerWidth > 860) set(false); }, { passive: true });
+})();
+/* Analytics: same convention as the assessment app (window.va event, guarded).
+   Progressive enhancement only, the links work with JS disabled. */
+(function(){
+  function track(name, data){ try { if (window.va) window.va('event', { name: name, ...(data || {}) }); } catch (e) { /* ignore */ } }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest && e.target.closest('[data-va-event]');
+    if (!el) return;
+    track(el.getAttribute('data-va-event'), { location: el.getAttribute('data-va-location') || '' });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
