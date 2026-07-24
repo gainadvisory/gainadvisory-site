@@ -11,5 +11,6 @@
   <url><loc>https://gainadvisory.com/research</loc></url>
   <url><loc>https://gainadvisory.com/research/ai-commercial-control</loc></url>
   <url><loc>https://gainadvisory.com/readiness</loc></url>
+  <url><loc>https://gainadvisory.com/commercial-by-design</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://gainadvisory.com/about</loc></url>
 </urlset>
